@@ -9,19 +9,19 @@ app = Flask(__name__)
 
 
 @app.route("/")
-def index():
+def get_homepage_recipes():
     """Return trending and custom recipes"""
     
     return "Trending"
 
 @app.route("/session", methods=["POST"])
-def session():
+def create_user_session():
     """Return session"""
 
     return "Session"
 
 @app.route("/search")
-def get_search_recipes():
+def search_recipes():
     """Search for recipes"""
 
     search_dict = request.args.to_dict()
@@ -30,35 +30,34 @@ def get_search_recipes():
     return "Search"
 
 @app.route("/recipes/<recipe_id>")
-def recipe_details(recipe_id):
+def get_recipe(recipe_id):
     """Return recipe"""
 
     return "Recipe"           
 
 
 @app.route("/recipes/<recipe_id>/ingredients")
-def recipe_ingredients(recipe_id):
+def get_recipe_ingredients(recipe_id):
     """Return recipe ingredients"""
 
     return "Recipe Ingredients"
 
 @app.route("/users/<user_id>/favorites")
-def user_favorites(user_id):
+def get_user_favorites(user_id):
     """Return user favorites"""
 
     return "User Favorites"
 
-@app.route("/users/<user_id>/favorites/<recipe_id>", methods=["PATCH"])
-def add_favorite(user_id, recipe_id):
-    """Add favorite"""
+@app.route("/users/<user_id>/favorites/<recipe_id>", methods=["PATCH", "DELETE"])
+def update_favorite(user_id, recipe_id):
+    """Update favorite"""
 
-    return "Add Favorite"
-
-@app.route("/users/<user_id>/favorites/<recipe_id>", methods=["DELETE"])
-def delete_favorite(user_id, recipe_id):
-    """Delete favorite"""
-
-    return "Delete Favorite"
+    if request.method == "PATCH":
+        # add favorite
+        return "Add Favorite"
+    elif request.method == "DELETE":
+        # delete favorite
+        return "Delete Favorite"
 
 if __name__ == "__main__":
 
