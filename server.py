@@ -1,13 +1,11 @@
 """Server for Dish-Dash app"""
-import requests
-from flask import Flask
-from dotenv import load_dotenv
-import os
+from flask import (Flask, request)
+from urllib.parse import parse_qs
+
+import crud
+
 
 app = Flask(__name__)
-
-load_dotenv()
-SPOONACULAR_API_KEY = os.getenv("SPOONACULAR_API_KEY")
 
 
 @app.route("/")
@@ -23,8 +21,11 @@ def session():
     return "Session"
 
 @app.route("/search")
-def search_recipes():
+def get_search_recipes():
     """Search for recipes"""
+
+    search_dict = request.args.to_dict()
+    crud.search_recipes(search_dict)
 
     return "Search"
 
