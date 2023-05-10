@@ -35,6 +35,8 @@ def search_recipes():
 @app.route("/recipes/<recipe_id>")
 def get_recipe(recipe_id):
     """Return recipe"""
+    def get_recipe(recipe_id):
+        """Return recipe"""
 
     return "Recipe"           
 

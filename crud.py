@@ -26,7 +26,7 @@ def get_landing_page_recipes():
     if TEST_MODE:
         response = mock_data['landing_page']['response']
     else:
-        request = f'{uri_recipes}/random?number=10&apiKey={SPOONACULAR_API_KEY}'
+        request = f'{uri_recipes}/random?number=3&tags=vegan, dessert, italian&apiKey={SPOONACULAR_API_KEY}'
         response = requests.get(request).json()
 
     return response
@@ -53,5 +53,18 @@ def search_recipes(search):
 
     return response
 
+
+
+def get_recipe(recipe_id):
+    """Return recipe"""
+
+    # Use mock data in test mode
+    if TEST_MODE:
+        response = mock_data['recipe']['response']
+    else:
+        request = f'{uri_recipes}/{recipe_id}/information?includeNutrition=false&apiKey={SPOONACULAR_API_KEY}'
+        response = requests.get(request).json()
+
+    return response
 
 
