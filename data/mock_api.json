@@ -791,5 +791,83 @@
               ]
             }
         }
+    },
+
+    "recipe_ingredients": {
+        "query": "http://localhost:5000/recipes/644885/ingredients",
+        "response": {
+            "ingredients": [
+                {
+                  "amount": {
+                    "metric": {
+                      "unit": "g", 
+                      "value": 453.592
+                    }, 
+                    "us": {
+                      "unit": "pound", 
+                      "value": 1.0
+                    }
+                  }, 
+                  "image": "potatoes-yukon-gold.png", 
+                  "name": "yukon gold potatoes"
+                }, 
+                {
+                  "amount": {
+                    "metric": {
+                      "unit": "Tbsps", 
+                      "value": 2.0
+                    }, 
+                    "us": {
+                      "unit": "Tbsps", 
+                      "value": 2.0
+                    }
+                  }, 
+                  "image": "white-powder.jpg", 
+                  "name": "cooked ener-g egg replacer"
+                }, 
+                {
+                  "amount": {
+                    "metric": {
+                      "unit": "Tbsps", 
+                      "value": 2.0
+                    }, 
+                    "us": {
+                      "unit": "Tbsps", 
+                      "value": 2.0
+                    }
+                  }, 
+                  "image": "chickpea-flour-or-another-gluten-free-flour.jpg", 
+                  "name": "chickpea flour"
+                }, 
+                {
+                  "amount": {
+                    "metric": {
+                      "unit": "Tbsps", 
+                      "value": 3.0
+                    }, 
+                    "us": {
+                      "unit": "Tbsps", 
+                      "value": 3.0
+                    }
+                  }, 
+                  "image": "white-powder.jpg", 
+                  "name": "potato starch"
+                }, 
+                {
+                  "amount": {
+                    "metric": {
+                      "unit": "servings", 
+                      "value": 4.0
+                    }, 
+                    "us": {
+                      "unit": "servings", 
+                      "value": 4.0
+                    }
+                  }, 
+                  "image": "salt-and-pepper.jpg", 
+                  "name": "black salt and pepper"
+                }
+              ]
+        }
     }
 }

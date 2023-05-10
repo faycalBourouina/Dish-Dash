@@ -41,11 +41,14 @@ def get_recipe(recipe_id):
     return response         
 
 
+#/recipes/644885/ingredients
 @app.route("/recipes/<recipe_id>/ingredients")
 def get_recipe_ingredients(recipe_id):
     """Return recipe ingredients"""
+    
+    response = crud.get_recipe_ingredients(recipe_id)
 
-    return "Recipe Ingredients"
+    return response
 
 @app.route("/users/<user_id>/favorites")
 def get_user_favorites(user_id):
