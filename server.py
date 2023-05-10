@@ -14,8 +14,10 @@ def get_landing_page_recipes():
 
     response = crud.get_landing_page_recipes()
 
-    return response
-
+    if response:
+        return response, 200
+    else:
+        return "Error", 404
 
 @app.route("/session", methods=["POST"])
 def create_user_session():
@@ -30,7 +32,10 @@ def search_recipes():
     search_dict = request.args.to_dict()
     response = crud.search_recipes(search_dict)
 
-    return response
+    if response:
+        return response, 200
+    else:
+        return "Error", 404
 
 @app.route("/recipes/<recipe_id>")
 def get_recipe(recipe_id):
@@ -38,18 +43,22 @@ def get_recipe(recipe_id):
 
     response = crud.get_recipe(recipe_id)
 
-    return response         
+    if response:
+        return response, 200
+    else:   
+        return "Error", 404
 
-
-#/recipes/644885/ingredients
 @app.route("/recipes/<recipe_id>/ingredients")
 def get_recipe_ingredients(recipe_id):
     """Return recipe ingredients"""
     
     response = crud.get_recipe_ingredients(recipe_id)
 
-    return response
-
+    if response:
+        return response, 200
+    else:
+        return "Error", 404
+    
 @app.route("/users/<user_id>/favorites")
 def get_user_favorites(user_id):
     """Return user favorites"""

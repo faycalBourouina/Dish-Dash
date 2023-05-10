@@ -1,5 +1,25 @@
 
-{
+{   
+    "MOCK_API Documentation": {
+        "landing_page": {
+            "query": "http://localhost:5000/",
+            "response": {}
+        },
+        "search":{
+            "query": "http://localhost:5000/search?query=pasta&cuisine=italian&diet=vegetarian",
+            "response": {}
+        },
+        "recipe_by_id": {
+            "query": "http://localhost:5000/recipes/644885",
+            "response": {}
+        },
+        "recipe_ingredients": {
+            "query": "http://localhost:5000/recipes/644885/ingredients",
+            "response": {
+                "ingredients": []
+            }
+        }
+    },
     "landing_page": {
         "query": "http://localhost:5000/",
         "response": {

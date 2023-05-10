@@ -86,8 +86,3 @@ def get_recipe_ingredients(recipe_id):
         response = requests.get(request).json()
 
     return response
-
-
-
-
-
