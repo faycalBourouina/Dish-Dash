@@ -300,5 +300,496 @@
             ], 
             "totalResults": 6
         }    
-    }   
+    },
+    
+    "recipe_by_id": {
+        "query": "http://localhost:5000/recipes/644885",
+        "response": {
+            "aggregateLikes": 1, 
+            "analyzedInstructions": [
+              {
+                "name": "", 
+                "steps": [
+                  {
+                    "equipment": [
+                      {
+                        "id": 404762, 
+                        "image": "microwave.jpg", 
+                        "localizedName": "microwave", 
+                        "name": "microwave"
+                      }, 
+                      {
+                        "id": 404784, 
+                        "image": "oven.jpg", 
+                        "localizedName": "oven", 
+                        "name": "oven", 
+                        "temperature": {
+                          "number": 425.0, 
+                          "unit": "Fahrenheit"
+                        }
+                      }
+                    ], 
+                    "ingredients": [
+                      {
+                        "id": 11352, 
+                        "image": "potatoes-yukon-gold.png", 
+                        "localizedName": "potato", 
+                        "name": "potato"
+                      }
+                    ], 
+                    "length": {
+                      "number": 3, 
+                      "unit": "minutes"
+                    }, 
+                    "number": 1, 
+                    "step": "Preheat oven to 425F. Pierce potatoes 2-3 times with a fork, place on a microwave-safe plate and microwave for 3 minutes."
+                  }, 
+                  {
+                    "equipment": [
+                      {
+                        "id": 404727, 
+                        "image": "baking-sheet.jpg", 
+                        "localizedName": "baking sheet", 
+                        "name": "baking sheet"
+                      }, 
+                      {
+                        "id": 404784, 
+                        "image": "oven.jpg", 
+                        "localizedName": "oven", 
+                        "name": "oven"
+                      }
+                    ], 
+                    "ingredients": [
+                      {
+                        "id": 11352, 
+                        "image": "potatoes-yukon-gold.png", 
+                        "localizedName": "potato", 
+                        "name": "potato"
+                      }, 
+                      {
+                        "id": 10118192, 
+                        "image": "shortbread-cookies.jpg", 
+                        "localizedName": "cookies", 
+                        "name": "cookies"
+                      }
+                    ], 
+                    "length": {
+                      "number": 60, 
+                      "unit": "minutes"
+                    }, 
+                    "number": 2, 
+                    "step": "Place potatoes on racks set over a cookie sheet and bake 1 hour."
+                  }, 
+                  {
+                    "equipment": [
+                      {
+                        "id": 404790, 
+                        "image": "potato-ricer.jpg", 
+                        "localizedName": "potato ricer", 
+                        "name": "potato ricer"
+                      }
+                    ], 
+                    "ingredients": [
+                      {
+                        "id": 11352, 
+                        "image": "potatoes-yukon-gold.png", 
+                        "localizedName": "potato", 
+                        "name": "potato"
+                      }
+                    ], 
+                    "number": 3, 
+                    "step": "Allow to cool until you are able to handle them, then peel them into a potato ricer or food mill basin and run through."
+                  }, 
+                  {
+                    "equipment": [], 
+                    "ingredients": [
+                      {
+                        "id": 1144, 
+                        "image": "liquid-egg-substitute.jpg", 
+                        "localizedName": "egg replacer", 
+                        "name": "egg replacer"
+                      }
+                    ], 
+                    "number": 4, 
+                    "step": "Add egg replacer and beat in."
+                  }, 
+                  {
+                    "equipment": [], 
+                    "ingredients": [
+                      {
+                        "id": 16157, 
+                        "image": "chickpea-flour-or-another-gluten-free-flour.jpg", 
+                        "localizedName": "chickpea flour", 
+                        "name": "chickpea flour"
+                      }, 
+                      {
+                        "id": 11413, 
+                        "image": "white-powder.jpg", 
+                        "localizedName": "potato starch", 
+                        "name": "potato starch"
+                      }, 
+                      {
+                        "id": 11352, 
+                        "image": "potatoes-yukon-gold.png", 
+                        "localizedName": "potato", 
+                        "name": "potato"
+                      }, 
+                      {
+                        "id": 0, 
+                        "image": "pizza-dough", 
+                        "localizedName": "dough", 
+                        "name": "dough"
+                      }
+                    ], 
+                    "number": 5, 
+                    "step": "Combine the chickpea flour and potato starch, then add to the potato mixture and blend to a fairly stiff dough."
+                  }, 
+                  {
+                    "equipment": [], 
+                    "ingredients": [], 
+                    "length": {
+                      "number": 60, 
+                      "unit": "minutes"
+                    }, 
+                    "number": 6, 
+                    "step": "Divide into four even pieces and chill 1 hour."
+                  }, 
+                  {
+                    "equipment": [], 
+                    "ingredients": [
+                      {
+                        "id": 0, 
+                        "image": "pizza-dough", 
+                        "localizedName": "dough", 
+                        "name": "dough"
+                      }, 
+                      {
+                        "id": 0, 
+                        "image": "dinner-yeast-rolls.jpg", 
+                        "localizedName": "roll", 
+                        "name": "roll"
+                      }
+                    ], 
+                    "number": 7, 
+                    "step": "Roll out 1 porton of the dough into a rope about 20\" long."
+                  }, 
+                  {
+                    "equipment": [
+                      {
+                        "id": 404727, 
+                        "image": "baking-sheet.jpg", 
+                        "localizedName": "baking sheet", 
+                        "name": "baking sheet"
+                      }
+                    ], 
+                    "ingredients": [
+                      {
+                        "id": 10118192, 
+                        "image": "shortbread-cookies.jpg", 
+                        "localizedName": "cookies", 
+                        "name": "cookies"
+                      }
+                    ], 
+                    "number": 8, 
+                    "step": "Cut rope into approximately 1\" pieces and place onto a lined or greased cookie sheet."
+                  }, 
+                  {
+                    "equipment": [], 
+                    "ingredients": [
+                      {
+                        "id": 98853, 
+                        "image": "gnocchi-isolated.jpg", 
+                        "localizedName": "gnocchi", 
+                        "name": "gnocchi"
+                      }
+                    ], 
+                    "length": {
+                      "number": 60, 
+                      "unit": "minutes"
+                    }, 
+                    "number": 9, 
+                    "step": "With the back of a fork, slightly flatten each of the gnocchi. Chill 1 hour before cooking or freeze on the sheet and transfer to a freezer bag for later cooking."
+                  }, 
+                  {
+                    "equipment": [], 
+                    "ingredients": [
+                      {
+                        "id": 0, 
+                        "image": "pizza-dough", 
+                        "localizedName": "dough", 
+                        "name": "dough"
+                      }
+                    ], 
+                    "number": 10, 
+                    "step": "Repeat process with remaining dough."
+                  }, 
+                  {
+                    "equipment": [
+                      {
+                        "id": 404645, 
+                        "image": "pan.png", 
+                        "localizedName": "frying pan", 
+                        "name": "frying pan"
+                      }
+                    ], 
+                    "ingredients": [
+                      {
+                        "id": 4609, 
+                        "image": "raw-bacon.png", 
+                        "localizedName": "bacon drippings", 
+                        "name": "bacon drippings"
+                      }, 
+                      {
+                        "id": 10123, 
+                        "image": "raw-bacon.png", 
+                        "localizedName": "bacon", 
+                        "name": "bacon"
+                      }, 
+                      {
+                        "id": 4582, 
+                        "image": "vegetable-oil.jpg", 
+                        "localizedName": "cooking oil", 
+                        "name": "cooking oil"
+                      }
+                    ], 
+                    "number": 11, 
+                    "step": "To cook, heat 1/2 tbsp of oil or a small amount of non-stick spray in a large skillet (or for a non-vegan version, cook some bacon until crisp and use the bacon fat)."
+                  }, 
+                  {
+                    "equipment": [], 
+                    "ingredients": [
+                      {
+                        "id": 98853, 
+                        "image": "gnocchi-isolated.jpg", 
+                        "localizedName": "gnocchi", 
+                        "name": "gnocchi"
+                      }
+                    ], 
+                    "number": 12, 
+                    "step": "Add chilled gnocchi and cook, stirring once or twice, until well browned on all sides."
+                  }, 
+                  {
+                    "equipment": [], 
+                    "ingredients": [
+                      {
+                        "id": 0, 
+                        "image": "", 
+                        "localizedName": "sauce", 
+                        "name": "sauce"
+                      }
+                    ], 
+                    "number": 13, 
+                    "step": "Add desired sauce (don't add too much or they will fall apart) and toss well."
+                  }
+                ]
+              }
+            ], 
+            "cheap": false, 
+            "cookingMinutes": -1, 
+            "creditsText": "Foodista.com \u2013 The Cooking Encyclopedia Everyone Can Edit", 
+            "cuisines": [
+              "Mediterranean", 
+              "Italian", 
+              "European"
+            ], 
+            "dairyFree": true, 
+            "diets": [
+              "gluten free", 
+              "dairy free", 
+              "lacto ovo vegetarian", 
+              "vegan"
+            ], 
+            "dishTypes": [
+              "side dish", 
+              "antipasti", 
+              "starter", 
+              "snack", 
+              "appetizer", 
+              "antipasto", 
+              "hor d'oeuvre"
+            ], 
+            "extendedIngredients": [
+              {
+                "aisle": "Produce", 
+                "amount": 1.0, 
+                "consistency": "SOLID", 
+                "id": 10211362, 
+                "image": "potatoes-yukon-gold.png", 
+                "measures": {
+                  "metric": {
+                    "amount": 453.592, 
+                    "unitLong": "grams", 
+                    "unitShort": "g"
+                  }, 
+                  "us": {
+                    "amount": 1.0, 
+                    "unitLong": "pound", 
+                    "unitShort": "lb"
+                  }
+                }, 
+                "meta": [
+                  "scrubbed", 
+                  "well"
+                ], 
+                "name": "yukon gold potatoes", 
+                "nameClean": "yukon gold potato", 
+                "original": "1 pound large Yukon Gold potatoes, scrubbed well", 
+                "originalName": "Yukon Gold potatoes, scrubbed well", 
+                "unit": "pound"
+              }, 
+              {
+                "aisle": "Health Foods;Baking", 
+                "amount": 2.0, 
+                "consistency": "SOLID", 
+                "id": 93658, 
+                "image": "white-powder.jpg", 
+                "measures": {
+                  "metric": {
+                    "amount": 2.0, 
+                    "unitLong": "Tbsps", 
+                    "unitShort": "Tbsps"
+                  }, 
+                  "us": {
+                    "amount": 2.0, 
+                    "unitLong": "Tbsps", 
+                    "unitShort": "Tbsps"
+                  }
+                }, 
+                "meta": [
+                  "prepared"
+                ], 
+                "name": "ener-g egg replacer", 
+                "nameClean": "ener g egg replacer", 
+                "original": "2 tablespoons Ener-G egg replacer, prepared according to package directions", 
+                "originalName": "Ener-G egg replacer, prepared according to package directions", 
+                "unit": "tablespoons"
+              }, 
+              {
+                "aisle": "Gluten Free;Ethnic Foods;Health Foods", 
+                "amount": 2.0, 
+                "consistency": "SOLID", 
+                "id": 16157, 
+                "image": "chickpea-flour-or-another-gluten-free-flour.jpg", 
+                "measures": {
+                  "metric": {
+                    "amount": 2.0, 
+                    "unitLong": "Tbsps", 
+                    "unitShort": "Tbsps"
+                  }, 
+                  "us": {
+                    "amount": 2.0, 
+                    "unitLong": "Tbsps", 
+                    "unitShort": "Tbsps"
+                  }
+                }, 
+                "meta": [], 
+                "name": "chickpea flour", 
+                "nameClean": "chickpea flour", 
+                "original": "2 tablespoons chickpea flour", 
+                "originalName": "chickpea flour", 
+                "unit": "tablespoons"
+              }, 
+              {
+                "aisle": "Baking", 
+                "amount": 3.0, 
+                "consistency": "SOLID", 
+                "id": 11413, 
+                "image": "white-powder.jpg", 
+                "measures": {
+                  "metric": {
+                    "amount": 3.0, 
+                    "unitLong": "Tbsps", 
+                    "unitShort": "Tbsps"
+                  }, 
+                  "us": {
+                    "amount": 3.0, 
+                    "unitLong": "Tbsps", 
+                    "unitShort": "Tbsps"
+                  }
+                }, 
+                "meta": [], 
+                "name": "potato starch", 
+                "nameClean": "potato starch", 
+                "original": "3 tablespoons potato starch", 
+                "originalName": "potato starch", 
+                "unit": "tablespoons"
+              }, 
+              {
+                "aisle": "Spices and Seasonings", 
+                "amount": 4.0, 
+                "consistency": "SOLID", 
+                "id": 1102047, 
+                "image": "salt-and-pepper.jpg", 
+                "measures": {
+                  "metric": {
+                    "amount": 4.0, 
+                    "unitLong": "servings", 
+                    "unitShort": "servings"
+                  }, 
+                  "us": {
+                    "amount": 4.0, 
+                    "unitLong": "servings", 
+                    "unitShort": "servings"
+                  }
+                }, 
+                "meta": [
+                  "black", 
+                  "to taste"
+                ], 
+                "name": "salt and pepper", 
+                "nameClean": "salt and pepper", 
+                "original": "Salt and black pepper to taste", 
+                "originalName": "Salt and black pepper to taste", 
+                "unit": "servings"
+              }
+            ], 
+            "gaps": "no", 
+            "glutenFree": true, 
+            "healthScore": 18, 
+            "id": 644885, 
+            "image": "https://spoonacular.com/recipeImages/644885-556x370.jpg", 
+            "imageType": "jpg", 
+            "instructions": "Preheat oven to 425F. Pierce potatoes 2-3 times with a fork, place on a microwave-safe plate and microwave for 3 minutes.\nPlace potatoes on racks set over a cookie sheet and bake 1 hour.\nAllow to cool until you are able to handle them, then peel them into a potato ricer or food mill basin and run through.\nAdd egg replacer and beat in.\nCombine the chickpea flour and potato starch, then add to the potato mixture and blend to a fairly stiff dough.\nDivide into four even pieces and chill 1 hour.\nRoll out 1 porton of the dough into a rope about 20\" long.\nCut rope into approximately 1\" pieces and place onto a lined or greased cookie sheet.\nWith the back of a fork, slightly flatten each of the gnocchi. Chill 1 hour before cooking or freeze on the sheet and transfer to a freezer bag for later cooking.\nRepeat process with remaining dough.\nTo cook, heat 1/2 tbsp of oil or a small amount of non-stick spray in a large skillet (or for a non-vegan version, cook some bacon until crisp and use the bacon fat). Add chilled gnocchi and cook, stirring once or twice, until well browned on all sides. Add desired sauce (don't add too much or they will fall apart) and toss well.", 
+            "license": "CC BY 3.0", 
+            "lowFodmap": false, 
+            "occasions": [], 
+            "originalId": null, 
+            "preparationMinutes": -1, 
+            "pricePerServing": 30.79, 
+            "readyInMinutes": 45, 
+            "servings": 4, 
+            "sourceName": "Foodista", 
+            "sourceUrl": "https://www.foodista.com/recipe/MMFLTKZS/gluten-free-vegan-gnocchi", 
+            "spoonacularSourceUrl": "https://spoonacular.com/gluten-free-vegan-gnocchi-644885", 
+            "summary": "You can never have too many Mediterranean recipes, so give Gluten Free Vegan Gnocchi a try. This recipe serves 4. This hor d'oeuvre has <b>133 calories</b>, <b>4g of protein</b>, and <b>0g of fat</b> per serving. For <b>31 cents per serving</b>, this recipe <b>covers 7%</b> of your daily requirements of vitamins and minerals. This recipe from Foodista requires salt and pepper, ener-g egg replacer, chickpea flour, and potato starch. 1 person has made this recipe and would make it again. It is a good option if you're following a <b>gluten free, dairy free, lacto ovo vegetarian, and vegan</b> diet. From preparation to the plate, this recipe takes about <b>45 minutes</b>. All things considered, we decided this recipe <b>deserves a spoonacular score of 84%</b>. This score is outstanding. Users who liked this recipe also liked <a href=\"https://spoonacular.com/recipes/gluten-free-vegan-gnocchi-1382671\">Gluten Free Vegan Gnocchi</a>, <a href=\"https://spoonacular.com/recipes/gluten-free-vegan-walnut-and-oat-brownies-vegan-gluten-free-grain-free-flourless-dairy-free-no-refined-sugar-1356583\">Gluten-Free Vegan Walnut and Oat Brownies (Vegan, Gluten-Free, Grain-Free, Flourless, Dairy-Free, No Refined Sugar)</a>, and <a href=\"https://spoonacular.com/recipes/gluten-free-vegan-walnut-and-oat-brownies-vegan-gluten-free-grain-free-flourless-dairy-free-no-refined-sugar-1191427\">Gluten-Free Vegan Walnut and Oat Brownies (Vegan, Gluten-Free, Grain-Free, Flourless, Dairy-Free, No Refined Sugar)</a>.", 
+            "sustainable": false, 
+            "title": "Gluten Free Vegan Gnocchi", 
+            "vegan": true, 
+            "vegetarian": true, 
+            "veryHealthy": false, 
+            "veryPopular": false, 
+            "weightWatcherSmartPoints": 3, 
+            "winePairing": {
+              "pairedWines": [
+                "chianti", 
+                "verdicchio", 
+                "trebbiano"
+              ], 
+              "pairingText": "Gnocchi can be paired with Chianti, Verdicchio, and Trebbiano. Italians know food and they know wine. Trebbiano and Verdicchio are Italian white wines that pair well with fish and white meat, while Chianti is a great Italian red for heavier, bolder dishes. The Tenuta di Capraia Chianti Classico with a 4.6 out of 5 star rating seems like a good match. It costs about 18 dollars per bottle.", 
+              "productMatches": [
+                {
+                  "averageRating": 0.9200000166893005, 
+                  "description": "Chianti Classico Tenuta di Capraia is a wine with an optimal complexity and structure. Ruby red color with violet tinges. Intense and rich aroma, vinous, fruit-driven. Pleasant cherry notes, refreshing and well-balanced with hints of integrated vivid tannin.", 
+                  "id": 435699, 
+                  "imageUrl": "https://spoonacular.com/productImages/435699-312x231.jpg", 
+                  "link": "https://click.linksynergy.com/deeplink?id=*QCiIS6t4gA&mid=2025&murl=https%3A%2F%2Fwww.wine.com%2Fproduct%2Ftenuta-di-capraia-chianti-classico-2014%2F188880", 
+                  "price": "$17.989999771118164", 
+                  "ratingCount": 6.0, 
+                  "score": 0.8673684377419322, 
+                  "title": "Tenuta di Capraia Chianti Classico"
+                }
+              ]
+            }
+        }
+    }
 }

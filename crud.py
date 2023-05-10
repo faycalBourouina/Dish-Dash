@@ -60,7 +60,11 @@ def get_recipe(recipe_id):
 
     # Use mock data in test mode
     if TEST_MODE:
-        response = mock_data['recipe']['response']
+        print ("recipe id: ", mock_data['recipe_by_id']['response']['id'])
+        if mock_data['recipe_by_id']['response']['id'] == int(recipe_id):
+            response = mock_data['recipe_by_id']['response']
+        else :
+            response = "Recipe not found"    
     else:
         request = f'{uri_recipes}/{recipe_id}/information?includeNutrition=false&apiKey={SPOONACULAR_API_KEY}'
         response = requests.get(request).json()

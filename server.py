@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 
 @app.route("/")
-def get_homepage_recipes():
+def get_landing_page_recipes():
     """Return trending and custom recipes"""
 
     response = crud.get_landing_page_recipes()
@@ -35,10 +35,10 @@ def search_recipes():
 @app.route("/recipes/<recipe_id>")
 def get_recipe(recipe_id):
     """Return recipe"""
-    def get_recipe(recipe_id):
-        """Return recipe"""
 
-    return "Recipe"           
+    response = crud.get_recipe(recipe_id)
+
+    return response         
 
 
 @app.route("/recipes/<recipe_id>/ingredients")
