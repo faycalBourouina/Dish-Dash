@@ -31,4 +31,27 @@ def get_landing_page_recipes():
 
     return response
 
+def search_recipes(search):
+    """Search for recipes"""
+
+    # Use mock data in test mode
+    if TEST_MODE:
+        response = mock_data['search']['response']
+    else:
+
+        query = search.get('query', '')
+        diet = search.get('diet', '')
+        cuisine = search.get('cuisine', '')
+        intolerances = search.get('intolerances', '')
+        includeIngredients = search.get('includeIngredients', '')
+        type = search.get('type', '')
+        maReadyTime = search.get('maxReadyTime', '')
+        #fillIngredients	= True
+
+        request = f'{uri_recipes}/complexSearch?&query={query}&diet={diet}&cuisine={cuisine}&apiKey={SPOONACULAR_API_KEY}'
+        response = requests.get(request).json()
+
+    return response
+
+
 

@@ -26,8 +26,11 @@ def create_user_session():
 @app.route("/search")
 def search_recipes():
     """Search for recipes"""
-    
-    return "Search Recipes"
+
+    search_dict = request.args.to_dict()
+    response = crud.search_recipes(search_dict)
+
+    return response
 
 @app.route("/recipes/<recipe_id>")
 def get_recipe(recipe_id):
