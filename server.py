@@ -11,6 +11,7 @@ app = Flask(__name__)
 @app.route("/")
 def get_homepage_recipes():
     """Return trending and custom recipes"""
+
     
     return "Trending"
 
@@ -25,9 +26,9 @@ def search_recipes():
     """Search for recipes"""
 
     search_dict = request.args.to_dict()
-    crud.search_recipes(search_dict)
+    response = crud.search_recipes(search_dict)
 
-    return "Search"
+    return response
 
 @app.route("/recipes/<recipe_id>")
 def get_recipe(recipe_id):

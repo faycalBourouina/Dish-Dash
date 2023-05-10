@@ -1,0 +1,51 @@
+
+{
+    "search":{
+        "query": "http://localhost:5000/search?query=pasta&cuisine=italian&diet=vegetarian",
+        "response": {
+            "number": 10, 
+            "offset": 0, 
+            "results": [
+            {
+                "id": 644885, 
+                "image": "https://spoonacular.com/recipeImages/644885-312x231.jpg", 
+                "imageType": "jpg", 
+                "title": "Gluten Free Vegan Gnocchi"
+            }, 
+            {
+                "id": 644205, 
+                "image": "https://spoonacular.com/recipeImages/644205-312x231.jpg", 
+                "imageType": "jpg", 
+                "title": "Garden Vegetable Ravioli With Tomato Brodo"
+            }, 
+            {
+                "id": 656544, 
+                "image": "https://spoonacular.com/recipeImages/656544-312x231.jpg", 
+                "imageType": "jpg", 
+                "title": "Polenta gnocchi with savoy cabbage and cheese"
+            }, 
+            {
+                "id": 1096168, 
+                "image": "https://spoonacular.com/recipeImages/1096168-312x231.jpg", 
+                "imageType": "jpg", 
+                "title": "Sweet Potato Gnocchi tossed in Garlic Sage Olive Oil"
+            }, 
+            {
+                "id": 640064, 
+                "image": "https://spoonacular.com/recipeImages/640064-312x231.jpg", 
+                "imageType": "jpg", 
+                "title": "Coriander Ravioli With Pumpkin & Cottage Cheese Filling"
+            }, 
+            {
+                "id": 656972, 
+                "image": "https://spoonacular.com/recipeImages/656972-312x231.jpg", 
+                "imageType": "jpg", 
+                "title": "Potato Gnocchi With Kale and Mushrooms In A Goat Cheese Sauce"
+            }
+            ], 
+            "totalResults": 6
+        }    
+    }
+
+    
+}
