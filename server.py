@@ -12,8 +12,10 @@ app = Flask(__name__)
 def get_homepage_recipes():
     """Return trending and custom recipes"""
 
-    
-    return "Trending"
+    response = crud.get_landing_page_recipes()
+
+    return response
+
 
 @app.route("/session", methods=["POST"])
 def create_user_session():
@@ -24,11 +26,8 @@ def create_user_session():
 @app.route("/search")
 def search_recipes():
     """Search for recipes"""
-
-    search_dict = request.args.to_dict()
-    response = crud.search_recipes(search_dict)
-
-    return response
+    
+    return "Search Recipes"
 
 @app.route("/recipes/<recipe_id>")
 def get_recipe(recipe_id):
