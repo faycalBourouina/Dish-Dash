@@ -72,10 +72,32 @@ class ServerTests(unittest.TestCase):
         self.assertIsInstance(recipes_value, list, "'results' attribute is not an array")
         self.assertTrue(len(recipes_value) > 0, "'results' attribute is an empty array")
 
-        
+
+    # Test recipe by id
+    def test_recipe_by_id_status_code(self):
+        """Test recipe by id status code"""
+
+        result = self.client.get("/recipes/644885")
+        self.assertEqual(result.status_code, 200) 
 
 
+    def test_recipe_by_id_response_format(self):
+        """Test recipe by id response format"""
 
+        result = self.client.get("/recipes/644885")
+        self.assertEqual(result.headers['Content-Type'], 'application/json')
+
+
+    def test_recipe_by_id_response_id_attribute(self):
+        """Test presence and value of 'id' attribute"""
+            
+        result = self.client.get("/recipes/644885")
+        response_data = json.loads(result.data)
+        self.assertIn('id', response_data)
+        self.assertEqual(response_data['id'], 644885)
+
+
+    
 
 if __name__ == "__main__":
     unittest.main()
