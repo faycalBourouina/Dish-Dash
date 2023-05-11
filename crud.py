@@ -17,6 +17,21 @@ uri_recipes = f'https://api.spoonacular.com/recipes'
 with open('data/mock_api.json') as f:
     mock_data = json.load(f)
 
+# mock user data for testing
+with open('data/mock_users.json') as f:
+    mock_users = json.load(f)
+
+def authenticate(email, password):
+    """Login user"""
+    
+    if  MODE == 'TEST_MODE':
+        for user in mock_users:
+            if user['email'] == email and user['password'] == password:
+                return True
+            else:
+                return False
+
+    # Use real data in production mode to be implemented
 
 def get_landing_page_recipes():
     """Return trending and custom recipes"""

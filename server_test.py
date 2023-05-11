@@ -11,6 +11,22 @@ class ServerTests(unittest.TestCase):
         self.client = app.test_client()
         app.config['TESTING'] = True
     
+    # Test authentication
+    def test_authentication_status_code(self):
+        """Test authentication status code if successful"""
+
+        result = self.client.post("/authenticate", data={"email": "user1@example.com", "password": "password1"})
+        self.assertEqual(result.status_code, 200)
+    
+    def test_authentication_status_code_fail(self):
+        """Test authentication status code if unsuccessful"""
+
+        result = self.client.post("/authenticate", data={"email": "user1@example.com", "password": "password"})
+        self.assertEqual(result.status_code, 401, "'Incorect password should fail'")
+
+        result = self.client.post("/authenticate", data={"email": "user@example.com", "password": "password1"})
+        self.assertEqual(result.status_code, 401, "'Incorect email should fail'")
+                                                             
     # Test landing page
     def test_landing_page_status_code(self):
         """Test landing page status code"""

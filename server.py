@@ -22,7 +22,18 @@ def get_landing_page_recipes():
 def authenticate_user():
     """Authenticate user"""
 
-    return "Authenticate User"
+    password = request.form.get("password")
+    email = request.form.get("email")
+    
+    print("email: ", email)
+    print("password: ", password)
+    authentication = crud.authenticate(email, password)
+
+    if authentication:
+        print("Authentication successful: ", authentication)
+        return 'Authentication successful', 200
+    else:
+        return 'Authentication failed', 401
 
 @app.route("/search")
 def search_recipes():
