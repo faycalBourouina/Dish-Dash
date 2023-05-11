@@ -1,11 +1,13 @@
 """Server for Dish-Dash app"""
 from flask import (Flask, request, session)
+from flask_cors import CORS
 from urllib.parse import parse_qs
 import os
 from dotenv import load_dotenv
 import crud
 
 app = Flask(__name__)
+CORS(app)
 
 # Load the API key from the .env file
 load_dotenv()
@@ -23,14 +25,16 @@ def get_landing_page_recipes():
     else:
         return "Error", 404
 
-@app.route("/authenticate", methods=["POST", "GET"])
+@app.route("/authenticate", methods=["POST"])
 def authenticate_user():
     """Authenticate user"""
 
-    password = request.form.get("password")
-    email = request.form.get("email")
+    password = request.form.get('password')
+    email = request.form.get('email')
+    print("credentials: ", password, email)
 
     response = crud.authenticate(email, password)
+
     if len(response) > 0:
         session['user'] = response
         return response, 200
@@ -71,14 +75,13 @@ def get_recipe_ingredients(recipe_id):
     else:
         return "Error", 404
     
-@app.route("/users/<user_id>/favorites")
+@app.route("/users/<int:user_id>/favorites")
 def get_user_favorites(user_id):
     """Return user favorites"""
 
-    print(session.get('user', None))
+    print("session: ", session.get('user'))
     if 'user' in session and session['user']['id'] == user_id:
-        print(session['user'])
-        return f"User {session['user_id']} Favorites"
+        return f"User {session['user']} Favorites"
     else:
          return "Authentication required", 401
 

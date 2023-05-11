@@ -34,7 +34,8 @@ class ServerTests(unittest.TestCase):
 
         self.assertEqual(result.headers['Content-Type'], 'application/json')
 
-    def test_authentication_response_attribute(self):
+    def test_authentication_response_attribute_sucess(self):
+        """Test presence and value of 'id' attribute"""
 
         result = self.client.post("/authenticate", data={"email": "user1@example.com", "password": "password1"})
 
