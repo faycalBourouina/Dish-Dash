@@ -24,14 +24,14 @@ class ServerTests(unittest.TestCase):
         result = self.client.get("/")
         self.assertEqual(result.headers['Content-Type'], 'application/json')
 
-    def test_landing_page_recipe_attribute(self):
+    def test_landing_page_recipes_attribute(self):
         """Test presence and format of 'recipes' attribute"""
 
         result = self.client.get("/")
         response_data = json.loads(result.data)
         self.assertIn('recipes', response_data)
 
-    def test_landing_page_non_empty_recipe_array(self):
+    def test_landing_page_non_empty_recipes_array(self):
         """Test 'recipes' attribute is a non-empty array"""
 
         result = self.client.get("/")
@@ -57,7 +57,7 @@ class ServerTests(unittest.TestCase):
         self.assertEqual(result.headers['Content-Type'], 'application/json')
 
     def test_search_recipe_attribute(self):
-        """Test presence and format of 'results' attribute"""
+        """Test presence of 'results' attribute"""
 
         result = self.client.get("/search")
         response_data = json.loads(result.data)
@@ -97,7 +97,35 @@ class ServerTests(unittest.TestCase):
         self.assertEqual(response_data['id'], 644885)
 
 
-    
+    # Test recipe ingredients
+    def test_recipe_ingredients_status_code(self):
+        """Test recipe ingredients by id status code"""
 
+        result = self.client.get("/recipes/644885/ingredients")
+        self.assertEqual(result.status_code, 200)
+
+    def test_recipe_ingredients_response_format(self):
+        """Test recipe ingredients by id response format"""
+
+        result = self.client.get("/recipes/644885/ingredients")
+        self.assertEqual(result.headers['Content-Type'], 'application/json')
+
+    def test_recipe_ingredients_ingredients_attribute(self):
+        """Test presence of 'ingredients' attribute"""
+
+        result = self.client.get("/recipes/644885/ingredients")
+        response_data = json.loads(result.data)
+        self.assertIn('ingredients', response_data)
+
+    def test_recipe_ingredients_non_empty_ingredients_array(self):
+        """Test 'ingredients' attribute is a non-empty array"""
+
+        result = self.client.get("/recipes/644885/ingredients")
+        response_data = json.loads(result.data)
+        ingredients_value = response_data['ingredients']
+        self.assertIsInstance(ingredients_value, list, "'ingredients' attribute is not an array")
+        self.assertTrue(len(ingredients_value) > 0, "'ingredients' attribute is an empty array")
+
+        
 if __name__ == "__main__":
     unittest.main()
