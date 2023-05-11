@@ -12,7 +12,7 @@ class ServerTests(unittest.TestCase):
         app.config['TESTING'] = True
     
     # Test authentication
-    def test_authentication_status_code(self):
+    def test_authentication_status_code_success(self):
         """Test authentication status code if successful"""
 
         result = self.client.post("/authenticate", data={"email": "user1@example.com", "password": "password1"})

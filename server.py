@@ -1,11 +1,16 @@
 """Server for Dish-Dash app"""
-from flask import (Flask, request)
+from flask import (Flask, request, session)
 from urllib.parse import parse_qs
-
+import os
+from dotenv import load_dotenv
 import crud
 
 app = Flask(__name__)
 
+# Load the API key from the .env file
+load_dotenv()
+
+app.secret_key = os.getenv("SESSION_SECRET_KEY")
 
 @app.route("/")
 def get_landing_page_recipes():
@@ -18,19 +23,16 @@ def get_landing_page_recipes():
     else:
         return "Error", 404
 
-@app.route("/login", methods=["POST", "GET"])
+@app.route("/authenticate", methods=["POST", "GET"])
 def authenticate_user():
     """Authenticate user"""
 
     password = request.form.get("password")
     email = request.form.get("email")
-    
-    print("email: ", email)
-    print("password: ", password)
-    authentication = crud.authenticate(email, password)
 
-    if authentication:
-        print("Authentication successful: ", authentication)
+    response = crud.authenticate(email, password)
+    if len(response) > 0:
+        session['user'] = response
         return 'Authentication successful', 200
     else:
         return 'Authentication failed', 401
@@ -73,7 +75,10 @@ def get_recipe_ingredients(recipe_id):
 def get_user_favorites(user_id):
     """Return user favorites"""
 
-    return "User Favorites"
+    if 'user_id' in session and session['user_id'] == user_id:
+        return f"User {session['user_id']} Favorites"
+    else:
+         return "Authentication required", 401
 
 @app.route("/users/<user_id>/favorites/<recipe_id>", methods=["PATCH", "DELETE"])
 def update_favorite(user_id, recipe_id):

@@ -1,8 +1,8 @@
 import requests
+
 from dotenv import load_dotenv
 import os
 import json
-
 
 # Load the API key from the .env file
 load_dotenv()
@@ -25,12 +25,13 @@ def authenticate(email, password):
     """Login user"""
     
     if  MODE == 'TEST_MODE':
+        response  = {}
         for user in mock_users:
             if user['email'] == email and user['password'] == password:
-                return True
-            else:
-                return False
-
+                response = {'id': user['id'], 'email': user['email']}
+                break
+        return response
+    
     # Use real data in production mode to be implemented
 
 def get_landing_page_recipes():
@@ -100,3 +101,6 @@ def get_recipe_ingredients(recipe_id):
         response = requests.get(request).json()
 
     return response
+
+if __name__ == "__main__":
+    from server import app
