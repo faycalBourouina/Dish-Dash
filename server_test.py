@@ -26,7 +26,19 @@ class ServerTests(unittest.TestCase):
 
         result = self.client.post("/authenticate", data={"email": "user@example.com", "password": "password1"})
         self.assertEqual(result.status_code, 401, "'Incorect email should fail'")
-                                                             
+
+    def test_authentication_response_format(self):
+        """Test authentication response format"""
+
+        result = self.client.post("/authenticate", data={"email": "user1@example.com", "password": "password1"})
+
+        self.assertEqual(result.headers['Content-Type'], 'application/json')
+
+        response_data = json.loads(result.data)
+        self.assertIn('id', response_data)
+        self.assertEqual(response_data['id'], 1, "'id' attribute should be 1")
+
+
     # Test landing page
     def test_landing_page_status_code(self):
         """Test landing page status code"""

@@ -33,7 +33,7 @@ def authenticate_user():
     response = crud.authenticate(email, password)
     if len(response) > 0:
         session['user'] = response
-        return 'Authentication successful', 200
+        return response, 200
     else:
         return 'Authentication failed', 401
 
@@ -75,7 +75,9 @@ def get_recipe_ingredients(recipe_id):
 def get_user_favorites(user_id):
     """Return user favorites"""
 
-    if 'user_id' in session and session['user_id'] == user_id:
+    print(session.get('user', None))
+    if 'user' in session and session['user']['id'] == user_id:
+        print(session['user'])
         return f"User {session['user_id']} Favorites"
     else:
          return "Authentication required", 401
