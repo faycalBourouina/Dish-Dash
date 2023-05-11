@@ -40,9 +40,6 @@ class ServerTests(unittest.TestCase):
         self.assertIsInstance(recipes_value, list, "'recipes' attribute is not an array")
         self.assertTrue(len(recipes_value) > 0, "'recipes' attribute is an empty array")
 
-
-
-
     # Test search
     def test_search_status_code(self):
         """Test search status code"""

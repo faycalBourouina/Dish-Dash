@@ -4,7 +4,6 @@ from urllib.parse import parse_qs
 
 import crud
 
-
 app = Flask(__name__)
 
 
@@ -19,11 +18,11 @@ def get_landing_page_recipes():
     else:
         return "Error", 404
 
-@app.route("/session", methods=["POST"])
-def create_user_session():
-    """Return session"""
+@app.route("/login", methods=["POST", "GET"])
+def authenticate_user():
+    """Authenticate user"""
 
-    return "Session"
+    return "Authenticate User"
 
 @app.route("/search")
 def search_recipes():
