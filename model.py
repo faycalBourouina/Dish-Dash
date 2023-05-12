@@ -13,11 +13,12 @@ class User(db.Model):
     id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     email = db.Column(db.String, unique=True)
     password = db.Column(db.String)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
-    favorites = db.relationship('Favorite')
+    favorites = db.relationship('Favorite', back_populates='user')
 
     def __repr__(self):
-        return f'<User user_id={self.user_id} email={self.email}>'
+        return f'<User id={self.id} email={self.email}>'
     
 
 class Recipe(db.Model):
@@ -28,7 +29,8 @@ class Recipe(db.Model):
     id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     title = db.Column(db.String)
 
-    favorites = db.relationship('Favorite')
+    favorites = db.relationship('Favorite', back_populates='recipe')
+
     def __repr__(self):
         return f'<Recipe recipe_id={self.recipe_id} title={self.title}>'
     
@@ -42,8 +44,8 @@ class Favorite(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     recipe_id = db.Column(db.Integer, db.ForeignKey('recipes.id'))
 
-    user = db.relationship('User')
-    recipe = db.relationship('Recipe')
+    user = db.relationship('User', back_populates='favorites')
+    recipe = db.relationship('Recipe', back_populates='favorites')
 
     def __repr__(self):
         return f'<Favorite favorite_id={self.favorite_id} user_id={self.user_id} recipe_id={self.recipe_id}>'

@@ -1,4 +1,5 @@
 from model import db, User, Recipe, Favorite, connect_to_db
+from datetime import datetime
 
 import requests
 
@@ -29,16 +30,16 @@ def create_user(email, password):
     """Create a new user"""
 
     if MODE == 'TEST_MODE':
-        response = {}
-        for user in mock_users['users']:
-            if user['email'] == email:
-                response = {}
-                break
-            else:
-                response = {'id': len(mock_users['users']) + 1, 'email': email}
-        return response
+        # Check if user already exists
+        if User.query.filter(User.email == email).first():
+            response = {}
+        else:
+            user = User(email=email, password=password, created_at=datetime.now())
+            
+        return user 
 
-    # else use real data in production mode to be implemented
+    # Use real data in production mode to be implemented      
+
 
 def authenticate(email, password):
     """Login user"""
