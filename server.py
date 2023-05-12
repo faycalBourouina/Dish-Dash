@@ -31,7 +31,6 @@ def authenticate_user():
 
     password = request.form.get('password')
     email = request.form.get('email')
-    print("credentials: ", password, email)
 
     response = crud.authenticate(email, password)
 

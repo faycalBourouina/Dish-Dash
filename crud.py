@@ -26,7 +26,7 @@ def authenticate(email, password):
     
     if  MODE == 'TEST_MODE':
         response  = {}
-        for user in mock_users:
+        for user in mock_users['users']:
             if user['email'] == email and user['password'] == password:
                 response = {'id': user['id'], 'email': user['email']}
                 break
