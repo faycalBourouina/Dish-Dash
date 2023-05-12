@@ -18,7 +18,7 @@ with open('data/mock_api.json') as f:
     mock_data = json.load(f)
 
 # mock user data for testing
-with open('data/mock_users.json') as f:
+with open('data/mock_db.json') as f:
     mock_users = json.load(f)
 
 def authenticate(email, password):

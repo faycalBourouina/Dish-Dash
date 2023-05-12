@@ -80,6 +80,7 @@ def get_user_favorites(user_id):
 
     print("session: ", session.get('user'))
     if 'user' in session and session['user']['id'] == user_id:
+        print(session['user']['id'])
         return "Favorites recipes"
     else:
          return "Authentication required", 401
