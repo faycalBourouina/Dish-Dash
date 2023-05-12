@@ -25,6 +25,22 @@ def get_landing_page_recipes():
     else:
         return "Error", 404
 
+
+@app.route("/signup", methods=["POST"])
+def create_user():
+    """Create a new user"""
+
+    password = request.form.get('password')
+    email = request.form.get('email')
+
+    response = crud.create_user(email, password)
+
+    if response:
+        session['user'] = response
+        return response, 201
+    else:
+        return 'User already exists', 409
+    
 @app.route("/authenticate", methods=["POST"])
 def authenticate_user():
     """Authenticate user"""

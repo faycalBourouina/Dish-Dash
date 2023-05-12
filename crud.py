@@ -1,3 +1,5 @@
+from model import db, User, Recipe, Favorite, connect_to_db
+
 import requests
 
 from dotenv import load_dotenv
@@ -20,6 +22,23 @@ with open('data/mock_api.json') as f:
 # mock user data for testing
 with open('data/mock_db.json') as f:
     mock_users = json.load(f)
+
+
+
+def create_user(email, password):
+    """Create a new user"""
+
+    if MODE == 'TEST_MODE':
+        response = {}
+        for user in mock_users['users']:
+            if user['email'] == email:
+                response = {}
+                break
+            else:
+                response = {'id': len(mock_users['users']) + 1, 'email': email}
+        return response
+
+    # else use real data in production mode to be implemented
 
 def authenticate(email, password):
     """Login user"""

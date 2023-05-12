@@ -10,6 +10,31 @@ class ServerTests(unittest.TestCase):
 
         self.client = app.test_client()
         app.config['TESTING'] = True
+
+
+    # Test sign up
+    def test_signup_status_code_new_user(self):
+        """Test sign up status code for new user"""
+
+        result = self.client.post("/signup", data={"email": "user11@example.com", "password": "password11"})
+        self.assertEqual(result.status_code, 201)
+
+            
+    def test_signup_response_id_attribute_new_user(self):
+        """Test presence and value of 'id' attribute"""
+
+        result = self.client.post("/signup", data={"email": "user11@example.com", "password": "password11"})
+        response_data = json.loads(result.data)
+        self.assertIn('id', response_data)
+        self.assertEqual(response_data['id'], 11, "'id' attribute should be 11")
+
+
+    def test_signup_status_code_existing_user(self):
+        """Test sign up status code for existing user"""
+
+        result = self.client.post("/signup", data={"email": "user10@example.com", "password": "password10"})
+        self.assertEqual(result.status_code, 409)
+
     
     # Test authentication
     def test_authentication_status_code_success(self):
@@ -34,7 +59,7 @@ class ServerTests(unittest.TestCase):
 
         self.assertEqual(result.headers['Content-Type'], 'application/json')
 
-    def test_authentication_response_attribute_sucess(self):
+    def test_authentication_response_id_attribute_sucess(self):
         """Test presence and value of 'id' attribute"""
 
         result = self.client.post("/authenticate", data={"email": "user1@example.com", "password": "password1"})
