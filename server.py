@@ -46,11 +46,10 @@ def create_user():
     if new_user:
         model.db.session.add(new_user)
         model.db.session.commit()
-        response = {'id': new_user.id, 'email': new_user.email}
         
-        print("new user: ", new_user)
-        print("response: ", response)
+        response = {'id': new_user.id, 'email': new_user.email}
         session['user'] = response
+
         return response, 201
     else:
         return 'User already exists', 409
@@ -62,10 +61,12 @@ def authenticate_user():
     password = request.form.get('password')
     email = request.form.get('email')
 
-    response = crud.authenticate(email, password)
+    user = crud.authenticate(email, password)
 
-    if len(response) > 0:
+    if user:
+        response = {'id': user.id, 'email': user.email}
         session['user'] = response
+        
         return response, 200
     else:
         return 'Authentication failed', 401

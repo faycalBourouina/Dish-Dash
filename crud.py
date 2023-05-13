@@ -45,12 +45,11 @@ def authenticate(email, password):
     """Login user"""
     
     if  MODE == 'TEST_MODE':
-        response  = {}
-        for user in mock_users['users']:
-            if user['email'] == email and user['password'] == password:
-                response = {'id': user['id'], 'email': user['email']}
-                break
-        return response
+        user = User.query.filter(User.email == email).first()
+        if user and user.password == password:
+            return user
+        else:
+            return None
     
     # Use real data in production mode to be implemented
 

@@ -129,7 +129,7 @@ class ServerTests(unittest.TestCase):
 
 
 
-class dbTests(unittest.TestCase):
+class DBTests(unittest.TestCase):
     """Tests for database"""
 
     def setUp(self):
