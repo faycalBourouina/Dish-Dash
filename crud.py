@@ -147,8 +147,17 @@ def add_favorite(user, recipe):
         if existing_favorite:
             return 
         else:
-            favorite = Favorite(user=user , recipe=recipe)
 
+            # Check if recipe already exists in favorites
+            existing_favorite = Favorite.query.filter(Favorite.recipe_id == recipe.id).first()
+            
+            if existing_favorite:
+                kisses = existing_favorite.kisses + 1
+                favorite = Favorite(user=user, recipe=recipe, kisses=kisses)
+
+            else:
+                favorite = Favorite(user=user, recipe=recipe, kisses=1)
+            
         return favorite
     # Use real data in production mode to be implemented
 
@@ -157,7 +166,6 @@ def get_favorites(user_id):
 
     if MODE == 'TEST_MODE':
         favorites = Favorite.query.filter(Favorite.user_id == user_id).all()
-        print(f"user with id '{user_id}' favorites recipes: " , favorites)
         return favorites
 
     # Use real data in production mode to be implemented

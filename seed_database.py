@@ -49,13 +49,6 @@ def seed_test_db():
         new_favorite = crud.add_favorite(user, liked_recipe)
         if new_favorite:
             favorites_in_db.append(new_favorite)
-    print("----------------------------------------------------------------------------------------------")
-    print("users_in_db", users_in_db)
-    print("----------------------------------------------------------------------------------------------")
-    print("recipes_in_db", recipes_in_db)
-    print("----------------------------------------------------------------------------------------------")
-    print("favorites_in_db", favorites_in_db)
-    print("----------------------------------------------------------------------------------------------")
 
     model.db.session.add_all(recipes_in_db)
     model.db.session.commit()
@@ -63,15 +56,15 @@ def seed_test_db():
     model.db.session.add_all(favorites_in_db)
     model.db.session.commit()
 
-    print("----------------------------------------------------------------------------------------------")
     print("Session added to db")
 
 
 if __name__ == '__main__':
-    
+
+    seed_test_db()
     # Check if the database already exists before creating it
-    result = os.system("psql -lqt | cut -d \| -f 1 | grep -w dish-dash")
-    if result == 0:
-        print("Database 'dish-dash' already exists. Skipping database creation.")
-    else:
-        seed_test_db()
+    #result = os.system("psql -lqt | cut -d \| -f 1 | grep -w dish-dash")
+    #if result == 0:
+        #print("Database 'dish-dash' already exists. Skipping database creation.")
+    #else:
+        #seed_test_db()
