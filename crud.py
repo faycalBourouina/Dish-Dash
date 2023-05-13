@@ -139,6 +139,20 @@ def add_recipe(recipe):
     # Use real data in production mode to be implemented
 
 
+def add_favorite(user, recipe):
+    """Add recipe to user's favorites"""
+
+    if MODE == 'TEST_MODE':
+
+        existing_favorite = Favorite.query.filter(Favorite.user_id == user.id, Favorite.recipe_id == recipe.id).first()
+        if existing_favorite:
+            return 
+        else:
+            favorite = Favorite(user=user , recipe=recipe)
+
+        return favorite
+    # Use real data in production mode to be implemented
+
 
 
 if __name__ == "__main__":
