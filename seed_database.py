@@ -1,5 +1,6 @@
 import json
 import os
+from random import choice
 
 import model
 import server
@@ -27,21 +28,3 @@ for user in mock_db_data['users']:
 
 model.db.session.add_all(users_in_db)
 model.db.session.commit()
-print("users_in_db: ", users_in_db)
-
-
-for recipe in mock_db_data['recipes']:
-    id = recipe['id']
-    title = recipe['title']
-    new_recipe = crud.create_recipe(id, title)
-    recipes_in_db.append(new_recipe)
-
-model.db.session.add_all(recipes_in_db)
-model.db.session.commit()
-
-
-#for favorite in mock_db_data['favorites']:
-#    user_id = favorite['user_id']
-#    recipe_id = favorite['recipe_id']
-#    favorite = crud.create_favorite(user_id, recipe_id)
-#    favorites_in_db.append(favorite)

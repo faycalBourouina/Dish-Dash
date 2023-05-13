@@ -35,7 +35,7 @@ def create_user(email, password):
             response = {}
         else:
             user = User(email=email, password=password, created_at=datetime.now())
-            
+
         return user 
 
     # Use real data in production mode to be implemented      
@@ -121,6 +121,25 @@ def get_recipe_ingredients(recipe_id):
         response = requests.get(request).json()
 
     return response
+
+def add_recipe(recipe):
+    """Add liked recipe to database"""
+    recipe_id = recipe['id']
+    recipe_title = recipe['title']
+
+    if MODE == 'TEST_MODE':
+        existing_recipe = Recipe.query.filter(Recipe.id == recipe_id).first()
+        if existing_recipe:
+            recipe = existing_recipe
+        else:
+            recipe = Recipe(id=recipe_id, title=recipe_title)
+        
+        return recipe
+
+    # Use real data in production mode to be implemented
+
+
+
 
 if __name__ == "__main__":
     from server import app

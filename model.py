@@ -32,7 +32,7 @@ class Recipe(db.Model):
     favorites = db.relationship('Favorite', back_populates='recipe')
 
     def __repr__(self):
-        return f'<Recipe recipe_id={self.recipe_id} title={self.title}>'
+        return f'<Recipe id={self.id} title={self.title}>'
     
 class Favorite(db.Model):
     """ Favorite """
@@ -48,7 +48,7 @@ class Favorite(db.Model):
     recipe = db.relationship('Recipe', back_populates='favorites')
 
     def __repr__(self):
-        return f'<Favorite favorite_id={self.favorite_id} user_id={self.user_id} recipe_id={self.recipe_id}>'
+        return f'<Favorite favorite_id={self.id} user_id={self.user_id} recipe_id={self.recipe_id}>'
     
 # Connects to dish-dash database
 def connect_to_db(flask_app, db_uri='postgresql:///dish-dash', echo=True):

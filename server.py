@@ -103,7 +103,7 @@ def get_user_favorites(user_id):
 
 @app.route("/users/<user_id>/favorites/<recipe_id>", methods=["PATCH", "DELETE"])
 def update_favorite(user_id, recipe_id):
-    """Update favorite"""
+    """Update favorites"""
 
     if request.method == "PATCH":
         # add favorite
