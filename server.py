@@ -1,10 +1,13 @@
 """Server for Dish-Dash app"""
 from flask import (Flask, request, session)
 from flask_cors import CORS
+
 from urllib.parse import parse_qs
 import os
 from dotenv import load_dotenv
+
 import crud
+import model
 
 app = Flask(__name__)
 CORS(app)
@@ -12,7 +15,12 @@ CORS(app)
 # Load the API key from the .env file
 load_dotenv()
 
+# session secret key
 app.secret_key = os.getenv("SESSION_SECRET_KEY")
+
+
+# Connect to the database
+model.connect_to_db(app)
 
 @app.route("/")
 def get_landing_page_recipes():
@@ -33,9 +41,15 @@ def create_user():
     password = request.form.get('password')
     email = request.form.get('email')
 
-    response = crud.create_user(email, password)
+    new_user = crud.create_user(email, password)
 
-    if response:
+    if new_user:
+        model.db.session.add(new_user)
+        model.db.session.commit()
+        response = {'id': new_user.id, 'email': new_user.email}
+        
+        print("new user: ", new_user)
+        print("response: ", response)
         session['user'] = response
         return response, 201
     else:

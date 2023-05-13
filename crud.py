@@ -30,13 +30,13 @@ def create_user(email, password):
     """Create a new user"""
 
     if MODE == 'TEST_MODE':
-        # Check if user already exists
-        if User.query.filter(User.email == email).first():
-            response = {}
+        
+        existing_user = User.query.filter(User.email == email).first()
+        if existing_user:
+            return None
         else:
             user = User(email=email, password=password, created_at=datetime.now())
-
-        return user 
+            return user 
 
     # Use real data in production mode to be implemented      
 
