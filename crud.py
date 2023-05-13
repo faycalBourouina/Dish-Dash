@@ -152,7 +152,15 @@ def add_favorite(user, recipe):
         return favorite
     # Use real data in production mode to be implemented
 
+def get_favorites(user_id):
+    """Return user's favorites"""
 
+    if MODE == 'TEST_MODE':
+        favorites = Favorite.query.filter(Favorite.user_id == user_id).all()
+        print(f"user with id '{user_id}' favorites recipes: " , favorites)
+        return favorites
+
+    # Use real data in production mode to be implemented
 
 if __name__ == "__main__":
     from server import app

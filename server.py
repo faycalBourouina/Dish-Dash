@@ -5,11 +5,14 @@ from flask_cors import CORS
 from urllib.parse import parse_qs
 import os
 from dotenv import load_dotenv
+import json
 
 import crud
 import model
+from utils import  sqlalchemy_obj_to_dict
 
 app = Flask(__name__)
+
 CORS(app)
 
 # Load the API key from the .env file
@@ -109,10 +112,8 @@ def get_recipe_ingredients(recipe_id):
 def get_user_favorites(user_id):
     """Return user favorites"""
 
-    print("session: ", session.get('user'))
     if 'user' in session and session['user']['id'] == user_id:
-        print(session['user']['id'])
-        return "Favorites recipes"
+        return "User favorites", 200
     else:
          return "Authentication required", 401
 
