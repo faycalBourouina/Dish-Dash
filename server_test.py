@@ -1,6 +1,7 @@
 import unittest
 import json
 import logging
+from flask import session
 
 from server import app
 import model 
@@ -210,6 +211,42 @@ class DBTests(unittest.TestCase):
         self.assertIn('id', response_data)
         self.assertEqual(response_data['id'], 1, "'id' attribute should be 1")
 
-        
+    
+    # Test use favorites recipes
+
+    def test_favorites_status_code_success(self):
+        """Test favorites status code if successful"""
+
+        # Set session to simulate authentication for user 1
+        with self.client.session_transaction() as session:
+            session['user'] = {'id': 1, 'email': 'user1@example.com'}
+
+        result = self.client.get("/users/1/favorites")
+        self.assertEqual(result.status_code, 200)
+
+    def test_favorites_status_code_fail(self):
+        """Test favorites status code if unsuccessful if user is not logged in"""
+
+        result = self.client.get("/users/1/favorites")
+        self.assertEqual(result.status_code, 401)
+
+    def test_favorites_response_attribute_format_value(self):
+        """Test favorites response format and value"""
+
+        # Set session to simulate authentication for user 1
+        with self.client.session_transaction() as session:
+            session['user'] = {'id': 1, 'email': 'user1@example.com'}
+
+        result = self.client.get("/users/1/favorites")
+
+        # Convert the JSON response to a dictionary
+        response_data = json.loads(result.data)
+
+        # Assert that the 'favorites' keyword is present in the response
+        self.assertIn('favorites', response_data)
+
+        # Assert that the 'favorites' value is a list
+        self.assertIsInstance(response_data['favorites'], list)
+
 if __name__ == "__main__":
     unittest.main()

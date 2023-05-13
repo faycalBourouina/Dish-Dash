@@ -113,7 +113,21 @@ def get_user_favorites(user_id):
     """Return user favorites"""
 
     if 'user' in session and session['user']['id'] == user_id:
-        return "User favorites", 200
+        
+        favorites_list = []
+
+        # get user favorites in sqlalchemy objects
+        favorites = crud.get_favorites(user_id)  
+
+        # convert sqlalchemy objects to dictionaries
+        for favorite in favorites:
+            favorite_dict = sqlalchemy_obj_to_dict(favorite)
+            favorites_list.append(favorite_dict)
+        
+        response = json.dumps({'favorites': favorites_list})
+        print ("response", response)
+
+        return response, 200
     else:
          return "Authentication required", 401
 
