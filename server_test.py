@@ -212,7 +212,7 @@ class DBTests(unittest.TestCase):
         self.assertEqual(response_data['id'], 1, "'id' attribute should be 1")
 
     
-    # Test use favorites recipes
+    # Test user favorites recipes
 
     def test_favorites_status_code_success(self):
         """Test favorites status code if successful"""
@@ -248,6 +248,91 @@ class DBTests(unittest.TestCase):
         # Assert that the 'favorites' value is a list
         self.assertIsInstance(response_data['favorites'], list)
 
+
+    # Test add favorites recipes
+
+    def test_add_favorite_status_code_success(self):
+        """Test add favorite status code if successful"""
+
+        # Set session to simulate authentication for user 1
+        with self.client.session_transaction() as session:
+            session['user'] = {'id': 1, 'email': 'user1@example.com'}
+        
+        result = self.client.patch("/users/1/favorites/644885")
+        print(f"data: {result.data} status code: {result.status_code}")
+        self.assertEqual(result.status_code, 201)
+    
+    def test_add_favorites_status_code_fail(self):
+        """Test add favorite status code if unsuccessful if user is not logged in"""
+
+        result = self.client.patch("/users/1/favorites/644885")
+        self.assertEqual(result.status_code, 401)
+
+
+    def test_add_favorite_to_favorites_attribute_value(self):
+        """Test add favorite recipe value infavorites list"""
+
+        # Set session to simulate authentication for user 1
+        with self.client.session_transaction() as session:
+            session['user'] = {'id': 1, 'email': 'user1@example.com'}
+        
+        # Add recipe to favorites
+        self.client.patch("/users/1/favorites/644885")
+
+        # testing if the recipe was added to the favorites
+        result = self.client.get("/users/1/favorites")
+        
+        # Convert the JSON response to a dictionary
+        response_data = json.loads(result.data)
+
+        # Assert recipe_id attribute is in the favorites list
+        self.assertTrue(any(favorite['recipe_id'] == 644885 for favorite in response_data['favorites']), "Recipe id 644885 should be in the favorites list")
+
+    # Test remove favorites recipes
+
+    def test_remove_favorite_status_code_success(self):
+        """Test remove favorite status code if successful"""
+
+        # Set session to simulate authentication for user 1
+        with self.client.session_transaction() as session:
+            session['user'] = {'id': 1, 'email': 'user1@example.com'}
+        
+        # Add recipe to favorites if not already in favorites
+        self.client.patch("/users/1/favorites/644885")
+
+        # Remove a recipe from favorites
+        result = self.client.delete("/users/1/favorites/644885")
+        self.assertEqual(result.status_code, 204)
+
+    def test_remove_favorite_status_code_fail(self):
+        """Test remove favorite status code if unsuccessful if user is not logged in"""
+
+        result = self.client.delete("/users/1/favorites/644885")
+        self.assertEqual(result.status_code, 401)
+
+
+    def test_remove_favorite_from_favorites_attribute_value(self):
+        """Test removed favorite recipe value in favorites list"""
+
+        # Set session to simulate authentication for user 1
+        with self.client.session_transaction() as session:
+            session['user'] = {'id': 1, 'email': 'user1@example.com'}
+
+
+        # Add recipe to favorites if not already in favorites
+        self.client.patch("/users/1/favorites/644885")
+
+        # Remove a recipe from favorites
+        self.client.delete("/users/1/favorites/644885")
+
+        # testing if the recipe was removed from the favorites
+        result = self.client.get("/users/1/favorites")
+
+        # Convert the JSON response to a dictionary
+        response_data = json.loads(result.data)
+
+        # Assert recipe_id attribute is not in the favorites list
+        self.assertFalse(any(favorite['recipe_id'] == 644885 for favorite in response_data['favorites']), "Recipe id 644885 should not be in the favorites list")
 
 if __name__ == "__main__":
     unittest.main()

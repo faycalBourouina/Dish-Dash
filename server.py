@@ -178,7 +178,7 @@ def update_favorite(user_id, recipe_id):
                 model.db.session.delete(favorite_to_delete)
                 model.db.session.commit()
             
-                return f"Recipe with the id {recipe_id} removed from favorites", 200
+                return f"Recipe with the id {recipe_id} removed from favorites", 204
         
             else:   
                 return f"Recipe with the id {recipe_id} not found in favorites", 404
