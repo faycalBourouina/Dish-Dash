@@ -33,6 +33,7 @@ class Recipe(db.Model):
 
 
     favorites = db.relationship('Favorite', back_populates='recipe')
+    recipe_ingredients = db.relationship('RecipeIngredient', back_populates='recipe')
 
     def __repr__(self):
         return f'<Recipe id={self.id} title={self.title}>'
@@ -52,6 +53,41 @@ class Favorite(db.Model):
     def __repr__(self):
         return f'<Favorite favorite_id={self.id} kisses={self.kisses} user_id={self.user_id} recipe_id={self.recipe_id}>'
     
+
+
+class Ingredient(db.Model):
+    """ Ingredient """
+
+    __tablename__ = 'ingredients'
+
+    id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    name = db.Column(db.String)
+
+    recipe_ingredients = db.relationship('RecipeIngredient', back_populates='ingredient')
+
+    def __repr__(self):
+        return f'<Ingredient id={self.id} name={self.name}>'
+    
+
+
+class RecipeIngredient(db.Model):
+    """ Recipe Ingredient """
+
+    __tablename__ = 'recipe_ingredients'
+
+    id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    recipe_id = db.Column(db.Integer, db.ForeignKey('recipes.id'))
+    ingredient_id = db.Column(db.Integer, db.ForeignKey('ingredients.id'))
+
+    recipe = db.relationship('Recipe', back_populates='recipe_ingredients')
+    ingredient = db.relationship('Ingredient', back_populates='recipe_ingredients')
+
+    def __repr__(self):
+        return f'<RecipeIngredient id={self.id} recipe_id={self.recipe_id} ingredient_id={self.ingredient_id}>'
+
+
+
+
 # Connects to dish-dash database
 def connect_to_db(flask_app, db_uri='postgresql:///dish-dash', echo=True):
     flask_app.config['SQLALCHEMY_DATABASE_URI'] = db_uri
