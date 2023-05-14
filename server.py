@@ -131,16 +131,61 @@ def get_user_favorites(user_id):
     else:
          return "Authentication required", 401
 
-@app.route("/users/<user_id>/favorites/<recipe_id>", methods=["PATCH", "DELETE"])
+@app.route("/users/<int:user_id>/favorites/<int:recipe_id>", methods=["PATCH", "DELETE"])
 def update_favorite(user_id, recipe_id):
     """Update favorites"""
 
     if request.method == "PATCH":
-        # add favorite
-        return "Add Favorite"
+        
+        if 'user' in session and session['user']['id'] == user_id:
+
+            # get user from database
+            user = crud.get_user_by_id(user_id)
+
+            #get recipe from the API
+            recipe = crud.get_recipe(recipe_id)
+            print ("recipe", recipe)
+        
+            # add favorite recipe to recipes list or update kiss count if already in list 
+            recipe_added = crud.add_favorite_to_recipes(recipe)
+
+            # create new favorite
+            new_favortie = crud.add_favorite(user, recipe_added)
+
+            # add new favorite to database
+            model.db.session.add(new_favortie)
+            model.db.session.commit()
+
+            # convert sqlalchemy object to dictionary
+            favorite_dict = sqlalchemy_obj_to_dict(new_favortie)
+
+            response = json.dumps({'favorite': favorite_dict})
+            print ("response", response)
+
+            return response, 201
+        
+        else:
+            return "Authentication required", 401
+
     elif request.method == "DELETE":
-        # delete favorite
-        return "Delete Favorite"
+
+        if 'user' in session and session['user']['id'] == user_id:
+            
+            # get the favorite to be deleted
+            favorite_to_delete = crud.remove_favorite(user_id, recipe_id)
+
+            if favorite_to_delete:
+                model.db.session.delete(favorite_to_delete)
+                model.db.session.commit()
+            
+                return f"Recipe with the id {recipe_id} removed from favorites", 200
+        
+            else:   
+                return f"Recipe with the id {recipe_id} not found in favorites", 404
+        
+        else:
+            return "Authentication required", 401
+
 
 if __name__ == "__main__":
 

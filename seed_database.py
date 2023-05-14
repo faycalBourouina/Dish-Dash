@@ -42,7 +42,7 @@ def seed_test_db():
         recipe = choice(mock_db_data['recipes'])
         
         # Add recipe to the db
-        liked_recipe = crud.add_recipe(recipe)
+        liked_recipe = crud.add_favorite_to_recipes(recipe)
         recipes_in_db.append(liked_recipe)
 
         # Add liked recipe to user's favorites

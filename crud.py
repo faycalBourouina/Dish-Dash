@@ -53,6 +53,18 @@ def authenticate(email, password):
     
     # Use real data in production mode to be implemented
 
+def get_user_by_id(user_id):
+    """Return user by id"""
+
+    if MODE == 'TEST_MODE':
+        user = User.query.filter(User.id == user_id).first()
+        if user:
+            return user
+        else:
+            return None
+
+    # Use real data in production mode to be implemented
+
 def get_landing_page_recipes():
     """Return trending and custom recipes"""
 
@@ -121,8 +133,8 @@ def get_recipe_ingredients(recipe_id):
 
     return response
 
-def add_recipe(recipe):
-    """Add liked recipe to database"""
+def add_favorite_to_recipes(recipe):
+    """Add favorite recipe to the recipes table"""
     recipe_id = recipe['id']
     recipe_title = recipe['title']
 
@@ -150,6 +162,18 @@ def add_favorite(user, recipe):
         else:
             favorite = Favorite(user=user, recipe=recipe)
             return favorite
+    # Use real data in production mode to be implemented
+
+def remove_favorite(user_id, recipe_id):
+    """Remove recipe from user's favorites"""
+
+    if MODE == 'TEST_MODE':
+
+        existing_favorite = Favorite.query.filter(Favorite.user_id == user_id, Favorite.recipe_id == recipe_id).first()
+        if existing_favorite:
+            return existing_favorite
+        else:
+            return 
     # Use real data in production mode to be implemented
 
 def get_favorites(user_id):

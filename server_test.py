@@ -248,5 +248,6 @@ class DBTests(unittest.TestCase):
         # Assert that the 'favorites' value is a list
         self.assertIsInstance(response_data['favorites'], list)
 
+
 if __name__ == "__main__":
     unittest.main()
