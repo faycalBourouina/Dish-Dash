@@ -28,6 +28,9 @@ class Recipe(db.Model):
 
     id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     title = db.Column(db.String)
+    kisses = db.Column(db.Integer , default=1)
+
+
 
     favorites = db.relationship('Favorite', back_populates='recipe')
 
@@ -40,7 +43,6 @@ class Favorite(db.Model):
     __tablename__ = 'favorites'
 
     id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    kisses = db.Column(db.Integer , default=1)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     recipe_id = db.Column(db.Integer, db.ForeignKey('recipes.id'))
 

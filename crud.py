@@ -129,6 +129,7 @@ def add_recipe(recipe):
     if MODE == 'TEST_MODE':
         existing_recipe = Recipe.query.filter(Recipe.id == recipe_id).first()
         if existing_recipe:
+            existing_recipe.kisses += 1
             recipe = existing_recipe
         else:
             recipe = Recipe(id=recipe_id, title=recipe_title)
@@ -147,18 +148,8 @@ def add_favorite(user, recipe):
         if existing_favorite:
             return 
         else:
-
-            # Check if recipe already exists in favorites
-            existing_favorite = Favorite.query.filter(Favorite.recipe_id == recipe.id).first()
-            
-            if existing_favorite:
-                kisses = existing_favorite.kisses + 1
-                favorite = Favorite(user=user, recipe=recipe, kisses=kisses)
-
-            else:
-                favorite = Favorite(user=user, recipe=recipe, kisses=1)
-            
-        return favorite
+            favorite = Favorite(user=user, recipe=recipe)
+            return favorite
     # Use real data in production mode to be implemented
 
 def get_favorites(user_id):
