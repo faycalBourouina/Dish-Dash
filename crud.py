@@ -159,29 +159,78 @@ def get_recipe(recipe_id):
 def get_recipe_ingredients(recipe_id):
     """Return recipe ingredients"""
 
-    # Use mock data in test mode
-    if MODE == 'TEST_MODE':
+    # Gettin recipe ingredinet from mock api
+    recipe_ingredients = get_recipe(recipe_id)['ingredients']
 
-        # Gettin recipe ingredinet from mock api
-        recipe_ingredients = get_recipe(recipe_id)['ingredients']
-
-        # If ingerdients exist, return ingredients
-        if len(recipe_ingredients) > 0:
-            ingredients = [{'id': ingredient['id'], 'name': ingredient['name']} for ingredient in recipe_ingredients]
-            print(ingredients)
-            return ingredients
-        else:
-            return {'error': 'Recipe not found'} 
+    # If ingerdients exist, return ingredients
+    if len(recipe_ingredients) > 0:
+        ingredients = [{'id': ingredient['id'], 'name': ingredient['name']} for ingredient in recipe_ingredients]
+        return ingredients
+    else:
+        return {'error': 'Recipe not found'} 
 
     # Use real data in production mode
     
+def add_recipe_ingredients(recipe_id):
+    """Add recipe ingredients to the ingredients table and the recipes_ingredients association table"""
+
+    # Then get the recipe ingredients to create ingredient objects
+    ingredients = get_recipe_ingredients(recipe_id)
+
+    # recipe_ingredient (singular recipe) is a list of ingredient objects or the specefic recipe
+    recipe_ingredients = []      
+
+    # recipes_ingredients (plural recipes) is a list of recipe_ingredient objects of the recipe_ingredients association table
+    recipes_ingredients = []                
+          
+
+    if len(ingredients) > 0:
+
+        for ingredient in ingredients:
+
+            # check if ingredient already exists in the ingredients table
+            existing_ingredient = Ingredient.query.filter(Ingredient.id == ingredient['id']).first()
+
+            # If ingredien does not exist
+            if not existing_ingredient:
+
+                # Create ingredient object
+                ingredient = Ingredient(id=ingredient['id'], name=ingredient['name'])
+                
+                # Add ingredient to recipe_ingredients list
+                recipe_ingredients.append(ingredient)
+
+                # Add ingredient to recipes_ingredients list
+                recipe_ingredient = add_recipes_ingredients(recipe_id, ingredient)
+                recipes_ingredients.append(recipe_ingredient)
+
+               
+    return {'recipe_ingredients': recipe_ingredients, 'recipes_ingredients': recipes_ingredients}
+
+def add_recipes_ingredients(recipe_id, ingredient):
+    """Add recipes_ingredients to the recipes_ingredients association table"""
+
+    # Check if recipe id and ingredient id combination already exists in the recipes_ingredients table
+    existing_recipe_ingredient = RecipeIngredient.query.filter(RecipeIngredient.recipe_id == recipe_id, RecipeIngredient.ingredient_id == ingredient.id).first()
+
+    if existing_recipe_ingredient:
+        return None
+    
+    # If not, create a new recipe ingredient object to be added to the recipes_ingredients table
+    else:
+        # Create recipe_ingredient object
+        recipe = Recipe.query.filter(Recipe.id == recipe_id).first()
+        recipe_ingredient = RecipeIngredient(recipe=recipe, ingredient=ingredient)
+
+        return recipe_ingredient
+
+
 
 def add_favorite_to_recipes(recipe):
     """Add favorite recipe to the recipes table"""
+
     recipe_id = recipe['id']
     recipe_title = recipe['title']
-
-    recipe_ingredients = []
 
     if MODE == 'TEST_MODE':
 
@@ -194,21 +243,9 @@ def add_favorite_to_recipes(recipe):
             # If recipe does not exist, create a recipe object
             recipe = Recipe(id=recipe_id, title=recipe_title)
 
-            # Then get the recipe ingredients to create ingredient objects
-            ingredients = get_recipe_ingredients(recipe_id)
-                        
-            for ingredient in ingredients:
-                # Check if the ingredien ingredient_id, recipe_id combination already exists in the ingredients table
-                existing_recipe_ingredient = RecipeIngredient.query.filter(RecipeIngredient.ingredient_id == ingredient.id, RecipeIngredient.recipe_id == recipe_id).first()
-                if existing_recipe_ingredient:
-                    break
-                # If not, create a new ingredient object to be added to the ingredients table
-                else:
-                    recipe_ingredient = RecipeIngredient(ingredient_id=ingredient.id, recipe_id=recipe_id)
-                    recipe_ingredients.append(recipe_ingredient)
 
         # Retun the recipe object and the recipe ingredients objects
-        return (recipe, recipe_ingredients)
+        return recipe
 
     # Use real data in production mode to be implemented
 

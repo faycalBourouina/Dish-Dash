@@ -23,6 +23,7 @@ def seed_test_db():
     users_in_db = []
     favorites_in_db = []
     recipes_in_db = []
+    ingredients_in_db = []
     recipes_ingredients_in_db = []
 
 
@@ -39,23 +40,36 @@ def seed_test_db():
     for x in range(10):
         # Select a random user form the list of users in the db
         user = choice(users_in_db)
+
         # Select a random recipe from the mock data
         recipe = choice(mock_db_data['recipes'])
         
         # get liked recipe object 
-        liked_recipe, recipe_ingredients = crud.add_favorite_to_recipes(recipe)
+        liked_recipe = crud.add_favorite_to_recipes(recipe)
 
         # Add recipe to recipes_in_db list to add to db later
         recipes_in_db.append(liked_recipe)
-
-        # if recipe_ingredients is not empty, add ingredients to ingredients_in_db list to add to db later
-        if len(recipe_ingredients):
-            recipes_ingredients_in_db.extend(recipe_ingredients)
 
         # Add liked recipe to user's favorites
         new_favorite = crud.add_favorite(user, liked_recipe)
         if new_favorite:
             favorites_in_db.append(new_favorite)
+    
+
+    for recipe in recipes_in_db:
+        response = crud.add_recipe_ingredients(recipe.id)
+        
+        # add recipe ingredinets to ingredinets table
+        ingredients = response['recipes_ingredients']
+        ingredients_in_db.extend(ingredients)
+        print("ingredients_in_db in seed", ingredients_in_db)
+
+        # add recipes ingredients to recipes_ingredients table
+        recipes_ingredients = response['recipes_ingredients']
+        recipes_ingredients_in_db.extend(recipes_ingredients)
+        print("recipes_ingredients_in_dbin seed", recipes_ingredients_in_db)
+
+
 
 
     model.db.session.add_all(recipes_in_db)
