@@ -198,13 +198,13 @@ def add_favorite_to_recipes(recipe):
             ingredients = get_recipe_ingredients(recipe_id)
                         
             for ingredient in ingredients:
-                # Check if the ingredien name, recipe_id combination already exists in the ingredients table
-                existing_recipe_ingredient = RecipeIngredient.query.filter(RecipeIngredient.ingredient_name == ingredient, RecipeIngredient.recipe_id == recipe_id).first()
+                # Check if the ingredien ingredient_id, recipe_id combination already exists in the ingredients table
+                existing_recipe_ingredient = RecipeIngredient.query.filter(RecipeIngredient.ingredient_id == ingredient.id, RecipeIngredient.recipe_id == recipe_id).first()
                 if existing_recipe_ingredient:
                     break
                 # If not, create a new ingredient object to be added to the ingredients table
                 else:
-                    recipe_ingredient = RecipeIngredient(ingredient_name=ingredient, recipe_id=recipe_id)
+                    recipe_ingredient = RecipeIngredient(ingredient_id=ingredient.id, recipe_id=recipe_id)
                     recipe_ingredients.append(recipe_ingredient)
 
         # Retun the recipe object and the recipe ingredients objects
