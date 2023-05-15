@@ -61,7 +61,7 @@ class Ingredient(db.Model):
     __tablename__ = 'ingredients'
 
     id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    name = db.Column(db.String)
+    name = db.Column(db.String, unique=True)
 
     recipe_ingredients = db.relationship('RecipeIngredient', back_populates='ingredient')
 
@@ -77,7 +77,8 @@ class RecipeIngredient(db.Model):
 
     id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     recipe_id = db.Column(db.Integer, db.ForeignKey('recipes.id'))
-    ingredient_id = db.Column(db.Integer, db.ForeignKey('ingredients.id'))
+    ingredient_id = db.Column(db.Integer, db.ForeignKey('ingredients.id'), autoincrement=True)
+    ingredient_name = db.Column(db.String)
 
     recipe = db.relationship('Recipe', back_populates='recipe_ingredients')
     ingredient = db.relationship('Ingredient', back_populates='recipe_ingredients')

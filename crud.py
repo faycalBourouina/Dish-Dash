@@ -1,4 +1,4 @@
-from model import db, User, Recipe, Favorite, connect_to_db
+from model import db, User, Recipe, Favorite, Ingredient, RecipeIngredient, connect_to_db
 from datetime import datetime
 
 import requests
@@ -150,6 +150,8 @@ def add_favorite_to_recipes(recipe):
     recipe_id = recipe['id']
     recipe_title = recipe['title']
 
+    recipe_ingredients = []
+
     if MODE == 'TEST_MODE':
 
         # If recipe already exists, increment kisses
@@ -158,15 +160,23 @@ def add_favorite_to_recipes(recipe):
             existing_recipe.kisses += 1
             recipe = existing_recipe
         else:
-            # If recipe does not exist, add it to the recipes table
+            # If recipe does not exist, create a recipe object
             recipe = Recipe(id=recipe_id, title=recipe_title)
 
-            # Add recipe ingredients to the ingredients table
+            # Then get the recipe ingredients to create ingredient objects
+            ingredients = get_recipe_ingredients(recipe_id)
+                        
+            for ingredient in ingredients:
+                # Check if the ingredien name, recipe_id combination already exists in the ingredients table
+                existing_recipe_ingredient = RecipeIngredient.query.filter(RecipeIngredient.ingredient_name == ingredient, RecipeIngredient.recipe_id == recipe_id).first()
+                if existing_recipe_ingredient:
+                    break
+                # If not, create a new ingredient object to be added to the ingredients table
+                else:
+                    recipe_ingredient = RecipeIngredient(ingredient_name=ingredient, recipe_id=recipe_id)
+                    recipe_ingredients.append(recipe_ingredient)
 
-
-
-        
-        return recipe
+        return (recipe, recipe_ingredients)
 
     # Use real data in production mode to be implemented
 
