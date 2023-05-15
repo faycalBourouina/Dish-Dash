@@ -176,6 +176,7 @@ def add_favorite_to_recipes(recipe):
                     recipe_ingredient = RecipeIngredient(ingredient_name=ingredient, recipe_id=recipe_id)
                     recipe_ingredients.append(recipe_ingredient)
 
+        # Retun the recipe object and the recipe ingredients objects
         return (recipe, recipe_ingredients)
 
     # Use real data in production mode to be implemented
