@@ -99,25 +99,57 @@ def search_recipes(search):
 
     return response
 
-
-
 def get_recipe(recipe_id):
     """Return recipe"""
 
     # Use mock data in test mode
-    if MODE == 'TEST_MODE':
+    if MODE == 'TEST_MODE_':
         if mock_data['recipe_by_id']['response']['id'] == int(recipe_id):
             response = mock_data['recipe_by_id']['response']
         else :
             response = "Recipe not found"
+        
+        return response
 
     # Use real data in production mode
     else:
+        # Get the recipe information data from the API
         request = f'{uri_recipes}/{recipe_id}/information?includeNutrition=false&apiKey={SPOONACULAR_API_KEY}'
         response = requests.get(request).json()
 
-    return response
+        # If recipe exists, extract needed recipe information
+        if response:
+            recipe_id = response['id']
+            recipe_name = response['title']
+            recipe_image = response['image']
+            recipe_instructions = response['instructions']
+            recipe_ingredients = []
 
+            # If recipe has ingredients, extract needed ingredients information
+            if 'extendedIngredients' in response:
+                ingredients = response['extendedIngredients']
+
+                for ingredient in ingredients:
+                    ingredient_id = ingredient['id']
+                    ingredient_name = ingredient['name']
+                    ingredient_original_name = ingredient['original']
+        
+                    # Append ingredient details to the recipe_ingredients list
+                    recipe_ingredients.append({
+                        'id': ingredient_id,
+                        'name': ingredient_name,
+                        'original_name': ingredient_original_name
+                })
+            
+            return {
+                'id': recipe_id,
+                'name': recipe_name,
+                'image': recipe_image,
+                'instructions': recipe_instructions,
+                'ingredients': recipe_ingredients
+            }
+        else:
+            return {'error': 'Recipe not found'}
 
 def get_recipe_ingredients(recipe_id):
     """Return recipe ingredients"""
@@ -139,11 +171,7 @@ def get_recipe_ingredients(recipe_id):
             return {'error': 'Recipe not found'} 
 
     # Use real data in production mode
-    else:
-        request = f'{uri_recipes}/{recipe_id}/ingredientWidget.json?apiKey={SPOONACULAR_API_KEY}'
-        response = requests.get(request).json()
-
-    return response
+    
 
 def add_favorite_to_recipes(recipe):
     """Add favorite recipe to the recipes table"""
