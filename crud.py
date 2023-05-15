@@ -103,13 +103,18 @@ def get_recipe(recipe_id):
     """Return recipe"""
 
     # Use mock data in test mode
-    if MODE == 'TEST_MODE_':
-        if mock_data['recipe_by_id']['response']['id'] == int(recipe_id):
-            response = mock_data['recipe_by_id']['response']
-        else :
-            response = "Recipe not found"
-        
-        return response
+    if MODE == 'TEST_MODE':
+        recipe = next((recipe for recipe in mock_data['recipe_by_id']['response'] if recipe['id'] == recipe_id), None)
+        if recipe:
+            return {
+                'id': recipe['id'],
+                'name': recipe['name'],
+                'image': recipe['image'],
+                'instructions': recipe['instructions'],
+                'ingredients': recipe['ingredients']
+            }
+        else:
+            return {'error': 'Recipe not found'}
 
     # Use real data in production mode
     else:
@@ -156,16 +161,14 @@ def get_recipe_ingredients(recipe_id):
 
     # Use mock data in test mode
     if MODE == 'TEST_MODE':
-       
-        # Get the mock API data for the recipes ingredients
-        recipes_ingredients = mock_data['recipes_ingredients']['response']
 
-        # Find the recipe data with the matching recipe_id
-        recipe = next((recipe for recipe in recipes_ingredients if recipe['recipe_id'] == recipe_id), None)
+        # Gettin recipe ingredinet from mock api
+        recipe_ingredients = get_recipe(recipe_id)['ingredients']
 
-        if recipe:
-            # Extract the ingredient names from the recipe data
-            ingredients = [ingredient['name'] for ingredient in recipe['ingredients']]
+        # If ingerdients exist, return ingredients
+        if len(recipe_ingredients) > 0:
+            ingredients = [{'id': ingredient['id'], 'name': ingredient['name']} for ingredient in recipe_ingredients]
+            print(ingredients)
             return ingredients
         else:
             return {'error': 'Recipe not found'} 

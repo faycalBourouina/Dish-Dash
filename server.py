@@ -86,7 +86,7 @@ def search_recipes():
     else:
         return "Error", 404
 
-@app.route("/recipes/<recipe_id>")
+@app.route("/recipes/<int:recipe_id>")
 def get_recipe(recipe_id):
     """Return recipe"""
 

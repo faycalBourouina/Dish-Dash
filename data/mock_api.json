@@ -10,11 +10,11 @@
             "response": []
         },
         "recipe_by_id": {
-            "query": "http://localhost:5000/recipes/644885",
+            "query": "http://localhost:5000/recipes/<recipe_id>>",
             "response": {}
         },
         "recipe_ingredients": {
-            "query": "http://localhost:5000/recipes/644885/ingredients",
+            "query": "http://localhost:5000/recipes/<recipe_id>/ingredients",
             "response": {
                 "ingredients": []
             }

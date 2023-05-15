@@ -77,8 +77,7 @@ class RecipeIngredient(db.Model):
 
     id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     recipe_id = db.Column(db.Integer, db.ForeignKey('recipes.id'))
-    ingredient_id = db.Column(db.Integer, db.ForeignKey('ingredients.id'), autoincrement=True)
-    ingredient_name = db.Column(db.String)
+    ingredient_id = db.Column(db.Integer, db.ForeignKey('ingredients.id'))
 
     recipe = db.relationship('Recipe', back_populates='recipe_ingredients')
     ingredient = db.relationship('Ingredient', back_populates='recipe_ingredients')
