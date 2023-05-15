@@ -124,7 +124,19 @@ def get_recipe_ingredients(recipe_id):
 
     # Use mock data in test mode
     if MODE == 'TEST_MODE':
-        response = mock_data['recipe_ingredients']['response']
+       
+        # Get the mock API data for the recipes ingredients
+        recipes_ingredients = mock_data['recipes_ingredients']['response']
+
+        # Find the recipe data with the matching recipe_id
+        recipe = next((recipe for recipe in recipes_ingredients if recipe['recipe_id'] == recipe_id), None)
+
+        if recipe:
+            # Extract the ingredient names from the recipe data
+            ingredients = [ingredient['name'] for ingredient in recipe['ingredients']]
+            return ingredients
+        else:
+            return {'error': 'Recipe not found'} 
 
     # Use real data in production mode
     else:
@@ -139,12 +151,20 @@ def add_favorite_to_recipes(recipe):
     recipe_title = recipe['title']
 
     if MODE == 'TEST_MODE':
+
+        # If recipe already exists, increment kisses
         existing_recipe = Recipe.query.filter(Recipe.id == recipe_id).first()
         if existing_recipe:
             existing_recipe.kisses += 1
             recipe = existing_recipe
         else:
+            # If recipe does not exist, add it to the recipes table
             recipe = Recipe(id=recipe_id, title=recipe_title)
+
+            # Add recipe ingredients to the ingredients table
+
+
+
         
         return recipe
 

@@ -3,7 +3,7 @@
     "MOCK_API Documentation": {
         "landing_page": {
             "query": "http://localhost:5000/",
-            "response": []0
+            "response": []
         },
         "search":{
             "query": "http://localhost:5000/search?query=pasta&cuisine=italian&diet=vegetarian",
@@ -321,7 +321,6 @@
             "totalResults": 6
         }    
     },
-    
     "recipe_by_id": {
         "query": "http://localhost:5000/recipes/644885",
         "response": {
@@ -812,11 +811,10 @@
             }
         }
     },
-    "recipes_ingrdients": {
+    "recipes_ingredients": {
       "query": "localhost:3000/recipes/<recipe_id>/ingredients",
       "response":[
-        {
-          "recipe_id": 644885,
+        { "recipe_id": 644885,
           "ingredients": [
               {
                   "name": "yukon gold potatoes",
@@ -890,8 +888,7 @@
               }
           ]
         },
-        {
-          "recipe_id": 644205,
+        { "recipe_id": 644205,
           "ingredients": [
               {
                   "name": "broccoli",
@@ -1077,8 +1074,7 @@
               }
           ]
         },
-        {
-          "recipe_id": 656544,
+        { "recipe_id": 656544,
           "ingredients": [
               {
                   "name": "buckwheat flour",
@@ -1208,8 +1204,7 @@
               }
           ]
         },
-        {
-          "recipe_id": 1096168,
+        { "recipe_id": 1096168,
           "ingredients": [
               {
                   "name": "sweet potato",
@@ -1325,8 +1320,7 @@
               }
           ]
         }, 
-        {
-          "recipe_id": 640064,
+        { "recipe_id": 640064,
           "ingredients": [
               {
                   "name": "ap flour",
@@ -1470,9 +1464,7 @@
               }
           ]
         },
-        
-        {
-          "recipe_id": 656972,
+        { "recipe_id": 656972,
           "ingredients": [
               {
                   "name": "baking potatoes",
@@ -1633,5 +1625,3 @@
       ]
     }
 }
-
-

@@ -97,11 +97,13 @@ def get_recipe(recipe_id):
     else:   
         return "Error", 404
 
-@app.route("/recipes/<recipe_id>/ingredients")
+@app.route("/recipes/<int:recipe_id>/ingredients")
 def get_recipe_ingredients(recipe_id):
     """Return recipe ingredients"""
     
-    response = crud.get_recipe_ingredients(recipe_id)
+    ingredients = crud.get_recipe_ingredients(recipe_id)
+    print("ingredients before json dump", ingredients)
+    response = json.dumps({'ingredients': ingredients})
 
     if response:
         return response, 200
@@ -125,7 +127,6 @@ def get_user_favorites(user_id):
             favorites_list.append(favorite_dict)
         
         response = json.dumps({'favorites': favorites_list})
-        print ("response", response)
 
         return response, 200
     else:
@@ -144,7 +145,6 @@ def update_favorite(user_id, recipe_id):
 
             #get recipe from the API
             recipe = crud.get_recipe(recipe_id)
-            print ("recipe", recipe)
         
             # add favorite recipe to recipes list or update kiss count if already in list 
             recipe_added = crud.add_favorite_to_recipes(recipe)
@@ -160,7 +160,6 @@ def update_favorite(user_id, recipe_id):
             favorite_dict = sqlalchemy_obj_to_dict(new_favortie)
 
             response = json.dumps({'favorite': favorite_dict})
-            print ("response", response)
 
             return response, 201
         
