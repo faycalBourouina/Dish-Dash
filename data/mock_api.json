@@ -3,11 +3,11 @@
     "MOCK_API Documentation": {
         "landing_page": {
             "query": "http://localhost:5000/",
-            "response": {}
+            "response": []0
         },
         "search":{
             "query": "http://localhost:5000/search?query=pasta&cuisine=italian&diet=vegetarian",
-            "response": {}
+            "response": []
         },
         "recipe_by_id": {
             "query": "http://localhost:5000/recipes/644885",
@@ -812,82 +812,826 @@
             }
         }
     },
-
-    "recipe_ingredients": {
-        "query": "http://localhost:5000/recipes/644885/ingredients",
-        "response": {
-            "ingredients": [
-                {
+    "recipes_ingrdients": {
+      "query": "localhost:3000/recipes/<recipe_id>/ingredients",
+      "response":[
+        {
+          "recipe_id": 644885,
+          "ingredients": [
+              {
+                  "name": "yukon gold potatoes",
+                  "image": "potatoes-yukon-gold.png",
                   "amount": {
-                    "metric": {
-                      "unit": "g", 
-                      "value": 453.592
-                    }, 
-                    "us": {
-                      "unit": "pound", 
-                      "value": 1.0
-                    }
-                  }, 
-                  "image": "potatoes-yukon-gold.png", 
-                  "name": "yukon gold potatoes"
-                }, 
-                {
+                      "metric": {
+                          "value": 453.592,
+                          "unit": "g"
+                      },
+                      "us": {
+                          "value": 1.0,
+                          "unit": "pound"
+                      }
+                  }
+              },
+              {
+                  "name": "cooked ener-g egg replacer",
+                  "image": "white-powder.jpg",
                   "amount": {
-                    "metric": {
-                      "unit": "Tbsps", 
-                      "value": 2.0
-                    }, 
-                    "us": {
-                      "unit": "Tbsps", 
-                      "value": 2.0
-                    }
-                  }, 
-                  "image": "white-powder.jpg", 
-                  "name": "cooked ener-g egg replacer"
-                }, 
-                {
+                      "metric": {
+                          "value": 2.0,
+                          "unit": "Tbsps"
+                      },
+                      "us": {
+                          "value": 2.0,
+                          "unit": "Tbsps"
+                      }
+                  }
+              },
+              {
+                  "name": "chickpea flour",
+                  "image": "chickpea-flour-or-another-gluten-free-flour.jpg",
                   "amount": {
-                    "metric": {
-                      "unit": "Tbsps", 
-                      "value": 2.0
-                    }, 
-                    "us": {
-                      "unit": "Tbsps", 
-                      "value": 2.0
-                    }
-                  }, 
-                  "image": "chickpea-flour-or-another-gluten-free-flour.jpg", 
-                  "name": "chickpea flour"
-                }, 
-                {
+                      "metric": {
+                          "value": 2.0,
+                          "unit": "Tbsps"
+                      },
+                      "us": {
+                          "value": 2.0,
+                          "unit": "Tbsps"
+                      }
+                  }
+              },
+              {
+                  "name": "potato starch",
+                  "image": "white-powder.jpg",
                   "amount": {
-                    "metric": {
-                      "unit": "Tbsps", 
-                      "value": 3.0
-                    }, 
-                    "us": {
-                      "unit": "Tbsps", 
-                      "value": 3.0
-                    }
-                  }, 
-                  "image": "white-powder.jpg", 
-                  "name": "potato starch"
-                }, 
-                {
+                      "metric": {
+                          "value": 3.0,
+                          "unit": "Tbsps"
+                      },
+                      "us": {
+                          "value": 3.0,
+                          "unit": "Tbsps"
+                      }
+                  }
+              },
+              {
+                  "name": "black salt and pepper",
+                  "image": "salt-and-pepper.jpg",
                   "amount": {
-                    "metric": {
-                      "unit": "servings", 
-                      "value": 4.0
-                    }, 
-                    "us": {
-                      "unit": "servings", 
-                      "value": 4.0
-                    }
-                  }, 
-                  "image": "salt-and-pepper.jpg", 
-                  "name": "black salt and pepper"
-                }
-              ]
+                      "metric": {
+                          "value": 4.0,
+                          "unit": "servings"
+                      },
+                      "us": {
+                          "value": 4.0,
+                          "unit": "servings"
+                      }
+                  }
+              }
+          ]
+        },
+        {
+          "recipe_id": 644205,
+          "ingredients": [
+              {
+                  "name": "broccoli",
+                  "image": "broccoli.jpg",
+                  "amount": {
+                      "metric": {
+                          "value": 91.0,
+                          "unit": "g"
+                      },
+                      "us": {
+                          "value": 1.0,
+                          "unit": "cup"
+                      }
+                  }
+              },
+              {
+                  "name": "carrots",
+                  "image": "sliced-carrot.png",
+                  "amount": {
+                      "metric": {
+                          "value": 64.0,
+                          "unit": "g"
+                      },
+                      "us": {
+                          "value": 0.5,
+                          "unit": "cup"
+                      }
+                  }
+              },
+              {
+                  "name": "ears of corn",
+                  "image": "corn-on-the-cob.jpg",
+                  "amount": {
+                      "metric": {
+                          "value": 2.0,
+                          "unit": ""
+                      },
+                      "us": {
+                          "value": 2.0,
+                          "unit": ""
+                      }
+                  }
+              },
+              {
+                  "name": "eggs",
+                  "image": "egg.png",
+                  "amount": {
+                      "metric": {
+                          "value": 3.0,
+                          "unit": ""
+                      },
+                      "us": {
+                          "value": 3.0,
+                          "unit": ""
+                      }
+                  }
+              },
+              {
+                  "name": "flour",
+                  "image": "flour.png",
+                  "amount": {
+                      "metric": {
+                          "value": 187.5,
+                          "unit": "g"
+                      },
+                      "us": {
+                          "value": 1.5,
+                          "unit": "cups"
+                      }
+                  }
+              },
+              {
+                  "name": "fresh flat-leaf parsley",
+                  "image": "parsley.jpg",
+                  "amount": {
+                      "metric": {
+                          "value": 1.0,
+                          "unit": "small handful"
+                      },
+                      "us": {
+                          "value": 1.0,
+                          "unit": "small handful"
+                      }
+                  }
+              },
+              {
+                  "name": "garlic",
+                  "image": "garlic.png",
+                  "amount": {
+                      "metric": {
+                          "value": 1.0,
+                          "unit": "cl"
+                      },
+                      "us": {
+                          "value": 1.0,
+                          "unit": "cl"
+                      }
+                  }
+              },
+              {
+                  "name": "laura chenel's chabis goat cheese",
+                  "image": "goat-cheese.jpg",
+                  "amount": {
+                      "metric": {
+                          "value": 1.0,
+                          "unit": "pkg"
+                      },
+                      "us": {
+                          "value": 1.0,
+                          "unit": "pkg"
+                      }
+                  }
+              },
+              {
+                  "name": "olive oil",
+                  "image": "olive-oil.jpg",
+                  "amount": {
+                      "metric": {
+                          "value": 6.0,
+                          "unit": "servings"
+                      },
+                      "us": {
+                          "value": 6.0,
+                          "unit": "servings"
+                      }
+                  }
+              },
+              {
+                  "name": "fresh sea salt",
+                  "image": "pepper.jpg",
+                  "amount": {
+                      "metric": {
+                          "value": 6.0,
+                          "unit": "servings"
+                      },
+                      "us": {
+                          "value": 6.0,
+                          "unit": "servings"
+                      }
+                  }
+              },
+              {
+                  "name": "green dark spring onion",
+                  "image": "spring-onions.jpg",
+                  "amount": {
+                      "metric": {
+                          "value": 1.0,
+                          "unit": ""
+                      },
+                      "us": {
+                          "value": 1.0,
+                          "unit": ""
+                      }
+                  }
+              },
+              {
+                  "name": "summer squash",
+                  "image": "yellow-squash.jpg",
+                  "amount": {
+                      "metric": {
+                          "value": 4.0,
+                          "unit": ""
+                      },
+                      "us": {
+                          "value": 4.0,
+                          "unit": ""
+                      }
+                  }
+              },
+              {
+                  "name": "tomatoes",
+                  "image": "tomato.png",
+                  "amount": {
+                      "metric": {
+                          "value": 680.389,
+                          "unit": "g"
+                      },
+                      "us": {
+                          "value": 1.5,
+                          "unit": "pounds"
+                      }
+                  }
+              }
+          ]
+        },
+        {
+          "recipe_id": 656544,
+          "ingredients": [
+              {
+                  "name": "buckwheat flour",
+                  "image": "buckwheat-flour.jpg",
+                  "amount": {
+                      "metric": {
+                          "value": 40.0,
+                          "unit": "g"
+                      },
+                      "us": {
+                          "value": 0.33333334,
+                          "unit": "cup"
+                      }
+                  }
+              },
+              {
+                  "name": "butter",
+                  "image": "butter-sliced.jpg",
+                  "amount": {
+                      "metric": {
+                          "value": 2.0,
+                          "unit": "Tbsps"
+                      },
+                      "us": {
+                          "value": 2.0,
+                          "unit": "Tbsps"
+                      }
+                  }
+              },
+              {
+                  "name": "cooked polenta",
+                  "image": "cornmeal.png",
+                  "amount": {
+                      "metric": {
+                          "value": 226.796,
+                          "unit": "g"
+                      },
+                      "us": {
+                          "value": 0.5,
+                          "unit": "lb"
+                      }
+                  }
+              },
+              {
+                  "name": "egg",
+                  "image": "egg.png",
+                  "amount": {
+                      "metric": {
+                          "value": 1.0,
+                          "unit": ""
+                      },
+                      "us": {
+                          "value": 1.0,
+                          "unit": ""
+                      }
+                  }
+              },
+              {
+                  "name": "fontina",
+                  "image": "fontina.jpg",
+                  "amount": {
+                      "metric": {
+                          "value": 66.0,
+                          "unit": "g"
+                      },
+                      "us": {
+                          "value": 0.5,
+                          "unit": "cup"
+                      }
+                  }
+              },
+              {
+                  "name": "garlic",
+                  "image": "garlic.png",
+                  "amount": {
+                      "metric": {
+                          "value": 1.0,
+                          "unit": "clove"
+                      },
+                      "us": {
+                          "value": 1.0,
+                          "unit": "clove"
+                      }
+                  }
+              },
+              {
+                  "name": "sage",
+                  "image": "fresh-sage.png",
+                  "amount": {
+                      "metric": {
+                          "value": 2.0,
+                          "unit": "servings"
+                      },
+                      "us": {
+                          "value": 2.0,
+                          "unit": "servings"
+                      }
+                  }
+              },
+              {
+                  "name": "salt",
+                  "image": "salt.jpg",
+                  "amount": {
+                      "metric": {
+                          "value": 2.0,
+                          "unit": "servings"
+                      },
+                      "us": {
+                          "value": 2.0,
+                          "unit": "servings"
+                      }
+                  }
+              },
+              {
+                  "name": "savoy cabbage",
+                  "image": "savoy-cabbage.jpg",
+                  "amount": {
+                      "metric": {
+                          "value": 0.5,
+                          "unit": ""
+                      },
+                      "us": {
+                          "value": 0.5,
+                          "unit": ""
+                      }
+                  }
+              }
+          ]
+        },
+        {
+          "recipe_id": 1096168,
+          "ingredients": [
+              {
+                  "name": "sweet potato",
+                  "image": "sweet-potato.png",
+                  "amount": {
+                      "metric": {
+                          "value": 226.796,
+                          "unit": "g"
+                      },
+                      "us": {
+                          "value": 8.0,
+                          "unit": "oz"
+                      }
+                  }
+              },
+              {
+                  "name": "egg",
+                  "image": "egg.png",
+                  "amount": {
+                      "metric": {
+                          "value": 1.0,
+                          "unit": ""
+                      },
+                      "us": {
+                          "value": 1.0,
+                          "unit": ""
+                      }
+                  }
+              },
+              {
+                  "name": "all purpose flour",
+                  "image": "flour.png",
+                  "amount": {
+                      "metric": {
+                          "value": 250.0,
+                          "unit": "g"
+                      },
+                      "us": {
+                          "value": 2.0,
+                          "unit": "cups"
+                      }
+                  }
+              },
+              {
+                  "name": "olive oil",
+                  "image": "olive-oil.jpg",
+                  "amount": {
+                      "metric": {
+                          "value": 1.0,
+                          "unit": "Tbsp"
+                      },
+                      "us": {
+                          "value": 1.0,
+                          "unit": "Tbsp"
+                      }
+                  }
+              },
+              {
+                  "name": "garlic cloves",
+                  "image": "garlic.jpg",
+                  "amount": {
+                      "metric": {
+                          "value": 2.0,
+                          "unit": ""
+                      },
+                      "us": {
+                          "value": 2.0,
+                          "unit": ""
+                      }
+                  }
+              },
+              {
+                  "name": "dry white wine",
+                  "image": "white-wine.jpg",
+                  "amount": {
+                      "metric": {
+                          "value": 2.0,
+                          "unit": "Tbsps"
+                      },
+                      "us": {
+                          "value": 2.0,
+                          "unit": "Tbsps"
+                      }
+                  }
+              },
+              {
+                  "name": "sage leaves",
+                  "image": "fresh-sage.png",
+                  "amount": {
+                      "metric": {
+                          "value": 8.0,
+                          "unit": ""
+                      },
+                      "us": {
+                          "value": 8.0,
+                          "unit": ""
+                      }
+                  }
+              },
+              {
+                  "name": "salt and pepper",
+                  "image": "salt-and-pepper.jpg",
+                  "amount": {
+                      "metric": {
+                          "value": 4.0,
+                          "unit": "servings"
+                      },
+                      "us": {
+                          "value": 4.0,
+                          "unit": "servings"
+                      }
+                  }
+              }
+          ]
+        }, 
+        {
+          "recipe_id": 640064,
+          "ingredients": [
+              {
+                  "name": "ap flour",
+                  "image": "flour.png",
+                  "amount": {
+                      "metric": {
+                          "value": 125.0,
+                          "unit": "g"
+                      },
+                      "us": {
+                          "value": 1.0,
+                          "unit": "cup"
+                      }
+                  }
+              },
+              {
+                  "name": "black pepper",
+                  "image": "pepper.jpg",
+                  "amount": {
+                      "metric": {
+                          "value": 2.0,
+                          "unit": "servings"
+                      },
+                      "us": {
+                          "value": 2.0,
+                          "unit": "servings"
+                      }
+                  }
+              },
+              {
+                  "name": "egg",
+                  "image": "egg.png",
+                  "amount": {
+                      "metric": {
+                          "value": 1.0,
+                          "unit": ""
+                      },
+                      "us": {
+                          "value": 1.0,
+                          "unit": ""
+                      }
+                  }
+              },
+              {
+                  "name": "fresh coriander",
+                  "image": "cilantro.png",
+                  "amount": {
+                      "metric": {
+                          "value": 4.0,
+                          "unit": "Tbsps"
+                      },
+                      "us": {
+                          "value": 4.0,
+                          "unit": "Tbsps"
+                      }
+                  }
+              },
+              {
+                  "name": "garlic on its skin",
+                  "image": "garlic.png",
+                  "amount": {
+                      "metric": {
+                          "value": 4.0,
+                          "unit": "cloves"
+                      },
+                      "us": {
+                          "value": 4.0,
+                          "unit": "cloves"
+                      }
+                  }
+              },
+              {
+                  "name": "milk",
+                  "image": "milk.png",
+                  "amount": {
+                      "metric": {
+                          "value": 122.0,
+                          "unit": "ml"
+                      },
+                      "us": {
+                          "value": 0.5,
+                          "unit": "cup"
+                      }
+                  }
+              },
+              {
+                  "name": "cottage cheese/paneer",
+                  "image": "cottage-cheese.jpg",
+                  "amount": {
+                      "metric": {
+                          "value": 105.0,
+                          "unit": "g"
+                      },
+                      "us": {
+                          "value": 0.5,
+                          "unit": "cup"
+                      }
+                  }
+              },
+              {
+                  "name": "cooked pumpkin cubes",
+                  "image": "pumpkin.png",
+                  "amount": {
+                      "metric": {
+                          "value": 232.0,
+                          "unit": "g"
+                      },
+                      "us": {
+                          "value": 2.0,
+                          "unit": "cups"
+                      }
+                  }
+              },
+              {
+                  "name": "salt",
+                  "image": "salt.jpg",
+                  "amount": {
+                      "metric": {
+                          "value": 1.0,
+                          "unit": "tsp"
+                      },
+                      "us": {
+                          "value": 1.0,
+                          "unit": "tsp"
+                      }
+                  }
+              },
+              {
+                  "name": "sundried tomatoes",
+                  "image": "sundried-tomatoes.jpg",
+                  "amount": {
+                      "metric": {
+                          "value": 4.0,
+                          "unit": ""
+                      },
+                      "us": {
+                          "value": 4.0,
+                          "unit": ""
+                      }
+                  }
+              }
+          ]
+        },
+        
+        {
+          "recipe_id": 656972,
+          "ingredients": [
+              {
+                  "name": "baking potatoes",
+                  "image": "russet-or-idaho-potatoes.png",
+                  "amount": {
+                      "metric": {
+                          "value": 680.389,
+                          "unit": "g"
+                      },
+                      "us": {
+                          "value": 1.5,
+                          "unit": "pounds"
+                      }
+                  }
+              },
+              {
+                  "name": "flour",
+                  "image": "flour.png",
+                  "amount": {
+                      "metric": {
+                          "value": 125.0,
+                          "unit": "g"
+                      },
+                      "us": {
+                          "value": 1.0,
+                          "unit": "cup"
+                      }
+                  }
+              },
+              {
+                  "name": "egg yolk",
+                  "image": "egg-yolk.jpg",
+                  "amount": {
+                      "metric": {
+                          "value": 1.0,
+                          "unit": ""
+                      },
+                      "us": {
+                          "value": 1.0,
+                          "unit": ""
+                      }
+                  }
+              },
+              {
+                  "name": "kosher salt",
+                  "image": "salt.jpg",
+                  "amount": {
+                      "metric": {
+                          "value": 1.0,
+                          "unit": "tsp"
+                      },
+                      "us": {
+                          "value": 1.0,
+                          "unit": "tsp"
+                      }
+                  }
+              },
+              {
+                  "name": "fresh nutmeg",
+                  "image": "ground-nutmeg.jpg",
+                  "amount": {
+                      "metric": {
+                          "value": 0.25,
+                          "unit": "tsps"
+                      },
+                      "us": {
+                          "value": 0.25,
+                          "unit": "tsps"
+                      }
+                  }
+              },
+              {
+                  "name": "olive oil",
+                  "image": "olive-oil.jpg",
+                  "amount": {
+                      "metric": {
+                          "value": 2.0,
+                          "unit": "tsps"
+                      },
+                      "us": {
+                          "value": 2.0,
+                          "unit": "tsps"
+                      }
+                  }
+              },
+              {
+                  "name": "crimmini mushrooms",
+                  "image": "mushrooms.png",
+                  "amount": {
+                      "metric": {
+                          "value": 226.796,
+                          "unit": "g"
+                      },
+                      "us": {
+                          "value": 8.0,
+                          "unit": "ounces"
+                      }
+                  }
+              },
+              {
+                  "name": "fresh kale",
+                  "image": "kale.jpg",
+                  "amount": {
+                      "metric": {
+                          "value": 134.0,
+                          "unit": "g"
+                      },
+                      "us": {
+                          "value": 2.0,
+                          "unit": "cups"
+                      }
+                  }
+              },
+              {
+                  "name": "semi-soft goat cheese",
+                  "image": "goat-cheese.jpg",
+                  "amount": {
+                      "metric": {
+                          "value": 113.398,
+                          "unit": "g"
+                      },
+                      "us": {
+                          "value": 4.0,
+                          "unit": "ounces"
+                      }
+                  }
+              },
+              {
+                  "name": "skim milk",
+                  "image": "milk.jpg",
+                  "amount": {
+                      "metric": {
+                          "value": 122.5,
+                          "unit": "ml"
+                      },
+                      "us": {
+                          "value": 0.5,
+                          "unit": "cup"
+                      }
+                  }
+              },
+              {
+                  "name": "salt and pepper",
+                  "image": "salt-and-pepper.jpg",
+                  "amount": {
+                      "metric": {
+                          "value": 4.0,
+                          "unit": "servings"
+                      },
+                      "us": {
+                          "value": 4.0,
+                          "unit": "servings"
+                      }
+                  }
+              }
+          ]
         }
+      ]
     }
 }
+
+
