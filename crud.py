@@ -186,16 +186,16 @@ def add_recipe_ingredients(recipe_id):
 
     if len(ingredients) > 0:
 
-        for ingredient in ingredients:
+        for ingredient_data in ingredients:
 
             # check if ingredient already exists in the ingredients table
-            existing_ingredient = Ingredient.query.filter(Ingredient.id == ingredient['id']).first()
+            existing_ingredient = Ingredient.query.filter(Ingredient.id == ingredient_data['id']).first()
 
             # If ingredien does not exist
             if not existing_ingredient:
 
                 # Create ingredient object
-                ingredient = Ingredient(id=ingredient['id'], name=ingredient['name'])
+                ingredient = Ingredient(id=ingredient_data['id'], name=ingredient_data['name'])
                 
                 # Add ingredient to recipe_ingredients list
                 recipe_ingredients.append(ingredient)
@@ -220,17 +220,22 @@ def add_recipes_ingredients(recipe_id, ingredient):
     else:
         # Create recipe_ingredient object
         recipe = Recipe.query.filter(Recipe.id == recipe_id).first()
+        print("------------------------------------------------------------------------------------------------------------------")
+        print("recipe_id in add_recipes_ingredients", recipe_id)
+        print("recipe in add_recipes_ingredients", recipe)
         recipe_ingredient = RecipeIngredient(recipe=recipe, ingredient=ingredient)
 
         return recipe_ingredient
-
-
 
 def add_favorite_to_recipes(recipe):
     """Add favorite recipe to the recipes table"""
 
     recipe_id = recipe['id']
     recipe_title = recipe['title']
+
+    recipe = {}
+    recipe_ingredients = []
+    recipes_ingredients = []
 
     if MODE == 'TEST_MODE':
 
@@ -239,16 +244,21 @@ def add_favorite_to_recipes(recipe):
         if existing_recipe:
             existing_recipe.kisses += 1
             recipe = existing_recipe
-        else:
+            
+        elif not existing_recipe:
             # If recipe does not exist, create a recipe object
             recipe = Recipe(id=recipe_id, title=recipe_title)
+            db.session.add(recipe)
+            # getting recipe ingredients and recipes_ingredients
+            results = add_recipe_ingredients(recipe_id)
 
+            recipe_ingredients = results['recipe_ingredients']
+            recipes_ingredients = results['recipes_ingredients']
 
-        # Retun the recipe object and the recipe ingredients objects
-        return recipe
+        # Retun the recipe, recipe_ingredients, and recipes_ingredients objects
+        return {'recipe': recipe, 'ingredients': recipe_ingredients, 'recipes_ingredients': recipes_ingredients}
 
     # Use real data in production mode to be implemented
-
 
 def add_favorite(user, recipe):
     """Add recipe to user's favorites"""
@@ -272,12 +282,11 @@ def remove_favorite(user_id, recipe_id):
         if existing_favorite:
             return existing_favorite
         else:
-            return 
+            return None
     # Use real data in production mode to be implemented
 
 def get_favorites(user_id):
     """Return user's favorites"""
-
     if MODE == 'TEST_MODE':
         favorites = Favorite.query.filter(Favorite.user_id == user_id).all()
         return favorites

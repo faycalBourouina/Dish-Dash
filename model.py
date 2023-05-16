@@ -26,7 +26,7 @@ class Recipe(db.Model):
 
     __tablename__ = 'recipes'
 
-    id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String)
     kisses = db.Column(db.Integer , default=1)
 
@@ -60,8 +60,8 @@ class Ingredient(db.Model):
 
     __tablename__ = 'ingredients'
 
-    id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    name = db.Column(db.String, unique=True)
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String)
 
     recipe_ingredients = db.relationship('RecipeIngredient', back_populates='ingredient')
 

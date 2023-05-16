@@ -42,44 +42,37 @@ def seed_test_db():
         user = choice(users_in_db)
 
         # Select a random recipe from the mock data
-        recipe = choice(mock_db_data['recipes'])
+        rand_recipe = choice(mock_db_data['recipes'])
         
-        # get liked recipe object 
-        liked_recipe = crud.add_favorite_to_recipes(recipe)
+        # get recipe, ingredients, and recipes_ingredients objects
+        results =  crud.add_favorite_to_recipes(rand_recipe)
 
-        # Add recipe to recipes_in_db list to add to db later
-        recipes_in_db.append(liked_recipe)
+        recipe = results['recipe']
+        ingredients = results['ingredients']
+        recipes_ingredients = results['recipes_ingredients']
+
+        # add recipe, ingredients, and recipes_ingredients to db
+
+        model.db.session.add_all(ingredients)
+        model.db.session.add_all(recipes_ingredients)
+        model.db.session.commit()
+
 
         # Add liked recipe to user's favorites
-        new_favorite = crud.add_favorite(user, liked_recipe)
+        new_favorite = crud.add_favorite(user, recipe)
         if new_favorite:
             favorites_in_db.append(new_favorite)
     
 
-    for recipe in recipes_in_db:
-        response = crud.add_recipe_ingredients(recipe.id)
-        
-        # add recipe ingredinets to ingredinets table
-        ingredients = response['recipes_ingredients']
-        ingredients_in_db.extend(ingredients)
-        print("ingredients_in_db in seed", ingredients_in_db)
-
-        # add recipes ingredients to recipes_ingredients table
-        recipes_ingredients = response['recipes_ingredients']
-        recipes_ingredients_in_db.extend(recipes_ingredients)
-        print("recipes_ingredients_in_dbin seed", recipes_ingredients_in_db)
-
-
-
-
-    model.db.session.add_all(recipes_in_db)
-    model.db.session.commit()
-
-    model.db.session.add_all(recipes_ingredients_in_db)
-    model.db.session.commit()
 
     model.db.session.add_all(favorites_in_db)
     model.db.session.commit()
+
+    
+    recipe_ingredients = model.RecipeIngredient.query.all()
+
+    for recipe_ingredient in recipe_ingredients:
+        print(recipe_ingredient.recipe_id)
 
     print("Session added to db")
 
@@ -87,6 +80,7 @@ def seed_test_db():
 if __name__ == '__main__':
 
     seed_test_db()
+
     # Check if the database already exists before creating it
     #result = os.system("psql -lqt | cut -d \| -f 1 | grep -w dish-dash")
     #if result == 0:
