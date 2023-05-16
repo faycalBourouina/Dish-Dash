@@ -71,11 +71,15 @@ def authenticate_user():
     password = request.form.get('password')
     email = request.form.get('email')
 
-    user = crud.authenticate(email, password)
+    user_obj = crud.authenticate(email, password)
 
-    if user:
-        response = {'id': user.id, 'email': user.email}
-        session['user'] = response
+    if user_obj:
+        
+        user_dict = sqlalchemy_obj_to_dict(user_obj)
+        user = {'id': user_dict['id'], 'email': user_dict['email']}
+        session['user'] = user
+
+        response = jsonify({'user': user})
         
         return response, 200
     else:
