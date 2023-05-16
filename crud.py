@@ -31,6 +31,7 @@ def create_user(email, password):
 
     if MODE == 'TEST_MODE':
         
+        # Check if user already exists
         existing_user = User.query.filter(User.email == email).first()
         if existing_user:
             return None
@@ -45,6 +46,8 @@ def authenticate(email, password):
     """Login user"""
     
     if  MODE == 'TEST_MODE':
+
+        # Check if user exists and password is correct
         user = User.query.filter(User.email == email).first()
         if user and user.password == password:
             return user
@@ -108,7 +111,7 @@ def get_recipe(recipe_id):
         if recipe:
             return {
                 'id': recipe['id'],
-                'name': recipe['name'],
+                'title': recipe['name'],
                 'image': recipe['image'],
                 'instructions': recipe['instructions'],
                 'ingredients': recipe['ingredients']
@@ -220,10 +223,6 @@ def add_recipes_ingredients(recipe, ingredient):
     # If not, create a new recipe ingredient object to be added to the recipes_ingredients table
     else:
         # Create recipe_ingredient object
-        #recipe = Recipe.query.filter(Recipe.id == recipe_id).first()
-        print("------------------------------------------------------------------------------------------------------------------")
-        print("recipe_id in add_recipes_ingredients", recipe_id)
-        print("recipe in add_recipes_ingredients", recipe)
         recipe_ingredient = RecipeIngredient(recipe=recipe, ingredient=ingredient)
 
         return recipe_ingredient
@@ -250,6 +249,7 @@ def add_favorite_to_recipes(recipe):
             # If recipe does not exist, create a recipe object
             recipe = Recipe(id=recipe_id, title=recipe_title)
             #db.session.add(recipe)
+
             # getting recipe ingredients and recipes_ingredients
             results = add_recipe_ingredients(recipe)
 

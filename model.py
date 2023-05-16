@@ -36,7 +36,7 @@ class Recipe(db.Model):
     recipe_ingredients = db.relationship('RecipeIngredient', back_populates='recipe')
 
     def __repr__(self):
-        return f'<Recipe id={self.id} title={self.title}>'
+        return f'<Recipe id={self.id} title={self.title} kisses={self.kisses}>'
     
 class Favorite(db.Model):
     """ Favorite """
@@ -51,7 +51,7 @@ class Favorite(db.Model):
     recipe = db.relationship('Recipe', back_populates='favorites')
 
     def __repr__(self):
-        return f'<Favorite favorite_id={self.id} kisses={self.kisses} user_id={self.user_id} recipe_id={self.recipe_id}>'
+        return f'<Favorite favorite_id={self.id} user_id={self.user_id} recipe_id={self.recipe_id}>'
     
 
 

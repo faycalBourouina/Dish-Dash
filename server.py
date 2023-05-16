@@ -1,5 +1,5 @@
 """Server for Dish-Dash app"""
-from flask import (Flask, request, session)
+from flask import (Flask, request, session, jsonify)
 from flask_cors import CORS
 
 from urllib.parse import parse_qs
@@ -34,7 +34,7 @@ def get_landing_page_recipes():
     if response:
         return response, 200
     else:
-        return "Error", 404
+        return "{Error: 'No recipes found'}", 404
 
 
 @app.route("/signup", methods=["POST"])
@@ -50,9 +50,16 @@ def create_user():
         model.db.session.add(new_user)
         model.db.session.commit()
         
-        response = {'id': new_user.id, 'email': new_user.email}
-        session['user'] = response
+        # get user object from db and convert to dict
+        user_obj = crud.get_user_by_id(new_user.id)
+        user_dict = sqlalchemy_obj_to_dict(user_obj)
 
+        user = {'id': user_dict['id'], 'email': user_dict['email']}
+        session['user'] = user
+
+        response = jsonify({'user': user})
+        
+        print("response in create_user: ", response)
         return response, 201
     else:
         return 'User already exists', 409
@@ -102,8 +109,7 @@ def get_recipe_ingredients(recipe_id):
     """Return recipe ingredients"""
     
     ingredients = crud.get_recipe_ingredients(recipe_id)
-    print("ingredients before json dump", ingredients)
-    response = json.dumps({'ingredients': ingredients})
+    response = jsonify({'ingredients': ingredients})
 
     if response:
         return response, 200
@@ -126,7 +132,7 @@ def get_user_favorites(user_id):
             favorite_dict = sqlalchemy_obj_to_dict(favorite)
             favorites_list.append(favorite_dict)
         
-        response = json.dumps({'favorites': favorites_list})
+        response = jsonify({'favorites': favorites_list})
 
         return response, 200
     else:
@@ -147,19 +153,29 @@ def update_favorite(user_id, recipe_id):
             recipe = crud.get_recipe(recipe_id)
         
             # add favorite recipe to recipes list or update kiss count if already in list 
-            recipe_added = crud.add_favorite_to_recipes(recipe)
+            results = crud.add_favorite_to_recipes(recipe)
+            
+            favorite_recipe = results['recipe']
+            recipe_ingredients = results['ingredients']
+            recipes_ingredients = results['recipes_ingredients']
 
-            # create new favorite
-            new_favortie = crud.add_favorite(user, recipe_added)
+            model.db.session.add(favorite_recipe)
+            model.db.session.add_all(recipe_ingredients)
+            model.db.session.add_all(recipes_ingredients)
 
-            # add new favorite to database
+
+            new_favortie = crud.add_favorite(user, favorite_recipe)
             model.db.session.add(new_favortie)
+
+            #print("new favorite", new_favortie)
+
+
             model.db.session.commit()
 
             # convert sqlalchemy object to dictionary
             favorite_dict = sqlalchemy_obj_to_dict(new_favortie)
 
-            response = json.dumps({'favorite': favorite_dict})
+            response = jsonify({'favorite': favorite_dict})
 
             return response, 201
         
