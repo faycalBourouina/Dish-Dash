@@ -171,9 +171,9 @@ def get_recipe_ingredients(recipe_id):
 
     # Use real data in production mode
     
-def add_recipe_ingredients(recipe_id):
+def add_recipe_ingredients(recipe):
     """Add recipe ingredients to the ingredients table and the recipes_ingredients association table"""
-
+    recipe_id = recipe.id
     # Then get the recipe ingredients to create ingredient objects
     ingredients = get_recipe_ingredients(recipe_id)
 
@@ -201,15 +201,16 @@ def add_recipe_ingredients(recipe_id):
                 recipe_ingredients.append(ingredient)
 
                 # Add ingredient to recipes_ingredients list
-                recipe_ingredient = add_recipes_ingredients(recipe_id, ingredient)
+                recipe_ingredient = add_recipes_ingredients(recipe, ingredient)
                 recipes_ingredients.append(recipe_ingredient)
 
                
     return {'recipe_ingredients': recipe_ingredients, 'recipes_ingredients': recipes_ingredients}
 
-def add_recipes_ingredients(recipe_id, ingredient):
+def add_recipes_ingredients(recipe, ingredient):
     """Add recipes_ingredients to the recipes_ingredients association table"""
 
+    recipe_id = recipe.id
     # Check if recipe id and ingredient id combination already exists in the recipes_ingredients table
     existing_recipe_ingredient = RecipeIngredient.query.filter(RecipeIngredient.recipe_id == recipe_id, RecipeIngredient.ingredient_id == ingredient.id).first()
 
@@ -219,7 +220,7 @@ def add_recipes_ingredients(recipe_id, ingredient):
     # If not, create a new recipe ingredient object to be added to the recipes_ingredients table
     else:
         # Create recipe_ingredient object
-        recipe = Recipe.query.filter(Recipe.id == recipe_id).first()
+        #recipe = Recipe.query.filter(Recipe.id == recipe_id).first()
         print("------------------------------------------------------------------------------------------------------------------")
         print("recipe_id in add_recipes_ingredients", recipe_id)
         print("recipe in add_recipes_ingredients", recipe)
@@ -248,9 +249,9 @@ def add_favorite_to_recipes(recipe):
         elif not existing_recipe:
             # If recipe does not exist, create a recipe object
             recipe = Recipe(id=recipe_id, title=recipe_title)
-            db.session.add(recipe)
+            #db.session.add(recipe)
             # getting recipe ingredients and recipes_ingredients
-            results = add_recipe_ingredients(recipe_id)
+            results = add_recipe_ingredients(recipe)
 
             recipe_ingredients = results['recipe_ingredients']
             recipes_ingredients = results['recipes_ingredients']

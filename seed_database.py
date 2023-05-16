@@ -52,7 +52,7 @@ def seed_test_db():
         recipes_ingredients = results['recipes_ingredients']
 
         # add recipe, ingredients, and recipes_ingredients to db
-
+        model.db.session.add(recipe)
         model.db.session.add_all(ingredients)
         model.db.session.add_all(recipes_ingredients)
         model.db.session.commit()
