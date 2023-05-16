@@ -59,7 +59,6 @@ def create_user():
 
         response = jsonify({'user': user})
         
-        print("response in create_user: ", response)
         return response, 201
     else:
         return 'User already exists', 409
@@ -90,23 +89,25 @@ def search_recipes():
     """Search for recipes"""
 
     search_dict = request.args.to_dict()
-    response = crud.search_recipes(search_dict)
+    recipes = crud.search_recipes(search_dict)
 
-    if response:
+    if recipes:
+        response = jsonify({'recipes': recipes})
         return response, 200
     else:
-        return "Error", 404
+        return {"Error: 'No recipes found'"}, 404
 
 @app.route("/recipes/<int:recipe_id>")
 def get_recipe(recipe_id):
     """Return recipe"""
 
-    response = crud.get_recipe(recipe_id)
+    recipe = crud.get_recipe(recipe_id)
 
-    if response:
+    if recipe:
+        response = jsonify({'recipe': recipe})
         return response, 200
     else:   
-        return "Error", 404
+        return "{Error: 'No recipe found'}", 404
 
 @app.route("/recipes/<int:recipe_id>/ingredients")
 def get_recipe_ingredients(recipe_id):
@@ -118,7 +119,7 @@ def get_recipe_ingredients(recipe_id):
     if response:
         return response, 200
     else:
-        return "Error", 404
+        return "{Error: 'No ingredients found'}", 404
     
 @app.route("/users/<int:user_id>/favorites")
 def get_user_favorites(user_id):
@@ -150,38 +151,47 @@ def update_favorite(user_id, recipe_id):
         
         if 'user' in session and session['user']['id'] == user_id:
 
-            # get user from database
+            # Get user from database
             user = crud.get_user_by_id(user_id)
 
-            #get recipe from the API
+            # Get recipe from the API
             recipe = crud.get_recipe(recipe_id)
         
-            # add favorite recipe to recipes list or update kiss count if already in list 
+            # Get the favorite recipe, recipe ingredients, and recipes_ingredients 
             results = crud.add_favorite_to_recipes(recipe)
-            
+
+            # Get favorite recipe, recipe ingredients, and recipes_ingredients created objects           
             favorite_recipe = results['recipe']
             recipe_ingredients = results['ingredients']
             recipes_ingredients = results['recipes_ingredients']
-
+            
+            # Add favorite recipe, recipe ingredients, and recipes_ingredients to the database
             model.db.session.add(favorite_recipe)
             model.db.session.add_all(recipe_ingredients)
             model.db.session.add_all(recipes_ingredients)
 
-
+            # Create a new favorite object and add it to the database
             new_favortie = crud.add_favorite(user, favorite_recipe)
-            model.db.session.add(new_favortie)
 
-            #print("new favorite", new_favortie)
+            # Check if favorite was created (if already exists, it will return None)
+            if new_favortie:                
+                model.db.session.add(new_favortie)
+                model.db.session.commit()           
 
+                # Convert sqlalchemy object to dictionary
+                favorite_dict = sqlalchemy_obj_to_dict(new_favortie)
 
-            model.db.session.commit()
+                response = jsonify({'favorite': favorite_dict})
 
-            # convert sqlalchemy object to dictionary
-            favorite_dict = sqlalchemy_obj_to_dict(new_favortie)
+                #print("------------------------------------------------------------------------------------------------------")
+                #print(favorite_recipe)
+                #print(user)
+                #print(new_favortie)
 
-            response = jsonify({'favorite': favorite_dict})
-
-            return response, 201
+                return response, 201
+            
+            else:
+                return "Favorite already exists", 409
         
         else:
             return "Authentication required", 401
@@ -192,6 +202,8 @@ def update_favorite(user_id, recipe_id):
             
             # get the favorite to be deleted
             favorite_to_delete = crud.remove_favorite(user_id, recipe_id)
+            print("favorite_to_delete in server.py", favorite_to_delete) 
+
 
             if favorite_to_delete:
                 model.db.session.delete(favorite_to_delete)

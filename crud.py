@@ -117,7 +117,7 @@ def get_recipe(recipe_id):
                 'ingredients': recipe['ingredients']
             }
         else:
-            return {'error': 'Recipe not found'}
+            return None
 
     # Use real data in production mode
     else:
@@ -157,12 +157,12 @@ def get_recipe(recipe_id):
                 'ingredients': recipe_ingredients
             }
         else:
-            return {'error': 'Recipe not found'}
+            return None
 
 def get_recipe_ingredients(recipe_id):
     """Return recipe ingredients"""
 
-    # Gettin recipe ingredinet from mock api
+    # Gettin recipe ingredients 
     recipe_ingredients = get_recipe(recipe_id)['ingredients']
 
     # If ingerdients exist, return ingredients
@@ -170,9 +170,7 @@ def get_recipe_ingredients(recipe_id):
         ingredients = [{'id': ingredient['id'], 'name': ingredient['name']} for ingredient in recipe_ingredients]
         return ingredients
     else:
-        return {'error': 'Recipe not found'} 
-
-    # Use real data in production mode
+        return None
     
 def add_recipe_ingredients(recipe):
     """Add recipe ingredients to the ingredients table and the recipes_ingredients association table"""
@@ -268,7 +266,7 @@ def add_favorite(user, recipe):
 
         existing_favorite = Favorite.query.filter(Favorite.user_id == user.id, Favorite.recipe_id == recipe.id).first()
         if existing_favorite:
-            return 
+            return None
         else:
             favorite = Favorite(user=user, recipe=recipe)
             return favorite
@@ -280,6 +278,7 @@ def remove_favorite(user_id, recipe_id):
     if MODE == 'TEST_MODE':
 
         existing_favorite = Favorite.query.filter(Favorite.user_id == user_id, Favorite.recipe_id == recipe_id).first()
+        print("favorite_to_delete in crud.py", existing_favorite) 
         if existing_favorite:
             return existing_favorite
         else:
