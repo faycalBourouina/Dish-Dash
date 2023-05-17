@@ -1,5 +1,5 @@
 """Server for Dish-Dash app"""
-from flask import (Flask, request, session, jsonify)
+from flask import (Flask, request, session, jsonify, render_template, redirect)
 from flask_cors import CORS
 
 from urllib.parse import parse_qs
@@ -25,6 +25,12 @@ app.secret_key = os.getenv("SESSION_SECRET_KEY")
 # Connect to the database
 model.connect_to_db(app)
 
+@app.route("/client")
+def get_client():
+    """Test my next client"""
+    
+    return render_template("index.html")
+
 @app.route("/")
 def get_landing_page_recipes():
     """Return trending and custom recipes"""
@@ -32,6 +38,7 @@ def get_landing_page_recipes():
     response = crud.get_landing_page_recipes()
 
     if response:
+        response = jsonify(response)
         return response, 200
     else:
         return "{Error: 'No recipes found'}", 404
