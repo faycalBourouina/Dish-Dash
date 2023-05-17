@@ -10,6 +10,12 @@ function Search() {
         setRecipes(results);
     }
     
+    async function handleRecipeClick(recipe) {
+        const response = await fetch(`/recipes/${recipe.id}`);
+        const data = await response.json();
+        setSelectedRecipe(data);
+    }
+    
     return (
         <div>
             <div className="container">
