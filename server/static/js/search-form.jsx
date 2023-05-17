@@ -1,6 +1,6 @@
 const { useState } = React;
 
-function SearchForm() {
+function SearchForm({ onSearch }) {
   const [query, setQuery] = useState('');
   const [diet, setDiet] = useState('');
   const [cuisine, setCuisine] = useState('');
@@ -38,7 +38,7 @@ function SearchForm() {
   const handleSubmit = event => {
     event.preventDefault();
 
-    handleSearch({
+    onSearch({
       query,
       diet,
       cuisine,

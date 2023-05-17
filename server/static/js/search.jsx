@@ -1,12 +1,17 @@
 function Search() {
-
-    const [results, setResults] = React.useState([]);
-
+    
+    async function handleSearch(searchQuery) {
+        const params = new URLSearchParams(searchQuery);
+        const response = await fetch(`/search?${params.toString()}`);
+        const data = await response.json();
+        console.log(data);
+    }
+        
 
     return (
         <div>
             <div className="container">
-                <SearchForm />
+                <SearchForm onSearch={handleSearch} />
             </div>
         </div>
     );
