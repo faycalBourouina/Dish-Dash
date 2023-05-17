@@ -34,12 +34,6 @@ function SearchForm() {
     );
   };
 
-  async function handleSearch(searchQuery) {
-    const params = new URLSearchParams(searchQuery);
-    const response = await fetch(`/search?${params.toString()}`);
-    const data = await response.json();
-    console.log(data);
-  }
 
   const handleSubmit = event => {
     event.preventDefault();
