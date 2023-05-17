@@ -84,10 +84,9 @@ def search_recipes(search):
     """Search for recipes"""
 
     # Use mock data in test mode
-    if MODE == 'TEST_MODE':
+    if MODE == 'TEST_MODE_':
         response = mock_data['search']['response']
     else:
-
         query = search.get('query', '')
         diet = search.get('diet', '')
         cuisine = search.get('cuisine', '')
@@ -97,7 +96,9 @@ def search_recipes(search):
         maReadyTime = search.get('maxReadyTime', '')
         #fillIngredients	= True
 
+
         request = f'{uri_recipes}/complexSearch?&query={query}&diet={diet}&cuisine={cuisine}&apiKey={SPOONACULAR_API_KEY}'
+        print(request)
         response = requests.get(request).json()
 
     return response

@@ -95,9 +95,9 @@ def authenticate_user():
 def search_recipes():
     """Search for recipes"""
 
+    # Get search parameters and convert to dictionary
     search_dict = request.args.to_dict()
 
-    print(search_dict)
     recipes = crud.search_recipes(search_dict)
 
     if recipes:
