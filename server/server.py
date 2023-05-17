@@ -96,6 +96,8 @@ def search_recipes():
     """Search for recipes"""
 
     search_dict = request.args.to_dict()
+
+    print(search_dict)
     recipes = crud.search_recipes(search_dict)
 
     if recipes:

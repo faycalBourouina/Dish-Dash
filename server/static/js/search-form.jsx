@@ -1,6 +1,6 @@
 const { useState } = React;
 
-function SearchForm({ onSearch }) {
+function SearchForm() {
   const [query, setQuery] = useState('');
   const [diet, setDiet] = useState('');
   const [cuisine, setCuisine] = useState('');
@@ -34,10 +34,17 @@ function SearchForm({ onSearch }) {
     );
   };
 
+  async function handleSearch(searchQuery) {
+    const params = new URLSearchParams(searchQuery);
+    const response = await fetch(`/search?${params.toString()}`);
+    const data = await response.json();
+    console.log(data);
+  }
+
   const handleSubmit = event => {
     event.preventDefault();
 
-    onSearch({
+    handleSearch({
       query,
       diet,
       cuisine,
