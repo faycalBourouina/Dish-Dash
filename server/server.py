@@ -28,7 +28,8 @@ model.connect_to_db(app)
 @app.route("/client")
 def get_client():
     """Test my next client"""
-    
+    session['user'] = {'id': 1, 'email': 'user1@example.com'}
+
     return render_template("index.html")
 
 @app.route("/")

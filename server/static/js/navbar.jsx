@@ -1,4 +1,4 @@
-function NavBar() {
+function Navbar({ isLogged }) {
     return (
       <nav>
         <ul>

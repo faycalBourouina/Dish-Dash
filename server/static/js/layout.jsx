@@ -1,4 +1,4 @@
-function Layout() {
+function Layout({ isLogged }) {
     const [recipes, setRecipes] = React.useState([]);
     const [selectedRecipe, setSelectedRecipe] = React.useState(null);
     
@@ -22,6 +22,7 @@ function Layout() {
     return (
       <div>
         <div className="container">
+          <Navbar isLogged={isLogged} />
           <SearchForm onSearch={handleSearch} />
           <div>
             {selectedRecipe ? (

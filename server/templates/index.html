@@ -11,16 +11,24 @@
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/react-router-dom/umd/react-router-dom.min.js"></script>
 
+    <script>
+      // Access the userSession value from Flask and assign it to a JavaScript variable
+      {% if session['user'] %}
+        var isLogged = true;
+      {% else %}
+        var isLogged = false;
+      {% endif %}
+    </script>
+
+    <script type="text/babel" src="/static/js/navbar.jsx"></script>
     <script type="text/babel" src="/static/js/search-form.jsx"></script>
     <script type="text/babel" src="/static/js/recipe-list.jsx"></script>
     <script type="text/babel" src="/static/js/recipe-details.jsx"></script>
     <script type="text/babel" src="/static/js/layout.jsx"></script>
-    <script type="text/babel" src="/static/js/navbar.jsx"></script>
     <script type="text/babel" src="/static/js/app.jsx"></script>
 
-
     <script type="text/babel">
-      ReactDOM.render(<App />, document.getElementById('root'));
+      ReactDOM.render(<App isLogged={isLogged} />, document.getElementById('root'));
     </script>
   </body>
 </html>

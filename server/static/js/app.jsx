@@ -1,11 +1,10 @@
 
-function App() {
+function App({ isLogged }) {
 
   return (
     <div>
       <div className="container">
-      <NavBar />
-      <Layout />
+      <Layout isLogged={isLogged} />
       </div>
     </div>
   );
