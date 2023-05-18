@@ -84,7 +84,7 @@ def search_recipes(search):
     """Search for recipes"""
 
     # Use mock data in test mode
-    if MODE == 'TEST_MODE_':
+    if MODE == 'TEST_MODE':
         response = mock_data['search']['response']
     else:
         query = search.get('query', '')
