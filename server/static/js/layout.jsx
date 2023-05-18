@@ -20,24 +20,17 @@ function Layout() {
     }
     
     return (
-        <div>
-          <div className="container">
-            <SearchForm onSearch={handleSearch} />
-            <div>
-              {selectedRecipe ? (
-                <RecipeDetails recipe={selectedRecipe} />
-              ) : (
-                <ul>
-                  {recipes.map((recipe, index) => (
-                    <li key={recipe.id} onClick={() => handleRecipeClick(recipe)}>
-                      <h3> {recipe.title} </h3>
-                      <img src={recipe.image} />
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </div>
+      <div>
+        <div className="container">
+          <SearchForm onSearch={handleSearch} />
+          <div>
+            {selectedRecipe ? (
+              <RecipeDetails recipe={selectedRecipe} />
+            ) : (
+              <RecipeList recipes={recipes} onRecipeClick={handleRecipeClick} />
+            )}
           </div>
         </div>
-      );
+      </div>
+    );
 }
