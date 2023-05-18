@@ -14,9 +14,9 @@
     <script>
       // Access the userSession value from Flask and assign it to a JavaScript variable
       {% if session['user'] %}
-        var isLogged = true;
+        var isLogged = {{session['user']['id']}}
       {% else %}
-        var isLogged = false;
+        var isLogged = null;
       {% endif %}
     </script>
 

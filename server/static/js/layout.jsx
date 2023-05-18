@@ -1,4 +1,7 @@
+const { useState, useEffect } = React;
+
 function Layout({ isLogged }) {
+    const [activeTab, setActiveTab] = React.useState("home");
     const [recipes, setRecipes] = React.useState([]);
     const [selectedRecipe, setSelectedRecipe] = React.useState(null);
     
@@ -19,10 +22,12 @@ function Layout({ isLogged }) {
         setSelectedRecipe(recipe_details);
     }
     
+ 
+  
     return (
       <div>
         <div className="container">
-          <Navbar isLogged={isLogged} />
+          <Navbar isLogged={isLogged} setActiveTab={setActiveTab} />
           <SearchForm onSearch={handleSearch} />
           <div>
             {selectedRecipe ? (

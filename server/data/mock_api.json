@@ -23,256 +23,34 @@
     "landing_page": {
         "query": "http://localhost:5000/",
         "response": {
-            "recipes": [
+            "number": 10, 
+            "offset": 0, 
+            "results": [
                 {
-                  "aggregateLikes": 2, 
-                  "analyzedInstructions": [
-                    {
-                      "name": "", 
-                      "steps": [
-                        {
-                          "equipment": [
-                            {
-                              "id": 404762, 
-                              "image": "microwave.jpg", 
-                              "localizedName": "microwave", 
-                              "name": "microwave"
-                            }, 
-                            {
-                              "id": 404669, 
-                              "image": "sauce-pan.jpg", 
-                              "localizedName": "sauce pan", 
-                              "name": "sauce pan"
-                            }, 
-                            {
-                              "id": 404783, 
-                              "image": "bowl.jpg", 
-                              "localizedName": "bowl", 
-                              "name": "bowl"
-                            }
-                          ], 
-                          "ingredients": [
-                            {
-                              "id": 90480, 
-                              "image": "simple-syrup.jpg", 
-                              "localizedName": "simple syrup", 
-                              "name": "simple syrup"
-                            }, 
-                            {
-                              "id": 0, 
-                              "image": "", 
-                              "localizedName": "sauce", 
-                              "name": "sauce"
-                            }, 
-                            {
-                              "id": 19335, 
-                              "image": "sugar-in-bowl.png", 
-                              "localizedName": "sugar", 
-                              "name": "sugar"
-                            }, 
-                            {
-                              "id": 14412, 
-                              "image": "water.png", 
-                              "localizedName": "water", 
-                              "name": "water"
-                            }
-                          ], 
-                          "number": 1, 
-                          "step": "To make the simple syrup, combine one cup of water and one cup of sugar in a small sauce pan or microwave safe bowl."
-                        }, 
-                        {
-                          "equipment": [], 
-                          "ingredients": [
-                            {
-                              "id": 19335, 
-                              "image": "sugar-in-bowl.png", 
-                              "localizedName": "sugar", 
-                              "name": "sugar"
-                            }
-                          ], 
-                          "number": 2, 
-                          "step": "Heat until the sugar has completely dissolved. Cool a  little."
-                        }, 
-                        {
-                          "equipment": [
-                            {
-                              "id": 404726, 
-                              "image": "blender.png", 
-                              "localizedName": "blender", 
-                              "name": "blender"
-                            }
-                          ], 
-                          "ingredients": [], 
-                          "number": 3, 
-                          "step": "Place all the ingredients in a blender. Puree until smooth."
-                        }, 
-                        {
-                          "equipment": [], 
-                          "ingredients": [], 
-                          "length": {
-                            "number": 10, 
-                            "unit": "minutes"
-                          }, 
-                          "number": 4, 
-                          "step": "Pour into 1 large container, or 6 small dishes. Freeze.When ready to serve, remove from the freezer and set on the container for 10 minutes. Then use your spoon to shave away!Make a little over 3 cups, or 6 individual servings."
-                        }
-                      ]
-                    }
-                  ], 
-                  "cheap": false, 
-                  "cookingMinutes": -1, 
-                  "creditsText": "Foodista.com \u2013 The Cooking Encyclopedia Everyone Can Edit", 
-                  "cuisines": [
-                    "Mediterranean", 
-                    "Italian", 
-                    "European"
-                  ], 
-                  "dairyFree": true, 
-                  "diets": [
-                    "gluten free", 
-                    "dairy free", 
-                    "lacto ovo vegetarian", 
-                    "fodmap friendly", 
-                    "vegan"
-                  ], 
-                  "dishTypes": [
-                    "dessert"
-                  ], 
-                  "extendedIngredients": [
-                    {
-                      "aisle": "Produce", 
-                      "amount": 0.25, 
-                      "consistency": "SOLID", 
-                      "id": 2044, 
-                      "image": "fresh-basil.jpg", 
-                      "measures": {
-                        "metric": {
-                          "amount": 59.147, 
-                          "unitLong": "milliliters", 
-                          "unitShort": "ml"
-                        }, 
-                        "us": {
-                          "amount": 0.25, 
-                          "unitLong": "cups", 
-                          "unitShort": "cups"
-                        }
-                      }, 
-                      "meta": [], 
-                      "name": "basil leaves", 
-                      "nameClean": "fresh basil", 
-                      "original": "1/4 cup basil leaves", 
-                      "originalName": "basil leaves", 
-                      "unit": "cup"
-                    }, 
-                    {
-                      "aisle": "Produce", 
-                      "amount": 1.0, 
-                      "consistency": "LIQUID", 
-                      "id": 9152, 
-                      "image": "lemon-juice.jpg", 
-                      "measures": {
-                        "metric": {
-                          "amount": 1.0, 
-                          "unitLong": "", 
-                          "unitShort": ""
-                        }, 
-                        "us": {
-                          "amount": 1.0, 
-                          "unitLong": "", 
-                          "unitShort": ""
-                        }
-                      }, 
-                      "meta": [], 
-                      "name": "juice of lemon", 
-                      "nameClean": "lemon juice", 
-                      "original": "Zest and Juice of 1 lemon", 
-                      "originalName": "Zest and Juice of lemon", 
-                      "unit": ""
-                    }, 
-                    {
-                      "aisle": "Alcoholic Beverages", 
-                      "amount": 1.5, 
-                      "consistency": "LIQUID", 
-                      "id": 90480, 
-                      "image": "simple-syrup.jpg", 
-                      "measures": {
-                        "metric": {
-                          "amount": 354.882, 
-                          "unitLong": "milliliters", 
-                          "unitShort": "ml"
-                        }, 
-                        "us": {
-                          "amount": 1.5, 
-                          "unitLong": "cups", 
-                          "unitShort": "cups"
-                        }
-                      }, 
-                      "meta": [], 
-                      "name": "simple syrup", 
-                      "nameClean": "simple syrup", 
-                      "original": "1 1/2 cups simple syrup", 
-                      "originalName": "simple syrup", 
-                      "unit": "cups"
-                    }, 
-                    {
-                      "aisle": "Produce", 
-                      "amount": 400.0, 
-                      "consistency": "SOLID", 
-                      "id": 9316, 
-                      "image": "strawberries.png", 
-                      "measures": {
-                        "metric": {
-                          "amount": 400.0, 
-                          "unitLong": "grams", 
-                          "unitShort": "g"
-                        }, 
-                        "us": {
-                          "amount": 14.11, 
-                          "unitLong": "ounces", 
-                          "unitShort": "oz"
-                        }
-                      }, 
-                      "meta": [
-                        "for garnishing", 
-                        "(Reserve some )"
-                      ], 
-                      "name": "strawberries", 
-                      "nameClean": "strawberries", 
-                      "original": "400 grams strawberries (Reserve some for garnishing)", 
-                      "originalName": "strawberries (Reserve some for garnishing)", 
-                      "unit": "grams"
-                    }
-                  ], 
-                  "gaps": "no", 
-                  "glutenFree": true, 
-                  "healthScore": 2, 
-                  "id": 661757, 
-                  "image": "https://spoonacular.com/recipeImages/661757-556x370.jpg", 
-                  "imageType": "jpg", 
-                  "instructions": "<ol><li>To make the simple syrup, combine one cup of water and one cup of sugar in a small sauce pan or microwave safe bowl. Heat until the sugar has completely dissolved. Cool a  little.</li><li>Place all the ingredients in a blender. Puree until smooth. Pour into 1 large container, or 6 small dishes. Freeze.</li><li>When ready to serve, remove from the freezer and set on the container for 10 minutes. Then use your spoon to shave away!</li><li>Make a little over 3 cups, or 6 individual servings.</li></ol>", 
-                  "license": "CC BY 3.0", 
-                  "lowFodmap": true, 
-                  "occasions": [
-                    "mother's day"
-                  ], 
-                  "originalId": null, 
-                  "preparationMinutes": -1, 
-                  "pricePerServing": 139.06, 
-                  "readyInMinutes": 45, 
-                  "servings": 6, 
-                  "sourceName": "Foodista", 
-                  "sourceUrl": "http://www.foodista.com/recipe/8M8XSYF7/strawberry-basil-italian-ice", 
-                  "spoonacularSourceUrl": "https://spoonacular.com/strawberry-basil-italian-ice-661757", 
-                  "summary": "Strawberry Basil Italian Ice takes around <b>45 minutes</b> from beginning to end. This gluten free, dairy free, lacto ovo vegetarian, and fodmap friendly recipe serves 6 and costs <b>$1.39 per serving</b>. This dessert has <b>249 calories</b>, <b>0g of protein</b>, and <b>0g of fat</b> per serving. Only a few people made this recipe, and 2 would say it hit the spot. It is brought to you by Foodista. A mixture of basil leaves, juice of lemon, simple syrup, and a handful of other ingredients are all it takes to make this recipe so delicious. This recipe is typical of Mediterranean cuisine. It will be a hit at your <b>Mother's Day</b> event. Taking all factors into account, this recipe <b>earns a spoonacular score of 30%</b>, which is not so great. <a href=\"https://spoonacular.com/recipes/strawberry-basil-italian-ice-58534\">Strawberry Basil Italian Ice</a>, <a href=\"https://spoonacular.com/recipes/strawberry-italian-ice-760582\">Strawberry Italian Ice</a>, and <a href=\"https://spoonacular.com/recipes/strawberry-italian-ice-398610\">Strawberry Italian Ice</a> are very similar to this recipe.", 
-                  "sustainable": false, 
-                  "title": "Strawberry Basil Italian Ice", 
-                  "vegan": true, 
-                  "vegetarian": true, 
-                  "veryHealthy": false, 
-                  "veryPopular": false, 
-                  "weightWatcherSmartPoints": 14
+                    "id": 644885, 
+                    "image": "https://spoonacular.com/recipeImages/644885-312x231.jpg", 
+                    "imageType": "jpg", 
+                    "title": "Gluten Free Vegan Gnocchi"
+                }, 
+                {
+                    "id": 644205, 
+                    "image": "https://spoonacular.com/recipeImages/644205-312x231.jpg", 
+                    "imageType": "jpg", 
+                    "title": "Garden Vegetable Ravioli With Tomato Brodo"
+                }, 
+                {
+                    "id": 656544, 
+                    "image": "https://spoonacular.com/recipeImages/656544-312x231.jpg", 
+                    "imageType": "jpg", 
+                    "title": "Polenta gnocchi with savoy cabbage and cheese"
+                }, 
+                {
+                    "id": 1096168, 
+                    "image": "https://spoonacular.com/recipeImages/1096168-312x231.jpg", 
+                    "imageType": "jpg", 
+                    "title": "Sweet Potato Gnocchi tossed in Garlic Sage Olive Oil"
                 }
-              ]           
+            ]
         }
     },
     "search":{

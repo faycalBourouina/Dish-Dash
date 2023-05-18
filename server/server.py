@@ -135,6 +135,7 @@ def get_recipe_ingredients(recipe_id):
 def get_user_favorites(user_id):
     """Return user favorites"""
 
+    print(session['user']['id'], user_id)
     if 'user' in session and session['user']['id'] == user_id:
         
         favorites_list = []
