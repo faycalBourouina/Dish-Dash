@@ -1,4 +1,4 @@
-function Landing() {
+function Layout() {
     const [recipes, setRecipes] = React.useState([]);
     const [selectedRecipe, setSelectedRecipe] = React.useState(null);
     
@@ -25,7 +25,7 @@ function Landing() {
             <SearchForm onSearch={handleSearch} />
             <div>
               {selectedRecipe ? (
-                <Recipe recipe={selectedRecipe} />
+                <RecipeDetails recipe={selectedRecipe} />
               ) : (
                 <ul>
                   {recipes.map((recipe, index) => (

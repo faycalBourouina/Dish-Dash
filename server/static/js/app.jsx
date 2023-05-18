@@ -4,7 +4,8 @@ function App() {
   return (
     <div>
       <div className="container">
-            <Landing />
+      <NavBar />
+      <Layout />
       </div>
     </div>
   );

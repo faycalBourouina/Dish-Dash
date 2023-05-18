@@ -1,4 +1,4 @@
-function Recipe({ recipe }) {
+function RecipeDetails({ recipe }) {
     return (
       <div>
         recipe details
