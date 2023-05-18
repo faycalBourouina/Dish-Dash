@@ -36,10 +36,10 @@ def get_client():
 def get_landing_page_recipes():
     """Return trending and custom recipes"""
 
-    response = crud.get_landing_page_recipes()
+    recipes = crud.get_landing_page_recipes()
 
-    if response:
-        response = jsonify(response)
+    if recipes:
+        response = jsonify({'recipes': recipes})
         return response, 200
     else:
         return "{Error: 'No recipes found'}", 404

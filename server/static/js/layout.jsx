@@ -21,8 +21,7 @@ function Layout({ isLogged }) {
         const recipe_details = await data.recipe;
         setSelectedRecipe(recipe_details);
     }
-    
- 
+  
   
     return (
       <div>
