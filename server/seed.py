@@ -43,15 +43,19 @@ def seed_test_db():
 
         # Select a random recipe from the mock data
         rand_recipe = choice(mock_db_data['recipes'])
-        
-        # get recipe, ingredients, and recipes_ingredients objects
-        results =  crud.add_favorite_to_recipes(rand_recipe)
+
+        # Get rand_recipe's details from the API
+        recipe_details = rand_recipe = crud.get_recipe(rand_recipe['id'])
+
+        # Get recipe, ingredients, and recipes_ingredients objects
+        results =  crud.add_favorite_to_recipes(recipe_details)
+        #results =  crud.add_favorite_to_recipes(rand_recipe)
 
         recipe = results['recipe']
         ingredients = results['ingredients']
         recipes_ingredients = results['recipes_ingredients']
 
-        # add recipe, ingredients, and recipes_ingredients to db
+        # Add recipe, ingredients, and recipes_ingredients to db
         model.db.session.add(recipe)
         model.db.session.add_all(ingredients)
         model.db.session.add_all(recipes_ingredients)

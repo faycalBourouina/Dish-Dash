@@ -230,6 +230,10 @@ def add_favorite_to_recipes(recipe):
 
     recipe_id = recipe['id']
     recipe_title = recipe['title']
+    recipe_image = recipe['image']
+    recipe_instructions = recipe['instructions']
+    recipe_ingredients_list = recipe['ingredients']
+    print("recipe_ingredients_list", recipe_ingredients_list)
 
     recipe = {}
     recipe_ingredients = []
@@ -245,8 +249,7 @@ def add_favorite_to_recipes(recipe):
             
         elif not existing_recipe:
             # If recipe does not exist, create a recipe object
-            recipe = Recipe(id=recipe_id, title=recipe_title)
-            #db.session.add(recipe)
+            recipe = Recipe(id=recipe_id, title=recipe_title, image=recipe_image, instructions=recipe_instructions, ingredients=recipe_ingredients_list)
 
             # getting recipe ingredients and recipes_ingredients
             results = add_recipe_ingredients(recipe)
@@ -288,7 +291,7 @@ def get_favorites(user_id):
     """Return user's favorites"""
     if MODE == 'TEST_MODE':
         favorites = Favorite.query.filter(Favorite.user_id == user_id).all()
-
+        
         return favorites
 
     # Use real data in production mode to be implemented
