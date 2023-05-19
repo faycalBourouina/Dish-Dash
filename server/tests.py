@@ -41,8 +41,8 @@ class ServerTests(unittest.TestCase):
 
         result = self.client.get("/")
         response_data = json.loads(result.data)
-        recipes_value = response_data['recipes']
-        self.assertIsInstance(recipes_value, list, "'recipes' attribute is not an list")
+        recipes_value = response_data['recipes']['results']
+        self.assertIsInstance(recipes_value, list, "'recipes' attribute is not a list")
         self.assertTrue(len(recipes_value) > 0, "'recipes' attribute is an empty lits")
 
     # Test search
@@ -74,7 +74,7 @@ class ServerTests(unittest.TestCase):
         response_data = json.loads(result.data)
 
         recipes_value = response_data['recipes']['results']
-        self.assertIsInstance(recipes_value, list, "'results' attribute is not an list")
+        self.assertIsInstance(recipes_value, list, "'results' attribute is not a list")
         self.assertTrue(len(recipes_value) > 0, "'results' attribute is an empty list")
 
     # Test recipe by id
@@ -126,7 +126,7 @@ class ServerTests(unittest.TestCase):
         result = self.client.get("/recipes/644885/ingredients")
         response_data = json.loads(result.data)
         ingredients_value = response_data['ingredients']
-        self.assertIsInstance(ingredients_value, list, "'ingredients' attribute is not an list")
+        self.assertIsInstance(ingredients_value, list, "'ingredients' attribute is not list")
         self.assertTrue(len(ingredients_value) > 0, "'ingredients' attribute is an empty list")
 
 

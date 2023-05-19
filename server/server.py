@@ -69,7 +69,8 @@ def create_user():
         
         return response, 201
     else:
-        return 'User already exists', 409
+        response = jsonify({'message': 'User already exists'})
+        return response, 409
     
 @app.route("/authenticate", methods=["POST"])
 def authenticate_user():
@@ -105,7 +106,7 @@ def search_recipes():
         response = jsonify({'recipes': recipes})
         return response, 200
     else:
-        return {"Error: 'No recipes found'"}, 404
+        return {'Error': 'No recipes found'}, 404
 
 @app.route("/recipes/<int:recipe_id>")
 def get_recipe(recipe_id):
@@ -135,7 +136,6 @@ def get_recipe_ingredients(recipe_id):
 def get_user_favorites(user_id):
     """Return user favorites"""
 
-    print(session['user']['id'], user_id)
     if 'user' in session and session['user']['id'] == user_id:
         
         favorites_list = []
@@ -202,7 +202,8 @@ def update_favorite(user_id, recipe_id):
                 return response, 201
             
             else:
-                return "Favorite already exists", 409
+                response = jsonify({'message': 'Favorite already exists'})
+                return response, 409
         
         else:
             return "Authentication required", 401
@@ -213,8 +214,6 @@ def update_favorite(user_id, recipe_id):
             
             # get the favorite to be deleted
             favorite_to_delete = crud.remove_favorite(user_id, recipe_id)
-            print("favorite_to_delete in server.py", favorite_to_delete) 
-
 
             if favorite_to_delete:
                 model.db.session.delete(favorite_to_delete)

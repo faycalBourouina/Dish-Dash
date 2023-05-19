@@ -98,7 +98,6 @@ def search_recipes(search):
 
 
         request = f'{uri_recipes}/complexSearch?&query={query}&diet={diet}&cuisine={cuisine}&apiKey={SPOONACULAR_API_KEY}'
-        print(request)
         response = requests.get(request).json()
 
     return response
@@ -279,7 +278,6 @@ def remove_favorite(user_id, recipe_id):
     if MODE == 'TEST_MODE':
 
         existing_favorite = Favorite.query.filter(Favorite.user_id == user_id, Favorite.recipe_id == recipe_id).first()
-        print("favorite_to_delete in crud.py", existing_favorite) 
         if existing_favorite:
             return existing_favorite
         else:
@@ -290,6 +288,9 @@ def get_favorites(user_id):
     """Return user's favorites"""
     if MODE == 'TEST_MODE':
         favorites = Favorite.query.filter(Favorite.user_id == user_id).all()
+        favorites_recipes = Recipe.query.filter(Recipe.id.in_([favorite.recipe_id for favorite in favorites])).all()
+        print("--------------------------------------------------")
+        print("recipes in favorites", favorites_recipes)
         return favorites
 
     # Use real data in production mode to be implemented
