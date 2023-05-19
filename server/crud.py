@@ -233,7 +233,6 @@ def add_favorite_to_recipes(recipe):
     recipe_image = recipe['image']
     recipe_instructions = recipe['instructions']
     recipe_ingredients_list = recipe['ingredients']
-    print("recipe_ingredients_list", recipe_ingredients_list)
 
     recipe = {}
     recipe_ingredients = []
@@ -290,8 +289,15 @@ def remove_favorite(user_id, recipe_id):
 def get_favorites(user_id):
     """Return user's favorites"""
     if MODE == 'TEST_MODE':
-        favorites = Favorite.query.filter(Favorite.user_id == user_id).all()
-        
+        # Query to fetch user favorites
+        user_favorites = Favorite.query.filter(Favorite.user_id == user_id).all()
+
+        # Get the recipe IDs from the user favorites
+        recipe_ids = [favorite.recipe_id for favorite in user_favorites]
+
+        # Fetch the recipes from the recipes table based on the recipe IDs
+        favorites = Recipe.query.filter(Recipe.id.in_(recipe_ids)).all()
+                    
         return favorites
 
     # Use real data in production mode to be implemented
