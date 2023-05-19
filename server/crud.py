@@ -288,9 +288,7 @@ def get_favorites(user_id):
     """Return user's favorites"""
     if MODE == 'TEST_MODE':
         favorites = Favorite.query.filter(Favorite.user_id == user_id).all()
-        favorites_recipes = Recipe.query.filter(Recipe.id.in_([favorite.recipe_id for favorite in favorites])).all()
-        print("--------------------------------------------------")
-        print("recipes in favorites", favorites_recipes)
+
         return favorites
 
     # Use real data in production mode to be implemented

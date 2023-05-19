@@ -1,6 +1,7 @@
 """ Models for the database """
 
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.dialects.postgresql import ARRAY
 from datetime import datetime
 
 db = SQLAlchemy()
@@ -28,6 +29,9 @@ class Recipe(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String)
+    image = db.Column(db.String)
+    ingredients = db.Column(ARRAY(db.String))
+    instructions = db.Column(db.text)
     kisses = db.Column(db.Integer , default=1)
 
 

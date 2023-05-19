@@ -148,6 +148,7 @@ def get_user_favorites(user_id):
             favorite_dict = sqlalchemy_obj_to_dict(favorite)
             favorites_list.append(favorite_dict)
         
+        print("recipes in favorites_list: ", favorites_list)
         response = jsonify({'favorites': favorites_list})
 
         return response, 200
