@@ -12,7 +12,13 @@ function Layout({ isLogged }) {
         const { recipes: { results } } = data;
         setSelectedRecipe(null); // clear the selected recipe
         setRecipes(results);
+        setActiveTab("search"); // switch to the search tab
+        console.log("activeTab after search", activeTab)  // activeTab is now "search"
     }
+
+  function handleSelectedRecipe () {
+    (selectedRecipe && activeTab === "search") && setSelectedRecipe(null);
+  } 
 
     async function handleUpdateFavorites() {
       const userId = isLogged;
@@ -90,14 +96,18 @@ function Layout({ isLogged }) {
           <SearchForm onSearch={handleSearch} />
           <div>
             {selectedRecipe ? (
-              <RecipeDetails 
+              <RecipeDetails
                 recipe={selectedRecipe}
+                activeTab={activeTab}
                 handleUpdateFavorites={handleUpdateFavorites}
-                />
+                recipesLength = {recipes.length}
+                handleSelectedRecipe = {handleSelectedRecipe}
+               />
             ) : (
               <RecipeList 
-                recipes={recipes} 
-                onRecipeClick={handleRecipeClick} 
+                recipes={recipes}
+                activeTab={activeTab}
+                onRecipeClick={handleRecipeClick}
               />
             )}
           </div>

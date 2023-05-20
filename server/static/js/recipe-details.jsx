@@ -1,7 +1,13 @@
-function RecipeDetails({ recipe, handleUpdateFavorites }) {
-  
+function RecipeDetails({ recipe, activeTab, handleUpdateFavorites, recipesLength, handleSelectedRecipe}) {
+  console.log("recipes length", recipesLength);
   return (
     <div>
+      {
+        activeTab === "search" && (
+        <h3 onClick={() => handleSelectedRecipe()}>
+          {recipesLength} {recipesLength === 1 ? "recipe" : "recipes"} found
+        </h3>)
+      }
       <h2>{recipe.title}</h2>
       <img src={recipe.image} alt={recipe.title} />
       <h3>Ingredients:</h3>
