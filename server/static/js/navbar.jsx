@@ -1,13 +1,8 @@
-function Navbar({ isLogged, setActiveTab, setSelectedRecipe }) {
+function Navbar({ isLogged, handleLogin, handleLogout, setActiveTab, setSelectedRecipe }) {
   
   const handleTabClick = (tab) => {
     setActiveTab(tab);
     setSelectedRecipe(null); // Clear the selected recipe
-  };
-
-  const handleLogin = (email, password) => {
-    console.log('Logging in with email:', email);
-    console.log('Logging in with password:', password);
   };
 
   return (

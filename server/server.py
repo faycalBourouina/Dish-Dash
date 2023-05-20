@@ -93,6 +93,14 @@ def authenticate_user():
     else:
         return 'Authentication failed', 401
 
+
+@app.route("/logout")
+def logout():
+    session.clear()
+    print(session)
+    response = jsonify({'message': 'Logged out successfully'})
+    return response, 200
+
 @app.route("/search")
 def search_recipes():
     """Search for recipes"""
