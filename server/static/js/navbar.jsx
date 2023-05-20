@@ -13,7 +13,7 @@ function Navbar({ isLogged, handleLogin, handleLogout, setActiveTab, setSelected
             Home
           </a>
         </li>
-        {!isLogged ? (
+        {isLogged ? (
           <>
             <li>
               <a onClick={() => handleTabClick("favorites")}>
@@ -21,7 +21,9 @@ function Navbar({ isLogged, handleLogin, handleLogout, setActiveTab, setSelected
                 </a>
             </li>
             <li>
-              <button>Logout</button>
+              <button onClick={handleLogout}>
+                Logout
+              </button>
             </li>
           </>
         ) : (

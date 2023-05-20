@@ -1,16 +1,28 @@
 const { useState } = React;
 
-function App({ isLogged }) {
+function App({ userId }) {
 
+  const [isLogged, setIsLogged] = useState(userId);
+  
   const handleLogin = (email, password) => {
     console.log('Logging in with email:', email);
     console.log('Logging in with password:', password);
   };
+  
+  const handleLogout = async () => {
+    try {
+      const response = await fetch('/logout');
+      const data = await response.json();
+      console.log(data.message); // Print the logout message
 
-  const handleLogout = () => {
-    console.log('Logging out');
+      // Update the isLogged state
+      setIsLogged(null);
+
+    } catch (error) {
+      console.error('Failed to logout:', error);
+      // Handle any errors that occurred during logout
+    }
   };
-
 
   return (
     <div>

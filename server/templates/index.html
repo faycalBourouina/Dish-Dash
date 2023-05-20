@@ -14,7 +14,7 @@
     <script>
       // Access the userSession value from Flask and assign it to a JavaScript variable
       {% if session['user'] %}
-        var isLogged = {{session['user']['id']}}
+        var userId = {{session['user']['id']}} || null;
       {% else %}
         var isLogged = null;
       {% endif %}
@@ -29,7 +29,7 @@
     <script type="text/babel" src="/static/js/app.jsx"></script>
 
     <script type="text/babel">
-      ReactDOM.render(<App isLogged={isLogged} />, document.getElementById('root'));
+      ReactDOM.render(<App userId={userId} />, document.getElementById('root'));
     </script>
   </body>
 </html>
