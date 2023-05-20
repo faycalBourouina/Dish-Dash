@@ -1,19 +1,29 @@
 function Navbar({ isLogged, setActiveTab, setSelectedRecipe }) {
+  
   const handleTabClick = (tab) => {
     setActiveTab(tab);
     setSelectedRecipe(null); // Clear the selected recipe
+  };
+
+  const handleLogin = (email, password) => {
+    console.log('Logging in with email:', email);
+    console.log('Logging in with password:', password);
   };
 
   return (
     <nav>
       <ul>
         <li>
-          <a onClick={() => handleTabClick("home")}>Home</a>
+          <a onClick={() => handleTabClick("home")}>
+            Home
+          </a>
         </li>
-        {isLogged ? (
+        {!isLogged ? (
           <>
             <li>
-              <a onClick={() => handleTabClick("favorites")}>Favorites</a>
+              <a onClick={() => handleTabClick("favorites")}>
+                Favorites
+                </a>
             </li>
             <li>
               <button>Logout</button>
@@ -22,7 +32,7 @@ function Navbar({ isLogged, setActiveTab, setSelectedRecipe }) {
         ) : (
           <>
             <li>
-              <button>Login</button>
+              <LoginForm handleLogin={handleLogin} />
             </li>
             <li>
               <button>Sign Up</button>
