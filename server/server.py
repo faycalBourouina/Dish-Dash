@@ -79,6 +79,8 @@ def authenticate_user():
     password = request.form.get('password')
     email = request.form.get('email')
 
+    print("credentials", email, password)
+
     user_obj = crud.authenticate(email, password)
 
     if user_obj:
@@ -97,7 +99,6 @@ def authenticate_user():
 @app.route("/logout")
 def logout():
     session.clear()
-    print(session)
     response = jsonify({'message': 'Logged out successfully'})
     return response, 200
 

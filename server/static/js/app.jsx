@@ -3,11 +3,26 @@ const { useState } = React;
 function App({ userId }) {
 
   const [isLogged, setIsLogged] = useState(userId);
-  
-  const handleLogin = (email, password) => {
-    console.log('Logging in with email:', email);
-    console.log('Logging in with password:', password);
-  };
+
+  const handleLogin = async (email, password) => {
+    console.log('Logging in with', email, password)
+    try {
+      const response = await fetch('/authenticate', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: new URLSearchParams({
+          email,
+          password
+        })
+      });
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
   
   const handleLogout = async () => {
     try {
@@ -20,7 +35,6 @@ function App({ userId }) {
 
     } catch (error) {
       console.error('Failed to logout:', error);
-      // Handle any errors that occurred during logout
     }
   };
 
