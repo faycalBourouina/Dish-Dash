@@ -5,7 +5,7 @@ function App({ userId }) {
   const [isLogged, setIsLogged] = useState(userId);
 
   const handleLogin = async (email, password) => {
-    console.log('Logging in with', email, password)
+    console.log("Logging in with", email, password)
     try {
       const response = await fetch('/authenticate', {
         method: 'POST',
@@ -23,6 +23,37 @@ function App({ userId }) {
       setIsLogged(id);
     } catch (error) {
       console.error(error);
+    }
+  }
+
+  const handleSignup = async (email, password) => {
+    console.log("signing up with", email, password)
+    try {
+      const response = await fetch('/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: new URLSearchParams({
+          email,
+          password
+        })
+      });
+  
+      if (response.ok) {
+        const data = await response.json();
+        const { user: { id } } = data;
+        console.log('Signed up as', id);
+        setIsLogged(id);
+
+      } else if (response.status === 409) {
+        const data = await response.json();
+        console.log('Signup failed:', data.message);
+      } else {
+        console.log('Signup failed with error:', response.status);
+      }
+    } catch (error) {
+      console.error('Failed to signup:', error);
     }
   }
   
@@ -43,7 +74,7 @@ function App({ userId }) {
   return (
     <div>
       <div className="container">
-      <Layout isLogged={isLogged} handleLogin={handleLogin} handleLogout={handleLogout} />
+      <Layout isLogged={isLogged} handleLogin={handleLogin} handleSignup={handleSignup} handleLogout={handleLogout}  />
       </div>
     </div>
   );

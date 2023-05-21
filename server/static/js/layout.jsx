@@ -1,6 +1,6 @@
 const { useState, useEffect } = React;
 
-function Layout({ isLogged , handleLogin, handleLogout }) {
+function Layout({ isLogged , handleLogin, handleSignup, handleLogout }) {
     const [activeTab, setActiveTab] = React.useState("home");
     const [recipes, setRecipes] = React.useState([]);
     const [selectedRecipe, setSelectedRecipe] = React.useState(null);
@@ -93,8 +93,9 @@ function Layout({ isLogged , handleLogin, handleLogout }) {
       <div>
         <div className="container">
           <Navbar 
-            isLogged={isLogged} 
+            isLogged={isLogged}
             handleLogin={handleLogin}
+            handleSignup={handleSignup}
             handleLogout={handleLogout}
             setActiveTab={setActiveTab} 
             setSelectedRecipe={setSelectedRecipe} 

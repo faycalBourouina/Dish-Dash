@@ -1,4 +1,4 @@
-function Navbar({ isLogged, handleLogin, handleLogout, setActiveTab, setSelectedRecipe }) {
+function Navbar({ isLogged, handleLogin, handleSignup, handleLogout, setActiveTab, setSelectedRecipe }) {
   
   const handleTabClick = (tab) => {
     setActiveTab(tab);
@@ -29,10 +29,7 @@ function Navbar({ isLogged, handleLogin, handleLogout, setActiveTab, setSelected
         ) : (
           <>
             <li>
-              <AuthForm handleLogin={handleLogin} />
-            </li>
-            <li>
-              <button>Sign Up</button>
+              <AuthForm handleLogin={handleLogin} handleSignup={handleSignup}/>
             </li>
           </>
         )}
