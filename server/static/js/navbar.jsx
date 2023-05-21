@@ -29,7 +29,7 @@ function Navbar({ isLogged, handleLogin, handleLogout, setActiveTab, setSelected
         ) : (
           <>
             <li>
-              <LoginForm handleLogin={handleLogin} />
+              <AuthForm handleLogin={handleLogin} />
             </li>
             <li>
               <button>Sign Up</button>

@@ -1,4 +1,4 @@
-function RecipeDetails({ recipe, activeTab, handleUpdateFavorites, recipesLength, handleSelectedRecipe}) {
+function RecipeDetails({ isLogged, recipe, activeTab, handleUpdateFavorites, recipesLength, handleSelectedRecipe}) {
   console.log("recipes length", recipesLength);
   return (
     <div>

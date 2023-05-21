@@ -1,6 +1,6 @@
 const { useState } = React;
 
-function LoginForm({ handleLogin }) {
+function AuthForm({ handleLogin }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
   

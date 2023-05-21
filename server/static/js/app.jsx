@@ -18,7 +18,9 @@ function App({ userId }) {
         })
       });
       const data = await response.json();
-      console.log(data);
+      const { user: { id } } = data;
+      console.log('Logged in as', id);
+      setIsLogged(id);
     } catch (error) {
       console.error(error);
     }

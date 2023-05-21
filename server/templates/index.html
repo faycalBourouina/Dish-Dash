@@ -14,13 +14,14 @@
     <script>
       // Access the userSession value from Flask and assign it to a JavaScript variable
       {% if session['user'] %}
-        var userId = {{session['user']['id']}} || null;
+        var userId = {{session['user']['id']}};
+        console.log("userId: ", userId);
       {% else %}
-        var isLogged = null;
+        var userId = null;
       {% endif %}
     </script>
 
-    <script type="text/babel" src="/static/js/login-form.jsx"></script>
+    <script type="text/babel" src="/static/js/auth-form.jsx"></script>
     <script type="text/babel" src="/static/js/navbar.jsx"></script>
     <script type="text/babel" src="/static/js/search-form.jsx"></script>
     <script type="text/babel" src="/static/js/recipe-list.jsx"></script>

@@ -104,6 +104,7 @@ function Layout({ isLogged , handleLogin, handleLogout }) {
           <div>
             {selectedRecipe ? (
               <RecipeDetails
+                isLogged={isLogged}
                 recipe={selectedRecipe}
                 activeTab={activeTab}
                 handleUpdateFavorites={handleUpdateFavorites}
@@ -111,7 +112,7 @@ function Layout({ isLogged , handleLogin, handleLogout }) {
                 handleSelectedRecipe = {handleSelectedRecipe}
                />
             ) : (
-              <RecipeList 
+              <RecipeList
                 recipes={recipes}
                 activeTab={activeTab}
                 onRecipeClick={handleRecipeClick}
