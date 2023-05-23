@@ -139,7 +139,7 @@ def get_recipe_ingredients(recipe_id):
         return "{Error: 'No ingredients found'}", 404
     
 @app.route("/recipes/<int:recipe_id>/groceries")
-def get_recipe_groceries(recipe_id):
+def get_walmart_items(recipe_id):
     """Return recipe groceries items"""
 
     groceries = crud.get_walmart_items(recipe_id)

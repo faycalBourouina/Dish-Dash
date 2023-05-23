@@ -1698,6 +1698,198 @@
                 ]
             }
         ]
+    },
+    "walmart_items": {
+        "query": "http://localhost:5000/recipes/644885/groceries",
+        "response": {
+            "chickpea flour": {
+                "fulfillment": {
+                    "delivery_from_store": true,
+                    "pickup": true,
+                    "shipping": true,
+                    "shipping_days": 1
+                },
+                "inventory": {
+                    "in_stock": true,
+                    "preorder": false
+                },
+                "offers": {
+                    "is_marketplace_item": false,
+                    "primary": {
+                        "currency_symbol": "$",
+                        "id": "E7CB75BBDD80479394F130E4114F9BA3",
+                        "price": 2.24,
+                        "seller": {
+                            "id": "F55CDC31AB754BB68FE0B39041159D63",
+                            "name": "Walmart.com"
+                        }
+                    }
+                },
+                "position": 1,
+                "product": {
+                    "best_seller": true,
+                    "images": [
+                        "https://i5.walmartimages.com/asr/923d0601-6244-48e0-88fd-1d8202b07415.22f35763ff12f4f0f3f47ae48963864c.jpeg?odnHeight=180&odnWidth=180&odnBg=ffffff"
+                    ],
+                    "item_id": "10403017",
+                    "link": "https://www.walmart.com/ip/Great-Value-All-Purpose-Flour-5LB-Bag/10403017?fulfillmentIntent=In-store&athbdg=L1600",
+                    "main_image": "https://i5.walmartimages.com/asr/923d0601-6244-48e0-88fd-1d8202b07415.22f35763ff12f4f0f3f47ae48963864c.jpeg?odnHeight=180&odnWidth=180&odnBg=ffffff",
+                    "product_id": "1B36SFRSNXFK",
+                    "rating": 4.3,
+                    "ratings_total": 890,
+                    "title": "Great Value All-Purpose Flour, 5LB Bag"
+                }
+            },
+            "ener-g egg replacer": {
+                "fulfillment": {
+                    "delivery_from_store": true,
+                    "pickup": true,
+                    "shipping": false
+                },
+                "inventory": {
+                    "in_stock": true,
+                    "preorder": false
+                },
+                "offers": {
+                    "is_marketplace_item": false,
+                    "primary": {
+                        "currency_symbol": "$",
+                        "id": "D4CE70BE88604785875DEAAB3AE3EE7D",
+                        "price": 3.86,
+                        "seller": {
+                            "id": "F55CDC31AB754BB68FE0B39041159D63",
+                            "name": "Walmart.com"
+                        }
+                    }
+                },
+                "position": 1,
+                "product": {
+                    "description": "<li>Organic</li><li>ALA omega 3 supports cardiovascular health</li><li>Gluten free</li>",
+                    "images": [
+                        "https://i5.walmartimages.com/asr/cff3a65b-053d-47ba-83da-9e01061dadd0.eca5b60c8497cbcb2fefc2d23067fa6d.jpeg?odnHeight=180&odnWidth=180&odnBg=ffffff"
+                    ],
+                    "item_id": "32794161",
+                    "link": "https://www.walmart.com/ip/Badia-Organic-Ground-Flax-Seed-16-Oz/32794161?fulfillmentIntent=In-store",
+                    "main_image": "https://i5.walmartimages.com/asr/cff3a65b-053d-47ba-83da-9e01061dadd0.eca5b60c8497cbcb2fefc2d23067fa6d.jpeg?odnHeight=180&odnWidth=180&odnBg=ffffff",
+                    "product_id": "6K5Z0KSOAFYH",
+                    "rating": 0,
+                    "ratings_total": 0,
+                    "title": "Badia Organic Ground Flax Seed, 16 Oz"
+                }
+            },
+            "potato starch": {
+                "fulfillment": {
+                    "delivery_from_store": true,
+                    "pickup": true,
+                    "shipping": false
+                },
+                "inventory": {
+                    "in_stock": true,
+                    "preorder": false
+                },
+                "offers": {
+                    "is_marketplace_item": false,
+                    "primary": {
+                        "currency_symbol": "$",
+                        "id": "80F522B6769E49529C9C220287C52576",
+                        "price": 5.34,
+                        "seller": {
+                            "id": "F55CDC31AB754BB68FE0B39041159D63",
+                            "name": "Walmart.com"
+                        }
+                    }
+                },
+                "position": 1,
+                "product": {
+                    "description": "<li>Sweet and savory</li><li>All natural</li><li>No cholesterol</li>",
+                    "images": [
+                        "https://i5.walmartimages.com/asr/95a172dd-988b-45c7-9303-90387d895121_1.6f3ea03c590d314918a59270c7c2eaeb.jpeg?odnHeight=180&odnWidth=180&odnBg=FFFFFF"
+                    ],
+                    "item_id": "15716883",
+                    "link": "https://www.walmart.com/ip/Alexia-Sweet-Potato-Fries-with-Sea-Salt-Non-GMO-Ingredients-20-oz-Frozen/15716883?fulfillmentIntent=In-store",
+                    "main_image": "https://i5.walmartimages.com/asr/95a172dd-988b-45c7-9303-90387d895121_1.6f3ea03c590d314918a59270c7c2eaeb.jpeg?odnHeight=180&odnWidth=180&odnBg=FFFFFF",
+                    "product_id": "4LBZ9D2PFZBA",
+                    "rating": 0,
+                    "ratings_total": 0,
+                    "title": "Alexia Sweet Potato Fries with Sea Salt, Non-GMO Ingredients, 20 oz (Frozen)"
+                }
+            },
+            "salt and pepper": {
+                "fulfillment": {
+                    "delivery_from_store": true,
+                    "pickup": true,
+                    "shipping": false
+                },
+                "inventory": {
+                    "in_stock": true,
+                    "preorder": false
+                },
+                "offers": {
+                    "is_marketplace_item": false,
+                    "primary": {
+                        "currency_symbol": "$",
+                        "id": "3E6D9B749AF441518A7BF0917C023228",
+                        "price": 1.43,
+                        "seller": {
+                            "id": "F55CDC31AB754BB68FE0B39041159D63",
+                            "name": "Walmart.com"
+                        }
+                    }
+                },
+                "position": 1,
+                "product": {
+                    "description": "<li>Morton Iodized Table Salt is an all-purpose salt perfect for everything from cooking and baking to filling the shakers on your table. Simplify your time in the kitchen with Morton Iodized Table</li>",
+                    "images": [
+                        "https://i5.walmartimages.com/asr/1ac9bdb7-d39d-4733-bf77-614aadb1a6a6.b660a62fb8ac6979f8c9868f8b4fed7b.jpeg?odnHeight=180&odnWidth=180&odnBg=ffffff"
+                    ],
+                    "item_id": "10448936",
+                    "link": "https://www.walmart.com/ip/Morton-Salt-Iodized-26-Ounce/10448936?fulfillmentIntent=In-store",
+                    "main_image": "https://i5.walmartimages.com/asr/1ac9bdb7-d39d-4733-bf77-614aadb1a6a6.b660a62fb8ac6979f8c9868f8b4fed7b.jpeg?odnHeight=180&odnWidth=180&odnBg=ffffff",
+                    "product_id": "4TWQPCP5V1XF",
+                    "rating": 4.6,
+                    "ratings_total": 1112,
+                    "title": "Morton Salt, Iodized, 26 Ounce"
+                }
+            },
+            "yukon gold potatoes": {
+                "fulfillment": {
+                    "delivery_from_store": true,
+                    "pickup": true,
+                    "shipping": false
+                },
+                "inventory": {
+                    "in_stock": true,
+                    "preorder": false
+                },
+                "offers": {
+                    "is_marketplace_item": false,
+                    "primary": {
+                        "currency_symbol": "$",
+                        "id": "9B3E72A50C8A4A35909C37BA013639B1",
+                        "price": 1.44,
+                        "seller": {
+                            "id": "F55CDC31AB754BB68FE0B39041159D63",
+                            "name": "Walmart.com"
+                        }
+                    }
+                },
+                "position": 1,
+                "product": {
+                    "description": "<li>Made with 100% Real Idaho potatoes</li><li>Naturally Gluten-Free</li><li>Includes 10 (4.1oz) pouches, 48 servings</li><li>Easy and quick to preparesimply add water and ready in 4 minutes</li>",
+                    "images": [
+                        "https://i5.walmartimages.com/asr/282c6abc-53f7-4f9c-bd44-7126069ccb11.fbeaa692b702575fd326a77fb5540ddd.jpeg?odnHeight=180&odnWidth=180&odnBg=ffffff"
+                    ],
+                    "item_id": "13399212",
+                    "link": "https://www.walmart.com/ip/Idahoan-Buttery-Golden-Selects-Mashed-Potatoes-4-1-oz-Pouch/13399212?fulfillmentIntent=In-store",
+                    "main_image": "https://i5.walmartimages.com/asr/282c6abc-53f7-4f9c-bd44-7126069ccb11.fbeaa692b702575fd326a77fb5540ddd.jpeg?odnHeight=180&odnWidth=180&odnBg=ffffff",
+                    "product_id": "1ZKC3YE2EVZB",
+                    "rating": 0,
+                    "ratings_total": 0,
+                    "title": "Idahoan Buttery Golden Selects Mashed Potatoes, 4.1 oz Pouch"
+                }
+            }
+
+        }
     }
 
 }

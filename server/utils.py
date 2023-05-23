@@ -14,3 +14,21 @@ def is_valid_upc(upc):
         return True
     else:
         return False
+
+def get_groceries_upcs(groceries):
+    """Get groceries upcs"""
+
+    # Get groceries items from recipe ingredients
+    #groceries = map_ingredients_groceries(recipe_id)
+    products = {}
+
+    if groceries:
+        for item in groceries:
+            for product in item["products"]:
+                upc = product["upc"]
+                if is_valid_upc(upc):
+                    original_name = item["originalName"]
+                    if original_name not in products:
+                        products[original_name] = []
+                    products[original_name].append(upc)
+    return products
