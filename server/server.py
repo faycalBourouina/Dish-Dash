@@ -78,8 +78,6 @@ def authenticate_user():
     password = request.form.get('password')
     email = request.form.get('email')
 
-    print("credentials", email, password)
-
     user_obj = crud.authenticate(email, password)
 
     if user_obj:
@@ -139,6 +137,18 @@ def get_recipe_ingredients(recipe_id):
         return response, 200
     else:
         return "{Error: 'No ingredients found'}", 404
+    
+@app.route("/recipes/<int:recipe_id>/groceries")
+def get_recipe_groceries(recipe_id):
+    """Return recipe groceries items"""
+
+    groceries = crud.get_walmart_items(recipe_id)
+    response = jsonify({'groceries': groceries})
+    
+    if response:
+        return response, 200
+    else:
+        return "{Error: 'No groceries found'}", 404
     
 @app.route("/users/<int:user_id>/favorites")
 def get_user_favorites(user_id):

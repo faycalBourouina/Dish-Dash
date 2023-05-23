@@ -210,6 +210,25 @@ class DBTests(unittest.TestCase):
         self.assertIn('id', response_data['user'])  # Check if 'id' key is present within 'user'
         self.assertEqual(response_data['user']['id'], 1, "'id' attribute should be 1") # Check if 'id' value is 1
     
+
+    # Test logout
+    def test_logout_status_code_success(self):
+        """Test logout status code if successful"""
+
+        # Login as a user first (you can modify this based on your login implementation)
+        self.client.post("/authenticate", data={"email": "user1@example.com", "password": "password1"})
+
+        # Perform logout
+        result = self.client.get("/logout")
+
+        # Assert the response status code is 200
+        self.assertEqual(result.status_code, 200)
+
+        # Assert the response contains the expected data
+        response_data = json.loads(result.data)
+        self.assertIn('message', response_data)
+        self.assertEqual(response_data['message'], 'Logged out successfully')
+        
     # Test user favorites recipes
     def test_favorites_status_code_success(self):
         """Test favorites status code if successful"""

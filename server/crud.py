@@ -1,4 +1,5 @@
 from model import db, User, Recipe, Favorite, Ingredient, RecipeIngredient, connect_to_db
+from utils import is_valid_upc
 from datetime import datetime
 
 import requests
@@ -11,11 +12,12 @@ import json
 load_dotenv()
 
 SPOONACULAR_API_KEY = os.getenv("SPOONACULAR_API_KEY")
+BLUECART_API_KEY = os.getenv("BLUECART_API_KEY")
 MODE = os.getenv("MODE")
 
 # The base uri for the spoonacular recipes API
 uri_recipes = f'https://api.spoonacular.com/recipes'
-
+uri_walmart_items = 'https://api.bluecartapi.com/request'
 # mock API data for testing
 with open('data/mock_api.json') as f:
     mock_data = json.load(f)
@@ -172,8 +174,61 @@ def get_recipe_ingredients(recipe_id):
     else:
         return None
     
+def map_ingredients_groceries(recipe_id):
+    """Map recipe ingredients to groceries"""
+    
+    # Getting recipe ingredients 
+    ingredients = get_recipe_ingredients(recipe_id)
+
+    # If ingredients exist, get groceries items
+    if ingredients:
+
+        # Get the ingredient names
+        ingredient_names = [ingredient['name'] for ingredient in ingredients]
+
+        if MODE == 'TEST_MODE':
+            # Use mock data in test mode
+            response = mock_data['ingredients_groceries']['response']
+            return response
+        
+        else:
+            # Map ingredients to groceries
+            url = f'https://api.spoonacular.com/food/ingredients/map?apiKey={SPOONACULAR_API_KEY}'
+            headers = {
+                "Content-Type": "application/json"
+            }
+            data = {
+                "ingredients": ingredient_names,
+            }
+            response = requests.post(url, headers=headers, json=data).json()
+
+            return response
+    else:
+
+        return None
+
+def get_walmart_items(recipe_id):
+    """Get Walmart items from recipe groceries"""
+
+    # Get groceries items from recipe ingredients
+    groceries = map_ingredients_groceries(recipe_id)
+    products = {}
+
+    if groceries:
+        for item in groceries:
+            for product in item["products"]:
+                upc = product["upc"]
+                if is_valid_upc(upc):
+                    original_name = item["originalName"]
+                    if original_name not in products:
+                        products[original_name] = []
+                    products[original_name].append(upc)
+    print(products)    
+    return products
+
 def add_recipe_ingredients(recipe):
     """Add recipe ingredients to the ingredients table and the recipes_ingredients association table"""
+
     recipe_id = recipe.id
     # Then get the recipe ingredients to create ingredient objects
     ingredients = get_recipe_ingredients(recipe_id)

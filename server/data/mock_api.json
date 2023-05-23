@@ -1238,5 +1238,466 @@
           ]
         }
       ]
+    },
+    "ingredients_groceries": {
+        "query": "localhost:3000/recipes/<recipe_id>/groceries",
+        "response": [
+            {
+                "ingredientImage": "potatoes-yukon-gold.png",
+                "meta": [
+                    "yukon_gold_potato"
+                ],
+                "original": "yukon gold potatoes",
+                "originalName": "yukon gold potatoes",
+                "products": [
+                    {
+                        "id": 4668974,
+                        "title": "Boomer Gold Potatoes, 1.5 Lb.",
+                        "upc": "walmart_product_979258270"
+                    },
+                    {
+                        "id": 629079,
+                        "title": "Tasteful Selections Honey Gold Potatoes, 24 Oz.",
+                        "upc": "826088581107"
+                    },
+                    {
+                        "id": 3941516,
+                        "title": "Guarantee Brand Yukon Gold Potatoes, 3 Lb.",
+                        "upc": "walmart_product_42700530"
+                    },
+                    {
+                        "id": 413236,
+                        "title": "Ahold Gold Potatoes",
+                        "upc": "688267031915"
+                    },
+                    {
+                        "id": 181963,
+                        "title": "Ahold Gold Potatoes",
+                        "upc": "688267012716"
+                    },
+                    {
+                        "id": 408230,
+                        "title": "Top Brass Organic Gold Potatoes",
+                        "upc": "850503002106"
+                    },
+                    {
+                        "id": 6882804,
+                        "title": "Petite Gold Potatoes, 1.5 lbs",
+                        "upc": "walmart_product_192661689"
+                    },
+                    {
+                        "id": 4560236,
+                        "title": "Petite Gold Potatoes, 1.5 lbs",
+                        "upc": "walmart_product_198941422"
+                    },
+                    {
+                        "id": 6548494,
+                        "title": "Petite Gold Potatoes, 1.5 lbs",
+                        "upc": "walmart_product_234187601"
+                    },
+                    {
+                        "id": 4570676,
+                        "title": "Petite Gold Potatoes, 1.5 lbs",
+                        "upc": "walmart_product_186382551"
+                    },
+                    {
+                        "id": 5570544,
+                        "title": "Petite Gold Potatoes, 1.5 lbs",
+                        "upc": "walmart_product_166612705"
+                    },
+                    {
+                        "id": 186793,
+                        "title": "Fresh from the Start Yellow-Gold Potatoes",
+                        "upc": "033383533100"
+                    },
+                    {
+                        "id": 175411,
+                        "title": "Simply Spuds Steamables Golden Potatoes",
+                        "upc": "012289520063"
+                    },
+                    {
+                        "id": 412731,
+                        "title": "Nature's Promise Organic Golden Potatoes",
+                        "upc": "688267170904"
+                    },
+                    {
+                        "id": 3775070,
+                        "title": "Melissa's Ruby Gold Potatoes, 1.5 Lb.",
+                        "upc": "walmart_product_42408863"
+                    },
+                    {
+                        "id": 3592710,
+                        "title": "Simply Spuds Steamables Golden Potatoes, 1 lb",
+                        "upc": "walmart_product_604131849"
+                    },
+                    {
+                        "id": 5713352,
+                        "title": "Tasteful Selections Microwave Honey Gold Potatoes, 24 oz",
+                        "upc": "walmart_product_187811625"
+                    },
+                    {
+                        "id": 5238326,
+                        "title": "Alexia Roasted & Ready Baby Golden Potatoes with Himalayan Salt 12/16oz",
+                        "upc": "834183007712"
+                    },
+                    {
+                        "id": 3851760,
+                        "title": "Marketside Yukon Gold mMashed Potatoes, 21 oz",
+                        "upc": "walmart_product_130619012"
+                    },
+                    {
+                        "id": 6905812,
+                        "title": "Great Value Roasted Yukon Gold & Redskin Potato Blend, 12 oz",
+                        "upc": "walmart_product_767295813"
+                    }
+                ]
+            },
+            {
+                "ingredientImage": "white-powder.jpg",
+                "meta": [
+                    "ener_g_egg_replacer"
+                ],
+                "original": "ener-g egg replacer",
+                "originalName": "ener-g egg replacer",
+                "products": [
+                    {
+                        "id": 195386,
+                        "title": "Ener-G Egg Replacer, 16 oz (Pack of 6)",
+                        "upc": "030684986710"
+                    }
+                ]
+            },
+            {
+                "ingredientImage": "chickpea-flour-or-another-gluten-free-flour.jpg",
+                "meta": [
+                    "chickpea_flour"
+                ],
+                "original": "chickpea flour",
+                "originalName": "chickpea flour",
+                "products": [
+                    {
+                        "id": 5498676,
+                        "title": "Garbanzo Chickpea Flour, 16 Ounce,1 Pound (Pack Of 1)",
+                        "upc": "walmart_product_1680667944"
+                    },
+                    {
+                        "id": 4762164,
+                        "title": "Flours & Meals Organics Chickpea Flour, 10Oz Organic, 10 Ounce, 0",
+                        "upc": "walmart_product_1926401387"
+                    },
+                    {
+                        "id": 4541030,
+                        "title": "Spicy World Besan F",
+                        "upc": "692991401340"
+                    },
+                    {
+                        "id": 580821,
+                        "title": "Sprouted Garbanzo Flour - 24 oz (680 Grams) by Pure Living",
+                        "upc": "037247020812"
+                    },
+                    {
+                        "id": 5765676,
+                        "title": "Chickpea Flour | Garbanzo Bean Flour | 9 LBS",
+                        "upc": "858931003146"
+                    },
+                    {
+                        "id": 5037772,
+                        "title": "Bob's Red Mill, Chickpea Flour, 16 oz",
+                        "upc": "291000203182"
+                    },
+                    {
+                        "id": 682875,
+                        "title": "Just About Foods Organic Chickpea Flour 1 lb",
+                        "upc": "850004143001"
+                    },
+                    {
+                        "id": 5335996,
+                        "title": "Rani Chana Besan (Chickpeas Flour, Gram) 400oz (25lbs) 11.36kg Bulk Box ~ All Natural | Vegan | Gluten Friendly | NON-GMO | Indian Origin",
+                        "upc": "680901198145"
+                    },
+                    {
+                        "id": 87276,
+                        "title": "Bob's Red Mill Garbanzo Bean Flour",
+                        "upc": "039978003324"
+                    },
+                    {
+                        "id": 4447014,
+                        "title": "Bob's Red Mill Garbanzo Bean Flour, 16 oz",
+                        "upc": "665609409083"
+                    },
+                    {
+                        "id": 4466576,
+                        "title": "Bob's Red Mill Garbanzo Bean Flour, 16 oz (3-Pack)",
+                        "upc": "665609409106"
+                    },
+                    {
+                        "id": 3981916,
+                        "title": "Bob's Red Mill Stone Ground Garbanzo Bean Flour, 12 oz, 4 pack",
+                        "upc": "walmart_product_55351484"
+                    },
+                    {
+                        "id": 4465552,
+                        "title": "Namaste Foods, Gluten Free, Organic, Garbanzo Bean Flour, 16 oz. Bag",
+                        "upc": "850403000486"
+                    },
+                    {
+                        "id": 3832392,
+                        "title": "Bob's Red Mill Stone Ground Garbanzo Bean Flour, 22 oz (Pack of 4)",
+                        "upc": "walmart_product_17339993"
+                    },
+                    {
+                        "id": 4744948,
+                        "title": "(2 Pack) Namaste Foods Raw Goods Gluten Free Organic Garbanzo Bean Flour, 16 oz Pack of 6",
+                        "upc": "walmart_product_1162819387"
+                    },
+                    {
+                        "id": 6365526,
+                        "title": "Garbanzo Bean Flour, Non-GMO Verified, 4 Pounds — Kosher, Raw, Vegan — by Food to Live",
+                        "upc": "810054366614"
+                    },
+                    {
+                        "id": 4055864,
+                        "title": "Garbanzo Bean Flour 1 lb - Non-GMO, Vegan, Made in USA - Great for Making Tortillas, Socca, Banana Bread, and Chickpea Fritters - Gluten-Free and Nut-Free",
+                        "upc": "468985443463"
+                    },
+                    {
+                        "id": 4229062,
+                        "title": "Bobs Red Mill Chickpea Flour, 16 Ounce -- 4 per case.",
+                        "upc": "walmart_product_1821563697"
+                    },
+                    {
+                        "id": 192177,
+                        "title": "Durbar Besan Flour, 2 lb (Pack of 10)",
+                        "upc": "030684882463"
+                    },
+                    {
+                        "id": 5711824,
+                        "title": "Navitas Organics Organic Chickpea Flour 10 oz Pwdr",
+                        "upc": "811961022839"
+                    }
+                ]
+            },
+            {
+                "ingredientImage": "white-powder.jpg",
+                "meta": [
+                    "potato_starch"
+                ],
+                "original": "potato starch",
+                "originalName": "potato starch",
+                "products": [
+                    {
+                        "id": 3996866,
+                        "title": "Potato Starch 4oz (113 Grams)",
+                        "upc": "783120217571"
+                    },
+                    {
+                        "id": 3928868,
+                        "title": "Potato Starch by Its Delish, 2 lbs",
+                        "upc": "799137508038"
+                    },
+                    {
+                        "id": 3981910,
+                        "title": "Potato Starch by Its Delish, 10 Oz. Medium Jar",
+                        "upc": "799137508014"
+                    },
+                    {
+                        "id": 3550876,
+                        "title": "Streit's Potato Starch, 12 oz, (Pack of 12)",
+                        "upc": "030684353451"
+                    },
+                    {
+                        "id": 3648978,
+                        "title": "JFC Katakuriko Potato Starch, 12 Ounce",
+                        "upc": "870972006870"
+                    },
+                    {
+                        "id": 3871142,
+                        "title": "Bob's Red Mill Potato Starch 24 Ounces (Pack of 4)",
+                        "upc": "129600429131"
+                    },
+                    {
+                        "id": 4097660,
+                        "title": "Bob's Red Mill Gluten Free Potato Starch 22 oz (Pack of 2)",
+                        "upc": "191566977018"
+                    },
+                    {
+                        "id": 3717076,
+                        "title": "Judee's Gluten Free Unmodified Potato Starch, 2.5 lb",
+                        "upc": "609613731709"
+                    },
+                    {
+                        "id": 3819124,
+                        "title": "Organic Potato Starch, 5 Pounds — Non-GMO, Vegan, Kosher — by Food to Live",
+                        "upc": "810054360094"
+                    },
+                    {
+                        "id": 52105,
+                        "title": "Streit's Potato Starch",
+                        "upc": "070227500775"
+                    },
+                    {
+                        "id": 200187,
+                        "title": "Manischewitz Potato Starch, 16 oz (Pack of, 12)",
+                        "upc": "030684306068"
+                    },
+                    {
+                        "id": 16594,
+                        "title": "Manischewitz Potato Starch Canister - Case of 12 - 16 oz.",
+                        "upc": "072700056083"
+                    },
+                    {
+                        "id": 28586,
+                        "title": "Bobs Red Mill Potato Starch, 24 Oz",
+                        "upc": "039978005250"
+                    },
+                    {
+                        "id": 4368348,
+                        "title": "Larissa Veronica Potato Starch, (4 oz, 3-Pack, Zin: 526023)",
+                        "upc": "064455260235"
+                    },
+                    {
+                        "id": 4226928,
+                        "title": "Larissa Veronica Potato Starch, (16 oz, 1-Pack, Zin: 526025)",
+                        "upc": "064435260255"
+                    },
+                    {
+                        "id": 3645252,
+                        "title": "(12 Pack)Manischewitz Potato Starch Canister, 16 oz.",
+                        "upc": "walmart_product_692322066"
+                    },
+                    {
+                        "id": 3716596,
+                        "title": "Bob's Red Mill Gluten Free Potato Starch, 24 oz",
+                        "upc": "778894014990"
+                    },
+                    {
+                        "id": 3912984,
+                        "title": "Judee's Gluten Free Unmodified Potato Starch, 4 lb",
+                        "upc": "733520999584"
+                    },
+                    {
+                        "id": 199008,
+                        "title": "Ener-G Pure Potato Starch Flour, 16 oz (Pack of 12)",
+                        "upc": "030684895999"
+                    },
+                    {
+                        "id": 4028998,
+                        "title": "Authentic Foods - Gluten Free Potato Starch - 3 lbs.",
+                        "upc": "788214000312"
+                    }
+                ]
+            },
+            {
+                "ingredientImage": "salt-and-pepper.jpg",
+                "meta": [
+                    "salt_and_pepper"
+                ],
+                "original": "salt and pepper",
+                "originalName": "salt and pepper",
+                "products": [
+                    {
+                        "id": 3820226,
+                        "title": "Salt And Pepper Shakers, Stainless Steel Dispenser With Stand, 4.5” x 2”, 3 Piece Set, Silver, Glass, Refillable Bottle, For Cooking, Spice, Dry Rub, Sea Salts, Seasoning, Restaurant",
+                        "upc": "walmart_product_516443650"
+                    },
+                    {
+                        "id": 3729590,
+                        "title": "Badia Salt And Pepper Blend, 3 Pound -- 8 Per Case",
+                        "upc": "100383649251"
+                    },
+                    {
+                        "id": 3991362,
+                        "title": "Himalayan Chef Salt and Pepper Combination",
+                        "upc": "walmart_product_973923208"
+                    },
+                    {
+                        "id": 597193,
+                        "title": "1 X German Shepherd - Salt and Pepper Shakers",
+                        "upc": "walmart_product_52552984"
+                    },
+                    {
+                        "id": 568695,
+                        "title": "Olde Thompson 3725-00 Euro Salt and Pepper Shaker Set, Brushed",
+                        "upc": "021248372506"
+                    },
+                    {
+                        "id": 3972934,
+                        "title": "Reaction Strike Jerk Jr 4.5\" Salt & Pepper",
+                        "upc": "879214000706"
+                    },
+                    {
+                        "id": 742975,
+                        "title": "Spice Supreme Salt &amp; Pepper Shaker Set, 4Pack",
+                        "upc": "013962120617"
+                    },
+                    {
+                        "id": 954123,
+                        "title": "Crestware - SHKR43M - 3 oz Paneled Glass Salt & Pepper Shaker",
+                        "upc": "710277120249"
+                    },
+                    {
+                        "id": 659107,
+                        "title": "Better Homes &amp; Gardens Porcelain Salt &amp; Pepper Set, 2 Piece",
+                        "upc": "013302558445"
+                    },
+                    {
+                        "id": 716947,
+                        "title": "The Pioneer Woman Flea Market Decorated Salt &amp; Pepper Shakers, 2 Piece",
+                        "upc": "085081055316"
+                    },
+                    {
+                        "id": 3632294,
+                        "title": "TJ Salt & Pepper Combo Pack W/ Grinders - Black Peppercorns And Sea Salt Crystals",
+                        "upc": "100412497624"
+                    },
+                    {
+                        "id": 3662854,
+                        "title": "Minute Mushrooms Garlic Herb/Salt & Pepper Variety Pack, 6 Ounce (Pack of 6)",
+                        "upc": "081453812044"
+                    },
+                    {
+                        "id": 1202925,
+                        "title": "Dalmatian BBQ Dry Rub Coarse Ground Salt &amp; Pepper, 24 oz",
+                        "upc": "810015332559"
+                    },
+                    {
+                        "id": 184960,
+                        "title": "Edazen Cruncha Ma Me Sea Salt And Black Pepper, .7 Oz",
+                        "upc": "859059002028"
+                    },
+                    {
+                        "id": 1242819,
+                        "title": "Setton Farms Pistachios Seasoned Kernels, Salt and Pepper, 3 oz Resealable Bag",
+                        "upc": "034325055469"
+                    },
+                    {
+                        "id": 129401,
+                        "title": "Salazon Chocolate Bar - Organic - 57 Percent Dark Chocolate - Sea Salt and Pepper - 2.75 oz - case of 12",
+                        "upc": "850225002026"
+                    },
+                    {
+                        "id": 31932,
+                        "title": "Wonderful Salt & Pepper Pistachios 7 oz. Bag",
+                        "upc": "014113910194"
+                    },
+                    {
+                        "id": 621633,
+                        "title": "Wonderful Pistachios, Salt &amp; Pepper, 1.25 Oz, Ct 12",
+                        "upc": "014113913324"
+                    },
+                    {
+                        "id": 408442,
+                        "title": "Wonderful Pistachios, Salt &amp; Pepper Flavor, 7 Ounce Resealable Pouch",
+                        "upc": "014113913256"
+                    },
+                    {
+                        "id": 178236,
+                        "title": "Somersaults Sunflower Seed, Salt & Pepper, Crunchy Bites, 6 Oz.",
+                        "upc": "898403002024"
+                    }
+                ]
+            }
+        ]
     }
+
 }
