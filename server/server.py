@@ -138,7 +138,7 @@ def get_recipe_ingredients(recipe_id):
     else:
         return "{Error: 'No ingredients found'}", 404
     
-@app.route("/recipes/<int:recipe_id>/groceries")
+@app.route("/recipes/<int:recipe_id>/items")
 def get_walmart_items(recipe_id):
     """Return recipe groceries items"""
 

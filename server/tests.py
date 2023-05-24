@@ -133,19 +133,19 @@ class ServerTests(unittest.TestCase):
     def test_get_walmart_items_status_code_success(self):
         """Test get walmart items status code"""
 
-        result = self.client.get("/recipes/644885/groceries")
+        result = self.client.get("/recipes/644885/items")
         self.assertEqual(result.status_code, 200)
 
     def test_get_walmart_items_response_format(self):
         """Test get walmart items response format"""
 
-        result = self.client.get("/recipes/644885/groceries")
+        result = self.client.get("/recipes/644885/items")
         self.assertEqual(result.headers['Content-Type'], 'application/json')
 
     def test_get_walmart_items_response_items_attribute(self):
         """Test presence of 'items' attribute"""
             
-        result = self.client.get("/recipes/644885/groceries")
+        result = self.client.get("/recipes/644885/items")
         response_data = json.loads(result.data)
         self.assertIn('items', response_data)
         self.assertIsInstance(response_data['items'], list, "'items' attribute is not a list")
