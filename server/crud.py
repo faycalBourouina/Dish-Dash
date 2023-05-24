@@ -206,39 +206,31 @@ def map_ingredients_groceries(recipe_id):
     else:
 
         return None
-
-def get_groceries_products(recipe_id):
-    """Get groceries products"""
-    groceries = map_ingredients_groceries(recipe_id)
-    products = {}
-
-    if groceries:
-        for item in groceries:
-            original_name = item["originalName"]
-            if original_name not in products:
-                products[original_name] = []
-            
-            for product in item["products"]:
-                products[original_name].append(product)
     
-    return products
+
 
 def get_walmart_items(recipe_id):
-    """Get walmart items"""
+    """Get Walmart items from recipe groceries"""
 
-    products = get_groceries_products(recipe_id)
-    walmart_items = {}
-    
-    # If products exist, get walmart items
-    if products:
+    groceries = map_ingredients_groceries(recipe_id)
+    products = []
 
+    if groceries:
         if MODE == 'TEST_MODE':
             # Use mock data in test mode
             response = mock_data['walmart_items']['response']
-            walmart_items = response
-            print (walmart_items)
 
-        # Use real data in production mode
+            # Loop through the response and extract needed information
+            for item_name, item_data in response.items():
+                product_info = {}
+
+                product_info["name"] = item_name
+                product_info["price"] = item_data["offers"]["primary"]["price"]
+                product_info["shipping"] = item_data["fulfillment"].get("shipping", False)
+                product_info.update(item_data["product"])
+
+                products.append(product_info)
+        
         else:
             # Set up the request parameters
             params = {
@@ -249,20 +241,28 @@ def get_walmart_items(recipe_id):
                 'delivery_type': 'available_in_store'
             }
 
-            for product in products:
+            for item in groceries:
+                product_info = {}
+                product_info["name"] = item["originalName"]
 
                 # Update the search term in the params for each iteration
-                params['search_term'] = product
+                params['search_term'] = item["originalName"]
 
                 # Make the HTTP GET request to BlueCart API
                 results = requests.get('https://api.bluecartapi.com/request', params=params).json()
-                
-                # Check if "search_results" exists and is not empty
+
                 if "search_results" in results and results["search_results"]:
                     # Add the first search result to the walmart_items dictionary
-                    walmart_items[product] = results["search_results"][0]
+                    item_info = results["search_results"][0]
 
-        return walmart_items
+                    product_info["shipping"] = item_info["fulfillment"].get("shipping", False)
+                    product_info["price"] = item_info["offers"]["primary"]["price"]
+                    product_info.update(item_info["product"])
+
+            products.append(product_info)
+
+        return products
+    
     else:
         return None
 

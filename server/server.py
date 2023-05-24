@@ -148,7 +148,7 @@ def get_walmart_items(recipe_id):
     if response:
         return response, 200
     else:
-        return "{Error: 'No groceries found'}", 404
+        return {'Error': 'No groceries items found'}, 404
     
 @app.route("/users/<int:user_id>/favorites")
 def get_user_favorites(user_id):
