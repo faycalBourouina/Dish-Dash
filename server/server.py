@@ -142,10 +142,10 @@ def get_recipe_ingredients(recipe_id):
 def get_walmart_items(recipe_id):
     """Return recipe groceries items"""
 
-    groceries = crud.get_walmart_items(recipe_id)
-    response = jsonify({'groceries': groceries})
-    
-    if response:
+    items = crud.get_walmart_items(recipe_id)
+
+    if items:
+        response = jsonify({'items': items})
         return response, 200
     else:
         return {'Error': 'No groceries items found'}, 404

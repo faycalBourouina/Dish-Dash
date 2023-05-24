@@ -129,7 +129,27 @@ class ServerTests(unittest.TestCase):
         self.assertIsInstance(ingredients_value, list, "'ingredients' attribute is not list")
         self.assertTrue(len(ingredients_value) > 0, "'ingredients' attribute is an empty list")
 
+    # Test recipe groceries list from Walmart
+    def test_get_walmart_items_status_code_success(self):
+        """Test get walmart items status code"""
 
+        result = self.client.get("/recipes/644885/groceries")
+        self.assertEqual(result.status_code, 200)
+
+    def test_get_walmart_items_response_format(self):
+        """Test get walmart items response format"""
+
+        result = self.client.get("/recipes/644885/groceries")
+        self.assertEqual(result.headers['Content-Type'], 'application/json')
+
+    def test_get_walmart_items_response_items_attribute(self):
+        """Test presence of 'items' attribute"""
+            
+        result = self.client.get("/recipes/644885/groceries")
+        response_data = json.loads(result.data)
+        self.assertIn('items', response_data)
+        self.assertIsInstance(response_data['items'], list, "'items' attribute is not a list")
+        self.assertIsNotNone(response_data['items'], "'items' attribute is None")
 
 class DBTests(unittest.TestCase):
     """Tests for database"""
