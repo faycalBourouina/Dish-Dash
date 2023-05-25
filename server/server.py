@@ -42,7 +42,7 @@ def get_landing_page_recipes():
 
     if recipes:
         response = jsonify({'recipes': recipes})
-        
+
         return response, 200
     else:
         return {'Error': 'No recipes found'}, 404
@@ -146,7 +146,12 @@ def get_recipe_ingredients(recipe_id):
 def get_walmart_items(recipe_id):
     """Return recipe groceries items"""
 
-    items = crud.get_walmart_items(recipe_id)
+    # get ingredients name from params
+    ingredients = request.args.get('ingredients')
+    print("ingredients from the front end", ingredients)
+
+    # Get walmart items using recipe ingredients
+    items = crud.get_walmart_items(recipe_id, ingredients)
 
     if items:
         response = jsonify({'items': items})

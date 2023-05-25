@@ -13,7 +13,6 @@ function Layout({ isLogged , handleLogin, handleSignup, handleLogout, cachedItem
         setSelectedRecipe(null); // clear the selected recipe
         setRecipes(results);
         setActiveTab("search"); // switch to the search tab
-        console.log("activeTab after search", activeTab)  // activeTab is now "search"
     }
 
   function handleSelectedRecipe () {
@@ -84,7 +83,6 @@ function Layout({ isLogged , handleLogin, handleSignup, handleLogout, cachedItem
     useEffect(() => {
       if (activeTab === "home") {
         fetchLandingRecipes();
-        console.log("landing recipes", recipes)
       } else if (activeTab === "favorites") {
         fetchFavoritesRecipes();
       }

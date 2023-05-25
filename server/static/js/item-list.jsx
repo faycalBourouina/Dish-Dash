@@ -5,13 +5,28 @@ const ItemList = ({ recipe, cachedItems, setCachedItems }) => {
   const recipeId = recipe.id;
 
   async function fetchItems(recipeId) {
+
     // Check if items are already cached
     if (cachedItems[recipeId]) {
       setItems(cachedItems[recipeId]);
       return;
     }
 
-    const response = await fetch(`/recipes/${recipeId}/items`);
+    // Get recipe ingredients
+    const ingredients = recipe.ingredients;
+
+    // Check if ingredients are empty
+    if (ingredients.length === 0) {
+      setItems([]);
+      return;
+    }
+
+    
+    // Convert ingredients to query string
+    const queryParams = new URLSearchParams({ ingredients: JSON.stringify(ingredients) }).toString();
+
+    // Fetch items from server
+    const response = await fetch(`/recipes/${recipeId}/items?${queryParams}`);
     const data = await response.json();
     const { items } = data;
     

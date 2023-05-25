@@ -1,4 +1,5 @@
 function RecipeDetails({ isLogged, recipe, activeTab, handleUpdateFavorites, recipesLength, handleSelectedRecipe, cachedItems, setCachedItems}) {
+
   return (
     <div>
       <div>
@@ -8,7 +9,7 @@ function RecipeDetails({ isLogged, recipe, activeTab, handleUpdateFavorites, rec
               {recipesLength} {recipesLength === 1 ? "recipe" : "recipes"} found
             </h3>)
           }
-          <h2>{recipe.title}</h2>
+          <h2>{recipe.name}</h2>
           <img src={recipe.image} alt={recipe.title} />
           <h3>Ingredients:</h3>
           <ul>

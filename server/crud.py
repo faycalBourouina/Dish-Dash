@@ -202,10 +202,15 @@ def map_ingredients_groceries(recipe_id):
     
 
 
-def get_walmart_items(recipe_id):
+def get_walmart_items(recipe_id, ingredients):
     """Get Walmart items from recipe groceries"""
 
-    groceries = map_ingredients_groceries(recipe_id)
+    # Get mapped ingredient to groceries items from spoonacular api
+    #groceries = map_ingredients_groceries(recipe_id)
+
+    # Or use the ingredients names passed from the front end
+    groceries = json.loads(ingredients)
+
     products = []
 
     if groceries:
@@ -238,12 +243,16 @@ def get_walmart_items(recipe_id):
             }
 
             for item in groceries:
-                product_info = {}
-                print("Orginal name: ", item["originalName"])
-                product_info["name"] = item["originalName"]
 
-                # Update the search term in the params for each iteration
-                params['search_term'] = item["originalName"]
+                product_info = {}
+
+                product_info["name"] = item["name"]
+
+                # Update the search term in the params to orginalName if we are using the ingredients from spoonacular api
+                #params['search_term'] = item["originalName"]
+
+                # Update the search term in the params to name if we are using ingredients from the front end
+                params['search_term'] = item["original_name"]
 
                 # Make the HTTP GET request to BlueCart API
                 results = requests.get('https://api.bluecartapi.com/request', params=params).json()
@@ -255,6 +264,7 @@ def get_walmart_items(recipe_id):
                     product_info["shipping"] = item_info["fulfillment"].get("shipping", False)
                     product_info["price"] = item_info["offers"]["primary"]["price"]
                     product_info.update(item_info["product"])
+                    print("walmart item", product_info["name"])
 
                 products.append(product_info)
         
@@ -296,6 +306,7 @@ def add_recipe_ingredients(recipe):
                 # Add ingredient to recipes_ingredients list
                 recipe_ingredient = add_recipes_ingredients(recipe, ingredient)
                 recipes_ingredients.append(recipe_ingredient)
+
                
     return {'recipe_ingredients': recipe_ingredients, 'recipes_ingredients': recipes_ingredients}
 
