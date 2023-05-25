@@ -24,6 +24,9 @@ app.secret_key = os.getenv("SESSION_SECRET_KEY")
 
 # Connect to the database
 model.connect_to_db(app)
+model.db.create_all()
+
+
 
 @app.route("/client")
 def get_client():
@@ -39,9 +42,10 @@ def get_landing_page_recipes():
 
     if recipes:
         response = jsonify({'recipes': recipes})
+        
         return response, 200
     else:
-        return "{Error: 'No recipes found'}", 404
+        return {'Error': 'No recipes found'}, 404
 
 
 @app.route("/signup", methods=["POST"])
@@ -185,7 +189,7 @@ def update_favorite(user_id, recipe_id):
 
             # Get recipe from the API
             recipe = crud.get_recipe(recipe_id)
-        
+            
             # Get the favorite recipe, recipe ingredients, and recipes_ingredients 
             results = crud.add_favorite_to_recipes(recipe)
 
@@ -211,11 +215,6 @@ def update_favorite(user_id, recipe_id):
                 favorite_dict = sqlalchemy_obj_to_dict(new_favortie)
 
                 response = jsonify({'favorite': favorite_dict})
-
-                #print("------------------------------------------------------------------------------------------------------")
-                #print(favorite_recipe)
-                #print(user)
-                #print(new_favortie)
 
                 return response, 201
             

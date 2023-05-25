@@ -2,7 +2,11 @@ const { useState } = React;
 
 function App({ userId }) {
 
+  //Storing the logged in user id
   const [isLogged, setIsLogged] = useState(userId);
+
+  // Caching variable to store fetched items
+  const [cachedItems, setCachedItems] = useState({});
 
   const handleLogin = async (email, password) => {
     console.log("Logging in with", email, password)
@@ -74,7 +78,14 @@ function App({ userId }) {
   return (
     <div>
       <div className="container">
-      <Layout isLogged={isLogged} handleLogin={handleLogin} handleSignup={handleSignup} handleLogout={handleLogout}  />
+      <Layout 
+        isLogged={isLogged} 
+        handleLogin={handleLogin} 
+        handleSignup={handleSignup} 
+        handleLogout={handleLogout}
+        cachedItems={cachedItems}
+        setCachedItems={setCachedItems}  
+      />
       </div>
     </div>
   );

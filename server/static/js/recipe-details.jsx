@@ -1,5 +1,4 @@
-function RecipeDetails({ isLogged, recipe, activeTab, handleUpdateFavorites, recipesLength, handleSelectedRecipe}) {
-  console.log("recipes length", recipesLength);
+function RecipeDetails({ isLogged, recipe, activeTab, handleUpdateFavorites, recipesLength, handleSelectedRecipe, cachedItems, setCachedItems}) {
   return (
     <div>
       <div>
@@ -22,7 +21,11 @@ function RecipeDetails({ isLogged, recipe, activeTab, handleUpdateFavorites, rec
         {isLogged && <button onClick={handleUpdateFavorites}>Chef's kiss</button>}
       </div>
       <div>
-        <ItemList recipeId = {recipe.id} />
+        <ItemList 
+          recipe = {recipe}
+          cachedItems={cachedItems}
+          setCachedItems={setCachedItems}
+        />
       </div>
     </div>
 

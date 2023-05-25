@@ -1,6 +1,6 @@
 const { useState, useEffect } = React;
 
-function Layout({ isLogged , handleLogin, handleSignup, handleLogout }) {
+function Layout({ isLogged , handleLogin, handleSignup, handleLogout, cachedItems, setCachedItems }) {
     const [activeTab, setActiveTab] = React.useState("home");
     const [recipes, setRecipes] = React.useState([]);
     const [selectedRecipe, setSelectedRecipe] = React.useState(null);
@@ -61,8 +61,8 @@ function Layout({ isLogged , handleLogin, handleSignup, handleLogout }) {
     async function fetchLandingRecipes() {
         const response = await fetch("/");
         const data = await response.json();
-        const { recipes: { results } } = data;
-        setRecipes(results);
+        const { recipes: { recipes } } = data;
+        setRecipes(recipes);
 
     }
 
@@ -84,6 +84,7 @@ function Layout({ isLogged , handleLogin, handleSignup, handleLogout }) {
     useEffect(() => {
       if (activeTab === "home") {
         fetchLandingRecipes();
+        console.log("landing recipes", recipes)
       } else if (activeTab === "favorites") {
         fetchFavoritesRecipes();
       }
@@ -111,6 +112,8 @@ function Layout({ isLogged , handleLogin, handleSignup, handleLogout }) {
                 handleUpdateFavorites={handleUpdateFavorites}
                 recipesLength = {recipes.length}
                 handleSelectedRecipe = {handleSelectedRecipe}
+                cachedItems={cachedItems}
+                setCachedItems={setCachedItems}
                />
             ) : (
               <RecipeList

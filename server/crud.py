@@ -1,7 +1,7 @@
 from model import db, User, Recipe, Favorite, Ingredient, RecipeIngredient, connect_to_db
 from utils import is_valid_upc
-from datetime import datetime
 
+from datetime import datetime
 import requests
 
 from dotenv import load_dotenv
@@ -15,9 +15,11 @@ SPOONACULAR_API_KEY = os.getenv("SPOONACULAR_API_KEY")
 BLUECART_API_KEY = os.getenv("BLUECART_API_KEY")
 MODE = os.getenv("MODE")
 
-# The base uri for the spoonacular recipes API
+# URI for API requests
 uri_recipes = f'https://api.spoonacular.com/recipes'
 uri_walmart_items = 'https://api.bluecartapi.com/request'
+
+
 # mock API data for testing
 with open('data/mock_api.json') as f:
     mock_data = json.load(f)
@@ -27,48 +29,36 @@ with open('data/mock_db.json') as f:
     mock_users = json.load(f)
 
 
-
 def create_user(email, password):
     """Create a new user"""
 
-    if MODE == 'TEST_MODE':
-        
-        # Check if user already exists
-        existing_user = User.query.filter(User.email == email).first()
-        if existing_user:
-            return None
-        else:
-            user = User(email=email, password=password, created_at=datetime.now())
-            return user 
-
-    # Use real data in production mode to be implemented      
+    # Check if user already exists
+    existing_user = User.query.filter(User.email == email).first()
+    if existing_user:
+        return None
+    else:
+        user = User(email=email, password=password, created_at=datetime.now())
+        return user 
 
 
 def authenticate(email, password):
     """Login user"""
     
-    if  MODE == 'TEST_MODE':
-
-        # Check if user exists and password is correct
-        user = User.query.filter(User.email == email).first()
-        if user and user.password == password:
-            return user
-        else:
-            return None
+    # Check if user exists and password is correct
+    user = User.query.filter(User.email == email).first()
+    if user and user.password == password:
+        return user
+    else:
+        return None
     
-    # Use real data in production mode to be implemented
-
 def get_user_by_id(user_id):
     """Return user by id"""
 
-    if MODE == 'TEST_MODE':
-        user = User.query.filter(User.id == user_id).first()
-        if user:
-            return user
-        else:
-            return None
-
-    # Use real data in production mode to be implemented
+    user = User.query.filter(User.id == user_id).first()
+    if user:
+        return user
+    else:
+        return None
 
 def get_landing_page_recipes():
     """Return trending and custom recipes"""
@@ -98,7 +88,7 @@ def search_recipes(search):
         maReadyTime = search.get('maxReadyTime', '')
         #fillIngredients	= True
 
-
+        # Make API request
         request = f'{uri_recipes}/complexSearch?&query={query}&diet={diet}&cuisine={cuisine}&apiKey={SPOONACULAR_API_KEY}'
         response = requests.get(request).json()
 
@@ -129,7 +119,7 @@ def get_recipe(recipe_id):
 
         # If recipe exists, extract needed recipe information
         if response:
-            recipe_id = response['id']
+            recipe_id = recipe_id
             recipe_name = response['title']
             recipe_image = response['image']
             recipe_instructions = response['instructions']
@@ -150,7 +140,7 @@ def get_recipe(recipe_id):
                         'name': ingredient_name,
                         'original_name': ingredient_original_name
                 })
-            
+
             return {
                 'id': recipe_id,
                 'name': recipe_name,
@@ -180,17 +170,20 @@ def map_ingredients_groceries(recipe_id):
     # Getting recipe ingredients 
     ingredients = get_recipe_ingredients(recipe_id)
 
+
     # If ingredients exist, get groceries items
     if ingredients:
 
         # Get the ingredient names
         ingredient_names = [ingredient['name'] for ingredient in ingredients]
 
+        # Use mock data in test mode
         if MODE == 'TEST_MODE':
             # Use mock data in test mode
             response = mock_data['ingredients_groceries']['response']
             return response
         
+        # Use real data in production mode
         else:
             # Map ingredients to groceries
             url = f'https://api.spoonacular.com/food/ingredients/map?apiKey={SPOONACULAR_API_KEY}'
@@ -216,6 +209,8 @@ def get_walmart_items(recipe_id):
     products = []
 
     if groceries:
+
+        # Use mock data in test mode
         if MODE == 'TEST_MODE':
             # Use mock data in test mode
             response = mock_data['walmart_items']['response']
@@ -231,18 +226,20 @@ def get_walmart_items(recipe_id):
 
                 products.append(product_info)
         
+        # Use real data in production mode
         else:
             # Set up the request parameters
             params = {
-                'api_key': 'C21E95CA536947B2B52A17C8059293AF',
+                'api_key': BLUECART_API_KEY,
                 'type': 'search',
-                'sort_by': 'best_seller',
+                'sort_by': 'best_match',
                 'category_id': '976759',
-                'delivery_type': 'available_in_store'
+                #'delivery_type': 'available_in_store'
             }
 
             for item in groceries:
                 product_info = {}
+                print("Orginal name: ", item["originalName"])
                 product_info["name"] = item["originalName"]
 
                 # Update the search term in the params for each iteration
@@ -259,8 +256,8 @@ def get_walmart_items(recipe_id):
                     product_info["price"] = item_info["offers"]["primary"]["price"]
                     product_info.update(item_info["product"])
 
-            products.append(product_info)
-
+                products.append(product_info)
+        
         return products
     
     else:
@@ -295,11 +292,10 @@ def add_recipe_ingredients(recipe):
                 
                 # Add ingredient to recipe_ingredients list
                 recipe_ingredients.append(ingredient)
-
+                                    
                 # Add ingredient to recipes_ingredients list
                 recipe_ingredient = add_recipes_ingredients(recipe, ingredient)
                 recipes_ingredients.append(recipe_ingredient)
-
                
     return {'recipe_ingredients': recipe_ingredients, 'recipes_ingredients': recipes_ingredients}
 
@@ -324,7 +320,7 @@ def add_favorite_to_recipes(recipe):
     """Add favorite recipe to the recipes table"""
 
     recipe_id = recipe['id']
-    recipe_title = recipe['title']
+    recipe_title = recipe['name']
     recipe_image = recipe['image']
     recipe_instructions = recipe['instructions']
     recipe_ingredients_list = recipe['ingredients']
@@ -333,69 +329,61 @@ def add_favorite_to_recipes(recipe):
     recipe_ingredients = []
     recipes_ingredients = []
 
-    if MODE == 'TEST_MODE':
 
-        # If recipe already exists, increment kisses
-        existing_recipe = Recipe.query.filter(Recipe.id == recipe_id).first()
-        if existing_recipe:
-            existing_recipe.kisses += 1
-            recipe = existing_recipe
+    # If recipe already exists, increment kisses
+    existing_recipe = Recipe.query.filter(Recipe.id == recipe_id).first()
+    if existing_recipe:
+        existing_recipe.kisses += 1
+        recipe = existing_recipe
             
-        elif not existing_recipe:
-            # If recipe does not exist, create a recipe object
-            recipe = Recipe(id=recipe_id, title=recipe_title, image=recipe_image, instructions=recipe_instructions, ingredients=recipe_ingredients_list)
+    elif not existing_recipe:
+        # If recipe does not exist, create a recipe object
+        recipe = Recipe(id=recipe_id, title=recipe_title, image=recipe_image, instructions=recipe_instructions, ingredients=recipe_ingredients_list)
 
-            # getting recipe ingredients and recipes_ingredients
-            results = add_recipe_ingredients(recipe)
+        # getting recipe ingredients and recipes_ingredients
+        results = add_recipe_ingredients(recipe)
 
-            recipe_ingredients = results['recipe_ingredients']
-            recipes_ingredients = results['recipes_ingredients']
+        recipe_ingredients = results['recipe_ingredients']
+        recipes_ingredients = results['recipes_ingredients']
 
-        # Retun the recipe, recipe_ingredients, and recipes_ingredients objects
-        return {'recipe': recipe, 'ingredients': recipe_ingredients, 'recipes_ingredients': recipes_ingredients}
+    # Retun the recipe, recipe_ingredients, and recipes_ingredients objects
+    return {'recipe': recipe, 'ingredients': recipe_ingredients, 'recipes_ingredients': recipes_ingredients}
 
-    # Use real data in production mode to be implemented
 
 def add_favorite(user, recipe):
     """Add recipe to user's favorites"""
 
-    if MODE == 'TEST_MODE':
-
-        existing_favorite = Favorite.query.filter(Favorite.user_id == user.id, Favorite.recipe_id == recipe.id).first()
-        if existing_favorite:
-            return None
-        else:
-            favorite = Favorite(user=user, recipe=recipe)
-            return favorite
+    existing_favorite = Favorite.query.filter(Favorite.user_id == user.id, Favorite.recipe_id == recipe.id).first()
+    if existing_favorite:
+        return None
+    else:
+        favorite = Favorite(user=user, recipe=recipe)
+        return favorite
     # Use real data in production mode to be implemented
 
 def remove_favorite(user_id, recipe_id):
     """Remove recipe from user's favorites"""
 
-    if MODE == 'TEST_MODE':
-
-        existing_favorite = Favorite.query.filter(Favorite.user_id == user_id, Favorite.recipe_id == recipe_id).first()
-        if existing_favorite:
-            return existing_favorite
-        else:
-            return None
-    # Use real data in production mode to be implemented
+    existing_favorite = Favorite.query.filter(Favorite.user_id == user_id, Favorite.recipe_id == recipe_id).first()
+    if existing_favorite:
+        return existing_favorite
+    else:
+        return None
 
 def get_favorites(user_id):
     """Return user's favorites"""
-    if MODE == 'TEST_MODE':
-        # Query to fetch user favorites
-        user_favorites = Favorite.query.filter(Favorite.user_id == user_id).all()
+    
+    # Query to fetch user favorites
+    user_favorites = Favorite.query.filter(Favorite.user_id == user_id).all()
 
-        # Get the recipe IDs from the user favorites
-        recipe_ids = [favorite.recipe_id for favorite in user_favorites]
+    # Get the recipe IDs from the user favorites
+    recipe_ids = [favorite.recipe_id for favorite in user_favorites]
 
-        # Fetch the recipes from the recipes table based on the recipe IDs
-        favorites = Recipe.query.filter(Recipe.id.in_(recipe_ids)).all()
+    # Fetch the recipes from the recipes table based on the recipe IDs
+    favorites = Recipe.query.filter(Recipe.id.in_(recipe_ids)).all()
                     
-        return favorites
+    return favorites
 
-    # Use real data in production mode to be implemented
 
 if __name__ == "__main__":
     from server import app
