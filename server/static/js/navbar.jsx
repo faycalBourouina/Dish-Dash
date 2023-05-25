@@ -4,36 +4,29 @@ function Navbar({ isLogged, handleLogin, handleSignup, handleLogout, setActiveTa
     setActiveTab(tab);
     setSelectedRecipe(null); // Clear the selected recipe
   };
-
   return (
     <nav>
-      <ul>
-        <li>
-          <a onClick={() => handleTabClick("home")}>
-            Home
-          </a>
-        </li>
+      <Grid container>
+        <Grid item xs={4}>
+          <a onClick={() => handleTabClick("home")}>Home</a>
+        </Grid>
         {isLogged ? (
           <>
-            <li>
-              <a onClick={() => handleTabClick("favorites")}>
-                Favorites
-                </a>
-            </li>
-            <li>
-              <button onClick={handleLogout}>
-                Logout
-              </button>
-            </li>
+            <Grid item xs={4}>
+              <a onClick={() => handleTabClick("favorites")}>Favorites</a>
+            </Grid>
+            <Grid item xs={4}>
+              <button onClick={handleLogout}>Logout</button>
+            </Grid>
           </>
         ) : (
           <>
-            <li>
-              <AuthForm handleLogin={handleLogin} handleSignup={handleSignup}/>
-            </li>
+            <Grid item xs={8}>
+              <AuthForm handleLogin={handleLogin} handleSignup={handleSignup} />
+            </Grid>
           </>
         )}
-      </ul>
+      </Grid>
     </nav>
   );
 }

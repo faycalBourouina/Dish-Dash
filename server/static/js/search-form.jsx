@@ -1,4 +1,5 @@
 const { useState } = React;
+const { Grid, TextField, FormControl, InputLabel, Select, MenuItem, FormGroup, FormControlLabel, Checkbox, Button } = MaterialUI;
 
 function SearchForm({ onSearch }) {
   const [query, setQuery] = useState('');
@@ -51,100 +52,89 @@ function SearchForm({ onSearch }) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <label>
-        Query:
-        <input
-          type="text"
-          name="query"
-          value={query}
-          onChange={event => setQuery(event.target.value)}
-        />
-      </label>
-      <br />
-      <label>
-        Diet:
-        <select
-          name="diet"
-          value={diet}
-          onChange={event => setDiet(event.target.value)}
-        >
-          <option value="">--Select a diet--</option>
-          {diets.map(diet => (
-            <option key={diet} value={diet}>
-              {diet}
-            </option>
-          ))}
-        </select>
-      </label>
-      <br />
-      <label>
-        Cuisine:
-        <select
-          name="cuisine"
-          value={cuisine}
-          onChange={event => setCuisine(event.target.value)}
-        >
-          <option value="">--Select a cuisine--</option>
-          {cuisines.map(cuisine => (
-            <option key={cuisine} value={cuisine}>
-              {cuisine}
-            </option>
-          ))}
-        </select>
-      </label>
-      <br />
-      <fieldset>
-        <legend>Intolerances:</legend>
-        {intoleranceOptions.map(intolerance => (
-          <label key={intolerance}>
-            <input
-              type="checkbox"
-              name="intolerances"
-              value={intolerance}
-              checked={intolerances.includes(intolerance)}
-              onChange={handleIntoleranceChange}
-            />
-            {intolerance}
-          </label>
-        ))}
-      </fieldset>
-      <br />
-      <label>
-        Include Ingredients:
-        <input
-          type="text"
-          name="includeIngredients"
-          onChange={handleIncludeIngredientsChange}
-        />
-      </label>
-      <br />
-      <fieldset>
-        <legend>Type:</legend>
-        {typeOptions.map(typeOption => (
-          <label key={typeOption}>
-            <input
-              type="checkbox"
-              name="type"
-              value={typeOption}
-              checked={type.includes(typeOption)}
-              onChange={handleTypeChange}
-            />
-            {typeOption}
-          </label>
-        ))}
-      </fieldset>
-      <br />
-      <label>
-        Max Ready Time:
-        <input
-          type="number"
-          name="maxReadyTime"
-          value={maxReadyTime}
-          onChange={event => setMaxReadyTime(event.target.value)}
-        />
-      </label>
-      <br />
-      <button type="submit">Search</button>
-    </form>
+      <Grid container>
+        <Grid item xs={12}>
+          <Grid container>
+            <Grid item xs={4}>
+              <FormControl fullWidth>
+                <InputLabel>Diet</InputLabel>
+                <Select
+                  name="diet"
+                  value={diet}
+                  onChange={(event) => setDiet(event.target.value)}
+                >
+                  <MenuItem value="">
+                    <em>--Select a diet--</em>
+                  </MenuItem>
+                  {diets.map((diet) => (
+                    <MenuItem key={diet} value={diet}>
+                      {diet}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid item xs={4}>
+              <FormControl fullWidth>
+                <InputLabel>Cuisine</InputLabel>
+                <Select
+                  name="cuisine"
+                  value={cuisine}
+                  onChange={(event) => setCuisine(event.target.value)}
+                >
+                  <MenuItem value="">
+                    <em>--Select a cuisine--</em>
+                  </MenuItem>
+                  {cuisines.map((cuisine) => (
+                    <MenuItem key={cuisine} value={cuisine}>
+                      {cuisine}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid item xs={4}>
+              <FormControl component="fieldset">
+                <legend>Intolerances:</legend>
+                <FormGroup>
+                  {intoleranceOptions.map((intolerance) => (
+                    <FormControlLabel
+                      key={intolerance}
+                      control={
+                        <Checkbox
+                          name="intolerances"
+                          value={intolerance}
+                          checked={intolerances.includes(intolerance)}
+                          onChange={handleIntoleranceChange}
+                        />
+                      }
+                      label={intolerance}
+                    />
+                  ))}
+                </FormGroup>
+              </FormControl>
+            </Grid>
+          </Grid> 
+        </Grid> 
+      </Grid>
+      
+      <Grid container>
+        <Grid item xs={12}>
+          <Grid container>
+            <Grid item xs={6}>
+              <TextField
+                label="Query"
+                name="query"
+                value={query}
+                onChange={(event) => setQuery(event.target.value)}
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <Button type="submit" variant="contained">Search</Button> 
+            </Grid> 
+          </Grid> 
+        </Grid>
+      </Grid> 
+    </form> 
   );
 }

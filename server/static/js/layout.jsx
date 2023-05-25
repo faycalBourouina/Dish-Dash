@@ -1,4 +1,5 @@
 const { useState, useEffect } = React;
+const { Grid } = MaterialUI;
 
 function Layout({ isLogged , handleLogin, handleSignup, handleLogout, cachedItems, setCachedItems }) {
     const [activeTab, setActiveTab] = React.useState("home");
@@ -90,18 +91,23 @@ function Layout({ isLogged , handleLogin, handleSignup, handleLogout, cachedItem
   
     return (
       <div>
-        <div className="container">
-          <Navbar 
-            isLogged={isLogged}
-            handleLogin={handleLogin}
-            handleSignup={handleSignup}
-            handleLogout={handleLogout}
-            setActiveTab={setActiveTab} 
-            setSelectedRecipe={setSelectedRecipe} 
-          />
-          
-          <SearchForm onSearch={handleSearch} />
-          <div>
+        <Grid container direction="column">
+          <Grid item xs={12}>
+            <Navbar 
+              isLogged={isLogged}
+              handleLogin={handleLogin}
+              handleSignup={handleSignup}
+              handleLogout={handleLogout}
+              setActiveTab={setActiveTab} 
+              setSelectedRecipe={setSelectedRecipe} 
+            />
+          </Grid>
+
+
+          <Grid item xs={12}>
+            <SearchForm onSearch={handleSearch} />
+          </Grid>
+          <Grid item xs={12}>
             {selectedRecipe ? (
               <RecipeDetails
                 isLogged={isLogged}
@@ -120,8 +126,8 @@ function Layout({ isLogged , handleLogin, handleSignup, handleLogout, cachedItem
                 onRecipeClick={handleRecipeClick}
               />
             )}
-          </div>
-        </div>
+          </Grid>
+        </Grid>
       </div>
     );
 }
