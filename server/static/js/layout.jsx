@@ -1,5 +1,5 @@
 const { useState, useEffect } = React;
-const { Grid } = MaterialUI;
+const { Grid, Box } = MaterialUI;
 
 function Layout({ isLogged , handleLogin, handleSignup, handleLogout, cachedItems, setCachedItems }) {
     const [activeTab, setActiveTab] = React.useState("home");
@@ -93,40 +93,43 @@ function Layout({ isLogged , handleLogin, handleSignup, handleLogout, cachedItem
       <div>
         <Grid container direction="column">
           <Grid item xs={12}>
-            <Navbar 
-              isLogged={isLogged}
-              handleLogin={handleLogin}
-              handleSignup={handleSignup}
-              handleLogout={handleLogout}
-              setActiveTab={setActiveTab} 
-              setSelectedRecipe={setSelectedRecipe} 
-            />
-          </Grid>
-
-
-          <Grid item xs={12}>
-            <SearchForm onSearch={handleSearch} />
-          </Grid>
-          <Grid item xs={12}>
-            {selectedRecipe ? (
-              <RecipeDetails
+            <Box pl={4} pr={4} pt={4} pb={0}>
+              <Navbar 
                 isLogged={isLogged}
-                recipe={selectedRecipe}
-                activeTab={activeTab}
-                handleUpdateFavorites={handleUpdateFavorites}
-                recipesLength = {recipes.length}
-                handleSelectedRecipe = {handleSelectedRecipe}
-                cachedItems={cachedItems}
-                setCachedItems={setCachedItems}
-               />
-            ) : (
-              <RecipeList
-                recipes={recipes}
-                activeTab={activeTab}
-                onRecipeClick={handleRecipeClick}
+                handleLogin={handleLogin}
+                handleSignup={handleSignup}
+                handleLogout={handleLogout}
+                setActiveTab={setActiveTab} 
+                setSelectedRecipe={setSelectedRecipe} 
               />
-            )}
+            </Box>
           </Grid>
+
+          <Box p={4}>
+            <Grid item xs={12}>
+              <SearchForm onSearch={handleSearch} />
+            </Grid>
+            <Grid item xs={12}>
+              {selectedRecipe ? (
+                <RecipeDetails
+                  isLogged={isLogged}
+                  recipe={selectedRecipe}
+                  activeTab={activeTab}
+                  handleUpdateFavorites={handleUpdateFavorites}
+                  recipesLength = {recipes.length}
+                  handleSelectedRecipe = {handleSelectedRecipe}
+                  cachedItems={cachedItems}
+                  setCachedItems={setCachedItems}
+                />
+              ) : (
+                <RecipeList
+                  recipes={recipes}
+                  activeTab={activeTab}
+                  onRecipeClick={handleRecipeClick}
+                />
+              )}
+            </Grid>
+          </Box>
         </Grid>
       </div>
     );

@@ -1,5 +1,5 @@
 const { useState } = React;
-const { Grid, TextField, FormControl, InputLabel, Select, MenuItem, FormGroup, FormControlLabel, Checkbox, Button } = MaterialUI;
+const { Grid, TextField, FormControl, InputLabel, Select, MenuItem, FormGroup, FormControlLabel, Checkbox, Button, Stack, styled } = MaterialUI;
 
 function SearchForm({ onSearch }) {
   const [query, setQuery] = useState('');
@@ -10,10 +10,23 @@ function SearchForm({ onSearch }) {
   const [type, setType] = useState([]);
   const [maxReadyTime, setMaxReadyTime] = useState('');
 
-  const diets = ['Vegetarian', 'Vegan', 'Ketogenic', 'Paleo'];
-  const cuisines = ['Italian', 'Chinese', 'Indian', 'Mexican'];
-  const intoleranceOptions = ['Dairy', 'Egg', 'Gluten', 'Peanut'];
-  const typeOptions = ['Main Course', 'Side Dish', 'Dessert', 'Appetizer'];
+  const diets = ['Gluten Free', 'Ketogenic', 'Vegetarian', 'Lacto-Vegetarian', 'Ovo-Vegetarian', 'Vegan', 'Pescetarian', 'Paleo', 'Primal', 'low-FODMAP', 'Whole30']; 
+  const cuisines = ['African', 'Asian', 'American', 'British', 'Cajun', 'Caribbean', 'Chinese', 'Eastern European', 'European', 'French', 'German', 'Greek', 'Indian', 'Irish', 'Italian', 'Japanese', 'Jewish', 'Korean', 'Latin American', 'Mediterranean', 'Mexican', 'Middle Eastern', 'Nordic', 'Southern', 'Spanish', 'Thai', 'Vietnamese'];
+  const intoleranceOptions = ['Egg', 'Gluten', 'Grain', 'Peanut', 'Seafood', 'Sesame', 'Shellfish', 'Soy', 'Sulfite', 'Tree Nut', 'Wheat', 'Dairy', 'Fat', 'FODMAP', 'Pork', 'Red Meat', 'Sugar'];
+  const typeOptions = ['Main Course', 'Side Dish', 'Dessert', 'Appetizer', 'Salad', 'Bread', 'Breakfast', 'Soup', 'Beverage', 'Sauce', 'Marinade', 'Fingerfood', 'Snack', 'Drink'];
+
+
+  const handleQueryChange = event => {
+    setQuery(event.target.value);
+  };
+
+  const handleDietChange = event => {
+    setDiet(event.target.value);
+  };
+
+  const handleCuisineChange = event => {
+    setCuisine(event.target.value);
+  };
 
   const handleIntoleranceChange = event => {
     const { value } = event.target;
@@ -24,7 +37,7 @@ function SearchForm({ onSearch }) {
     );
   };
 
-  const handleIncludeIngredientsChange = event => {
+  const handleIngredientsChange = event => {
     setIncludeIngredients(event.target.value.split(','));
   };
 
@@ -35,6 +48,9 @@ function SearchForm({ onSearch }) {
     );
   };
 
+  const handleReadyTimeChange = event => {
+    setMaxReadyTime(event.target.value);
+  };
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -52,10 +68,45 @@ function SearchForm({ onSearch }) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <Grid container>
-        <Grid item xs={12}>
-          <Grid container>
-            <Grid item xs={4}>
+      <Grid container justifyContent="center">
+        <Grid item xs={12} pb={2}>
+          <Stack direction="row" spacing={2}>
+            <Grid item xs={3}>
+              <TextField 
+                label="Query"
+                name="query"
+                value={query}
+                onChange={(event) => setQuery(event.target.value)}
+                fullWidth
+              />
+            </Grid>
+            <Grid item xs={2}>
+            <TextField
+              label="Include Ingredients"
+              name="includeIngredients"
+              value={includeIngredients.join(',')}
+              onChange={handleIngredientsChange}
+              fullWidth
+            />
+            </Grid>
+            <Grid item xs={2}>
+              <FormControl fullWidth>
+                <InputLabel>Intolerances</InputLabel>
+                <Select
+                  multiple
+                  name="intolerances"
+                  value={intolerances}
+                  onChange={(event) => setIntolerances(event.target.value)}
+                >
+                  {intoleranceOptions.map((intolerance) => (
+                    <MenuItem key={intolerance} value={intolerance}>
+                      {intolerance}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid item xs={1}>
               <FormControl fullWidth>
                 <InputLabel>Diet</InputLabel>
                 <Select
@@ -74,7 +125,7 @@ function SearchForm({ onSearch }) {
                 </Select>
               </FormControl>
             </Grid>
-            <Grid item xs={4}>
+            <Grid item xs={1}>
               <FormControl fullWidth>
                 <InputLabel>Cuisine</InputLabel>
                 <Select
@@ -93,48 +144,43 @@ function SearchForm({ onSearch }) {
                 </Select>
               </FormControl>
             </Grid>
-            <Grid item xs={4}>
-              <FormControl component="fieldset">
-                <legend>Intolerances:</legend>
-                <FormGroup>
-                  {intoleranceOptions.map((intolerance) => (
-                    <FormControlLabel
-                      key={intolerance}
-                      control={
-                        <Checkbox
-                          name="intolerances"
-                          value={intolerance}
-                          checked={intolerances.includes(intolerance)}
-                          onChange={handleIntoleranceChange}
-                        />
-                      }
-                      label={intolerance}
-                    />
+            <Grid item xs={2}>
+              <FormControl fullWidth>
+                <InputLabel>Type</InputLabel>
+                <Select
+                  multiple
+                  name="type"
+                  value={type}
+                  onChange={(event) => setType(event.target.value)}
+                >
+                  {typeOptions.map((typeOption) => (
+                    <MenuItem key={typeOption} value={typeOption}>
+                      {typeOption}
+                    </MenuItem>
                   ))}
-                </FormGroup>
+                </Select>
               </FormControl>
             </Grid>
-          </Grid> 
-        </Grid> 
-      </Grid>
-      
-      <Grid container>
-        <Grid item xs={12}>
-          <Grid container>
-            <Grid item xs={6}>
+            <Grid item xs={1}>
               <TextField
-                label="Query"
-                name="query"
-                value={query}
-                onChange={(event) => setQuery(event.target.value)}
+                label="Max Ready Time (mins)"
+                name="maxReadyTime"
+                value={maxReadyTime}
+                onChange={(event) => setMaxReadyTime(event.target.value)}
+                fullWidth
               />
             </Grid>
-            <Grid item xs={6}>
-              <Button type="submit" variant="contained">Search</Button> 
-            </Grid> 
-          </Grid> 
+          </Stack>
         </Grid>
-      </Grid> 
+      </Grid>
+
+      <Grid container justifyContent="flex-end">
+        <Grid item xs={1} pl={1}>
+          <Button type="submit" variant="contained" color="primary" fullWidth>
+            Search
+          </Button>
+        </Grid>
+      </Grid>
     </form> 
   );
 }
