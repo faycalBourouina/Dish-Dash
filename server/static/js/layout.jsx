@@ -93,7 +93,7 @@ function Layout({ isLogged , handleLogin, handleSignup, handleLogout, cachedItem
       <div>
         <Grid container direction="column">
           <Grid item xs={12}>
-            <Box pl={4} pr={4} pt={4} pb={0}>
+            <Box pl={8} pr={8} pt={4} pb={0}>
               <Navbar 
                 isLogged={isLogged}
                 handleLogin={handleLogin}
@@ -105,7 +105,7 @@ function Layout({ isLogged , handleLogin, handleSignup, handleLogout, cachedItem
             </Box>
           </Grid>
 
-          <Box p={4}>
+          <Box p={8}>
             <Grid item xs={12}>
               <SearchForm onSearch={handleSearch} />
             </Grid>

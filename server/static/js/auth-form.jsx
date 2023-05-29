@@ -19,11 +19,52 @@ function AuthForm({ handleLogin, handleSignup }) {
   
   
     return (
-      <>
-        <input type="text" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-        <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-        <button onClick={handleLoginSubmit}>Login</button>
-        <button onClick={handleSignupSubmit}>Sign Up</button>
-      </>
+      <Grid container spacing={2} alignItems="center">
+        <Grid item>
+          <TextField
+            label="Email"
+            variant="outlined"
+            size="small"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            sx={{ backgroundColor: 'white' }}
+          />
+        </Grid>
+        <Grid item>
+          <TextField
+            label="Password"
+            type="password"
+            autoComplete="current-password"
+            variant="outlined"
+            size="small"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            sx={{ backgroundColor: 'white' }}
+          />
+        </Grid>
+        <Grid item>
+          <ButtonBase
+            onClick={handleLoginSubmit}
+            color="inherit" 
+            underline="none"
+            sx={{ fontSize: '1.0rem', minHeight: '48px'}} 
+
+          >
+            Login
+          </ButtonBase>
+        </Grid>
+        <Grid item>
+          <ButtonBase 
+            onClick={handleSignupSubmit}
+            color="inherit" 
+            underline="none"
+            sx={{ fontSize: '1.0rem', minHeight: '48px'}}
+            fullWidth
+          >
+            Sign Up
+          </ButtonBase>
+        </Grid>
+      
+      </Grid>
     );
   }
