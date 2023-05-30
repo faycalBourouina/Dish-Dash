@@ -72,10 +72,43 @@ def get_trending_recipes():
 
     return trending_recipes
 
+
+def get_similar_recipes(recipe_id):
+    """Return similar recipes"""
+
+    similar_recipes = []
+    
+    # Limit number of recipes to
+    params = { 
+        'apiKey': SPOONACULAR_API_KEY,
+        'number': 1
+        }
+    # Get similar recipes from the api
+    similar_recipes_data = requests.get(f'{uri_recipes}/{recipe_id}/similar', params=params).json()
+    
+    # Get id of similar recipes
+    recipe_ids = [recipe['id'] for recipe in similar_recipes_data]
+
+    # Get the full recipe for each recipe id
+    for recipe_id in recipe_ids:
+        recipe = get_recipe(recipe_id)
+        similar_recipes.append(recipe)
+
+    return similar_recipes
+
 def get_custom_recipes(user_id):
     """Return custom recipes for user if logged in """
 
     custom_recipes = []
+    # Get user's favorite recipes
+    if user_id:
+        recipes = get_favorites(user_id)
+        # Get id of the most recent recipes
+        recent_recipes_id = [recipe.id for recipe in recipes[:3]]        
+        # Get simolair recipes to the most recent recipes from the api
+        for recipe_id in recent_recipes_id:
+            similar_recipes = get_similar_recipes(recipe_id)
+            custom_recipes.extend(similar_recipes)
     
     return custom_recipes
 
@@ -86,7 +119,7 @@ def get_random_recipes():
     # Limit number of recipes to
     params = { 
         'apiKey': SPOONACULAR_API_KEY,
-        'number': 3
+        'number': 1
     }
 
     # Get random recipes from the api
