@@ -94,6 +94,7 @@ def get_random_recipes():
 
     return random_recipes
 
+
 def get_landing_page_recipes(user_id):
     """Return trending and custom recipes"""
     
