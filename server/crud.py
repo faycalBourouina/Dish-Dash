@@ -1,5 +1,5 @@
 from model import db, User, Recipe, Favorite, Ingredient, RecipeIngredient, connect_to_db
-from utils import is_valid_upc
+from utils import sqlalchemy_obj_to_dict
 
 from datetime import datetime
 import requests
@@ -60,18 +60,46 @@ def get_user_by_id(user_id):
     else:
         return None
 
-def get_landing_page_recipes():
+
+def get_trending_recipes():
+    """Return trending recipes"""
+
+    trending_recipes = []
+    recipes_obj = Recipe.query.order_by(Recipe.kisses.desc()).limit(3).all()
+    for recipe_obj in recipes_obj:
+        recipe_dict = sqlalchemy_obj_to_dict(recipe_obj)
+        trending_recipes.append(recipe_dict)
+
+    return trending_recipes
+
+def get_custom_recipes(user_id):
+    """Return custom recipes for user if logged in """
+
+    custom_recipes = []
+    
+    return custom_recipes
+
+def get_random_recipes():
+    """Return random recipes"""
+    random_recipes = []
+
+    return random_recipes
+
+
+def get_landing_page_recipes(user_id):
     """Return trending and custom recipes"""
+    
+    landing_recipes = []
+    trending_recipes = get_trending_recipes()
+    custom_recipes = get_custom_recipes(user_id)
+    random_recipes = get_random_recipes()
 
-    # Use mock data in test mode
-    if MODE == 'TEST_MODE':
-        response = mock_data['landing_page']['response']
-    else:
-        request = f'{uri_recipes}/random?number=3&tags=vegan, dessert, italian&apiKey={SPOONACULAR_API_KEY}'
-        response = requests.get(request).json()
+    landing_recipes.extend(trending_recipes)
+    landing_recipes.extend(custom_recipes)
+    landing_recipes.extend(random_recipes)
 
-    return response
-
+    return landing_recipes
+ 
 def search_recipes(search):
     """Search for recipes"""
 
@@ -264,7 +292,6 @@ def get_walmart_items(recipe_id, ingredients):
                     product_info["shipping"] = item_info["fulfillment"].get("shipping", False)
                     product_info["price"] = item_info["offers"]["primary"]["price"]
                     product_info.update(item_info["product"])
-                    print("walmart item", product_info["name"])
 
                 products.append(product_info)
         

@@ -1,4 +1,4 @@
-const { AppBar, Toolbar, CssBaseline, ButtonBase} = MaterialUI;
+const { AppBar, Toolbar, CssBaseline, ButtonBase } = MaterialUI;
 
 function Navbar({ isLogged, handleLogin, handleSignup, handleLogout, setActiveTab, setSelectedRecipe }) {
   

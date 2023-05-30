@@ -1,4 +1,5 @@
 function RecipeList({ recipes, activeTab, onRecipeClick }) {
+  console.log("RecipeList", recipes);
   return (
     <div>
       {recipes.length === 0 ? (
@@ -12,7 +13,7 @@ function RecipeList({ recipes, activeTab, onRecipeClick }) {
           <ul>
             {recipes.map((recipe) => (
               <li key={recipe.id} onClick={() => onRecipeClick(recipe)}>
-                <h3>{recipe.title}</h3>
+                <h3>{recipe.title || recipe.name}</h3>
                 <img src={recipe.image} alt={recipe.title} />
               </li>
             ))}

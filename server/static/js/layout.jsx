@@ -61,7 +61,9 @@ function Layout({ isLogged , handleLogin, handleSignup, handleLogout, cachedItem
     async function fetchLandingRecipes() {
         const response = await fetch("/");
         const data = await response.json();
-        const { recipes: { recipes } } = data;
+        const { recipes } = data;
+        console.log("fetchLandingRecipes", data);
+
         setRecipes(recipes);
 
     }
@@ -89,6 +91,7 @@ function Layout({ isLogged , handleLogin, handleSignup, handleLogout, cachedItem
       }
     }, [activeTab]);
   
+
     return (
       <div>
         <Grid container direction="column">

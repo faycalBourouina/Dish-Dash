@@ -1,8 +1,12 @@
 function RecipeDetails({ isLogged, recipe, activeTab, handleUpdateFavorites, recipesLength, handleSelectedRecipe, cachedItems, setCachedItems}) {
 
   return (
-    <div>
-      <div>
+    <Grid container 
+      justifyContent="center"
+      xs={12} spacing={2}
+      pt={8} pb={8}
+    > 
+      <Grid item xs={12} md={8}>
           {
             activeTab === "search" && (
             <h3 onClick={() => handleSelectedRecipe()}>
@@ -20,15 +24,14 @@ function RecipeDetails({ isLogged, recipe, activeTab, handleUpdateFavorites, rec
           <h3>Instructions:</h3>
           <div dangerouslySetInnerHTML={{ __html: recipe.instructions }}></div>
         {isLogged && <button onClick={handleUpdateFavorites}>Chef's kiss</button>}
-      </div>
-      <div>
+      </Grid>
+      <Grid item xs={12} md={4}>
         <ItemList 
           recipe = {recipe}
           cachedItems={cachedItems}
           setCachedItems={setCachedItems}
         />
-      </div>
-    </div>
-
+      </Grid>
+    </Grid>
   );
 }

@@ -23,32 +23,101 @@
     "landing_page": {
         "query": "http://localhost:5000/",
         "response": {
-            "number": 10, 
-            "offset": 0, 
-            "recipes": [
+            "custom_recipes": [
                 {
-                    "id": 644885, 
-                    "image": "https://spoonacular.com/recipeImages/644885-312x231.jpg", 
-                    "imageType": "jpg", 
-                    "title": "Gluten Free Vegan Gnocchi"
-                }, 
+                    "id": 34432, "imageType": "jpg",
+                    "title": "Summer Rolls",
+                    "readyInMinutes": 12,
+                    "servings": 4,
+                    "sourceUrl": "http://www.self.com/fooddiet/recipes/2008/04/summer-rolls"
+                },
                 {
-                    "id": 644205, 
-                    "image": "https://spoonacular.com/recipeImages/644205-312x231.jpg", 
-                    "imageType": "jpg", 
-                    "title": "Garden Vegetable Ravioli With Tomato Brodo"
-                }, 
+                    "id": 11747,
+                    "imageType": "jpg",
+                    "title": "Summer Rolls",
+                    "readyInMinutes": 120,
+                    "servings": 50,
+                    "sourceUrl": "http://www.biggirlssmallkitchen.com/2009/11/cooking-for-others-25-years-of-jor-1-of.html"
+                },
                 {
-                    "id": 656544, 
-                    "image": "https://spoonacular.com/recipeImages/656544-312x231.jpg", 
-                    "imageType": "jpg", 
-                    "title": "Polenta gnocchi with savoy cabbage and cheese"
-                }, 
+                    "id": 34424,
+                    "imageType": "jpg",
+                    "title": "Summer Rolls",
+                    "readyInMinutes": 45,
+                    "servings": 4,
+                    "sourceUrl": "http://www.epicurious.com/recipes/food/views/Summer-Rolls-242327"
+                },
                 {
-                    "id": 1096168, 
-                    "image": "https://spoonacular.com/recipeImages/1096168-312x231.jpg", 
-                    "imageType": "jpg", 
-                    "title": "Sweet Potato Gnocchi tossed in Garlic Sage Olive Oil"
+                    "id": 58534,
+                    "imageType": "jpg",
+                    "title": "Strawberry Basil Italian Ice",
+                    "readyInMinutes": 45,
+                    "servings": 6,
+                    "sourceUrl": "http://aspicyperspective.com/2010/05/27/chill-out/"
+                },
+                {
+                    "id": 398610,
+                    "imageType": "jpg",
+                    "title": "Strawberry Italian Ice",
+                    "readyInMinutes": 10,
+                    "servings": 5,
+                    "sourceUrl": "http://www.tasteofhome.com/Recipes/strawberry-italian-ice"
+                },
+                {
+                    "id": 760582,
+                    "imageType": "jpg",
+                    "title": "Strawberry Italian Ice",
+                    "readyInMinutes": 45,
+                    "servings": 6,
+                    "sourceUrl": "http://www.vegetariantimes.com/recipe/strawberry-italian-ice/"
+                },
+                {
+                    "id": 585467,
+                    "imageType": "jpg",
+                    "title": "Strawberry Peach Swirled Smoothies",
+                    "readyInMinutes": 10,
+                    "servings": 2,
+                    "sourceUrl": "http://piesandplots.net/strawberry-peach-swirled-smoothies/"
+                },
+                {
+                    "id": 759476,
+                    "imageType": "jpg",
+                    "title": "Swirled Berry Cheesecake",
+                    "readyInMinutes": 45,
+                    "servings": 12,
+                    "sourceUrl": "http://www.vegetariantimes.com/recipe/swirled-berry-cheesecake/"
+                },
+                {
+                    "id": 50872,
+                    "imageType": "jpg",
+                    "title": "Swirled Summer Berry Soufflés",
+                    "readyInMinutes": 30,
+                    "servings": 6,
+                    "sourceUrl": "http://www.foodandwine.com/recipes/swirled-summer-berry-souffles"
+                },
+                {
+                    "id": 585467,
+                    "imageType": "jpg",
+                    "title": "Strawberry Peach Swirled Smoothies",
+                    "readyInMinutes": 10,
+                    "servings": 2,
+                    "sourceUrl": "http://piesandplots.net/strawberry-peach-swirled-smoothies/"
+                },
+                {
+                    "id": 759476,
+                    "imageType": "jpg",
+                    "title": "Swirled Berry Cheesecake",
+                    "readyInMinutes": 45,
+                    "servings": 12,
+                    "sourceUrl": "http://www.vegetariantimes.com/recipe/swirled-berry-cheesecake/"
+                },
+                {
+                    "id": 50872,
+                    "imageType": "jpg",
+                    "title": "Swirled Summer Berry Soufflés",
+                    "readyInMinutes": 30,
+                    "servings": 6,
+                    "sourceUrl": "http://www.foodandwine.com/recipes/swirled-summer-berry-souffles"
                 }
             ]
         }

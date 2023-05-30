@@ -30,7 +30,7 @@ model.db.create_all()
 
 @app.route("/client")
 def get_client():
-    """Test my next client"""
+    """Test client"""
     
     return render_template("index.html")
 
@@ -38,11 +38,12 @@ def get_client():
 def get_landing_page_recipes():
     """Return trending and custom recipes"""
 
-    recipes = crud.get_landing_page_recipes()
+    user_id = session.get('user', {}).get('id', None)
+    recipes = crud.get_landing_page_recipes(user_id)
 
     if recipes:
-        response = jsonify({'recipes': recipes})
-
+        response = {'recipes': recipes}
+        print("response: ", response)
         return response, 200
     else:
         return {'Error': 'No recipes found'}, 404
@@ -148,7 +149,6 @@ def get_walmart_items(recipe_id):
 
     # get ingredients name from params
     ingredients = request.args.get('ingredients')
-    print("ingredients from the front end", ingredients)
 
     # Get walmart items using recipe ingredients
     items = crud.get_walmart_items(recipe_id, ingredients)
