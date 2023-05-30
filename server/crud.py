@@ -119,7 +119,7 @@ def get_random_recipes():
     # Limit number of recipes to
     params = { 
         'apiKey': SPOONACULAR_API_KEY,
-        'number': 1
+        'number': 3
     }
 
     # Get random recipes from the api
@@ -140,6 +140,7 @@ def get_landing_page_recipes(user_id):
     landing_recipes.extend(custom_recipes)
     landing_recipes.extend(random_recipes)
 
+    print(landing_recipes)
     return landing_recipes
  
 def search_recipes(search):

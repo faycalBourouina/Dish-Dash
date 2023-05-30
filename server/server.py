@@ -43,7 +43,6 @@ def get_landing_page_recipes():
 
     if recipes:
         response = {'recipes': recipes}
-        print("response: ", response)
         return response, 200
     else:
         return {'Error': 'No recipes found'}, 404
