@@ -83,8 +83,16 @@ def get_random_recipes():
     """Return random recipes"""
     random_recipes = []
 
-    return random_recipes
+    # Limit number of recipes to
+    params = { 
+        'apiKey': SPOONACULAR_API_KEY,
+        'number': 3
+    }
 
+    # Get random recipes from the api
+    random_recipes = requests.get(f'{uri_recipes}/random', params=params).json()['recipes']
+
+    return random_recipes
 
 def get_landing_page_recipes(user_id):
     """Return trending and custom recipes"""
