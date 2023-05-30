@@ -81,7 +81,7 @@ def get_similar_recipes(recipe_id):
     # Limit number of recipes to
     params = { 
         'apiKey': SPOONACULAR_API_KEY,
-        'number': 1
+        'number': 3
         }
     # Get similar recipes from the api
     similar_recipes_data = requests.get(f'{uri_recipes}/{recipe_id}/similar', params=params).json()
@@ -89,10 +89,16 @@ def get_similar_recipes(recipe_id):
     # Get id of similar recipes
     recipe_ids = [recipe['id'] for recipe in similar_recipes_data]
 
-    # Get the full recipe for each recipe id
-    for recipe_id in recipe_ids:
-        recipe = get_recipe(recipe_id)
-        similar_recipes.append(recipe)
+    # Get the recipe information for each recipe in bulk
+    params = {
+        'apiKey': SPOONACULAR_API_KEY,
+        'ids': ','.join([str(recipe_id) for recipe_id in recipe_ids])
+    }
+
+
+    # Get the recipe information for each recipe id in bulk
+    recipe = requests.get(f'{uri_recipes}/informationBulk', params=params).json()
+    similar_recipes.extend(recipe)
 
     return similar_recipes
 
@@ -128,7 +134,7 @@ def get_random_recipes():
     return random_recipes
 
 
-def get_landing_page_recipes(user_id):
+def get_landing_recipes(user_id):
     """Return trending and custom recipes"""
     
     landing_recipes = []
@@ -140,7 +146,6 @@ def get_landing_page_recipes(user_id):
     landing_recipes.extend(custom_recipes)
     landing_recipes.extend(random_recipes)
 
-    print(landing_recipes)
     return landing_recipes
  
 def search_recipes(search):

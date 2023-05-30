@@ -28,18 +28,18 @@ model.db.create_all()
 
 
 
-@app.route("/client")
+@app.route("/")
 def get_client():
     """Test client"""
     
     return render_template("index.html")
 
-@app.route("/")
+@app.route("/landing")
 def get_landing_page_recipes():
     """Return trending and custom recipes"""
 
     user_id = session.get('user', {}).get('id', None)
-    recipes = crud.get_landing_page_recipes(user_id)
+    recipes = crud.get_landing_recipes(user_id)
 
     if recipes:
         response = {'recipes': recipes}

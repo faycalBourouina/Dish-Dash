@@ -59,7 +59,7 @@ function Layout({ isLogged , handleLogin, handleSignup, handleLogout, cachedItem
     }
     
     async function fetchLandingRecipes() {
-        const response = await fetch("/");
+        const response = await fetch("/landing");
         const data = await response.json();
         const { recipes } = data;
         console.log("fetchLandingRecipes", data);
