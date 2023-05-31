@@ -151,7 +151,7 @@ def get_walmart_items(recipe_id):
 
     # Get walmart items using recipe ingredients
     items = crud.get_walmart_items(recipe_id, ingredients)
-
+    print("ITEMS", items)
     if items:
         response = jsonify({'items': items})
         return response, 200
@@ -214,11 +214,15 @@ def update_favorite(user_id, recipe_id):
             if new_favortie:                
                 model.db.session.add(new_favortie)
                 model.db.session.commit()           
-
+                
+                # Get the favorite recipe
+                favorite_recipe = crud.get_recipe(new_favortie.recipe_id)
+                print("FAVORITE RECIPE", favorite_recipe)
+                
                 # Convert sqlalchemy object to dictionary
                 favorite_dict = sqlalchemy_obj_to_dict(new_favortie)
 
-                response = jsonify({'favorite': favorite_dict})
+                response = jsonify({'favorite': favorite_recipe})
 
                 return response, 201
             

@@ -46,9 +46,10 @@ const ItemList = ({ recipe, cachedItems, setCachedItems }) => {
     }
   }, [recipeId]);
 
+  
   return (
     <div>
-      <h2>Buy these recipe ingredients from Walmart:</h2>
+      <h2>Featured ingredients from Walmart:</h2>
       {items.map((item) => (
         <ItemDetails key={item.id} item={item} />
       ))}

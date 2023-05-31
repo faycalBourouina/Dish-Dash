@@ -4,9 +4,16 @@ function App({ userId }) {
 
   //Storing the logged in user id
   const [isLogged, setIsLogged] = useState(userId);
-
-  // Caching variable to store fetched items
+  // Caching fetched landing recipes
+  const [cachedLanding, setCachedLanding] = useState([]);
+  // Caching fetched fvorites recipes
+  const [cachedFavorites, setCachedFavorites] = useState([]);
+  //Caching fetched search recipes
+  const [cachedSearch, setCachedSearch] = useState([]);
+  // Caching fetched items
   const [cachedItems, setCachedItems] = useState({});
+
+
 
   const handleLogin = async (email, password) => {
     console.log("Logging in with", email, password)
@@ -83,8 +90,14 @@ function App({ userId }) {
         handleLogin={handleLogin} 
         handleSignup={handleSignup} 
         handleLogout={handleLogout}
+        cachedLanding={cachedLanding}
+        setCachedLanding={setCachedLanding}
+        cachedFavorites={cachedFavorites}
+        setCachedFavorites={setCachedFavorites}
         cachedItems={cachedItems}
-        setCachedItems={setCachedItems}  
+        setCachedItems={setCachedItems}
+        cachedSearch={cachedSearch}
+        setCachedSearch={setCachedSearch}  
       />
       </div>
     </div>

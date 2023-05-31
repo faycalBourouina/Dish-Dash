@@ -83,6 +83,7 @@ def get_similar_recipes(recipe_id):
         'apiKey': SPOONACULAR_API_KEY,
         'number': 3
         }
+    
     # Get similar recipes from the api
     similar_recipes_data = requests.get(f'{uri_recipes}/{recipe_id}/similar', params=params).json()
     

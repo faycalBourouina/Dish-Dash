@@ -1,24 +1,27 @@
 const { useState, useEffect } = React;
 const { Grid, Box } = MaterialUI;
 
-function Layout({ isLogged , handleLogin, handleSignup, handleLogout, cachedItems, setCachedItems }) {
+function Layout({ isLogged , handleLogin, handleSignup, handleLogout, cachedItems, setCachedItems, cachedLanding, setCachedLanding, cachedFavorites, setCachedFavorites, cachedSearch, setCachedSearch}) {
     const [activeTab, setActiveTab] = React.useState("home");
     const [recipes, setRecipes] = React.useState([]);
     const [selectedRecipe, setSelectedRecipe] = React.useState(null);
     
     async function handleSearch(searchQuery) {
+
+        setCachedSearch([]); // clear the cached search results
         const params = new URLSearchParams(searchQuery);
         const response = await fetch(`/search?${params.toString()}`);
         const data = await response.json();
         const { recipes: { results } } = data;
         setSelectedRecipe(null); // clear the selected recipe
+        setCachedSearch(results); // cache the search results
         setRecipes(results);
         setActiveTab("search"); // switch to the search tab
     }
 
-  function handleSelectedRecipe () {
-    (selectedRecipe && activeTab === "search") && setSelectedRecipe(null);
-  } 
+    function handleSelectedRecipe () {
+      (selectedRecipe && activeTab === "search") && setSelectedRecipe(null);
+    } 
 
     async function handleUpdateFavorites() {
       const userId = isLogged;
@@ -38,10 +41,10 @@ function Layout({ isLogged , handleLogin, handleSignup, handleLogout, cachedItem
           console.log("Favorite removed");
           // Update the recipes state by filtering out the deleted recipe
           const updatedRecipes = recipes.filter((r) => r.id !== recipeId);
-          setRecipes(updatedRecipes);
+          setCachedFavorites(updatedRecipes);
           setSelectedRecipe("");
           setActiveTab("favorites")
-          console.log("activeTab after delete", activeTab)
+
         } else {
           // Error handling
           console.error("Failed to remove favorite");
@@ -50,8 +53,12 @@ function Layout({ isLogged , handleLogin, handleSignup, handleLogout, cachedItem
         // Recipe added to favorites successfully
         console.log("Recipe added to favorites");
         const { favorite } = data;
-        // Update the recipes state by adding the new favorite recipe
-        setRecipes([...recipes, favorite]);
+        
+        // Update the cachedFavorites state by adding the new favorite recipe
+        setCachedFavorites([...cachedFavorites, favorite]);
+        
+        console.log("cachedFavorites in update", cachedFavorites);
+
       } else {
         // Error handling for other response statuses
         console.error("Failed to add recipe to favorites");
@@ -59,21 +66,30 @@ function Layout({ isLogged , handleLogin, handleSignup, handleLogout, cachedItem
     }
     
     async function fetchLandingRecipes() {
-        const response = await fetch("/landing");
-        const data = await response.json();
-        const { recipes } = data;
-        console.log("fetchLandingRecipes", data);
-
-        setRecipes(recipes);
-
+        if (cachedLanding.length) {
+          setRecipes(cachedLanding);
+        } else {     
+          const response = await fetch("/landing");
+          const data = await response.json();
+          const { recipes } = data;
+          setCachedLanding(recipes);
+          setRecipes(recipes);
+        }
     }
 
     async function fetchFavoritesRecipes() {
-        const userId = isLogged;
-        const response = await fetch(`users/${userId}/favorites`);
-        const data = await response.json();
-        const { favorites } = data;
-        setRecipes(favorites);
+        if (cachedFavorites.length) {
+          console.log("cachedFavorites in fetch", cachedFavorites);
+          setRecipes(cachedFavorites);
+        } else {
+          const userId = isLogged;
+          const response = await fetch(`users/${userId}/favorites`);
+          const data = await response.json();
+          const { favorites } = data;
+          console.log("favorites from server: ", favorites);
+          setCachedFavorites(favorites);
+          setRecipes(favorites);
+        }
     }
     
     async function handleRecipeClick(recipe) {
