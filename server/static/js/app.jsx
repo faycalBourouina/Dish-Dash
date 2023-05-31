@@ -13,8 +13,6 @@ function App({ userId }) {
   // Caching fetched items
   const [cachedItems, setCachedItems] = useState({});
 
-
-
   const handleLogin = async (email, password) => {
     console.log("Logging in with", email, password)
     try {

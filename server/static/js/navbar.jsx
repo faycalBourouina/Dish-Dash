@@ -71,7 +71,10 @@ function Navbar({ isLogged, handleLogin, handleSignup, handleLogout, setActiveTa
             </Grid>
           </Toolbar>
         </AppBar>
-        <TagsModal open={isModalOpen} handleClose={() => setIsModalOpen(false)} />
+        <TagsModal 
+          open={isModalOpen}
+          handleClose={() => setIsModalOpen(false)} 
+        />
       </Box>
   );
 }
