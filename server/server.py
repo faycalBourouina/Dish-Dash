@@ -54,9 +54,8 @@ def create_user():
 
     password = request.form.get('password')
     email = request.form.get('email')
-    tags = request.form.get('tags', {})
-    print("tags in server", tags)
-    new_user = crud.create_user(email, password, tags)
+
+    new_user = crud.create_user(email, password)
 
     if new_user:
         model.db.session.add(new_user)
@@ -75,6 +74,23 @@ def create_user():
     else:
         response = jsonify({'message': 'User already exists'})
         return response, 409
+    
+@app.route("/users/<int:user_id>/tags", methods=["POST"])
+def add_tags_to_user(user_id):
+    """Update user tags"""
+    
+    tags = request.json.get('tags', {})
+    print("tags in server.py", tags)
+
+    user_obj = crud.add_tags_to_user(user_id, tags)
+    if user_obj:
+        model.db.session.commit()
+        user_dict = sqlalchemy_obj_to_dict(user_obj)
+        tags = user_dict['tags']
+        response = jsonify({'tags': tags})
+        return response, 200
+    else:
+        return {'Error': 'User not found'}, 404
     
 @app.route("/authenticate", methods=["POST"])
 def authenticate_user():
@@ -152,7 +168,7 @@ def get_walmart_items(recipe_id):
 
     # Get walmart items using recipe ingredients
     items = crud.get_walmart_items(recipe_id, ingredients)
-    print("ITEMS", items)
+
     if items:
         response = jsonify({'items': items})
         return response, 200
@@ -218,7 +234,6 @@ def update_favorite(user_id, recipe_id):
                 
                 # Get the favorite recipe
                 favorite_recipe = crud.get_recipe(new_favortie.recipe_id)
-                print("FAVORITE RECIPE", favorite_recipe)
                 
                 # Convert sqlalchemy object to dictionary
                 favorite_dict = sqlalchemy_obj_to_dict(new_favortie)

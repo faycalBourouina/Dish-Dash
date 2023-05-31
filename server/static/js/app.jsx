@@ -35,8 +35,8 @@ function App({ userId }) {
     }
   }
 
-  const handleSignup = async (email, password, tags) => {
-    console.log("signing up with", email, password, tags)
+  const handleSignup = async (email, password) => {
+    console.log("signing up with", email, password)
     try {
       const response = await fetch('/signup', {
         method: 'POST',
@@ -46,7 +46,6 @@ function App({ userId }) {
         body: new URLSearchParams({
           email,
           password,
-          tags
         })
       });
   

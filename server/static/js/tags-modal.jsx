@@ -5,7 +5,7 @@ const mealTypes = ['Main Course', 'Side Dish', 'Dessert', 'Appetizer', 'Salad', 
 const cuisines = ['African', 'Asian', 'American', 'British', 'Cajun', 'Caribbean', 'Chinese', 'Eastern European', 'European', 'French', 'German', 'Greek', 'Indian', 'Irish', 'Italian', 'Japanese', 'Jewish', 'Korean', 'Latin American','Mediterranean','Mexican','Middle Eastern','Nordic','Southern','Spanish','Thai','Vietnamese'];
 const intolerance = ['Egg','Gluten','Grain','Peanut','Seafood','Sesame','Shellfish','Soy','Sulfite','Tree Nut','Wheat','Dairy','Fat','FODMAP','Pork','Red Meat','Sugar'];
 
-const TagsModal = ({ open, handleClose }) => {
+const TagsModal = ({ isLogged, open, handleClose }) => {
   const [selectedTags, setSelectedTags] = useState([]);
 
   // Select or deselect a tag and update the selectedTags state
@@ -16,6 +16,9 @@ const TagsModal = ({ open, handleClose }) => {
       setSelectedTags([...selectedTags, tag]);
     }
   };
+
+  // Send the selected tags to the server and close the modal
+
 
   return (
     <Dialog open={open} onClose={handleClose}>
@@ -55,7 +58,7 @@ const TagsModal = ({ open, handleClose }) => {
         ))}
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClose} variant="text">
+        <Button onClick={handleDoneClick} variant="text">
           Done
         </Button>
         <Button onClick={handleClose} variant="text">
