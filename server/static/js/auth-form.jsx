@@ -63,8 +63,7 @@ function AuthForm({ handleLogin, handleSignup }) {
           >
             Sign Up
           </ButtonBase>
-        </Grid>
-      
+        </Grid>   
       </Grid>
     );
   }

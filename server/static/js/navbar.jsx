@@ -2,9 +2,16 @@ const { AppBar, Toolbar, CssBaseline, ButtonBase } = MaterialUI;
 
 function Navbar({ isLogged, handleLogin, handleSignup, handleLogout, setActiveTab, setSelectedRecipe }) {
   
+  const [isModalOpen, setIsModalOpen] = React.useState(false);
+
   const handleTabClick = (tab) => {
     setActiveTab(tab);
     setSelectedRecipe(null); // Clear the selected recipe
+  };
+
+  const handleSignupWithModal = (email, password) => {
+    handleSignup(email, password);
+    setIsModalOpen(true);
   };
 
     return (
@@ -55,7 +62,7 @@ function Navbar({ isLogged, handleLogin, handleSignup, handleLogout, setActiveTa
                     <Grid container justifyContent="flex-end" sx={{ marginLeft: '25px' }}>
                       <AuthForm 
                         handleLogin={handleLogin} 
-                        handleSignup={handleSignup}
+                        handleSignup={handleSignupWithModal}
                       />
                     </Grid>
                 </Grid>
@@ -63,6 +70,7 @@ function Navbar({ isLogged, handleLogin, handleSignup, handleLogout, setActiveTa
             </Grid>
           </Toolbar>
         </AppBar>
+        <TagsModal open={isModalOpen} handleClose={() => setIsModalOpen(false)} />
       </Box>
   );
 }
