@@ -18,7 +18,38 @@ const TagsModal = ({ isLogged, open, handleClose }) => {
   };
 
   // Send the selected tags to the server and close the modal
+  const handleDoneClick = async () => {
+    const user_id = isLogged;
+    console.log("user_id: ", user_id);
+    console.log("selectedTags: ", selectedTags);
 
+    const data = {
+      tags: selectedTags,
+    };
+
+    try {
+      const response = await fetch(`/users/${user_id}/tags`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        const {tags} = data;
+        console.log("Tags updated: ", tags);
+      } else {
+        console.error('Request failed:', response.status);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+
+    setSelectedTags([]);
+    handleClose();
+  };
 
   return (
     <Dialog open={open} onClose={handleClose}>
