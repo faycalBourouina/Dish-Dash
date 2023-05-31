@@ -29,15 +29,18 @@ with open('data/mock_db.json') as f:
     mock_users = json.load(f)
 
 
-def create_user(email, password):
+def create_user(email, password, tags):
     """Create a new user"""
 
+    print("tags in crud", tags)
     # Check if user already exists
     existing_user = User.query.filter(User.email == email).first()
     if existing_user:
         return None
     else:
-        user = User(email=email, password=password, created_at=datetime.now())
+        user = User(email=email, password=password, tags=tags, created_at=datetime.now())
+        print("tags in User obj", user.tags)
+        
         return user 
 
 

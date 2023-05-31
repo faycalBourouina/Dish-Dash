@@ -54,8 +54,9 @@ def create_user():
 
     password = request.form.get('password')
     email = request.form.get('email')
-
-    new_user = crud.create_user(email, password)
+    tags = request.form.get('tags', {})
+    print("tags in server", tags)
+    new_user = crud.create_user(email, password, tags)
 
     if new_user:
         model.db.session.add(new_user)

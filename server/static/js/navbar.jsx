@@ -3,6 +3,7 @@ const { AppBar, Toolbar, CssBaseline, ButtonBase } = MaterialUI;
 function Navbar({ isLogged, handleLogin, handleSignup, handleLogout, setActiveTab, setSelectedRecipe }) {
   
   const [isModalOpen, setIsModalOpen] = React.useState(false);
+  const [tags, setTags] = React.useState(['vegan, dessert']);
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
@@ -10,7 +11,7 @@ function Navbar({ isLogged, handleLogin, handleSignup, handleLogout, setActiveTa
   };
 
   const handleSignupWithModal = (email, password) => {
-    handleSignup(email, password);
+    handleSignup(email, password, tags);
     setIsModalOpen(true);
   };
 

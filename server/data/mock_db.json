@@ -3,52 +3,62 @@
     {
       "id": 1,
       "email": "user1@example.com",
-      "password": "password1"
+      "password": "password1",
+      "tags": []
     },
     {
       "id": 2,
       "email": "user2@example.com",
-      "password": "password2"
+      "password": "password2",
+      "tags": []
     },
     {
       "id": 3,
       "email": "user3@example.com",
-      "password": "password3"
+      "password": "password3",
+      "tags": []
     },
     {
       "id": 4,
       "email": "user4@example.com",
-      "password": "password4"
+      "password": "password4",
+      "tags": []
     },
     {
       "id": 5,
       "email": "user5@example.com",
-      "password": "password5"
+      "password": "password5",
+      "tags": []
     },
     {
       "id": 6,
       "email": "user6@example.com",
-      "password": "password6"
+      "password": "password6",
+      "tags": []
     },
     {
       "id": 7,
       "email": "user7@example.com",
-      "password": "password7"
+      "password": "password7",
+      "tags": []
     },
     {
       "id": 8,
       "email": "user8@example.com",
-      "password": "password8"
+      "password": "password8",
+      "tags": []
     },
     {
       "id": 9,
       "email": "user9@example.com",
-      "password": "password9"
+      "password": "password9",
+      "tags": []
     },
     {
       "id": 10,
       "email": "user10@example.com",
-      "password": "password10"
+      "password": "password10",
+      "tags": []
     }
   ],
   "favorites": [

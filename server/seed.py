@@ -30,7 +30,8 @@ def seed_test_db():
     for user in mock_db_data['users']:
         email = user['email']
         password = user['password']
-        new_user = crud.create_user(email, password)
+        tags = user['tags']
+        new_user = crud.create_user(email, password, tags)
         users_in_db.append(new_user)
 
     model.db.session.add_all(users_in_db)
