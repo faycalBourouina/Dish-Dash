@@ -2,6 +2,8 @@ const { useState } = React;
 const { Grid, TextField, FormControl, InputLabel, Select, MenuItem, FormGroup, FormControlLabel, Checkbox, Button, Stack, styled } = MaterialUI;
 
 function SearchForm({ onSearch }) {
+
+  const [autoComplete, setAutoComplete] = useState([]);
   const [query, setQuery] = useState('');
   const [diet, setDiet] = useState('');
   const [cuisine, setCuisine] = useState('');
@@ -14,7 +16,6 @@ function SearchForm({ onSearch }) {
   const cuisines = ['African', 'Asian', 'American', 'British', 'Cajun', 'Caribbean', 'Chinese', 'Eastern European', 'European', 'French', 'German', 'Greek', 'Indian', 'Irish', 'Italian', 'Japanese', 'Jewish', 'Korean', 'Latin American', 'Mediterranean', 'Mexican', 'Middle Eastern', 'Nordic', 'Southern', 'Spanish', 'Thai', 'Vietnamese'];
   const intoleranceOptions = ['Egg', 'Gluten', 'Grain', 'Peanut', 'Seafood', 'Sesame', 'Shellfish', 'Soy', 'Sulfite', 'Tree Nut', 'Wheat', 'Dairy', 'Fat', 'FODMAP', 'Pork', 'Red Meat', 'Sugar'];
   const typeOptions = ['Main Course', 'Side Dish', 'Dessert', 'Appetizer', 'Salad', 'Bread', 'Breakfast', 'Soup', 'Beverage', 'Sauce', 'Marinade', 'Fingerfood', 'Snack', 'Drink'];
-
 
   const handleQueryChange = event => {
     setQuery(event.target.value);
@@ -73,10 +74,12 @@ function SearchForm({ onSearch }) {
           <Stack direction="row" spacing={2}>
             <Grid item xs={3}>
               <TextField 
-                label="Query"
+                label="Search for a recipe"
                 name="query"
                 value={query}
-                onChange={(event) => setQuery(event.target.value)}
+                onChange={(event) => {
+                  setQuery(event.target.value)
+                }}
                 fullWidth
               />
             </Grid>

@@ -99,10 +99,10 @@ function Layout({ isLogged , handleLogin, handleSignup, handleLogout, cachedItem
         setSelectedRecipe(recipe_details);
     }
 
-    
+
     useEffect(() => {
       if (!isLogged) {
-        //Reset the cached items if the user is not logged in
+        //Reset the cached items when isLogged value changes
         setCachedLanding([]);
         setCachedFavorites([]);
         setCachedSearch([]);
@@ -117,7 +117,6 @@ function Layout({ isLogged , handleLogin, handleSignup, handleLogout, cachedItem
       }
     }, [activeTab, isLogged]);
 
-  
 
     return (
       <div>

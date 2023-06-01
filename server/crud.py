@@ -140,7 +140,6 @@ def get_tagged_recipes(user_id, limit):
 
     tagged_recipes = []
     tags = User.query.filter(User.id == user_id).first().tags or []
-    print ("tags: ", tags)
 
     # If user has more than 2 tags
     if len(tags) > 2:
@@ -153,7 +152,7 @@ def get_tagged_recipes(user_id, limit):
 
             # Get random recipes for each tag combination
             for tags_combination in tags_combinations:
-                print("tags_combination: ", tags_combination)
+                
                 params = { 
                     'apiKey': SPOONACULAR_API_KEY,
                     'number': recipes_limit,
@@ -167,7 +166,7 @@ def get_tagged_recipes(user_id, limit):
                 if len(tagged_recipes) >= limit:
                     break
         
-        print(f"{len(tagged_recipes)} recipes found : {tagged_recipes}")
+        #print(f"{len(tagged_recipes)} recipes found : {tagged_recipes}")
     
     # If user has less than 2 tags
     else:
@@ -221,6 +220,21 @@ def get_landing_recipes(user_id):
     landing_recipes.extend(random_recipes)
 
     return landing_recipes
+
+def auto_complete_search(query):
+    """Autocomplete search"""
+
+    params = {
+        'apiKey': SPOONACULAR_API_KEY,
+        'number': 5,
+        'query': query
+    }
+
+    # Get autocomplete search from the api
+    autocomplete_search = requests.get(f'{uri_recipes}/autocomplete', params=params).json()
+    
+    return autocomplete_search
+
  
 def search_recipes(search):
     """Search for recipes"""

@@ -119,6 +119,13 @@ def logout():
     response = jsonify({'message': 'Logged out successfully'})
     return response, 200
 
+
+@app.route("/autocomplete")
+def auto_complete_search():
+    query = request.args.get("query", "")
+    results = crud.auto_complete_search(query)
+    return jsonify(results)
+
 @app.route("/search")
 def search_recipes():
     """Search for recipes"""
