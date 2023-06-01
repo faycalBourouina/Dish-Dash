@@ -98,6 +98,7 @@ function Layout({ isLogged , handleLogin, handleSignup, handleLogout, cachedItem
         const recipe_details = await data.recipe;
         setSelectedRecipe(recipe_details);
     }
+  
     
     useEffect(() => {
       if (activeTab === "home") {
@@ -105,7 +106,8 @@ function Layout({ isLogged , handleLogin, handleSignup, handleLogout, cachedItem
       } else if (activeTab === "favorites") {
         fetchFavoritesRecipes();
       }
-    }, [activeTab]);
+    }, [activeTab, isLogged]);
+
   
 
     return (

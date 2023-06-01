@@ -1,3 +1,5 @@
+from itertools import combinations
+
 def sqlalchemy_obj_to_dict(obj):
     """Convert a SQLAlchemy object to a dictionary."""
 
@@ -34,3 +36,7 @@ def get_groceries_upcs(groceries):
                         products[original_name] = []
                     products[original_name].append(upc)
     return products
+
+def get_tag_combinations_of_2(tags):
+    """Return all possible combinations of 2 tags"""
+    return list(combinations(tags, 2))

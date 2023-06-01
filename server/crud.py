@@ -1,5 +1,5 @@
 from model import db, User, Recipe, Favorite, Ingredient, RecipeIngredient, connect_to_db
-from utils import sqlalchemy_obj_to_dict
+from utils import (sqlalchemy_obj_to_dict, get_tag_combinations_of_2)
 
 
 
@@ -75,7 +75,7 @@ def get_trending_recipes():
     """Return trending recipes"""
 
     # The maximum number of trending recipes to return
-    trending_limit = 5
+    trending_limit = 2
     trending_recipes = []
 
     recipes_obj = Recipe.query.order_by(Recipe.kisses.desc()).limit(trending_limit).all()
@@ -120,7 +120,7 @@ def get_custom_recipes(user_id):
     """Return custom recipes for user if logged in """
     
     # The maximum number of custom recipes to return
-    custom_limit = 5
+    custom_limit = 2
     custom_recipes = []
 
     # Get user's favorite recipes
@@ -139,44 +139,67 @@ def get_tagged_recipes(user_id, limit):
     """Return tagged recipes for user if logged in """
 
     tagged_recipes = []
-
     tags = User.query.filter(User.id == user_id).first().tags or []
+    print ("tags: ", tags)
+
+    # If user has more than 2 tags
     if len(tags) > 2:
         # Get two random tags
-        tags = random.sample(tags, 2)
-        print("tags: ", tags)
+        tags_combinations = get_tag_combinations_of_2(tags)
 
-    # Limit number of recipes to
-    params = { 
-        'apiKey': SPOONACULAR_API_KEY,
-        'number': limit,
-        'tags': tags
-    }
+        while len(tagged_recipes) < limit:
+            # limit is the total number of recipes to return so we need to subtract the number of recipes already returned
+            recipes_limit = limit - len(tagged_recipes)
 
-    # Get random recipes from the api
-    tagged_recipes = requests.get(f'{uri_recipes}/random', params=params).json()['recipes']
+            # Get random recipes for each tag combination
+            for tags_combination in tags_combinations:
+                print("tags_combination: ", tags_combination)
+                params = { 
+                    'apiKey': SPOONACULAR_API_KEY,
+                    'number': recipes_limit,
+                    'tags': tags_combination
+                }
+                # Get random recipes from the api
+                recipes = requests.get(f'{uri_recipes}/random', params=params).json()['recipes']
+                tagged_recipes.extend(recipes)
+
+                # Break if we reached the limit recipes
+                if len(tagged_recipes) >= limit:
+                    break
+        
+        print(f"{len(tagged_recipes)} recipes found : {tagged_recipes}")
     
+    # If user has less than 2 tags
+    else:
+        params = {
+            'apiKey': SPOONACULAR_API_KEY,
+            'number': limit,
+            'tags': tags
+        }
+
+        # Get random recipes from the api
+        tagged_recipes = requests.get(f'{uri_recipes}/random', params=params).json()['recipes']
+
     return tagged_recipes
+
 
 def get_random_recipes(user_id):
     """Return random recipes"""
 
     # The maximum number of random recipes to return
-    random_limit = 5
+    random_limit = 2
 
     random_recipes = []
 
     # Get user's tags if logged in
     if user_id:
-        while len(random_recipes) < random_limit:
-            random_limit -= len(random_recipes)
-            tagged_recipes = get_tagged_recipes(user_id, random_limit)
-            random_recipes.extend(tagged_recipes)
+        tagged_recipes = get_tagged_recipes(user_id, random_limit)
+        random_recipes.extend(tagged_recipes)
     else:
         # Limit number of recipes to
         params = { 
             'apiKey': SPOONACULAR_API_KEY,
-            'number': 3
+            'number': random_limit
         }
 
         # Get random recipes from the api
