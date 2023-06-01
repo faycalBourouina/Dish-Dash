@@ -74,8 +74,11 @@ def get_user_by_id(user_id):
 def get_trending_recipes():
     """Return trending recipes"""
 
+    # The maximum number of trending recipes to return
+    trending_limit = 5
     trending_recipes = []
-    recipes_obj = Recipe.query.order_by(Recipe.kisses.desc()).limit(5).all()
+
+    recipes_obj = Recipe.query.order_by(Recipe.kisses.desc()).limit(trending_limit).all()
     for recipe_obj in recipes_obj:
         recipe_dict = sqlalchemy_obj_to_dict(recipe_obj)
         trending_recipes.append(recipe_dict)
@@ -115,13 +118,16 @@ def get_similar_recipes(recipe_id):
 
 def get_custom_recipes(user_id):
     """Return custom recipes for user if logged in """
-
+    
+    # The maximum number of custom recipes to return
+    custom_limit = 5
     custom_recipes = []
+
     # Get user's favorite recipes
     if user_id:
         recipes = get_favorites(user_id)
         # Get id of the most recent recipes
-        recent_recipes_id = [recipe.id for recipe in recipes[:5]]        
+        recent_recipes_id = [recipe.id for recipe in recipes[:custom_limit]]        
         # Get simolair recipes to the most recent recipes from the api
         for recipe_id in recent_recipes_id:
             similar_recipes = get_similar_recipes(recipe_id)
@@ -129,7 +135,7 @@ def get_custom_recipes(user_id):
     
     return custom_recipes
 
-def get_tagged_recipes(user_id):
+def get_tagged_recipes(user_id, limit):
     """Return tagged recipes for user if logged in """
 
     tagged_recipes = []
@@ -143,7 +149,7 @@ def get_tagged_recipes(user_id):
     # Limit number of recipes to
     params = { 
         'apiKey': SPOONACULAR_API_KEY,
-        'number': 3,
+        'number': limit,
         'tags': tags
     }
 
@@ -154,12 +160,17 @@ def get_tagged_recipes(user_id):
 
 def get_random_recipes(user_id):
     """Return random recipes"""
+
+    # The maximum number of random recipes to return
+    random_limit = 5
+
     random_recipes = []
 
     # Get user's tags if logged in
     if user_id:
-        while len(random_recipes) < 5:
-            tagged_recipes = get_tagged_recipes(user_id)
+        while len(random_recipes) < random_limit:
+            random_limit -= len(random_recipes)
+            tagged_recipes = get_tagged_recipes(user_id, random_limit)
             random_recipes.extend(tagged_recipes)
     else:
         # Limit number of recipes to
@@ -205,7 +216,7 @@ def search_recipes(search):
         #fillIngredients	= True
 
         # Make API request
-        request = f'{uri_recipes}/complexSearch?&query={query}&diet={diet}&cuisine={cuisine}&apiKey={SPOONACULAR_API_KEY}'
+        request = f'{uri_recipes}/complexSearch?&query={query}&diet={diet}&cuisine={cuisine}&number=20&apiKey={SPOONACULAR_API_KEY}'
         response = requests.get(request).json()
 
     return response
