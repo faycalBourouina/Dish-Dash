@@ -98,7 +98,16 @@ function Layout({ isLogged , handleLogin, handleSignup, handleLogout, cachedItem
         const recipe_details = await data.recipe;
         setSelectedRecipe(recipe_details);
     }
-  
+
+    
+    useEffect(() => {
+      if (!isLogged) {
+        //Reset the cached items if the user is not logged in
+        setCachedLanding([]);
+        setCachedFavorites([]);
+        setCachedSearch([]);
+      }
+    }, [isLogged]);
     
     useEffect(() => {
       if (activeTab === "home") {
