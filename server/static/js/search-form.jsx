@@ -1,5 +1,5 @@
 const { useState } = React;
-const { Grid, TextField, FormControl, InputLabel, Select, MenuItem, FormGroup, FormControlLabel, Checkbox, Button, Stack, styled } = MaterialUI;
+const { Grid, TextField, FormControl, InputLabel, Select, MenuItem, FormGroup, FormControlLabel, Checkbox, Button, Stack, styled, Autocomplete } = MaterialUI;
 
 function SearchForm({ onSearch }) {
 
@@ -16,6 +16,29 @@ function SearchForm({ onSearch }) {
   const cuisines = ['African', 'Asian', 'American', 'British', 'Cajun', 'Caribbean', 'Chinese', 'Eastern European', 'European', 'French', 'German', 'Greek', 'Indian', 'Irish', 'Italian', 'Japanese', 'Jewish', 'Korean', 'Latin American', 'Mediterranean', 'Mexican', 'Middle Eastern', 'Nordic', 'Southern', 'Spanish', 'Thai', 'Vietnamese'];
   const intoleranceOptions = ['Egg', 'Gluten', 'Grain', 'Peanut', 'Seafood', 'Sesame', 'Shellfish', 'Soy', 'Sulfite', 'Tree Nut', 'Wheat', 'Dairy', 'Fat', 'FODMAP', 'Pork', 'Red Meat', 'Sugar'];
   const typeOptions = ['Main Course', 'Side Dish', 'Dessert', 'Appetizer', 'Salad', 'Bread', 'Breakfast', 'Soup', 'Beverage', 'Sauce', 'Marinade', 'Fingerfood', 'Snack', 'Drink'];
+
+  let timerId; // Variable to store the timer ID
+
+  const handleAutoComplete = (query) => {
+    clearTimeout(timerId); // Clear the previous timer
+  
+    if (query.trim() !== '' && query.includes(' ')) {
+      // Trigger autocomplete immediately if the query is not empty and includes a space
+      performAutoComplete(query);
+    } else {
+      // Set a new timer to trigger autocomplete after a certain delay
+      timerId = setTimeout(() => {
+        performAutoComplete(query);
+      }, 1000); // Delay in milliseconds (adjust as needed)
+    }
+  };
+  
+  const performAutoComplete = async (query) => {
+    const autoCompleteResponse = await fetch(`/autocomplete?query=${query}`);
+    const autoCompleteData = await autoCompleteResponse.json();
+    setAutoComplete(autoCompleteData);
+    console.log("autoCompletion: ", autoCompleteData);
+  };
 
   const handleQueryChange = event => {
     setQuery(event.target.value);
@@ -73,14 +96,22 @@ function SearchForm({ onSearch }) {
         <Grid item xs={12} pb={2}>
           <Stack direction="row" spacing={2}>
             <Grid item xs={3}>
-              <TextField 
-                label="Search for a recipe"
-                name="query"
-                value={query}
-                onChange={(event) => {
-                  setQuery(event.target.value)
-                }}
-                fullWidth
+              <Autocomplete
+                  options={autoComplete}
+                  getOptionLabel={(option) => option.title}
+                  inputValue={query}
+                  onInputChange={(event, value) => {
+                    setQuery(value);
+                    handleAutoComplete(value);
+                  }}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      label="Search for a recipe"
+                      name="query"
+                      fullWidth
+                    />
+                  )}
               />
             </Grid>
             <Grid item xs={2}>
