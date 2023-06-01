@@ -1,9 +1,11 @@
 from model import db, User, Recipe, Favorite, Ingredient, RecipeIngredient, connect_to_db
 from utils import sqlalchemy_obj_to_dict
 
+
+
 from datetime import datetime
 import requests
-
+import random
 from dotenv import load_dotenv
 import os
 import json
@@ -38,7 +40,6 @@ def create_user(email, password):
         return None
     else:
         user = User(email=email, password=password, created_at=datetime.now())
-        print("tags in User obj", user.tags)
 
         return user 
 
@@ -47,7 +48,6 @@ def add_tags_to_user(user_id, tags):
 
     user = User.query.filter(User.id == user_id).first()
     user.tags = tags
-    print("tags in User obj", user.tags)
 
     return user
 
@@ -75,7 +75,7 @@ def get_trending_recipes():
     """Return trending recipes"""
 
     trending_recipes = []
-    recipes_obj = Recipe.query.order_by(Recipe.kisses.desc()).limit(3).all()
+    recipes_obj = Recipe.query.order_by(Recipe.kisses.desc()).limit(5).all()
     for recipe_obj in recipes_obj:
         recipe_dict = sqlalchemy_obj_to_dict(recipe_obj)
         trending_recipes.append(recipe_dict)
@@ -91,7 +91,7 @@ def get_similar_recipes(recipe_id):
     # Limit number of recipes to
     params = { 
         'apiKey': SPOONACULAR_API_KEY,
-        'number': 3
+        'number': 1
         }
     
     # Get similar recipes from the api
@@ -121,7 +121,7 @@ def get_custom_recipes(user_id):
     if user_id:
         recipes = get_favorites(user_id)
         # Get id of the most recent recipes
-        recent_recipes_id = [recipe.id for recipe in recipes[:3]]        
+        recent_recipes_id = [recipe.id for recipe in recipes[:5]]        
         # Get simolair recipes to the most recent recipes from the api
         for recipe_id in recent_recipes_id:
             similar_recipes = get_similar_recipes(recipe_id)
@@ -129,18 +129,47 @@ def get_custom_recipes(user_id):
     
     return custom_recipes
 
-def get_random_recipes():
-    """Return random recipes"""
-    random_recipes = []
+def get_tagged_recipes(user_id):
+    """Return tagged recipes for user if logged in """
+
+    tagged_recipes = []
+
+    tags = User.query.filter(User.id == user_id).first().tags or []
+    if len(tags) > 2:
+        # Get two random tags
+        tags = random.sample(tags, 2)
+        print("tags: ", tags)
 
     # Limit number of recipes to
     params = { 
         'apiKey': SPOONACULAR_API_KEY,
-        'number': 3
+        'number': 3,
+        'tags': tags
     }
 
     # Get random recipes from the api
-    random_recipes = requests.get(f'{uri_recipes}/random', params=params).json()['recipes']
+    tagged_recipes = requests.get(f'{uri_recipes}/random', params=params).json()['recipes']
+    
+    return tagged_recipes
+
+def get_random_recipes(user_id):
+    """Return random recipes"""
+    random_recipes = []
+
+    # Get user's tags if logged in
+    if user_id:
+        while len(random_recipes) < 5:
+            tagged_recipes = get_tagged_recipes(user_id)
+            random_recipes.extend(tagged_recipes)
+    else:
+        # Limit number of recipes to
+        params = { 
+            'apiKey': SPOONACULAR_API_KEY,
+            'number': 3
+        }
+
+        # Get random recipes from the api
+        random_recipes = requests.get(f'{uri_recipes}/random', params=params).json()['recipes']
 
     return random_recipes
 
@@ -151,7 +180,7 @@ def get_landing_recipes(user_id):
     landing_recipes = []
     trending_recipes = get_trending_recipes()
     custom_recipes = get_custom_recipes(user_id)
-    random_recipes = get_random_recipes()
+    random_recipes = get_random_recipes(user_id)
 
     landing_recipes.extend(trending_recipes)
     landing_recipes.extend(custom_recipes)

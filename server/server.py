@@ -80,7 +80,6 @@ def add_tags_to_user(user_id):
     """Update user tags"""
     
     tags = request.json.get('tags', {})
-    print("tags in server.py", tags)
 
     user_obj = crud.add_tags_to_user(user_id, tags)
     if user_obj:
