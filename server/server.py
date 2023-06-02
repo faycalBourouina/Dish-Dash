@@ -137,6 +137,7 @@ def search_recipes():
 
     if recipes:
         response = jsonify({'recipes': recipes})
+        print("search recipes response", response)
         return response, 200
     else:
         return {'Error': 'No recipes found'}, 404

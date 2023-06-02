@@ -211,15 +211,15 @@ def get_landing_recipes(user_id):
     """Return trending and custom recipes"""
 
     trending_limit = 2
-    custom_limit = 2
-    random_limit = 2
+    custom_limit = 5
+    random_limit = 5
     
     landing_recipes = []
-    trending_recipes = get_trending_recipes(trending_limit)
+    #trending_recipes = get_trending_recipes(trending_limit)
     custom_recipes = get_custom_recipes(user_id, custom_limit)
     random_recipes = get_random_recipes(user_id, random_limit)
 
-    landing_recipes.extend(trending_recipes)
+    #landing_recipes.extend(trending_recipes)
     landing_recipes.extend(custom_recipes)
     landing_recipes.extend(random_recipes)
 
@@ -243,10 +243,12 @@ def auto_complete_search(query):
 def search_recipes(search):
     """Search for recipes"""
 
+
     # Use mock data in test mode
     if MODE == 'TEST_MODE':
         response = mock_data['search']['response']
     else:
+        print("search in crud: ", search)
         query = search.get('query', '')
         diet = search.get('diet', '')
         cuisine = search.get('cuisine', '')
@@ -259,6 +261,7 @@ def search_recipes(search):
         # Make API request
         request = f'{uri_recipes}/complexSearch?&query={query}&diet={diet}&cuisine={cuisine}&number=20&apiKey={SPOONACULAR_API_KEY}'
         response = requests.get(request).json()
+        print("response in crud: ", response)
 
     return response
 

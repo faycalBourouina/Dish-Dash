@@ -12,12 +12,16 @@ function RecipeList({ recipes, activeTab, onRecipeClick }) {
               found
             </h3>
           )}
-          <Grid container spacing={2}>
+          <Grid container spacing={8}>
             {recipes.map((recipe) => (
               <RecipeItem
                 key={recipe.id}
                 recipe={recipe}
                 onRecipeClick={onRecipeClick}
+                summary={recipe.summary}
+                vegetarian={recipe.vegetarian}
+                vegan={recipe.vegan}
+                glutenFree={recipe.glutenFree}
               />
             ))}
           </Grid>
