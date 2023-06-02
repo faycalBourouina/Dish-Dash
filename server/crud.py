@@ -71,11 +71,11 @@ def get_user_by_id(user_id):
         return None
 
 
-def get_trending_recipes():
+def get_trending_recipes(limit):
     """Return trending recipes"""
 
     # The maximum number of trending recipes to return
-    trending_limit = 2
+    trending_limit = limit if limit else 3
     trending_recipes = []
 
     recipes_obj = Recipe.query.order_by(Recipe.kisses.desc()).limit(trending_limit).all()
@@ -116,11 +116,11 @@ def get_similar_recipes(recipe_id):
 
     return similar_recipes
 
-def get_custom_recipes(user_id):
+def get_custom_recipes(user_id, limit):
     """Return custom recipes for user if logged in """
     
     # The maximum number of custom recipes to return
-    custom_limit = 2
+    custom_limit = limit if limit else 3
     custom_recipes = []
 
     # Get user's favorite recipes
@@ -182,11 +182,11 @@ def get_tagged_recipes(user_id, limit):
     return tagged_recipes
 
 
-def get_random_recipes(user_id):
+def get_random_recipes(user_id, limit):
     """Return random recipes"""
 
     # The maximum number of random recipes to return
-    random_limit = 2
+    random_limit = limit if limit else 3
 
     random_recipes = []
 
@@ -209,11 +209,15 @@ def get_random_recipes(user_id):
 
 def get_landing_recipes(user_id):
     """Return trending and custom recipes"""
+
+    trending_limit = 2
+    custom_limit = 2
+    random_limit = 2
     
     landing_recipes = []
-    trending_recipes = get_trending_recipes()
-    custom_recipes = get_custom_recipes(user_id)
-    random_recipes = get_random_recipes(user_id)
+    trending_recipes = get_trending_recipes(trending_limit)
+    custom_recipes = get_custom_recipes(user_id, custom_limit)
+    random_recipes = get_random_recipes(user_id, random_limit)
 
     landing_recipes.extend(trending_recipes)
     landing_recipes.extend(custom_recipes)

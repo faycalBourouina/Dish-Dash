@@ -138,7 +138,7 @@ function Layout({ isLogged , handleLogin, handleSignup, handleLogout, cachedItem
             <Grid item xs={12}>
               <SearchForm onSearch={handleSearch} />
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={12} p={12}>
               {selectedRecipe ? (
                 <RecipeDetails
                   isLogged={isLogged}
