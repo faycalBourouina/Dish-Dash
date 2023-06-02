@@ -50,42 +50,51 @@ const TagsModal = ({ isLogged, open, handleClose }) => {
     setSelectedTags([]);
     handleClose();
   };
-
   return (
     <Dialog open={open} onClose={handleClose}>
       <DialogTitle>Diet and Cuisine Tags</DialogTitle>
       <DialogContent>
         <h3>Diets</h3>
         {diets.map((diet) => (
-          <Chip
-            label={diet}
-            onClick={() => handleChipClick(diet)}
-            color={selectedTags.includes(diet) ? "primary" : "default"}
-          />
+          <div key={diet} style={{ display: 'inline-block', margin: '8px' }}>
+            <Chip
+              label={diet}
+              onClick={() => handleChipClick(diet)}
+              color={selectedTags.includes(diet) ? 'primary' : 'default'}
+            />
+          </div>
         ))}
         <h3>Cuisines</h3>
         {cuisines.map((cuisine) => (
-          <Chip
-            label={cuisine}
-            onClick={() => handleChipClick(cuisine)}
-            color={selectedTags.includes(cuisine) ? "primary" : "default"}
-          />
+          <div key={cuisine} style={{ display: 'inline-block', margin: '8px' }}>
+            <Chip
+              label={cuisine}
+              onClick={() => handleChipClick(cuisine)}
+              color={selectedTags.includes(cuisine) ? 'primary' : 'default'}
+            />
+          </div>
         ))}
         <h3>Meal Types</h3>
         {mealTypes.map((mealType) => (
-          <Chip
-            label={mealType}
-            onClick={() => handleChipClick(mealType)}
-            color={selectedTags.includes(mealType) ? "primary" : "default"}
-          />
+          <div key={mealType} style={{ display: 'inline-block', margin: '8px' }}>
+            <Chip
+              label={mealType}
+              onClick={() => handleChipClick(mealType)}
+              color={selectedTags.includes(mealType) ? 'primary' : 'default'}
+            />
+          </div>
         ))}
         <h3>Intolerances</h3>
         {intolerance.map((intolerant) => (
-          <Chip
-            label={intolerant}
-            onClick={() => handleChipClick(intolerant)}
-            color={selectedTags.includes(intolerant) ? "primary" : "default"}
-          />
+          <div key={intolerant} style={{ display: 'inline-block', margin: '8px' }}>
+            <Chip
+              label={intolerant}
+              onClick={() => handleChipClick(intolerant)}
+              color={
+                selectedTags.includes(intolerant) ? 'primary' : 'default'
+              }
+            />
+          </div>
         ))}
       </DialogContent>
       <DialogActions>
@@ -98,4 +107,4 @@ const TagsModal = ({ isLogged, open, handleClose }) => {
       </DialogActions>
     </Dialog>
   );
-};
+}

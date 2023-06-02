@@ -9,7 +9,7 @@ function RecipeDetails({ isLogged, recipe, activeTab, handleUpdateFavorites, rec
       <Grid item xs={12} md={8}>
           {
             activeTab === "search" && (
-            <ButtonBase onClick={() => handleSelectedRecipe()}>
+            <ButtonBase onClick={() => handleSelectedRecipe(recipe.id)}>
               {recipesLength} {recipesLength === 1 ? "recipe" : "recipes"} found
             </ButtonBase>)
           }

@@ -211,8 +211,8 @@ def get_landing_recipes(user_id):
     """Return trending and custom recipes"""
 
     trending_limit = 2
-    custom_limit = 5
-    random_limit = 5
+    custom_limit = 2
+    random_limit = 2
     
     landing_recipes = []
     #trending_recipes = get_trending_recipes(trending_limit)

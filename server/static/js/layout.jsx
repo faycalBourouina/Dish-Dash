@@ -23,9 +23,9 @@ function Layout({ isLogged , handleLogin, handleSignup, handleLogout, cachedItem
       (selectedRecipe && activeTab === "search") && setSelectedRecipe(null);
     } 
 
-    async function handleUpdateFavorites() {
+    async function handleUpdateFavorites(recipeId) {
       const userId = isLogged;
-      const recipeId = selectedRecipe.id;
+
       const response = await fetch(`/users/${userId}/favorites/${recipeId}`, {
         method: "PATCH",
       });
@@ -154,6 +154,7 @@ function Layout({ isLogged , handleLogin, handleSignup, handleLogout, cachedItem
                 <RecipeList
                   recipes={recipes}
                   activeTab={activeTab}
+                  handleUpdateFavorites={handleUpdateFavorites}
                   onRecipeClick={handleRecipeClick}
                 />
               )}
