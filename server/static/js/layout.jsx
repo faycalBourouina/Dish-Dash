@@ -99,8 +99,8 @@ function Layout({ isLogged , handleLogin, handleSignup, handleLogout, cachedItem
         }
     }
     
-    async function handleRecipeClick(recipe) {
-        const response = await fetch(`/recipes/${recipe.id}`);
+    async function handleRecipeClick(id) {
+        const response = await fetch(`/recipes/${id}`);
         const data = await response.json();
         const recipe_details = await data.recipe;
         setSelectedRecipe(recipe_details);

@@ -1,33 +1,43 @@
+const { List, ListItem } = MaterialUI;
+
 function RecipeDetails({ isLogged, recipe, activeTab, handleUpdateFavorites, recipesLength, handleSelectedRecipe, cachedItems, setCachedItems}) {
 
   return (
-    <Grid container 
-      justifyContent="center"
-      spacing={2}
-      pt={8} pb={8}
-    > 
-      <Grid item xs={12} md={8}>
-          {
-            activeTab === "search" && (
-            <ButtonBase onClick={() => handleSelectedRecipe(recipe.id)}>
-              {recipesLength} {recipesLength === 1 ? "recipe" : "recipes"} found
-            </ButtonBase>)
-          }
-          <h2>{recipe.name}</h2>
+    <Grid container justifyContent="space-between">
+      <Grid item xs={12} md={6}>
+          {activeTab === 'search' && (
+            <Box marginBottom={2}>
+              <ButtonBase onClick={() => handleSelectedRecipe(recipe.id)}>
+                {recipesLength} {recipesLength === 1 ? 'recipe' : 'recipes'} found
+              </ButtonBase>
+            </Box>
+          )}
+        <Box marginBottom={4}>
+          <Typography variant="h3">{recipe.name}</Typography>
+        </Box>
+        <Box marginBottom={4}>
           <img src={recipe.image} alt={recipe.title} />
-          <h3>Ingredients:</h3>
-          <ul>
+        </Box>
+        <Box marginBottom={2}>
+          <Typography variant="h4">Ingredients:</Typography>
+        </Box>
+        <Box marginBottom={4}>
+          <List>
             {recipe.ingredients.map((ingredient) => (
-              <li key={ingredient.id}>{ingredient.original_name}</li>
+              <ListItem key={ingredient.id}>{ingredient.original_name}</ListItem>
             ))}
-          </ul>
-          <h3>Instructions:</h3>
-          <div dangerouslySetInnerHTML={{ __html: recipe.instructions }}></div>
-        {isLogged && <button onClick={handleUpdateFavorites(recipe.id)}>Chef's kiss</button>}
+          </List>
+        </Box>
+        <Box marginBottom={2}>
+          <Typography variant="h4">Instructions:</Typography>
+        </Box>
+        <Box marginBottom={2}>
+        <div dangerouslySetInnerHTML={{ __html: recipe.instructions }}></div>
+        </Box>
       </Grid>
-      <Grid item xs={12} md={4}>        
-        <ItemList 
-          recipe = {recipe}
+      <Grid item xs={12} md={6} container justifyContent="flex-end">
+        <ItemList
+          recipe={recipe}
           cachedItems={cachedItems}
           setCachedItems={setCachedItems}
         />

@@ -229,18 +229,16 @@ def get_landing_recipes(user_id):
     random_limit = 2
     
     landing_recipes = []
-    #trending_recipes = get_trending_recipes(trending_limit)
+    trending_recipes = get_trending_recipes(trending_limit)
     custom_recipes = get_custom_recipes(user_id, custom_limit)
     random_recipes = get_random_recipes(user_id, random_limit)
 
-    #landing_recipes.extend(trending_recipes)
+    landing_recipes.extend(trending_recipes)
     landing_recipes.extend(custom_recipes)
     landing_recipes.extend(random_recipes)
 
     # Add isFavorite attribute to recipes
     landing_recipes = add_favorite_attribute(landing_recipes, user_id)
-    print(landing_recipes)
-
 
     return landing_recipes
 
