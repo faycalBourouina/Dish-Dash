@@ -133,11 +133,15 @@ def search_recipes():
     # Get search parameters and convert to dictionary
     search_dict = request.args.to_dict()
 
-    recipes = crud.search_recipes(search_dict)
+    # Get user id from session
+    user_id = session.get('user', {}).get('id', None)
+
+    recipes = crud.search_recipes(search_dict, user_id)
 
     if recipes:
         response = jsonify({'recipes': recipes})
         print("search recipes response", response)
+        
         return response, 200
     else:
         return {'Error': 'No recipes found'}, 404

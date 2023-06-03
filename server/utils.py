@@ -1,5 +1,6 @@
 from itertools import combinations
 
+
 def sqlalchemy_obj_to_dict(obj):
     """Convert a SQLAlchemy object to a dictionary."""
 

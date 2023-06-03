@@ -12,11 +12,12 @@ function Layout({ isLogged , handleLogin, handleSignup, handleLogout, cachedItem
         const params = new URLSearchParams(searchQuery);
         const response = await fetch(`/search?${params.toString()}`);
         const data = await response.json();
-        const { recipes: { results } } = data;
+        const { recipes } = await data;
+        //setCachedSearch(recipes); // cache the search results
+        console.log("recipes", recipes);
+        setRecipes(recipes); // update the recipes state to searched recipes
         setSelectedRecipe(null); // clear the selected recipe
-        setCachedSearch(results); // cache the search results
-        setRecipes(results);
-        setActiveTab("search"); // switch to the search tab
+        //setActiveTab("search"); // switch to the search tab
     }
 
     function handleSelectedRecipe () {

@@ -71,6 +71,22 @@ def get_user_by_id(user_id):
         return None
 
 
+def add_favorite_attribute(recipes, user_id):
+    """Add the isFavorite attribute to each recipe """
+
+    # Query to fetch user favorites
+    user_favorites = Favorite.query.filter(Favorite.user_id == user_id).all()
+
+    # Get the recipe IDs from the user favorites
+    favorite_ids = [favorite.recipe_id for favorite in user_favorites]
+    
+
+    for recipe in recipes:
+        recipe['isFavorite'] = recipe['id'] in favorite_ids
+        print("is Favorite add to recipe: ", recipe['isFavorite'])
+    return recipes
+
+
 def get_trending_recipes(limit):
     """Return trending recipes"""
 
@@ -165,9 +181,7 @@ def get_tagged_recipes(user_id, limit):
                 # Break if we reached the limit recipes
                 if len(tagged_recipes) >= limit:
                     break
-        
-        #print(f"{len(tagged_recipes)} recipes found : {tagged_recipes}")
-    
+            
     # If user has less than 2 tags
     else:
         params = {
@@ -223,6 +237,10 @@ def get_landing_recipes(user_id):
     landing_recipes.extend(custom_recipes)
     landing_recipes.extend(random_recipes)
 
+    # Add isFavorite attribute to recipes
+    landing_recipes = add_favorite_attribute(landing_recipes, user_id)
+
+
     return landing_recipes
 
 def auto_complete_search(query):
@@ -240,7 +258,7 @@ def auto_complete_search(query):
     return autocomplete_search
 
  
-def search_recipes(search):
+def search_recipes(search, user_id):
     """Search for recipes"""
 
 
@@ -248,7 +266,6 @@ def search_recipes(search):
     if MODE == 'TEST_MODE':
         response = mock_data['search']['response']
     else:
-        print("search in crud: ", search)
         query = search.get('query', '')
         diet = search.get('diet', '')
         cuisine = search.get('cuisine', '')
@@ -259,9 +276,14 @@ def search_recipes(search):
         #fillIngredients	= True
 
         # Make API request
-        request = f'{uri_recipes}/complexSearch?&query={query}&diet={diet}&cuisine={cuisine}&number=20&apiKey={SPOONACULAR_API_KEY}'
+        request = f'{uri_recipes}/complexSearch?&query={query}&diet={diet}&cuisine={cuisine}&number=5&apiKey={SPOONACULAR_API_KEY}'
+         
         response = requests.get(request).json()
-        print("response in crud: ", response)
+        
+        # Add isFavorite attribute to recipes if user is logged in
+        if user_id:
+            response = add_favorite_attribute(response['results'], user_id)
+            print("serach recipes response", response)
 
     return response
 

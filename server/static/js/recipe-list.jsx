@@ -2,7 +2,7 @@ function RecipeList({ isLogged, recipes, activeTab, handleUpdateFavorites, onRec
 
   return (
     <div>
-      {recipes.length === 0 ? (
+      {recipes?.length === 0 ? (
         <h1>No recipes found</h1>
       ) : (
         <div>
@@ -21,9 +21,6 @@ function RecipeList({ isLogged, recipes, activeTab, handleUpdateFavorites, onRec
                 recipe={recipe}
                 onRecipeClick={onRecipeClick}
                 summary={recipe.summary}
-                vegetarian={recipe.vegetarian}
-                vegan={recipe.vegan}
-                glutenFree={recipe.glutenFree}
               />
             ))}
           </Grid>

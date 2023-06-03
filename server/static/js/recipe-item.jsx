@@ -1,6 +1,9 @@
 const { Card, CardContent, CardMedia, Grid, Typography, CardActions, Link, IconButton} = MaterialUI;
 
-function RecipeItem({ isLogged, handleUpdateFavorites, recipe, onRecipeClick, summary, vegetarian, vegan, glutenFree }) {
+function RecipeItem({ isLogged, handleUpdateFavorites, recipe, onRecipeClick }) {
+
+  const {id, image, summary, vegan, vegetarian, glutenFree, isFavorite } = recipe;
+
     
   const MAX_SUMMARY_LENGTH = 100; // Maximum number of characters for summary
     
@@ -21,13 +24,13 @@ function RecipeItem({ isLogged, handleUpdateFavorites, recipe, onRecipeClick, su
             <CardMedia
                 component="img"
                 height="100%"
-                image={recipe.image}
-                alt={recipe.title}
+                image={image}
+                alt={recipe.title || recipe.name}
                 sx={{ backgroundColor: '#e0e0e0' }}
             />
             {isLogged && (
             <IconButton
-              onClick={() => handleUpdateFavorites(recipe.id)}
+              onClick={() => handleUpdateFavorites(id)}
               aria-label="add to favorites"
               sx={{ opacity: 0.5 }}
               style={{ position: 'absolute', top: 0, right: 0 }}
@@ -78,7 +81,7 @@ function RecipeItem({ isLogged, handleUpdateFavorites, recipe, onRecipeClick, su
             <Button 
                 size="small" 
                 color="primary"
-                onClick={() => onRecipeClick(recipe.id)}
+                onClick={() => onRecipeClick(id)}
             >
                 Learn More
             </Button>
