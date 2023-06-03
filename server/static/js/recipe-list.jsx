@@ -1,4 +1,5 @@
-function RecipeList({ recipes, activeTab, handleUpdateFavorites, onRecipeClick }) {
+function RecipeList({ isLogged, recipes, activeTab, handleUpdateFavorites, onRecipeClick }) {
+
   return (
     <div>
       {recipes.length === 0 ? (
@@ -14,6 +15,7 @@ function RecipeList({ recipes, activeTab, handleUpdateFavorites, onRecipeClick }
           <Grid container spacing={8}>
             {recipes.map((recipe) => (
               <RecipeItem
+                isLogged={isLogged}
                 handleUpdateFavorites={handleUpdateFavorites}
                 key={recipe.id}
                 recipe={recipe}

@@ -23,7 +23,7 @@ function RecipeDetails({ isLogged, recipe, activeTab, handleUpdateFavorites, rec
           </ul>
           <h3>Instructions:</h3>
           <div dangerouslySetInnerHTML={{ __html: recipe.instructions }}></div>
-        {isLogged && <button onClick={handleUpdateFavorites}>Chef's kiss</button>}
+        {isLogged && <button onClick={handleUpdateFavorites(recipe.id)}>Chef's kiss</button>}
       </Grid>
       <Grid item xs={12} md={4}>        
         <ItemList 

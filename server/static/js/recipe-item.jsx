@@ -1,10 +1,10 @@
 const { Card, CardContent, CardMedia, Grid, Typography, CardActions, Link, IconButton} = MaterialUI;
 
-function RecipeItem({ handleUpdateFavorites, recipe, onRecipeClick, summary, vegetarian, vegan, glutenFree }) {
+function RecipeItem({ isLogged, handleUpdateFavorites, recipe, onRecipeClick, summary, vegetarian, vegan, glutenFree }) {
     
-    const MAX_SUMMARY_LENGTH = 100; // Maximum number of characters for summary
+  const MAX_SUMMARY_LENGTH = 100; // Maximum number of characters for summary
     
-    const sanitizedSummary = summary
+  const sanitizedSummary = summary
     ? new DOMParser()
         .parseFromString(summary, 'text/html')
         .body.textContent.trim()
@@ -25,6 +25,7 @@ function RecipeItem({ handleUpdateFavorites, recipe, onRecipeClick, summary, veg
                 alt={recipe.title}
                 sx={{ backgroundColor: '#e0e0e0' }}
             />
+            {isLogged && (
             <IconButton
               onClick={() => handleUpdateFavorites(recipe.id)}
               aria-label="add to favorites"
@@ -36,13 +37,14 @@ function RecipeItem({ handleUpdateFavorites, recipe, onRecipeClick, summary, veg
                 style={{
                   fontSize: '40px',
                   color: 'rgba(255, 255, 255, 1)',
-                  WebkitTextStroke: '3px black'
+                  WebkitTextStroke: '3px black',
+                  transition: 'color 0.3s ease-in-out',
                 }}
               >
                 favorite
               </i>
             </IconButton>
-
+            )}
         </div>
 
         <CardContent>
@@ -55,7 +57,7 @@ function RecipeItem({ handleUpdateFavorites, recipe, onRecipeClick, summary, veg
             </Typography>
           )}
         </CardContent>
-          <CardActions sx={{ display: 'flex', justifyContent: 'space-between' }}>
+        <CardActions sx={{ display: 'flex', justifyContent: 'space-between' }}>
                 <Stack direction="row" spacing={1} alignItems="center">
                     {vegetarian && (
                         <Typography variant="body2" color="text.secondary">
@@ -80,8 +82,8 @@ function RecipeItem({ handleUpdateFavorites, recipe, onRecipeClick, summary, veg
             >
                 Learn More
             </Button>
-          </CardActions>
+        </CardActions>
       </Card>
     </Grid>
   );
-  }
+}

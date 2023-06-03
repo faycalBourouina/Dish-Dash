@@ -40,10 +40,17 @@ function Layout({ isLogged , handleLogin, handleSignup, handleLogout, cachedItem
           // Favorite removed successfully
           console.log("Favorite removed");
           // Update the recipes state by filtering out the deleted recipe
-          const updatedRecipes = recipes.filter((r) => r.id !== recipeId);
+          const updatedRecipes = cachedFavorites.filter((r) => r.id !== recipeId);
           setCachedFavorites(updatedRecipes);
-          setSelectedRecipe("");
-          setActiveTab("favorites")
+          // Update the recipes state if the active tab is favorites
+          activeTab === "favorites" && setRecipes(updatedRecipes);
+
+          // Update the selectedRecipe state if the deleted recipe is the selected recipe
+          if (selectedRecipe && selectedRecipe.id === recipeId) {
+            console.log("selectedRecipe", selectedRecipe);
+            setSelectedRecipe(null);
+            setActiveTab("favorites")  
+          }
 
         } else {
           // Error handling
@@ -56,8 +63,8 @@ function Layout({ isLogged , handleLogin, handleSignup, handleLogout, cachedItem
         
         // Update the cachedFavorites state by adding the new favorite recipe
         setCachedFavorites([...cachedFavorites, favorite]);
-        
-        console.log("cachedFavorites in update", cachedFavorites);
+        // Update the recipes state if the active tab is favorites
+        activeTab === "favorites" && setRecipes([...recipes, favorite]); 
 
       } else {
         // Error handling for other response statuses
@@ -109,6 +116,9 @@ function Layout({ isLogged , handleLogin, handleSignup, handleLogout, cachedItem
       }
     }, [isLogged]);
     
+    useEffect(() => { fetchFavoritesRecipes()}, []);
+
+
     useEffect(() => {
       if (activeTab === "home") {
         fetchLandingRecipes();
@@ -117,7 +127,7 @@ function Layout({ isLogged , handleLogin, handleSignup, handleLogout, cachedItem
       }
     }, [activeTab, isLogged]);
 
-
+    
     return (
       <div>
         <Grid container direction="column">
@@ -152,6 +162,7 @@ function Layout({ isLogged , handleLogin, handleSignup, handleLogout, cachedItem
                 />
               ) : (
                 <RecipeList
+                  isLogged={isLogged}
                   recipes={recipes}
                   activeTab={activeTab}
                   handleUpdateFavorites={handleUpdateFavorites}
