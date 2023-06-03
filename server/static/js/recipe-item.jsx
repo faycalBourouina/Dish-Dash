@@ -30,18 +30,17 @@ function RecipeItem({ isLogged, handleUpdateFavorites, recipe, onRecipeClick }) 
             />
             {isLogged && (
             <IconButton
-              onClick={() => handleUpdateFavorites(id)}
+              onClick={() => handleUpdateFavorites(id, isFavorite)}
               aria-label="add to favorites"
-              sx={{ opacity: 0.5 }}
+              sx={{ opacity: isFavorite ? 1 : 0.5 }}
               style={{ position: 'absolute', top: 0, right: 0 }}
             >
               <i
                 className="material-icons"
                 style={{
                   fontSize: '40px',
-                  color: 'rgba(255, 255, 255, 1)',
+                  color: isFavorite ? '#FFCB05' : 'rgba(255, 255, 255, 1)',
                   WebkitTextStroke: '3px black',
-                  transition: 'color 0.3s ease-in-out',
                 }}
               >
                 favorite
