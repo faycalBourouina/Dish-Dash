@@ -239,6 +239,7 @@ def get_landing_recipes(user_id):
 
     # Add isFavorite attribute to recipes
     landing_recipes = add_favorite_attribute(landing_recipes, user_id)
+    print(landing_recipes)
 
 
     return landing_recipes
@@ -283,7 +284,6 @@ def search_recipes(search, user_id):
         # Add isFavorite attribute to recipes if user is logged in
         if user_id:
             response = add_favorite_attribute(response['results'], user_id)
-            print("serach recipes response", response)
 
     return response
 
@@ -562,7 +562,6 @@ def add_favorite(user, recipe):
     else:
         favorite = Favorite(user=user, recipe=recipe)
         return favorite
-    # Use real data in production mode to be implemented
 
 def remove_favorite(user_id, recipe_id):
     """Remove recipe from user's favorites"""

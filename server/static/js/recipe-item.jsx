@@ -2,9 +2,15 @@ const { Card, CardContent, CardMedia, Grid, Typography, CardActions, Link, IconB
 
 function RecipeItem({ isLogged, handleUpdateFavorites, recipe, onRecipeClick }) {
 
-  const {id, image, summary, vegan, vegetarian, glutenFree, isFavorite } = recipe;
+  const {id, image, summary, vegan, vegetarian, glutenFree, isFavorite: initIsFavorite } = recipe;
 
-    
+  const [isFavorite, setIsFavorite] = useState(initIsFavorite);
+
+  const handleFavoriteClick = (id, isFavorite) => {
+    setIsFavorite(!isFavorite);
+    handleUpdateFavorites(id, isFavorite);
+  };
+
   const MAX_SUMMARY_LENGTH = 100; // Maximum number of characters for summary
     
   const sanitizedSummary = summary
@@ -30,7 +36,7 @@ function RecipeItem({ isLogged, handleUpdateFavorites, recipe, onRecipeClick }) 
             />
             {isLogged && (
             <IconButton
-              onClick={() => handleUpdateFavorites(id, isFavorite)}
+              onClick={() => handleFavoriteClick(id, isFavorite)}
               aria-label="add to favorites"
               sx={{ opacity: isFavorite ? 1 : 0.5 }}
               style={{ position: 'absolute', top: 0, right: 0 }}

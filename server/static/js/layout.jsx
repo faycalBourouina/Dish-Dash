@@ -24,19 +24,33 @@ function Layout({ isLogged , handleLogin, handleSignup, handleLogout, cachedItem
       (selectedRecipe && activeTab === "search") && setSelectedRecipe(null);
     } 
 
-    async function handleUpdateFavorites(recipeId) {
+    async function handleUpdateFavorites(recipeId, isFavorite) {
       const userId = isLogged;
-
-      const response = await fetch(`/users/${userId}/favorites/${recipeId}`, {
-        method: "PATCH",
-      });
-      const data = await response.json();
     
-      if (response.status === 409 && data.message === "Favorite already exists") {
-        // Send a DELETE request to remove the favorite
+      if (!isFavorite) {
+        const response = await fetch(`/users/${userId}/favorites/${recipeId}`, {
+          method: "PATCH",
+        });
+        const data = await response.json();
+    
+        if (response.ok) {
+          // Recipe added to favorites successfully
+          console.log("Recipe added to favorites");
+          const { favorite } = data;
+    
+          // Update the cachedFavorites state by adding the new favorite recipe
+          setCachedFavorites([...cachedFavorites, favorite]);
+          // Update the recipes state if the active tab is favorites
+          activeTab === "favorites" && setRecipes([...recipes, favorite]);
+        } else {
+          // Error handling for other response statuses
+          console.error("Failed to add recipe to favorites");
+        }
+      } else {
         const deleteResponse = await fetch(`/users/${userId}/favorites/${recipeId}`, {
           method: "DELETE",
         });
+    
         if (deleteResponse.ok) {
           // Favorite removed successfully
           console.log("Favorite removed");
@@ -45,34 +59,19 @@ function Layout({ isLogged , handleLogin, handleSignup, handleLogout, cachedItem
           setCachedFavorites(updatedRecipes);
           // Update the recipes state if the active tab is favorites
           activeTab === "favorites" && setRecipes(updatedRecipes);
-
+    
           // Update the selectedRecipe state if the deleted recipe is the selected recipe
           if (selectedRecipe && selectedRecipe.id === recipeId) {
             console.log("selectedRecipe", selectedRecipe);
             setSelectedRecipe(null);
-            setActiveTab("favorites")  
+            setActiveTab("favorites");
           }
-
         } else {
           // Error handling
           console.error("Failed to remove favorite");
         }
-      } else if (response.ok) {
-        // Recipe added to favorites successfully
-        console.log("Recipe added to favorites");
-        const { favorite } = data;
-        
-        // Update the cachedFavorites state by adding the new favorite recipe
-        setCachedFavorites([...cachedFavorites, favorite]);
-        // Update the recipes state if the active tab is favorites
-        activeTab === "favorites" && setRecipes([...recipes, favorite]); 
-
-      } else {
-        // Error handling for other response statuses
-        console.error("Failed to add recipe to favorites");
       }
     }
-    
     async function fetchLandingRecipes() {
         if (cachedLanding.length) {
           setRecipes(cachedLanding);
@@ -126,6 +125,7 @@ function Layout({ isLogged , handleLogin, handleSignup, handleLogout, cachedItem
       } else if (activeTab === "favorites") {
         fetchFavoritesRecipes();
       }
+      console.log("recipes", recipes)
     }, [activeTab, isLogged]);
 
     
