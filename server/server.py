@@ -42,7 +42,7 @@ def get_landing_page_recipes():
     recipes = crud.get_landing_recipes(user_id)
 
     if recipes:
-        response = {'recipes': recipes}
+        response = jsonify({'recipes': recipes})
         return response, 200
     else:
         return {'Error': 'No recipes found'}, 404

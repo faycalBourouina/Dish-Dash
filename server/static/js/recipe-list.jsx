@@ -1,5 +1,5 @@
 function RecipeList({ isLogged, recipes, activeTab, handleUpdateFavorites, onRecipeClick }) {
-
+  console.log('recipes in RecipeList', recipes);
   return (
     <div>
       {recipes?.length === 0 ? (

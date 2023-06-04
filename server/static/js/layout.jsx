@@ -14,7 +14,6 @@ function Layout({ isLogged , handleLogin, handleSignup, handleLogout, cachedItem
         const data = await response.json();
         const { recipes } = await data;
         //setCachedSearch(recipes); // cache the search results
-        console.log("recipes", recipes);
         setRecipes(recipes); // update the recipes state to searched recipes
         setSelectedRecipe(null); // clear the selected recipe
         //setActiveTab("search"); // switch to the search tab
@@ -62,7 +61,6 @@ function Layout({ isLogged , handleLogin, handleSignup, handleLogout, cachedItem
     
           // Update the selectedRecipe state if the deleted recipe is the selected recipe
           if (selectedRecipe && selectedRecipe.id === recipeId) {
-            console.log("selectedRecipe", selectedRecipe);
             setSelectedRecipe(null);
             setActiveTab("favorites");
           }
@@ -79,6 +77,7 @@ function Layout({ isLogged , handleLogin, handleSignup, handleLogout, cachedItem
           const response = await fetch("/landing");
           const data = await response.json();
           const { recipes } = data;
+
           setCachedLanding(recipes);
           setRecipes(recipes);
         }
@@ -99,11 +98,13 @@ function Layout({ isLogged , handleLogin, handleSignup, handleLogout, cachedItem
         }
     }
     
-    async function handleRecipeClick(id) {
-        const response = await fetch(`/recipes/${id}`);
+    async function handleRecipeClick(recipe) {
+        const response = await fetch(`/recipes/${recipe.id}`);
         const data = await response.json();
-        const recipe_details = await data.recipe;
-        setSelectedRecipe(recipe_details);
+        const { ingredients } = await data.recipe;
+        recipe.ingredients = ingredients;
+
+        setSelectedRecipe(recipe);
     }
 
 
@@ -128,7 +129,6 @@ function Layout({ isLogged , handleLogin, handleSignup, handleLogout, cachedItem
       console.log("recipes", recipes)
     }, [activeTab, isLogged]);
 
-    
     return (
       <div>
         <Grid container direction="column">
@@ -144,7 +144,7 @@ function Layout({ isLogged , handleLogin, handleSignup, handleLogout, cachedItem
               />
             </Box>
           </Grid>
-
+    
           <Box p={8}>
             <Grid item xs={12}>
               <SearchForm onSearch={handleSearch} />
@@ -162,14 +162,15 @@ function Layout({ isLogged , handleLogin, handleSignup, handleLogout, cachedItem
                   setCachedItems={setCachedItems}
                 />
               ) : (
-                <RecipeList
-                  isLogged={isLogged}
-                  recipes={recipes}
-                  activeTab={activeTab}
-                  handleUpdateFavorites={handleUpdateFavorites}
-                  onRecipeClick={handleRecipeClick}
-                />
-              )}
+                  <RecipeList
+                    isLogged={isLogged}
+                    recipes={recipes}
+                    activeTab={activeTab}
+                    handleUpdateFavorites={handleUpdateFavorites}
+                    onRecipeClick={handleRecipeClick}
+                  />
+                )
+              }
             </Grid>
           </Box>
         </Grid>

@@ -18,6 +18,10 @@ function RecipeItem({ isLogged, handleUpdateFavorites, recipe, onRecipeClick }) 
         .parseFromString(summary, 'text/html')
         .body.textContent.trim()
     : '';
+  
+  // update recipe summary with sanitized summary
+  recipe.summary = sanitizedSummary;
+
   const truncatedSummary =
     sanitizedSummary && sanitizedSummary.length > MAX_SUMMARY_LENGTH
       ? `${sanitizedSummary.substring(0, MAX_SUMMARY_LENGTH).trim()}...`
@@ -86,7 +90,7 @@ function RecipeItem({ isLogged, handleUpdateFavorites, recipe, onRecipeClick }) 
             <Button 
                 size="small" 
                 color="primary"
-                onClick={() => onRecipeClick(id)}
+                onClick={() => onRecipeClick(recipe)}
             >
                 Learn More
             </Button>
