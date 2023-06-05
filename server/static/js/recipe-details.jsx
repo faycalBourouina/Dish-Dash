@@ -1,9 +1,7 @@
 const { List, ListItem } = MaterialUI;
-
 function RecipeDetails({ isLogged, recipe, activeTab, handleUpdateFavorites, recipesLength, handleSelectedRecipe, cachedItems, setCachedItems}) {
 
   const { id, title, image, instructions, ingredients, summary } = recipe;
-  console.log('recipe in RecipeDetails', recipe);
   
   return (
     <Grid container justifyContent="space-between">
@@ -48,11 +46,11 @@ function RecipeDetails({ isLogged, recipe, activeTab, handleUpdateFavorites, rec
         </Box>
       </Grid>
       <Grid item xs={12} md={6} container justifyContent="flex-end">
-        <ItemList
-          recipe={recipe}
-          cachedItems={cachedItems}
-          setCachedItems={setCachedItems}
-        />
+            <ItemList
+              recipe={recipe}
+              cachedItems={cachedItems}
+              setCachedItems={setCachedItems}
+            />
       </Grid>
     </Grid>
   );
