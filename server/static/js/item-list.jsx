@@ -1,3 +1,5 @@
+const { useRef } = React;
+
 const testItems =
 [
     {
@@ -136,6 +138,18 @@ const ItemList = ({ recipe, cachedItems, setCachedItems }) => {
   
   const [items, setItems] = useState([]);
 
+  const itemListRef = useRef(null);
+  const [itemListTop, setItemListTop] = useState(0);
+  const [itemListLeft, setItemListLeft] = useState(0);
+
+  useEffect(() => {
+    if (itemListRef.current) {
+      const rect = itemListRef.current.getBoundingClientRect();
+      setItemListTop(rect.top);
+      setItemListLeft(rect.left);
+    }
+  }, []);
+
   const recipeId = recipe.id;
 
   async function fetchItems(recipeId) {
@@ -181,11 +195,22 @@ const ItemList = ({ recipe, cachedItems, setCachedItems }) => {
   }, [recipeId]);
 
   return (
-    <div style={{height: '1500px', overflow: 'auto'}}>
-      <h3>Featured ingredients:</h3>
-      {testItems.map((item) => (
-        <ItemDetails key={item.id} item={item} />
-      ))}
-    </div>
+    <>
+      <div 
+        className="ItemList"
+        ref={itemListRef}
+        style={{
+            position: 'sticky',
+            top: itemListTop, 
+            top: 0, 
+            height: '1500px', 
+            overflow: 'auto'
+        }}
+      >
+        {testItems.map((item) => (
+          <ItemDetails key={item.id} item={item} />
+        ))}
+      </div>
+    </>
   );
 };

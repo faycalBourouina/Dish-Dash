@@ -46,11 +46,21 @@ function RecipeDetails({ isLogged, recipe, activeTab, handleUpdateFavorites, rec
         </Box>
       </Grid>
       <Grid item xs={12} md={6} container justifyContent="flex-end">
-            <ItemList
-              recipe={recipe}
-              cachedItems={cachedItems}
-              setCachedItems={setCachedItems}
+        <Box display="flex" flexDirection="column">
+          <Typography variant="h4"  style={{ textAlign: 'center' }}>
+            <img
+              src="/static/img/Walmart_logo_transparent_png.png"
+              alt="Walmart Logo"
+              style={{ height: '48px'}}
             />
+          </Typography>
+
+          <ItemList
+            recipe={recipe}
+            cachedItems={cachedItems}
+            setCachedItems={setCachedItems}
+          />
+        </Box>
       </Grid>
     </Grid>
   );

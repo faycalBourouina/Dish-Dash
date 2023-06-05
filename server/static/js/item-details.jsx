@@ -19,7 +19,7 @@ const ItemDetails = ({ item }) => {
       <CardContent>
         <Typography variant="h6"> {title} </Typography>
         <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-          <Typography variant="h6">${price}</Typography>
+          <Typography variant="h5">${price}</Typography>
         </Box>
       </CardContent>
       <CardActions sx={{ marginTop: -2, justifyContent: 'flex-end' }}>
