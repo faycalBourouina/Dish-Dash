@@ -1,6 +1,7 @@
+const { useState } = React;
 const { AppBar, Toolbar, CssBaseline, ButtonBase } = MaterialUI;
 
-function Navbar({ isLogged, handleLogin, handleSignup, handleLogout, setActiveTab, setSelectedRecipe }) {
+function Navbar({ isLogged, newUser, handleLogin, handleSignup, handleLogout, setActiveTab, setSelectedRecipe }) {
   
   const [isModalOpen, setIsModalOpen] = React.useState(false);
 
@@ -12,6 +13,11 @@ function Navbar({ isLogged, handleLogin, handleSignup, handleLogout, setActiveTa
   const handleSignupWithModal = (email, password) => {
     handleSignup(email, password);
     setIsModalOpen(true);
+  };
+
+  const handleLoginWithModal = (email, password) => {
+    handleLogin(email, password);
+    setIsModalOpen(false);
   };
 
     return (
@@ -59,22 +65,34 @@ function Navbar({ isLogged, handleLogin, handleSignup, handleLogout, setActiveTa
                 </>
                 ) : (
                 <Grid item xs={4}>
-                    <Grid container justifyContent="flex-end" sx={{ marginLeft: '25px' }}>
-                      <AuthForm 
-                        handleLogin={handleLogin} 
-                        handleSignup={handleSignupWithModal}
-                      />
-                    </Grid>
+                  <Grid container justifyContent="flex-end" sx={{ marginLeft: '25px' }}>
+                    <ButtonBase
+                      onClick={() => setIsModalOpen(true)}
+                      color="inherit"
+                      underline="none"
+                      sx={{ fontSize: '1.2rem', minHeight: '48px' }}
+                    >
+                      Login / Signup
+                    </ButtonBase>
+                  </Grid>
                 </Grid>
               )}
             </Grid>
           </Toolbar>
         </AppBar>
-        <TagsModal
-          isLogged={isLogged}
-          open={isModalOpen}
-          handleClose={() => setIsModalOpen(false)} 
-        />
+      <Box/>
+
+      {isModalOpen && (
+        <Box sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', pr: 5 }}>
+          <AuthModal
+                  open={isModalOpen}
+                  handleClose={() => setIsModalOpen(false)}
+                  handleLogin={handleLoginWithModal}
+                  handleSignup={handleSignupWithModal}
+                  newUser={newUser}
+          />
+        </Box>
+      )}
       </Box>
   );
 }

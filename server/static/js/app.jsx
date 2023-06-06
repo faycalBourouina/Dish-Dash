@@ -4,6 +4,8 @@ function App({ userId }) {
 
   //Storing the logged in user id
   const [isLogged, setIsLogged] = useState(userId);
+  // Set to true if the user is new
+  const [newUser, setNewUser] = useState(false);
   // Caching fetched landing recipes
   const [cachedLanding, setCachedLanding] = useState([]);
   // Caching fetched fvorites recipes
@@ -54,6 +56,7 @@ function App({ userId }) {
         const { user: { id } } = data;
         console.log('Signed up as', id);
         setIsLogged(id);
+        setNewUser(true);
 
       } else if (response.status === 409) {
         const data = await response.json();
@@ -84,7 +87,8 @@ function App({ userId }) {
     <div>
       <div className="container">
       <Layout 
-        isLogged={isLogged} 
+        isLogged={isLogged}
+        newUser={newUser}
         handleLogin={handleLogin} 
         handleSignup={handleSignup} 
         handleLogout={handleLogout}
