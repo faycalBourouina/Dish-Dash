@@ -14,9 +14,10 @@ function Layout({ isLogged , handleLogin, handleSignup, handleLogout, cachedItem
         const params = new URLSearchParams(searchQuery);
         const response = await fetch(`/search?${params.toString()}`);
         const data = await response.json();
-        const { recipes } = await data;
+        console.log('data in handleSearch', data);
+        const recipesResponse = data.recipes?.results || data.recipes || [];
         //setCachedSearch(recipes); // cache the search results
-        setRecipes(recipes); // update the recipes state to searched recipes
+        setRecipes(recipesResponse); // update the recipes state to searched recipes
         setSelectedRecipe(null); // clear the selected recipe
         //setActiveTab("search"); // switch to the search tab
         setIsLoading(false); // set isLoading back to false once data has finished loading

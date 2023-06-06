@@ -1,5 +1,5 @@
 from model import db, User, Recipe, Favorite, Ingredient, RecipeIngredient, connect_to_db
-from utils import (sqlalchemy_obj_to_dict, get_tag_combinations_of_2)
+from utils import (sqlalchemy_obj_to_dict, get_tag_combinations_of_2, remove_duplicate_recipes)
 
 
 
@@ -224,9 +224,9 @@ def get_random_recipes(user_id, limit):
 def get_landing_recipes(user_id):
     """Return trending and custom recipes"""
 
-    trending_limit = 1
-    custom_limit = 1
-    random_limit = 1
+    trending_limit = 2
+    custom_limit = 2
+    random_limit = 2
     
     landing_recipes = []
     #trending_recipes = get_trending_recipes(trending_limit)
@@ -236,6 +236,9 @@ def get_landing_recipes(user_id):
     #landing_recipes.extend(trending_recipes)
     landing_recipes.extend(custom_recipes)
     landing_recipes.extend(random_recipes)
+
+    # Remove duplicates based on recipe ID
+    landing_recipes = remove_duplicate_recipes(landing_recipes)
 
     # Add isFavorite attribute to recipes
     landing_recipes = add_favorite_attribute(landing_recipes, user_id)

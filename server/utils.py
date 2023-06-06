@@ -41,3 +41,15 @@ def get_groceries_upcs(groceries):
 def get_tag_combinations_of_2(tags):
     """Return all possible combinations of 2 tags"""
     return list(combinations(tags, 2))
+
+
+def remove_duplicate_recipes(recipes):
+    """Remove duplicates from a list of recipes based on recipe ID"""
+    unique_ids = set()
+    filtered_recipes = []
+    for recipe in recipes:
+        recipe_id = recipe['id']
+        if recipe_id not in unique_ids:
+            unique_ids.add(recipe_id)
+            filtered_recipes.append(recipe)
+    return filtered_recipes
