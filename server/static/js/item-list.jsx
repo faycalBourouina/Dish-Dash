@@ -136,6 +136,7 @@ const testItems =
 ]
 const ItemList = ({ recipe, cachedItems, setCachedItems }) => {
   
+  const [isLoadingItems, setIsLoadingItems] = useState(false);
   const [items, setItems] = useState([]);
 
   const itemListRef = useRef(null);
@@ -169,7 +170,8 @@ const ItemList = ({ recipe, cachedItems, setCachedItems }) => {
       return;
     }
 
-    
+    // Set loading state to true before fetching items
+    setIsLoadingItems(true);
     // Convert ingredients to query string
     const queryParams = new URLSearchParams({ ingredients: JSON.stringify(ingredients) }).toString();
 
@@ -185,6 +187,7 @@ const ItemList = ({ recipe, cachedItems, setCachedItems }) => {
     }));
 
     setItems(items);
+    setIsLoadingItems(false);
   }
 
   useEffect(() => {
@@ -193,7 +196,7 @@ const ItemList = ({ recipe, cachedItems, setCachedItems }) => {
       fetchItems(recipeId);
     }
   }, [recipeId]);
-
+  
   return (
     <>
       <div 
@@ -207,9 +210,13 @@ const ItemList = ({ recipe, cachedItems, setCachedItems }) => {
             overflow: 'auto'
         }}
       >
-        {testItems.map((item) => (
-          <ItemDetails key={item.id} item={item} />
-        ))}
+        {isLoadingItems ? (
+          <ItemListSkeleton />
+          ) : (
+          testItems.map((item) => (
+            <ItemDetails key={item.id} item={item} />
+          ))
+        )}
       </div>
     </>
   );

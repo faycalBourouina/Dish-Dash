@@ -58,7 +58,6 @@ function RecipeDetails({ isLogged, recipe, activeTab, handleUpdateFavorites, rec
               style={{ height: '48px'}}
             />
           </Typography>
-
           <ItemList
             recipe={recipe}
             cachedItems={cachedItems}
