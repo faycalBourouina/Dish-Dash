@@ -3,11 +3,13 @@ const { Grid, Box } = MaterialUI;
 
 function Layout({ isLogged , handleLogin, handleSignup, handleLogout, cachedItems, setCachedItems, cachedLanding, setCachedLanding, cachedFavorites, setCachedFavorites, cachedSearch, setCachedSearch}) {
     const [activeTab, setActiveTab] = React.useState("home");
+    const [isLoading, setIsLoading] = React.useState(false);
     const [recipes, setRecipes] = React.useState([]);
     const [selectedRecipe, setSelectedRecipe] = React.useState(null);
     
     async function handleSearch(searchQuery) {
 
+        setIsLoading(true); // set isLoading to true before starting the fetch
         setCachedSearch([]); // clear the cached search results
         const params = new URLSearchParams(searchQuery);
         const response = await fetch(`/search?${params.toString()}`);
@@ -17,6 +19,7 @@ function Layout({ isLogged , handleLogin, handleSignup, handleLogout, cachedItem
         setRecipes(recipes); // update the recipes state to searched recipes
         setSelectedRecipe(null); // clear the selected recipe
         //setActiveTab("search"); // switch to the search tab
+        setIsLoading(false); // set isLoading back to false once data has finished loading
     }
 
     function handleSelectedRecipe () {
@@ -25,7 +28,7 @@ function Layout({ isLogged , handleLogin, handleSignup, handleLogout, cachedItem
 
     async function handleUpdateFavorites(recipeId, isFavorite) {
       const userId = isLogged;
-    
+
       if (!isFavorite) {
         const response = await fetch(`/users/${userId}/favorites/${recipeId}`, {
           method: "PATCH",
@@ -73,13 +76,15 @@ function Layout({ isLogged , handleLogin, handleSignup, handleLogout, cachedItem
     async function fetchLandingRecipes() {
         if (cachedLanding.length) {
           setRecipes(cachedLanding);
-        } else {     
+        } else {
+          setIsLoading(true);     
           const response = await fetch("/landing");
           const data = await response.json();
           const { recipes } = data;
 
           setCachedLanding(recipes);
           setRecipes(recipes);
+          setIsLoading(false);
         }
     }
 
@@ -88,6 +93,7 @@ function Layout({ isLogged , handleLogin, handleSignup, handleLogout, cachedItem
           console.log("cachedFavorites in fetch", cachedFavorites);
           setRecipes(cachedFavorites);
         } else {
+          setIsLoading(true);
           const userId = isLogged;
           const response = await fetch(`users/${userId}/favorites`);
           const data = await response.json();
@@ -95,6 +101,7 @@ function Layout({ isLogged , handleLogin, handleSignup, handleLogout, cachedItem
           console.log("favorites from server: ", favorites);
           setCachedFavorites(favorites);
           setRecipes(favorites);
+          setIsLoading(false);
         }
     }
     
@@ -164,6 +171,7 @@ function Layout({ isLogged , handleLogin, handleSignup, handleLogout, cachedItem
               ) : (
                   <RecipeList
                     isLogged={isLogged}
+                    isLoading={isLoading}
                     recipes={recipes}
                     activeTab={activeTab}
                     handleUpdateFavorites={handleUpdateFavorites}

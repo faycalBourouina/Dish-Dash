@@ -1,5 +1,9 @@
-function RecipeList({ isLogged, recipes, activeTab, handleUpdateFavorites, onRecipeClick }) {
+function RecipeList({ isLogged, isLoading, recipes, activeTab, handleUpdateFavorites, onRecipeClick }) {
   console.log('recipes in RecipeList', recipes);
+
+  if (isLoading) {
+    return <RecipeListSkeleton />;
+  }
   return (
     <div>
       {recipes?.length === 0 ? (

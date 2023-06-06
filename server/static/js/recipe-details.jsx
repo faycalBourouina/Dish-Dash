@@ -4,7 +4,11 @@ function RecipeDetails({ isLogged, recipe, activeTab, handleUpdateFavorites, rec
   const { id, title, image, instructions, ingredients, summary } = recipe;
   
   return (
-    <Grid container justifyContent="space-between">
+    <Grid 
+      container 
+      justifyContent="space-between"
+      pr={10} pl ={10}
+    >
       <Grid item xs={12} md={6}>
           {activeTab === 'search' && (
             <Box marginBottom={2}>
