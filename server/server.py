@@ -35,10 +35,10 @@ def get_client():
     return render_template("index.html")
 
 @app.route("/joke")
-def get_joke():
+def get_food_jokes():
     """Get a random joke"""
 
-    joke = crud.get_joke()
+    joke = crud.get_food_jokes()
     response = jsonify({'joke': joke})
 
     return response, 200     
@@ -165,6 +165,19 @@ def get_recipe(recipe_id):
         return response, 200
     else:   
         return "{Error: 'No recipe found'}", 404
+    
+
+@app.route("/recipes/<int:recipe_id>/similar")
+def get_similar_recipes(recipe_id):
+    """Return similar recipes"""
+
+    recipes = crud.get_similar_recipes(recipe_id, 3)
+
+    if recipes:
+        response = jsonify({'recipes': recipes})
+        return response, 200
+    else:
+        return {'Error': 'No similar recipes found'}, 404
 
 @app.route("/recipes/<int:recipe_id>/ingredients")
 def get_recipe_ingredients(recipe_id):

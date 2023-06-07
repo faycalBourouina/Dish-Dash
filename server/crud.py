@@ -32,7 +32,7 @@ with open('data/mock_db.json') as f:
 
 def get_food_jokes():
     """Return food jokes"""
-    response = requests.get(f'{uri_recipes}/food/jokes/random', params={'apiKey': SPOONACULAR_API_KEY})
+    response = requests.get('https://api.spoonacular.com/food/jokes/random', params={'apiKey': SPOONACULAR_API_KEY})
     return response.json()
 
 def create_user(email, password):
@@ -106,7 +106,7 @@ def get_trending_recipes(limit):
     return trending_recipes
 
 
-def get_similar_recipes(recipe_id):
+def get_similar_recipes(recipe_id, num = 1):
     """Return similar recipes"""
 
     similar_recipes = []
@@ -114,7 +114,7 @@ def get_similar_recipes(recipe_id):
     # Limit number of recipes to
     params = { 
         'apiKey': SPOONACULAR_API_KEY,
-        'number': 1
+        'number': num
         }
     
     # Get similar recipes from the api
