@@ -30,6 +30,10 @@ with open('data/mock_api.json') as f:
 with open('data/mock_db.json') as f:
     mock_users = json.load(f)
 
+def get_food_jokes():
+    """Return food jokes"""
+    response = requests.get(f'{uri_recipes}/food/jokes/random', params={'apiKey': SPOONACULAR_API_KEY})
+    return response.json()
 
 def create_user(email, password):
     """Create a new user"""
@@ -96,8 +100,8 @@ def get_trending_recipes(limit):
 
     recipes_obj = Recipe.query.order_by(Recipe.kisses.desc()).limit(trending_limit).all()
     for recipe_obj in recipes_obj:
-        recipe_dict = sqlalchemy_obj_to_dict(recipe_obj)
-        trending_recipes.append(recipe_dict)
+        trending_recipe = get_recipe(recipe_obj.id)
+        trending_recipes.append(trending_recipe)
 
     return trending_recipes
 
@@ -229,11 +233,11 @@ def get_landing_recipes(user_id):
     random_limit = 2
     
     landing_recipes = []
-    #trending_recipes = get_trending_recipes(trending_limit)
+    trending_recipes = get_trending_recipes(trending_limit)
     custom_recipes = get_custom_recipes(user_id, custom_limit)
     random_recipes = get_random_recipes(user_id, random_limit)
 
-    #landing_recipes.extend(trending_recipes)
+    landing_recipes.extend(trending_recipes)
     landing_recipes.extend(custom_recipes)
     landing_recipes.extend(random_recipes)
 

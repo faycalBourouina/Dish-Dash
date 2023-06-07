@@ -160,6 +160,7 @@ function Layout({ isLogged , newUser, setNewUser, handleLogin, handleSignup, han
               <SearchForm onSearch={handleSearch} />
             </Grid>
             <Grid item xs={12} p={12}>
+              {isLoading && <Typography variant="h4">Loading...</Typography>}
               {selectedRecipe ? (
                 <RecipeDetails
                   isLogged={isLogged}

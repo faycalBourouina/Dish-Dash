@@ -30,9 +30,18 @@ model.db.create_all()
 
 @app.route("/")
 def get_client():
-    """Test client"""
+    """Return client"""
     
     return render_template("index.html")
+
+@app.route("/joke")
+def get_joke():
+    """Get a random joke"""
+
+    joke = crud.get_joke()
+    response = jsonify({'joke': joke})
+
+    return response, 200     
 
 @app.route("/landing")
 def get_landing_page_recipes():
