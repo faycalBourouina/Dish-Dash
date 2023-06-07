@@ -170,6 +170,7 @@ function Layout({ isLogged , newUser, setNewUser, handleLogin, handleSignup, han
                   handleSelectedRecipe = {handleSelectedRecipe}
                   cachedItems={cachedItems}
                   setCachedItems={setCachedItems}
+                  onRecipeClick={handleRecipeClick}
                 />
               ) : (
                   <RecipeList

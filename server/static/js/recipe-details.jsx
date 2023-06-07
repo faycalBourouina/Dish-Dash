@@ -1,5 +1,5 @@
 const { List, ListItem, IconButton } = MaterialUI;
-function RecipeDetails({ isLogged, recipe, activeTab, handleUpdateFavorites, recipesLength, handleSelectedRecipe, cachedItems, setCachedItems}) {
+function RecipeDetails({ isLogged, recipe, activeTab, handleUpdateFavorites, recipesLength, handleSelectedRecipe, cachedItems, setCachedItems, onRecipeClick}) {
 
   const { id, title, image, instructions, ingredients, summary, isFavorite: initIsFavorite } = recipe;
   
@@ -89,6 +89,17 @@ function RecipeDetails({ isLogged, recipe, activeTab, handleUpdateFavorites, rec
             setCachedItems={setCachedItems}
           />
         </Box>
+      </Grid>
+      < Grid item 
+          container justifyContent="space-between"
+          pt={10}
+      >
+        <SimilarRecipes
+          isLogged={isLogged}
+          handleUpdateFavorites={handleUpdateFavorites}
+          recipeId={recipe.id}
+          onRecipeClick={onRecipeClick}
+        />
       </Grid>
     </Grid>
   );

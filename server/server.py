@@ -171,7 +171,7 @@ def get_recipe(recipe_id):
 def get_similar_recipes(recipe_id):
     """Return similar recipes"""
 
-    recipes = crud.get_similar_recipes(recipe_id, 3)
+    recipes = crud.get_similar_recipes(recipe_id, 4)
 
     if recipes:
         response = jsonify({'recipes': recipes})
