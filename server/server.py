@@ -198,9 +198,10 @@ def get_user_favorites(user_id):
 
         # convert sqlalchemy objects to dictionaries and add isFavorite key
         for favorite in favorites:
-            favorite_dict = sqlalchemy_obj_to_dict(favorite)
-            favorite_dict['isFavorite'] = True
-            favorites_list.append(favorite_dict)
+            favorite = crud.get_recipe(favorite.id)
+            #favorite_dict = sqlalchemy_obj_to_dict(favorite)
+            favorite['isFavorite'] = True
+            favorites_list.append(favorite)
         
         response = jsonify({'favorites': favorites_list})
 
