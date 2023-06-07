@@ -1,7 +1,11 @@
-const { List, ListItem } = MaterialUI;
+const { List, ListItem, IconButton } = MaterialUI;
 function RecipeDetails({ isLogged, recipe, activeTab, handleUpdateFavorites, recipesLength, handleSelectedRecipe, cachedItems, setCachedItems}) {
 
-  const { id, title, image, instructions, ingredients, summary } = recipe;
+  const { id, title, image, instructions, ingredients, summary, isFavorite: initIsFavorite } = recipe;
+  
+  const [isFavorite, setIsFavorite] = useState(initIsFavorite);
+
+  console.log("is favorite", isFavorite)
   
   return (
     <Grid 
@@ -20,9 +24,30 @@ function RecipeDetails({ isLogged, recipe, activeTab, handleUpdateFavorites, rec
         <Box marginBottom={4}>
           <Typography variant="h3">{title}</Typography>
         </Box>
-        <Box marginBottom={4}>
-          <img src={image} alt={name} />
-        </Box>
+        <Box>
+          <div style={{ position: 'relative', display: 'inline-block' }}>
+            <img src={image} alt={title} />
+            {isLogged && (
+              <IconButton
+                onClick={() => {handleUpdateFavorites(id, isFavorite)}}
+                aria-label="add to favorites"
+                sx={{ opacity: isFavorite ? 1 : 0.5 }}
+                style={{ position: 'absolute', top: 0, right: 0 }}
+              >
+                <i
+                  className="material-icons"
+                  style={{
+                    fontSize: '40px',
+                    color: isFavorite ? '#FFCB05' : 'rgba(255, 255, 255, 1)',
+                    WebkitTextStroke: '3px black',
+                  }}
+                >
+                  favorite
+                </i>
+              </IconButton>
+            )}
+          </div>
+        </Box> 
         <Box marginBottom={4}>
           <RecipeTags recipe={recipe} />
         </Box>

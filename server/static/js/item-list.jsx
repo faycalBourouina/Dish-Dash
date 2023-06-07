@@ -200,7 +200,7 @@ const ItemList = ({ recipe, cachedItems, setCachedItems }) => {
   return (
     <>
       <div 
-        className="ItemList"
+        className="ScrollList"
         ref={itemListRef}
         style={{
             position: 'sticky',

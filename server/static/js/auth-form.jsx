@@ -1,6 +1,6 @@
-const { Dialog, DialogTitle, DialogContent, DialogActions, TextField, Button, Grid } = MaterialUI;
+const { Dialog, DialogTitle, DialogContent, DialogActions, TextField, Button, Grid, ButtonBase } = MaterialUI;
 
-function AuthForm({ handleLogin, handleSignup }) {
+function AuthForm({ handleLogin, handleSignup, handleClose }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -17,10 +17,22 @@ function AuthForm({ handleLogin, handleSignup }) {
   };
 
   return (
-    <Dialog open={true} onClose={() => {}}>
-      <DialogTitle>Authentication</DialogTitle>
-      <DialogContent>
-        <Grid container spacing={2} alignItems="center">
+    <Dialog open={true} onClose={handleClose}>
+      <DialogTitle style={{ textAlign: 'center' }}>Authentication</DialogTitle>
+      <DialogContent
+        maxWidth="false"
+        fullWidth
+        PaperProps={{
+          style: {
+            width: "400px",
+            height: "600px",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          },
+        }}
+      >
+        <Grid container spacing={2} alignItems="center" justifyContent="center">
           <Grid item xs={12}>
             <TextField
               label="Email"
@@ -43,16 +55,22 @@ function AuthForm({ handleLogin, handleSignup }) {
               fullWidth
             />
           </Grid>
+          <Grid item xs={12}>
+            <Grid container spacing={2} justifyContent="flex-end">
+              <Grid item>
+                <Button onClick={handleSignupSubmit} variant="text" color="primary">
+                  Sign Up
+                </Button>
+              </Grid>
+              <Grid item>
+                <Button onClick={handleLoginSubmit} variant="contained" color="primary">
+                  Login
+                </Button>
+              </Grid>
+            </Grid>
+          </Grid>
         </Grid>
       </DialogContent>
-      <DialogActions>
-        <Button onClick={handleLoginSubmit} variant="contained" color="primary">
-          Login
-        </Button>
-        <Button onClick={handleSignupSubmit} variant="contained" color="primary">
-          Sign Up
-        </Button>
-      </DialogActions>
     </Dialog>
   );
 }

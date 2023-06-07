@@ -1,26 +1,30 @@
 /* For Chrome, Safari, and Opera */
-.ItemList::-webkit-scrollbar {
-    width: 12px;
+  .ScrollList::-webkit-scrollbar {
+    width: 12px !important;
   }
   
-  .ItemList::-webkit-scrollbar-track {
-    background-color: transparent;
+  #scrollList.ScrollList::-webkit-scrollbar {
+    width: 12px !important;
+   }
+   
+  .ScrollList::-webkit-scrollbar-track {
+    background-color: transparent !important;;
   }
   
-  .ItemList::-webkit-scrollbar-thumb {
-    background-color: #d6dee1;
-    border-radius: 6px;
-    border: 3px solid transparent;
-    background-clip: content-box;
+  .ScrollList::-webkit-scrollbar-thumb {
+    background-color: #d6dee1 !important;;
+    border-radius: 6px !important;;
+    border: 3px solid transparent !important;;
+    background-clip: content-box !important;;
   }
   
-  .ItemList::-webkit-scrollbar-thumb:hover {
-    background-color: #a8bbbf;
+  .ScrollList::-webkit-scrollbar-thumb:hover {
+    background-color: #a8bbbf !important;;
   }
   
   /* For Firefox */
-  .ItemList {
-    scrollbar-width: thin;
-    scrollbar-color: #d6dee1 transparent;
+  .ScrollList {
+    scrollbar-width: thin !important;;
+    scrollbar-color: #d6dee1 transparent !important;;
   }
   

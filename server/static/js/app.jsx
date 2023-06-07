@@ -89,6 +89,7 @@ function App({ userId }) {
       <Layout 
         isLogged={isLogged}
         newUser={newUser}
+        setNewUser={setNewUser}
         handleLogin={handleLogin} 
         handleSignup={handleSignup} 
         handleLogout={handleLogout}

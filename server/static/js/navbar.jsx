@@ -1,9 +1,9 @@
 const { useState } = React;
 const { AppBar, Toolbar, CssBaseline, ButtonBase } = MaterialUI;
 
-function Navbar({ isLogged, newUser, handleLogin, handleSignup, handleLogout, setActiveTab, setSelectedRecipe }) {
+function Navbar({ isLogged, setNewUser, newUser, handleLogin, handleSignup, handleLogout, setActiveTab, setSelectedRecipe }) {
   
-  const [isModalOpen, setIsModalOpen] = React.useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
@@ -19,6 +19,11 @@ function Navbar({ isLogged, newUser, handleLogin, handleSignup, handleLogout, se
     handleLogin(email, password);
     setIsModalOpen(false);
   };
+
+  const handleClose = () => {
+    setIsModalOpen(false)
+    setNewUser(false)
+  }
 
     return (
       <Box sx={{ display: 'flex' }}>
@@ -65,14 +70,14 @@ function Navbar({ isLogged, newUser, handleLogin, handleSignup, handleLogout, se
                 </>
                 ) : (
                 <Grid item xs={4}>
-                  <Grid container justifyContent="flex-end" sx={{ marginLeft: '25px' }}>
+                  <Grid container justifyContent="flex-end" sx={{ marginLeft: '0px' }}>
                     <ButtonBase
                       onClick={() => setIsModalOpen(true)}
                       color="inherit"
                       underline="none"
                       sx={{ fontSize: '1.2rem', minHeight: '48px' }}
                     >
-                      Login / Signup
+                      Join
                     </ButtonBase>
                   </Grid>
                 </Grid>
@@ -86,10 +91,11 @@ function Navbar({ isLogged, newUser, handleLogin, handleSignup, handleLogout, se
         <Box sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', pr: 5 }}>
           <AuthModal
                   open={isModalOpen}
-                  handleClose={() => setIsModalOpen(false)}
+                  handleClose={handleClose}
                   handleLogin={handleLoginWithModal}
                   handleSignup={handleSignupWithModal}
                   newUser={newUser}
+                  isLogged={isLogged}
           />
         </Box>
       )}

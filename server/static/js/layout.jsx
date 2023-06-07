@@ -1,7 +1,7 @@
 const { useState, useEffect } = React;
 const { Grid, Box } = MaterialUI;
 
-function Layout({ isLogged , newUser, handleLogin, handleSignup, handleLogout, cachedItems, setCachedItems, cachedLanding, setCachedLanding, cachedFavorites, setCachedFavorites, cachedSearch, setCachedSearch}) {
+function Layout({ isLogged , newUser, setNewUser, handleLogin, handleSignup, handleLogout, cachedItems, setCachedItems, cachedLanding, setCachedLanding, cachedFavorites, setCachedFavorites, cachedSearch, setCachedSearch}) {
     const [activeTab, setActiveTab] = React.useState("home");
     const [isLoading, setIsLoading] = React.useState(false);
     const [recipes, setRecipes] = React.useState([]);
@@ -145,6 +145,7 @@ function Layout({ isLogged , newUser, handleLogin, handleSignup, handleLogout, c
               <Navbar 
                 isLogged={isLogged}
                 newUser={newUser}
+                setNewUser={setNewUser}
                 handleLogin={handleLogin}
                 handleSignup={handleSignup}
                 handleLogout={handleLogout}

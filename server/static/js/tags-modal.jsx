@@ -51,52 +51,94 @@ const TagsModal = ({ isLogged, open, handleClose }) => {
     handleClose();
   };
   return (
-    <Dialog open={open} onClose={handleClose}>
-      <DialogTitle>Diet and Cuisine Tags</DialogTitle>
-      <DialogContent>
-        <h3>Diets</h3>
-        {diets.map((diet) => (
-          <div key={diet} style={{ display: 'inline-block', margin: '8px' }}>
-            <Chip
-              label={diet}
-              onClick={() => handleChipClick(diet)}
-              color={selectedTags.includes(diet) ? 'primary' : 'default'}
-            />
-          </div>
-        ))}
-        <h3>Cuisines</h3>
-        {cuisines.map((cuisine) => (
-          <div key={cuisine} style={{ display: 'inline-block', margin: '8px' }}>
-            <Chip
-              label={cuisine}
-              onClick={() => handleChipClick(cuisine)}
-              color={selectedTags.includes(cuisine) ? 'primary' : 'default'}
-            />
-          </div>
-        ))}
-        <h3>Meal Types</h3>
-        {mealTypes.map((mealType) => (
-          <div key={mealType} style={{ display: 'inline-block', margin: '8px' }}>
-            <Chip
-              label={mealType}
-              onClick={() => handleChipClick(mealType)}
-              color={selectedTags.includes(mealType) ? 'primary' : 'default'}
-            />
-          </div>
-        ))}
-        <h3>Intolerances</h3>
-        {intolerance.map((intolerant) => (
-          <div key={intolerant} style={{ display: 'inline-block', margin: '8px' }}>
-            <Chip
-              label={intolerant}
-              onClick={() => handleChipClick(intolerant)}
-              color={
-                selectedTags.includes(intolerant) ? 'primary' : 'default'
-              }
-            />
-          </div>
-        ))}
+    <>
+      <DialogTitle>
+        <Box textAlign="center">
+          <Typography variant="h5">Diet and Cuisine Tags</Typography>
+        </Box>
+      </DialogTitle>
+      <DialogContent
+        id="scrollList"
+        className="ScrollList"
+        maxWidth="false"
+        fullWidth
+        PaperProps={{
+          style: {
+            width: "400px",
+            height: "800px",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          },
+        }}
+      >
+        <Box display="flex" flexDirection="column" alignItems="center">
+          <Box width="100%" textAlign="center" marginBottom={2}>
+            <Typography variant="subtitle1">Diets</Typography>
+          </Box>
+          <Box width="100%" display="flex" justifyContent="center" flexWrap="wrap" marginBottom={2}>
+            {diets.map((diet) => (
+              <Box key={diet} margin={1}>
+                <Chip
+                  label={diet}
+                  onClick={() => handleChipClick(diet)}
+                  color={selectedTags.includes(diet) ? 'primary' : 'default'}
+                  size="large"
+                />
+              </Box>
+            ))}
+          </Box>
+  
+          <Box width="100%" textAlign="center" marginBottom={2}>
+            <Typography variant="subtitle1">Cuisines</Typography>
+          </Box>
+          <Box width="100%" display="flex" justifyContent="center" flexWrap="wrap" marginBottom={2}>
+            {cuisines.map((cuisine) => (
+              <Box key={cuisine} margin={1}>
+                <Chip
+                  label={cuisine}
+                  onClick={() => handleChipClick(cuisine)}
+                  color={selectedTags.includes(cuisine) ? 'primary' : 'default'}
+                  size="medium"
+                />
+              </Box>
+            ))}
+          </Box>
+  
+          <Box width="100%" textAlign="center" marginBottom={2}>
+            <Typography variant="subtitle1">Meal Types</Typography>
+          </Box>
+          <Box width="100%" display="flex" justifyContent="center" flexWrap="wrap" marginBottom={2}>
+            {mealTypes.map((mealType) => (
+              <Box key={mealType} margin={1}>
+                <Chip
+                  label={mealType}
+                  onClick={() => handleChipClick(mealType)}
+                  color={selectedTags.includes(mealType) ? 'primary' : 'default'}
+                  size="medium"
+                />
+              </Box>
+            ))}
+          </Box>
+  
+          <Box width="100%" textAlign="center" marginBottom={2}>
+            <Typography variant="subtitle1">Intolerances</Typography>
+          </Box>
+          <Box width="100%" display="flex" justifyContent="center" flexWrap="wrap" marginBottom={2}>
+            {intolerance.map((intolerant) => (
+              <Box key={intolerant} margin={1}>
+                <Chip
+                  label={intolerant}
+                  onClick={() => handleChipClick(intolerant)}
+                  color={selectedTags.includes(intolerant) ? 'primary' : 'default'}
+                  size="medium"
+                />
+              </Box>
+            ))}
+          </Box>
+        </Box>
       </DialogContent>
+      
       <DialogActions>
         <Button onClick={handleDoneClick} variant="text">
           Done
@@ -105,6 +147,6 @@ const TagsModal = ({ isLogged, open, handleClose }) => {
           Skip
         </Button>
       </DialogActions>
-    </Dialog>
+    </>
   );
 }
