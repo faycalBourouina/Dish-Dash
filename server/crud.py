@@ -299,8 +299,15 @@ def get_recipe(recipe_id):
                 'id': recipe['id'],
                 'title': recipe['name'],
                 'image': recipe['image'],
+                'summary': recipe.get('summary', None),
                 'instructions': recipe['instructions'],
-                'ingredients': recipe['ingredients']
+                'ingredients': recipe['ingredients'],
+                'servings': recipe.get('servings', None),
+                'readyInMinutes': recipe.get('readyInMinutes', None),
+                'dairyFree': recipe.get('dairyFree', False),
+                'glutenFree': recipe.get('glutenFree', False),
+                'vegan': recipe.get('vegan', False),
+                'vegetarian': recipe.get('vegetarian', False)
             }
         else:
             return None
@@ -318,6 +325,7 @@ def get_recipe(recipe_id):
             recipe_image = response['image']
             recipe_instructions = response['instructions']
             recipe_ingredients = []
+            
 
             # If recipe has ingredients, extract needed ingredients information
             if 'extendedIngredients' in response:
@@ -340,7 +348,14 @@ def get_recipe(recipe_id):
                 'name': recipe_name,
                 'image': recipe_image,
                 'instructions': recipe_instructions,
-                'ingredients': recipe_ingredients
+                'ingredients': recipe_ingredients,
+                'summary': response.get('summary', None),
+                'servings': response.get('servings', None),
+                'readyInMinutes': response.get('readyInMinutes', None),
+                'dairyFree': response.get('dairyFree', False),
+                'glutenFree': response.get('glutenFree', False),
+                'vegan': response.get('vegan', False),
+                'vegetarian': response.get('vegetarian', False)
             }
         else:
             return None
