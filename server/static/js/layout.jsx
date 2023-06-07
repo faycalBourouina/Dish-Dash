@@ -40,7 +40,7 @@ function Layout({ isLogged , newUser, setNewUser, handleLogin, handleSignup, han
           // Recipe added to favorites successfully
           console.log("Recipe added to favorites");
           const { favorite } = data;
-    
+          console.log("favorite added is ", favorite);
           // Update the cachedFavorites state by adding the new favorite recipe
           setCachedFavorites([...cachedFavorites, favorite]);
           // Update the recipes state if the active tab is favorites

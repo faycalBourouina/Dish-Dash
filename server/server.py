@@ -172,6 +172,12 @@ def get_similar_recipes(recipe_id):
     """Return similar recipes"""
 
     recipes = crud.get_similar_recipes(recipe_id, 4)
+    
+    # Check if user is logged in add isFavorite key to recipe
+    user_id = session.get('user', {}).get('id', None)
+    
+    if user_id:
+        recipes = crud.add_favorite_attribute(recipes, user_id)
 
     if recipes:
         response = jsonify({'recipes': recipes})
@@ -268,9 +274,10 @@ def update_favorite(user_id, recipe_id):
                 
                 # Get the favorite recipe
                 favorite_recipe = crud.get_recipe(new_favortie.recipe_id)
+                favorite_recipe['isFavorite'] = True
                 
                 # Convert sqlalchemy object to dictionary
-                favorite_dict = sqlalchemy_obj_to_dict(new_favortie)
+                #favorite_dict = sqlalchemy_obj_to_dict(new_favortie)
 
                 response = jsonify({'favorite': favorite_recipe})
 

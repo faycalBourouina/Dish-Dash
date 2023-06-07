@@ -7,8 +7,8 @@ function RecipeItem({ isLogged, handleUpdateFavorites, recipe, onRecipeClick }) 
   const [isFavorite, setIsFavorite] = useState(initIsFavorite);
 
   const handleFavoriteClick = (id, isFavorite) => {
-    setIsFavorite(!isFavorite);
     handleUpdateFavorites(id, isFavorite);
+    setIsFavorite(!isFavorite);
   };
 
   const MAX_SUMMARY_LENGTH = 100; // Maximum number of characters for summary

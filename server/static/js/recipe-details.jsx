@@ -4,8 +4,6 @@ function RecipeDetails({ isLogged, recipe, activeTab, handleUpdateFavorites, rec
   const { id, title, image, instructions, ingredients, summary, isFavorite: initIsFavorite } = recipe;
   
   const [isFavorite, setIsFavorite] = useState(initIsFavorite);
-
-  console.log("is favorite", isFavorite)
   
   return (
     <Grid 
@@ -90,17 +88,12 @@ function RecipeDetails({ isLogged, recipe, activeTab, handleUpdateFavorites, rec
           />
         </Box>
       </Grid>
-      < Grid item 
-          container justifyContent="space-between"
-          pt={10}
-      >
         <SimilarRecipes
           isLogged={isLogged}
           handleUpdateFavorites={handleUpdateFavorites}
           recipeId={recipe.id}
           onRecipeClick={onRecipeClick}
         />
-      </Grid>
     </Grid>
   );
 }
