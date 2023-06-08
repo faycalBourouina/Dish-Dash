@@ -7,6 +7,7 @@ function AuthModal({ newUser, isLogged, open, handleClose, handleLogin, handleSi
         {!newUser ? (
             <AuthForm
                 open={open}
+                isLogged={isLogged}
                 handleLogin={handleLogin}
                 handleSignup={handleSignup}
                 message={message}

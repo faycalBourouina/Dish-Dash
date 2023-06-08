@@ -214,6 +214,9 @@ function Layout({ isLogged , newUser, setNewUser, handleLogin, handleSignup, han
             </Grid>
           </Box>
         </Grid>
+        <Box bgcolor="#1976d2" color="white" py={2} textAlign="center">
+          <Typography variant="caption">&copy; 2023 DishDash. All rights reserved.</Typography>
+        </Box>
       </div>
     );
 }

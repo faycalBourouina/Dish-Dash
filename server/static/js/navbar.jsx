@@ -17,7 +17,9 @@ function Navbar({ activeTab, setActiveTab, isLogged, setNewUser, newUser, handle
 
   const handleLoginWithModal = (email, password) => {
     handleLogin(email, password);
-    if (message.isError) return; // don't close the modal if there's an error
+    if (message && message.isError) {
+      return // don't close the modal if there was an error
+    }
     else if (!message.isError) {
       // If successful, close the modal after a short delay
       setTimeout(() => { 
@@ -25,7 +27,7 @@ function Navbar({ activeTab, setActiveTab, isLogged, setNewUser, newUser, handle
         setActiveTab("home");
         setNewUser(false);
         setMessage({}); // clear the message
-      }, 1000);
+      }, 2000);
     }
   };
 
@@ -150,12 +152,12 @@ function Navbar({ activeTab, setActiveTab, isLogged, setNewUser, newUser, handle
         <Box sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', pr: 5 }}>
           <AuthModal
                   open={isModalOpen}
+                  isLogged={isLogged}
                   handleClose={handleClose}
                   handleLogin={handleLoginWithModal}
                   handleSignup={handleSignupWithModal}
                   message={message}
                   newUser={newUser}
-                  isLogged={isLogged}
           />
         </Box>
       )}

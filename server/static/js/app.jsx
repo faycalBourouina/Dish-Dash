@@ -35,6 +35,7 @@ function App({ userId }) {
       }
     } catch (error) {
       console.error('Failed to login:', error);
+      setAuthMessage({ message: 'Login failed', isError: true });
     }
   };
 
