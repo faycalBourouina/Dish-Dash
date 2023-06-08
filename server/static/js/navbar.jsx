@@ -1,7 +1,7 @@
 const { useState } = React;
 const { AppBar, Toolbar, CssBaseline, ButtonBase } = MaterialUI;
 
-function Navbar({ isLogged, setNewUser, newUser, handleLogin, handleSignup, handleLogout, setActiveTab, setSelectedRecipe }) {
+function Navbar({ isLogged, setNewUser, newUser, handleLogin, handleSignup, message, setMessage, handleLogout, setActiveTab, setSelectedRecipe }) {
   
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -13,16 +13,27 @@ function Navbar({ isLogged, setNewUser, newUser, handleLogin, handleSignup, hand
   const handleSignupWithModal = (email, password) => {
     handleSignup(email, password);
     setIsModalOpen(true);
+    setMessage({}); // clear the message after signup
   };
 
   const handleLoginWithModal = (email, password) => {
     handleLogin(email, password);
-    setIsModalOpen(false);
+    if (message.isError) return; // don't close the modal if there's an error
+    else if (!message.isError) {
+      // If successful, close the modal after a short delay
+      setTimeout(() => { 
+        setIsModalOpen(false);
+        setNewUser(false);
+        setMessage({}); // clear the message
+      }, 1000);
+    }
   };
 
   const handleClose = () => {
-    setIsModalOpen(false)
-    setNewUser(false)
+    // check if user has successfully logged in
+      setIsModalOpen(false)
+      setNewUser(false)
+      setMessage({}); // clear the message
   }
 
     return (
@@ -94,6 +105,7 @@ function Navbar({ isLogged, setNewUser, newUser, handleLogin, handleSignup, hand
                   handleClose={handleClose}
                   handleLogin={handleLoginWithModal}
                   handleSignup={handleSignupWithModal}
+                  message={message}
                   newUser={newUser}
                   isLogged={isLogged}
           />

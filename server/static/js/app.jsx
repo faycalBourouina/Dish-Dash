@@ -1,22 +1,15 @@
 const { useState } = React;
 
 function App({ userId }) {
-
-  //Storing the logged in user id
   const [isLogged, setIsLogged] = useState(userId);
-  // Set to true if the user is new
   const [newUser, setNewUser] = useState(false);
-  // Caching fetched landing recipes
   const [cachedLanding, setCachedLanding] = useState([]);
-  // Caching fetched fvorites recipes
   const [cachedFavorites, setCachedFavorites] = useState([]);
-  //Caching fetched search recipes
   const [cachedSearch, setCachedSearch] = useState([]);
-  // Caching fetched items
   const [cachedItems, setCachedItems] = useState({});
+  const [authMessage, setAuthMessage] = useState({});
 
   const handleLogin = async (email, password) => {
-    console.log("Logging in with", email, password)
     try {
       const response = await fetch('/authenticate', {
         method: 'POST',
@@ -29,16 +22,23 @@ function App({ userId }) {
         })
       });
       const data = await response.json();
-      const { user: { id } } = data;
-      console.log('Logged in as', id);
-      setIsLogged(id);
+
+      if (response.ok) {
+        const { user: { id } } = data;
+        console.log('Logged in as', id);
+        setIsLogged(id);
+        setAuthMessage({ message: 'Login successful', isError: false });
+      } else {
+        const { message } = data;
+        console.log('Login failed:', message);
+        setAuthMessage({ message, isError: true });
+      }
     } catch (error) {
-      console.error(error);
+      console.error('Failed to login:', error);
     }
-  }
+  };
 
   const handleSignup = async (email, password) => {
-    console.log("signing up with", email, password)
     try {
       const response = await fetch('/signup', {
         method: 'POST',
@@ -50,34 +50,34 @@ function App({ userId }) {
           password,
         })
       });
-  
+
       if (response.ok) {
         const data = await response.json();
         const { user: { id } } = data;
         console.log('Signed up as', id);
         setIsLogged(id);
         setNewUser(true);
-
+        setAuthMessage({ message: 'Signup successful', isError: false });
       } else if (response.status === 409) {
         const data = await response.json();
-        console.log('Signup failed:', data.message);
+        const { message } = data;
+        console.log('Signup failed:', message);
+        setAuthMessage({ message, isError: true });
+        console.log("message in app.jsx: ", message)
       } else {
         console.log('Signup failed with error:', response.status);
       }
     } catch (error) {
       console.error('Failed to signup:', error);
     }
-  }
-  
+  };
+
   const handleLogout = async () => {
     try {
       const response = await fetch('/logout');
       const data = await response.json();
-      console.log(data.message); // Print the logout message
-
-      // Update the isLogged state
+      console.log(data.message);
       setIsLogged(null);
-
     } catch (error) {
       console.error('Failed to logout:', error);
     }
@@ -86,22 +86,24 @@ function App({ userId }) {
   return (
     <div>
       <div className="container">
-      <Layout 
-        isLogged={isLogged}
-        newUser={newUser}
-        setNewUser={setNewUser}
-        handleLogin={handleLogin} 
-        handleSignup={handleSignup} 
-        handleLogout={handleLogout}
-        cachedLanding={cachedLanding}
-        setCachedLanding={setCachedLanding}
-        cachedFavorites={cachedFavorites}
-        setCachedFavorites={setCachedFavorites}
-        cachedItems={cachedItems}
-        setCachedItems={setCachedItems}
-        cachedSearch={cachedSearch}
-        setCachedSearch={setCachedSearch}  
-      />
+        <Layout 
+          isLogged={isLogged}
+          newUser={newUser}
+          setNewUser={setNewUser}
+          handleLogin={handleLogin} 
+          handleSignup={handleSignup} 
+          handleLogout={handleLogout}
+          message={authMessage}
+          setMessage = {setAuthMessage}
+          cachedLanding={cachedLanding}
+          setCachedLanding={setCachedLanding}
+          cachedFavorites={cachedFavorites}
+          setCachedFavorites={setCachedFavorites}
+          cachedItems={cachedItems}
+          setCachedItems={setCachedItems}
+          cachedSearch={cachedSearch}
+          setCachedSearch={setCachedSearch}
+        />
       </div>
     </div>
   );

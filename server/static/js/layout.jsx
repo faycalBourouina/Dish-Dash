@@ -1,7 +1,7 @@
 const { useState, useEffect } = React;
-const { Grid, Box } = MaterialUI;
+const { Grid, Box, Alert } = MaterialUI;
 
-function Layout({ isLogged , newUser, setNewUser, handleLogin, handleSignup, handleLogout, cachedItems, setCachedItems, cachedLanding, setCachedLanding, cachedFavorites, setCachedFavorites, cachedSearch, setCachedSearch}) {
+function Layout({ isLogged , newUser, setNewUser, handleLogin, handleSignup, handleLogout, message, setMessage, cachedItems, setCachedItems, cachedLanding, setCachedLanding, cachedFavorites, setCachedFavorites, cachedSearch, setCachedSearch}) {
     const [activeTab, setActiveTab] = React.useState("home");
     const [isLoading, setIsLoading] = React.useState(false);
     const [recipes, setRecipes] = React.useState([]);
@@ -142,19 +142,20 @@ function Layout({ isLogged , newUser, setNewUser, handleLogin, handleSignup, han
         <Grid container direction="column">
           <Grid item xs={12}>
             <Box pl={8} pr={8} pt={4} pb={0}>
-              <Navbar 
+                <Navbar 
                 isLogged={isLogged}
                 newUser={newUser}
                 setNewUser={setNewUser}
                 handleLogin={handleLogin}
                 handleSignup={handleSignup}
                 handleLogout={handleLogout}
+                message={message}
+                setMessage={setMessage}
                 setActiveTab={setActiveTab} 
                 setSelectedRecipe={setSelectedRecipe} 
               />
             </Box>
           </Grid>
-    
           <Box p={8}>
             <Grid item xs={12}>
               <SearchForm onSearch={handleSearch} />
