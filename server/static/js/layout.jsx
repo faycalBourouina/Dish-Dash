@@ -167,6 +167,7 @@ function Layout({ isLogged , newUser, setNewUser, handleLogin, handleSignup, han
                 </Alert>
             </Snackbar>
             <Box pl={8} pr={8} pt={4} pb={0}>
+
                 <Navbar 
                 activeTab={activeTab}
                 setActiveTab={setActiveTab}

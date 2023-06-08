@@ -41,26 +41,38 @@ function Navbar({ activeTab, setActiveTab, isLogged, setNewUser, newUser, handle
       <CssBaseline />
         <AppBar component="nav">
           <Toolbar>
-            <Grid container justifyContent="space-between"  pl={5} pr={5}>
-              <Grid item >
-                <ButtonBase 
-                  onClick={() => handleTabClick("home")}
-                  color="inherit" 
-                  underline="none"
-                  sx={{ fontSize: '1.2rem', minHeight: '48px'}}
-                >
-                  <i 
-                    className="material-icons" 
-                    style= {{ 
-                      marginRight: '8px',
-                      color: activeTab === "home" ? '#FFCB05' : 'white',
-                    }}
-                  >
-                      home
-                    </i>
-                  Home
-                </ButtonBase>
+            <Grid container justifyContent="space-between" alignItems="center" pl={5} pr={5}>
+              <Grid item>
+                <Grid container justifyContent="flex-start" spacing={2}>
+                  <Grid item>
+                    <Box pt={1}>
+                      <img src="static/img/logo_fill.png" alt="Logo" style={{ height: '48px' }} />
+                    </Box>
+                  </Grid>
+                  <Grid item>
+                    <Box pt={1}>
+                      <ButtonBase
+                        onClick={() => handleTabClick("home")}
+                        color="inherit"
+                        underline="none"
+                        sx={{ fontSize: '1.2rem', minHeight: '48px' }}
+                      >
+                        <i
+                          className="material-icons"
+                          style={{
+                            marginRight: '8px',
+                            color: activeTab === "home" ? '#FFCB05' : 'white',
+                          }}
+                        >
+                          home
+                        </i>
+                        Home
+                      </ButtonBase>
+                    </Box>
+                  </Grid>
+                </Grid>
               </Grid>
+
               {isLogged ? (
                 <>
                   <Grid item>

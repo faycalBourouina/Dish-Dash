@@ -54,7 +54,7 @@ const TagsModal = ({ isLogged, handleClose }) => {
     <>
       <DialogTitle>
         <Box textAlign="center">
-          <Typography variant="h5">Diet and Cuisine Tags</Typography>
+          <Typography variant="h5">Tell us more, Chef!</Typography>
         </Box>
       </DialogTitle>
       <DialogContent

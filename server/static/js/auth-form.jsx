@@ -37,7 +37,9 @@ function AuthForm({ handleLogin, handleSignup, handleClose, message }) {
   };
   return (
     <Dialog open={true} onClose={handleClose}>
-      <DialogTitle style={{ textAlign: 'center' }}>Authentication</DialogTitle>
+      <DialogTitle style={{ textAlign: 'center' }}>
+          Let's get you cooking !
+      </DialogTitle>
       <DialogContent>
         {message.message && message.isError && (
           <Alert severity="error" sx={{ mb: 2 }}>
