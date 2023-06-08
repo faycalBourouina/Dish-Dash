@@ -34,7 +34,7 @@ function RecipeItem({ isLogged, handleUpdateFavorites, recipe, onRecipeClick }) 
             <CardMedia
                 component="img"
                 height="100%"
-                image={image}
+                image={image || '/static/images/placeholder-image.png'}
                 alt={recipe.title || recipe.name}
                 sx={{ backgroundColor: '#e0e0e0' }}
             />

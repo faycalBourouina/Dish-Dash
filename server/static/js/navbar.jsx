@@ -1,7 +1,7 @@
 const { useState } = React;
 const { AppBar, Toolbar, CssBaseline, ButtonBase } = MaterialUI;
 
-function Navbar({ isLogged, setNewUser, newUser, handleLogin, handleSignup, message, setMessage, handleLogout, setActiveTab, setSelectedRecipe }) {
+function Navbar({ activeTab, setActiveTab, isLogged, setNewUser, newUser, handleLogin, handleSignup, message, setMessage, handleLogout, setSelectedRecipe }) {
   
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -12,8 +12,7 @@ function Navbar({ isLogged, setNewUser, newUser, handleLogin, handleSignup, mess
 
   const handleSignupWithModal = (email, password) => {
     handleSignup(email, password);
-    setIsModalOpen(true);
-    setMessage({}); // clear the message after signup
+    setActiveTab("home");
   };
 
   const handleLoginWithModal = (email, password) => {
@@ -23,6 +22,7 @@ function Navbar({ isLogged, setNewUser, newUser, handleLogin, handleSignup, mess
       // If successful, close the modal after a short delay
       setTimeout(() => { 
         setIsModalOpen(false);
+        setActiveTab("home");
         setNewUser(false);
         setMessage({}); // clear the message
       }, 1000);
@@ -49,6 +49,15 @@ function Navbar({ isLogged, setNewUser, newUser, handleLogin, handleSignup, mess
                   underline="none"
                   sx={{ fontSize: '1.2rem', minHeight: '48px'}}
                 >
+                  <i 
+                    className="material-icons" 
+                    style= {{ 
+                      marginRight: '8px',
+                      color: activeTab === "home" ? '#FFCB05' : 'white',
+                    }}
+                  >
+                      home
+                    </i>
                   Home
                 </ButtonBase>
               </Grid>
@@ -63,16 +72,34 @@ function Navbar({ isLogged, setNewUser, newUser, handleLogin, handleSignup, mess
                           underline="none"
                           sx={{ fontSize: '1.2rem', minHeight: '48px'}}
                         >
-                          Favorites
+                          <i 
+                            className="material-icons" 
+                            style={{ 
+                              marginRight: '8px',                       
+                              color: activeTab === "favorites" ? '#FFCB05' : 'white',
+                          }}
+                          >
+                              favorite
+                          </i>
+                          My Recipes
                         </ButtonBase>
                       </Grid>
                       <Grid item>
                         <ButtonBase
-                          onClick={handleLogout}
+                          onClick={() => {handleLogout(); handleTabClick("home")}}
                           color="inherit" 
                           underline="none"
                           sx={{ fontSize: '1.2rem', minHeight: '48px'}}
                         >
+                          <i 
+                            className="material-icons" 
+                              style={{ 
+                              marginRight: '8px',                       
+                              color: activeTab === "account" ? '#FFCB05' : 'white',
+                            }}
+                          >
+                            logout
+                          </i>
                           Logout
                         </ButtonBase>
                       </Grid>
@@ -83,12 +110,21 @@ function Navbar({ isLogged, setNewUser, newUser, handleLogin, handleSignup, mess
                 <Grid item xs={4}>
                   <Grid container justifyContent="flex-end" sx={{ marginLeft: '0px' }}>
                     <ButtonBase
-                      onClick={() => setIsModalOpen(true)}
+                      onClick={() => {setIsModalOpen(true); setActiveTab("account")}}
                       color="inherit"
                       underline="none"
                       sx={{ fontSize: '1.2rem', minHeight: '48px' }}
                     >
-                      Join
+                        <i 
+                            className="material-icons" 
+                            style={{ 
+                              marginRight: '8px',                       
+                              color: activeTab === "account" ? '#FFCB05' : 'white',
+                          }}
+                        >
+                          account_circle
+                        </i>
+                      Account
                     </ButtonBase>
                   </Grid>
                 </Grid>

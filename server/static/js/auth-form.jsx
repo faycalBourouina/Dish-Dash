@@ -6,7 +6,7 @@ function AuthForm({ handleLogin, handleSignup, handleClose, message }) {
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
 
-  console.log("Message: ", message);
+  console.log("Message in auth form: ", message);
 
   const handleLoginSubmit = () => {
     /*if (!email.includes('@')) {

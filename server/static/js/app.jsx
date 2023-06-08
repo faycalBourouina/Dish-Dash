@@ -56,14 +56,14 @@ function App({ userId }) {
         const { user: { id } } = data;
         console.log('Signed up as', id);
         setIsLogged(id);
-        setNewUser(true);
         setAuthMessage({ message: 'Signup successful', isError: false });
+        // delay setting newUser to true to allow for the message to be displayed
+        setTimeout(() => setNewUser(true), 2000);
       } else if (response.status === 409) {
         const data = await response.json();
         const { message } = data;
         console.log('Signup failed:', message);
         setAuthMessage({ message, isError: true });
-        console.log("message in app.jsx: ", message)
       } else {
         console.log('Signup failed with error:', response.status);
       }

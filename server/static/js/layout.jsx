@@ -143,6 +143,8 @@ function Layout({ isLogged , newUser, setNewUser, handleLogin, handleSignup, han
           <Grid item xs={12}>
             <Box pl={8} pr={8} pt={4} pb={0}>
                 <Navbar 
+                activeTab={activeTab}
+                setActiveTab={setActiveTab}
                 isLogged={isLogged}
                 newUser={newUser}
                 setNewUser={setNewUser}
@@ -151,7 +153,6 @@ function Layout({ isLogged , newUser, setNewUser, handleLogin, handleSignup, han
                 handleLogout={handleLogout}
                 message={message}
                 setMessage={setMessage}
-                setActiveTab={setActiveTab} 
                 setSelectedRecipe={setSelectedRecipe} 
               />
             </Box>
