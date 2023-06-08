@@ -1,11 +1,14 @@
 const { useState, useEffect } = React;
-const { Grid, Box, Alert } = MaterialUI;
+const { Grid, Box, Alert, Snackbar } = MaterialUI;
 
 function Layout({ isLogged , newUser, setNewUser, handleLogin, handleSignup, handleLogout, message, setMessage, cachedItems, setCachedItems, cachedLanding, setCachedLanding, cachedFavorites, setCachedFavorites, cachedSearch, setCachedSearch}) {
-    const [activeTab, setActiveTab] = React.useState("home");
-    const [isLoading, setIsLoading] = React.useState(false);
-    const [recipes, setRecipes] = React.useState([]);
-    const [selectedRecipe, setSelectedRecipe] = React.useState(null);
+    const [activeTab, setActiveTab] = React.useState("home"); // State variable to track which tab is active
+    const [isLoading, setIsLoading] = React.useState(false); // State variable to track whether data is being fetched
+    const [recipes, setRecipes] = React.useState([]); // State variable to store the recipes
+    const [selectedRecipe, setSelectedRecipe] = React.useState(null); // State variable to store the selected recipe
+    const [favoriteMessage, setFavoriteMessage] = useState(""); // State variable to store the favorite success message
+    const [alertOpen, setAlertOpen] = useState(false); // State variable to control the Snackbar visibility
+    
     
     async function handleSearch(searchQuery) {
 
@@ -45,9 +48,14 @@ function Layout({ isLogged , newUser, setNewUser, handleLogin, handleSignup, han
           setCachedFavorites([...cachedFavorites, favorite]);
           // Update the recipes state if the active tab is favorites
           activeTab === "favorites" && setRecipes([...recipes, favorite]);
+
+          // Set the favorite success message
+          setFavoriteMessage("Recipe added to favorites successfully");
         } else {
           // Error handling for other response statuses
           console.error("Failed to add recipe to favorites");
+          // Failed to add recipe to favorites
+          setFavoriteMessage("Failed to add recipe to favorites");
         }
       } else {
         const deleteResponse = await fetch(`/users/${userId}/favorites/${recipeId}`, {
@@ -57,6 +65,7 @@ function Layout({ isLogged , newUser, setNewUser, handleLogin, handleSignup, han
         if (deleteResponse.ok) {
           // Favorite removed successfully
           console.log("Favorite removed");
+          setFavoriteMessage("Recipe removed from favorites successfully");
           // Update the recipes state by filtering out the deleted recipe
           const updatedRecipes = cachedFavorites.filter((r) => r.id !== recipeId);
           setCachedFavorites(updatedRecipes);
@@ -71,8 +80,11 @@ function Layout({ isLogged , newUser, setNewUser, handleLogin, handleSignup, han
         } else {
           // Error handling
           console.error("Failed to remove favorite");
+          // Failed to add recipe to favorites
+          setFavoriteMessage("Failed to remove recipe from favorites");
         }
       }
+      setAlertOpen(true);
     }
     async function fetchLandingRecipes() {
         if (cachedLanding.length) {
@@ -141,6 +153,19 @@ function Layout({ isLogged , newUser, setNewUser, handleLogin, handleSignup, han
       <div>
         <Grid container direction="column">
           <Grid item xs={12}>
+            <Snackbar
+                open={alertOpen}
+                autoHideDuration={3000}
+                anchorOrigin={{ vertical: "top", horizontal: "right" }}
+                onClose={() => setAlertOpen(false)}
+              >
+                <Alert
+                  onClose={() => setAlertOpen(false)}
+                  severity={favoriteMessage.includes("Failed") ? "error" : "success"}
+                >
+                {favoriteMessage}
+                </Alert>
+            </Snackbar>
             <Box pl={8} pr={8} pt={4} pb={0}>
                 <Navbar 
                 activeTab={activeTab}
