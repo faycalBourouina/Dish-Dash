@@ -1,10 +1,11 @@
-const { List, ListItem, IconButton } = MaterialUI;
+const { List, ListItem, IconButton, Link } = MaterialUI;
 function RecipeDetails({ isLogged, recipe, activeTab, handleUpdateFavorites, recipesLength, handleSelectedRecipe, cachedItems, setCachedItems, onRecipeClick}) {
 
   const { id, title, image, instructions, ingredients, summary, isFavorite: initIsFavorite } = recipe;
   
   const [isFavorite, setIsFavorite] = useState(initIsFavorite);
-  
+
+
   return (
     <Grid 
       container 
@@ -12,13 +13,13 @@ function RecipeDetails({ isLogged, recipe, activeTab, handleUpdateFavorites, rec
       pr={10} pl ={10}
     >
       <Grid item xs={12} md={6}>
-          {activeTab === 'search' && (
-            <Box marginBottom={2}>
-              <ButtonBase onClick={() => handleSelectedRecipe(id)}>
-                {recipesLength} {recipesLength === 1 ? 'recipe' : 'recipes'} found
-              </ButtonBase>
-            </Box>
-          )}
+        {activeTab === 'search' && (
+          <Box marginBottom={2}>
+            <Link onClick={() => handleSelectedRecipe(id)}>
+                {recipesLength} {recipesLength === 1 ? 'recipe' : 'recipes'} found 
+            </Link>
+          </Box>
+        )}
         <Box marginBottom={4}>
           <Typography variant="h3">{title}</Typography>
         </Box>

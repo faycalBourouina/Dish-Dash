@@ -22,7 +22,7 @@ function Layout({ isLogged , newUser, setNewUser, handleLogin, handleSignup, han
         //setCachedSearch(recipes); // cache the search results
         setRecipes(recipesResponse); // update the recipes state to searched recipes
         setSelectedRecipe(null); // clear the selected recipe
-        //setActiveTab("search"); // switch to the search tab
+        setActiveTab("search"); // switch to the search tab
         setIsLoading(false); // set isLoading back to false once data has finished loading
     }
 
@@ -93,12 +93,14 @@ function Layout({ isLogged , newUser, setNewUser, handleLogin, handleSignup, han
           setIsLoading(true);     
           const response = await fetch("/landing");
           const data = await response.json();
-          const { recipes } = data;
-
+          const { recipes } = await data;
+          
           setCachedLanding(recipes);
           setRecipes(recipes);
           setIsLoading(false);
+
         }
+
     }
 
     async function fetchFavoritesRecipes() {
@@ -136,18 +138,15 @@ function Layout({ isLogged , newUser, setNewUser, handleLogin, handleSignup, han
         setCachedSearch([]);
       }
     }, [isLogged]);
-    
-    useEffect(() => { fetchFavoritesRecipes()}, []);
 
 
     useEffect(() => {
-      if (activeTab === "home") {
-        fetchLandingRecipes();
-      } else if (activeTab === "favorites") {
+      if (activeTab === "favorites") {
         fetchFavoritesRecipes();
+      } else if (activeTab === "home") {
+        fetchLandingRecipes();
       }
-      console.log("recipes", recipes)
-    }, [activeTab, isLogged]);
+    }, [activeTab]);
 
     return (
       <div>
@@ -167,7 +166,6 @@ function Layout({ isLogged , newUser, setNewUser, handleLogin, handleSignup, han
                 </Alert>
             </Snackbar>
             <Box pl={8} pr={8} pt={4} pb={0}>
-
                 <Navbar 
                 activeTab={activeTab}
                 setActiveTab={setActiveTab}
@@ -213,10 +211,8 @@ function Layout({ isLogged , newUser, setNewUser, handleLogin, handleSignup, han
               }
             </Grid>
           </Box>
+            <Footer />
         </Grid>
-        <Box bgcolor="#1976d2" color="white" py={2} textAlign="center">
-          <Typography variant="caption">&copy; 2023 DishDash. All rights reserved.</Typography>
-        </Box>
       </div>
     );
 }

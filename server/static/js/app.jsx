@@ -1,6 +1,8 @@
 const { useState } = React;
+const { Grid } = MaterialUI;
 
 function App({ userId }) {
+
   const [isLogged, setIsLogged] = useState(userId);
   const [newUser, setNewUser] = useState(false);
   const [cachedLanding, setCachedLanding] = useState([]);
@@ -85,8 +87,7 @@ function App({ userId }) {
   };
 
   return (
-    <div>
-      <div className="container">
+      <>
         <Layout 
           isLogged={isLogged}
           newUser={newUser}
@@ -105,7 +106,6 @@ function App({ userId }) {
           cachedSearch={cachedSearch}
           setCachedSearch={setCachedSearch}
         />
-      </div>
-    </div>
+    </>
   );
 }

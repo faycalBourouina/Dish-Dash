@@ -14,14 +14,14 @@ function AuthForm({ isLogged, handleLogin, handleSignup, handleClose, message })
 
 
   const handleLoginSubmit = () => {
-    if (!validateEmail(email)) {
+    /*if (!validateEmail(email)) {
       setEmailError(true);
       return;
     }
     if (password.length < 8) {
       setPasswordError(true);
       return;
-    }
+    }*/
     handleLogin(email, password);
     setEmail('');
     setPassword('');

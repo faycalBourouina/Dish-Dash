@@ -228,9 +228,9 @@ def get_random_recipes(user_id, limit):
 def get_landing_recipes(user_id):
     """Return trending and custom recipes"""
 
-    trending_limit = 2
-    custom_limit = 2
-    random_limit = 2
+    trending_limit = 1
+    custom_limit = 1
+    random_limit = 1
     
     landing_recipes = []
     trending_recipes = get_trending_recipes(trending_limit)
@@ -282,7 +282,7 @@ def search_recipes(search, user_id):
         #fillIngredients	= True
 
         # Make API request
-        request = f'{uri_recipes}/complexSearch?&query={query}&diet={diet}&cuisine={cuisine}&number=5&apiKey={SPOONACULAR_API_KEY}'
+        request = f'{uri_recipes}/complexSearch?&query={query}&diet={diet}&cuisine={cuisine}&number=20&apiKey={SPOONACULAR_API_KEY}'
          
         response = requests.get(request).json()
         

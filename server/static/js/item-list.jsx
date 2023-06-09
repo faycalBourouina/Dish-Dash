@@ -213,7 +213,7 @@ const ItemList = ({ recipe, cachedItems, setCachedItems }) => {
         {isLoadingItems ? (
           <ItemListSkeleton />
           ) : (
-          testItems.map((item) => (
+          items.map((item) => (
             <ItemDetails key={item.id} item={item} />
           ))
         )}

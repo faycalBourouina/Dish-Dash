@@ -32,9 +32,9 @@ function Navbar({ activeTab, setActiveTab, isLogged, setNewUser, newUser, handle
   };
 
   const handleClose = () => {
-    // check if user has successfully logged in
-      setIsModalOpen(false)
-      setNewUser(false)
+      setActiveTab("home"); // reset the active tab
+      setIsModalOpen(false) // close the modal
+      setNewUser(false) // reset newUser
       setMessage({}); // clear the message
   }
 
