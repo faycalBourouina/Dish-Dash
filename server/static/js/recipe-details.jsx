@@ -21,7 +21,7 @@ function RecipeDetails({ isLogged, recipe, activeTab, handleUpdateFavorites, rec
           </Box>
         )}
         <Box marginBottom={4}>
-          <Typography variant="h3">{title}</Typography>
+          <Typography variant="h3">{title || recipe.name}</Typography>
         </Box>
         <Box>
           <div style={{ position: 'relative', display: 'inline-block' }}>

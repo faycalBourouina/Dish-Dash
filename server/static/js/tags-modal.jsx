@@ -60,7 +60,7 @@ const TagsModal = ({ isLogged, handleClose }) => {
       <DialogContent
         id="scrollList"
         className="ScrollList"
-        maxWidth="false"
+        maxWidth
         fullWidth
         PaperProps={{
           style: {

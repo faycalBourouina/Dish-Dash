@@ -22,7 +22,6 @@ class User(db.Model):
     def __repr__(self):
         return f'<User id={self.id} email={self.email}>'
     
-
 class Recipe(db.Model):
     """ Recipe """
 
@@ -33,6 +32,13 @@ class Recipe(db.Model):
     image = db.Column(db.String)
     ingredients = db.Column(db.JSON)
     instructions = db.Column(db.Text)
+    #summary = db.Column(db.Text)
+    #servings = db.Column(db.Integer)
+    #readyInMinutes = db.Column(db.Integer)
+    #dairyFree = db.Column(db.Boolean, default=False)
+    #glutenFree = db.Column(db.Boolean, default=False)
+    #vegan = db.Column(db.Boolean, default=False)
+    #vegetarian = db.Column(db.Boolean, default=False)
     kisses = db.Column(db.Integer , default=1)
 
 

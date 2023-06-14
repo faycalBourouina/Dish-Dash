@@ -228,9 +228,9 @@ def get_random_recipes(user_id, limit):
 def get_landing_recipes(user_id):
     """Return trending and custom recipes"""
 
-    trending_limit = 1
-    custom_limit = 1
-    random_limit = 1
+    trending_limit = 8
+    custom_limit = 8
+    random_limit = 8
     
     landing_recipes = []
     trending_recipes = get_trending_recipes(trending_limit)
@@ -267,7 +267,6 @@ def auto_complete_search(query):
 def search_recipes(search, user_id):
     """Search for recipes"""
 
-
     # Use mock data in test mode
     if MODE == 'TEST_MODE':
         response = mock_data['search']['response']
@@ -282,13 +281,24 @@ def search_recipes(search, user_id):
         #fillIngredients	= True
 
         # Make API request
-        request = f'{uri_recipes}/complexSearch?&query={query}&diet={diet}&cuisine={cuisine}&number=20&apiKey={SPOONACULAR_API_KEY}'
+        request = f'{uri_recipes}/complexSearch?&query={query}&diet={diet}&cuisine={cuisine}&number=12&apiKey={SPOONACULAR_API_KEY}'
          
         response = requests.get(request).json()
-        
+
         # Add isFavorite attribute to recipes if user is logged in
         if user_id:
             response = add_favorite_attribute(response['results'], user_id)
+            print("response in search_recipes", response)
+        
+        recipes = []
+
+        # Get full recipe information for each recipe
+        for recipe in response:
+            print("recipe in search_recipes", recipe)
+            recipe = get_recipe(recipe['id'])
+            recipes.append(recipe)
+
+        response = recipes
 
     return response
 
@@ -547,6 +557,14 @@ def add_favorite_to_recipes(recipe):
     recipe_image = recipe['image']
     recipe_instructions = recipe['instructions']
     recipe_ingredients_list = recipe['ingredients']
+    #recicipe_summary = recipe['summary']
+    #recipe_servings = recipe['servings']
+    #recipe_ready_in_minutes = recipe['readyInMinutes']
+    #recipe_dairyFree = recipe['dairyFree']
+    #recipe_glutenFree = recipe['glutenFree']
+    #recipe_vegan = recipe['vegan']
+    #recipe_vegetarian = recipe['vegetarian']
+
 
     recipe = {}
     recipe_ingredients = []
@@ -561,8 +579,8 @@ def add_favorite_to_recipes(recipe):
             
     elif not existing_recipe:
         # If recipe does not exist, create a recipe object
+        #recipe = Recipe(id=recipe_id, title=recipe_title, image=recipe_image, instructions=recipe_instructions, ingredients=recipe_ingredients_list, summary=recicipe_summary, servings=recipe_servings, readyInMinutes=recipe_ready_in_minutes, dairyFree=recipe_dairyFree, glutenFree = recipe_glutenFree, vegan=recipe_vegan, vegetarian=recipe_vegetarian)
         recipe = Recipe(id=recipe_id, title=recipe_title, image=recipe_image, instructions=recipe_instructions, ingredients=recipe_ingredients_list)
-
         # getting recipe ingredients and recipes_ingredients
         results = add_recipe_ingredients(recipe)
 

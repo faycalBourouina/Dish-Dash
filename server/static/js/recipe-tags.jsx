@@ -59,12 +59,14 @@ function RecipeTags({ recipe }) {
             />
           </Box>
         )}
-        <Box marginRight={1} marginBottom={1}>
-          <Chip
-            icon={<FontAwesomeIcon iconClass="fa-heartbeat" />}
-            label={`Health Score: ${healthScore}`}
-          />
-        </Box>
+        {healthScore && (
+          <Box marginRight={1} marginBottom={1}>
+            <Chip
+              icon={<FontAwesomeIcon iconClass="fa-heartbeat" />}
+              label={`Health Score: ${healthScore}`}
+            />
+          </Box>
+        )}
       </Box>
     );
   }

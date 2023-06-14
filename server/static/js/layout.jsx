@@ -50,7 +50,7 @@ function Layout({ isLogged , newUser, setNewUser, handleLogin, handleSignup, han
           activeTab === "favorites" && setRecipes([...recipes, favorite]);
 
           // Set the favorite success message
-          setFavoriteMessage("Recipe added to favorites successfully");
+          setFavoriteMessage(`${favorite.name} added to favorites successfully`);
         } else {
           // Error handling for other response statuses
           console.error("Failed to add recipe to favorites");

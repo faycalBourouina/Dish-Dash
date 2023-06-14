@@ -25,7 +25,7 @@ function RecipeList({ isLogged, isLoading, recipes, activeTab, handleUpdateFavor
         ) : (
           <div>
             {activeTab === 'search' && (
-              <Box pb={8}>
+              <Box pb={2}>
                   <Typography variant="h5" gutterBottom>
                     {recipes.length} {recipes.length === 1 ? 'recipe' : 'recipes'}{' '}
                     found:
