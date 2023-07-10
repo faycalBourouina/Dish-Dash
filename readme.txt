@@ -4,7 +4,7 @@ A web application generates recipe ideas based on a user's specified ingredients
 
 ## Demo Video
 
-[![Demo Video](http://img.youtube.com/vi/z0iRKaDXXA4/0.jpg)](http://www.youtube.com/watch?v=z0iRKaDXXA4)
+http://www.youtube.com/watch?v=z0iRKaDXXA4
 
 ## Features
 
