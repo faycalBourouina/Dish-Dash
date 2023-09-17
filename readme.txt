@@ -27,21 +27,117 @@ A web application generates recipe ideas based on a user's specified ingredients
 - **Caching:** Recipes are cached in the front-end to minimize server requests and improve user experience
 - **Loading:** When recipes or Walmart items are loading, the UI displays a similar UI with MUI skeletons
 
-### Technologies Used
+## How to Run
 
-#### Backend
+1. **Clone the Repository**:
+
+    ```bash
+    git clone https://github.com/faycalBourouina/Dish-Dash.git
+    ```
+
+2. **Navigate and Initialize**:
+
+    Navigate to the project's server directory and initialize a virtual environment.
+
+    ```bash
+    cd Dish-Dash/server
+    virtualenv env
+    source env/bin/activate
+    ```
+
+3. **Install Dependencies**:
+
+    While in the virtual environment, install all required dependencies.
+
+    ```bash
+    pip3 install -r requirement.txt
+    ```
+
+4. **Create a .env File**:
+
+    ```bash
+    touch .env
+    ```
+
+5. **Add API Secret Keys**:
+
+    Add the following API secret keys to your `.env` file:
+
+    ```bash
+    echo 'SPOONACULAR_API_KEY=[insert_a_random_key_here]' >> .env
+    echo 'BLUECART_API_KEY=[insert_a_random_key_here]' >> .env
+    ```
+
+6. **Add a Session Secret Key**:
+
+    ```bash
+    echo 'SESSION_SECRET_KEY=[insert_a_random_key_here]' >> .env
+    ```
+
+7. **Add Mode (Defaulted to Test Mode)**:
+
+    ```bash
+    echo 'MODE=_TEST_MODE' >> .env
+    ```
+
+8. **Verify .env Keys**:
+
+    Verify that all the .env keys were added successfully:
+
+    ```bash
+    cat .env
+    ```
+
+    You should see the `SPOONACULAR_API_KEY`, `BLUECART_API_KEY`, `SESSION_SECRET_KEY`, and `MODE` entries in the output.
+
+9. **Create and Seed the Database**:
+
+    Ensure PostgreSQL is installed. Then, run:
+
+    ```bash
+    python3 seed.py
+    ```
+
+    `seed.py` will create a database named `dish-dash`.
+
+    You can verify the different tables and their content:
+
+    ```bash
+    psql dish-dash
+    dish-dash=# \dt
+    ```
+
+    This will list the relations in the database.
+
+10. **Start the Server**:
+
+    Run the server:
+
+    ```bash
+    python3 server.py
+    ```
+
+    The server should be running at [http://localhost:5000/](http://localhost:5000/).
+
+   \*Running on http://172.21.172.27:5000/
+
+
+
+## Technologies Used
+
+### Backend
 
 - Flask
 - Flask-SQLAlchemy
 - PostgreSQL
 - Jinja2
 
-#### APIs
+### APIs
 
 - Spoonacular
 - Blue Cart
 
-#### Frontend
+### Frontend
 
 - React
 - MUI
