@@ -1,12 +1,10 @@
-#Project Proposal
+# Project Proposal
 
 A web application generates recipe ideas based on a user's specified ingredients and dietary preferences, while also providing links to purchase the necessary ingredients from Walmart. Users can easily find the perfect recipe for their needs with additional filters for ingredients to include, diet, cuisine, meal type, intolerances, and ready time. The application also provides users with the ability to save recipes as favorites for easy access and management.
-
 
 ## Demo Video
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/z0iRKaDXXA4" frameborder="0" allowfullscreen></iframe>
-
 
 ## Features
 
@@ -121,8 +119,6 @@ A web application generates recipe ideas based on a user's specified ingredients
 
    \*Running on http://172.21.172.27:5000/
 
-
-
 ## Technologies Used
 
 ### Backend
@@ -203,10 +199,10 @@ price: Price of the item.
 description: Description of the item.
 imguri: Link to an image representing the item.
 
-
 #### Data Model Diagram
 
-https://dbdiagram.io/embed/64547e77dca9fb07c48b0940
+[Link to Data Model Diagram](https://dbdiagram.io/embed/64547e77dca9fb07c48b0940)
+
 
 ## Roadmap
 
@@ -231,6 +227,7 @@ https://dbdiagram.io/embed/64547e77dca9fb07c48b0940
 3. Improve the landing page algorithm and categorize the returned recipes
 4. Improve searching
 
+
 ## Notes
 
-The wireframe of the project: https://wireframe.cc/usWCFG.
+The wireframe of the project: [Link to Wireframe](https://wireframe.cc/usWCFG).
