@@ -46,7 +46,69 @@ http://www.youtube.com/watch?v=z0iRKaDXXA4
 
 ## Data Model
 
-Link: https://dbdiagram.io/d/64547e77dca9fb07c48b0940
+This section outlines the underlying database structure of the project. It provides insight into the tables used and their relationships.
+
+Table: users
+
+Description: Stores information about registered users.
+Fields:
+id (Primary Key): Unique identifier for each user.
+email: User's email address.
+password: User's encrypted password.
+tags: List of personalized food tags associated with the user.
+created_at: Timestamp indicating when the user account was created.
+
+Table: favorites
+
+Description: Tracks the favorite recipes of each user.
+Fields:
+id (Primary Key): Unique identifier for each favorite.
+user_id (Foreign Key): References the id in the users table to associate the favorite with a specific user.
+recipe_id (Foreign Key): References the id in the recipes table to indicate the favored recipe.
+
+Table: recipes
+
+Description: Contains details about different recipes.
+Fields:
+id (Primary Key): Unique identifier for each recipe.
+title: Name of the recipe.
+image: Link to an image representing the recipe.
+ingredients: List of ingredients required for the recipe.
+instructions: Step-by-step instructions to prepare the recipe.
+kiss: An indicator of recipe popularity or rating.
+created_at: Timestamp indicating when the recipe was added.
+
+Table: ingredients
+
+Description: Stores information about individual ingredients.
+Fields:
+id (Primary Key): Unique identifier for each ingredient.
+name: Name of the ingredient.
+calories: Caloric content of the ingredient.
+icon: Link to an icon representing the ingredient.
+
+Table: ingredientsrecipes
+
+Description: Represents the relationship between ingredients and recipes, indicating which ingredients are used in which recipes.
+Fields:
+ingredientsrecipes_id (Primary Key): Unique identifier for each entry.
+ingredient_id (Foreign Key): References the id in the ingredients table to link an ingredient.
+recipe_id (Foreign Key): References the id in the recipes table to link a recipe.
+
+Table: walmartitems
+
+Description: Contains information about items available for purchase on Walmart related to recipe ingredients.
+Fields:
+id (Primary Key): Unique identifier for each item.
+link: Link to the Walmart product page.
+price: Price of the item.
+description: Description of the item.
+imguri: Link to an image representing the item.
+
+
+#### Data Model Diagram
+
+<iframe width="100%" height="500" src="https://dbdiagram.io/embed/64547e77dca9fb07c48b0940"></iframe>
 
 ## Roadmap
 
