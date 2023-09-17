@@ -2,9 +2,11 @@
 
 A web application generates recipe ideas based on a user's specified ingredients and dietary preferences, while also providing links to purchase the necessary ingredients from Walmart. Users can easily find the perfect recipe for their needs with additional filters for ingredients to include, diet, cuisine, meal type, intolerances, and ready time. The application also provides users with the ability to save recipes as favorites for easy access and management.
 
+
 ## Demo Video
 
-http://www.youtube.com/watch?v=z0iRKaDXXA4
+<iframe width="560" height="315" src="https://www.youtube.com/embed/z0iRKaDXXA4" frameborder="0" allowfullscreen></iframe>
+
 
 ## Features
 
@@ -108,7 +110,7 @@ imguri: Link to an image representing the item.
 
 #### Data Model Diagram
 
-<iframe width="100%" height="500" src="https://dbdiagram.io/embed/64547e77dca9fb07c48b0940"></iframe>
+https://dbdiagram.io/embed/64547e77dca9fb07c48b0940
 
 ## Roadmap
 
