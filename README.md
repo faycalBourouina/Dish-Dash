@@ -202,7 +202,6 @@ This section outlines the underlying database structure of the project. It provi
 #### Data Model Diagram
 
 [Link to Data Model Diagram](https://dbdiagram.io/embed/64547e77dca9fb07c48b0940)
-<iframe src="https://dbdiagram.io/embed/64547e77dca9fb07c48b0940" frameborder="0"></iframe>
 
 
 ## Roadmap
