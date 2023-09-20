@@ -120,18 +120,20 @@ A web application generates recipe ideas based on a user's specified ingredients
 
 ## Testing
 
-This project includes a suite of unit tests to ensure the functionality of different components. These tests are implemented using the `unittest` framework and cover various aspects of the application.
-
-### Running Tests
-
-To run the tests, follow these steps:
+This project includes a suite of unit tests to ensure the functionality of different components. These tests are implemented using the `unittest` framework and cover various aspects of the application. To run the tests, follow these steps:
 
 1. **Navigate to the Test Directory**:
 
    ```bash
-   cd Dish-Dash
+   cd Dish-Dash/server
+   ```
 
+2. **Run the tests**:
 
+   ```bash
+   python tests.py
+   ```
+   
 ## Technologies Used
 
 ### Backend
