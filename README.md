@@ -1,10 +1,11 @@
-# Project Proposal
+# Dish-Dash
 
 A web application generates recipe ideas based on a user's specified ingredients and dietary preferences, while also providing links to purchase the necessary ingredients from Walmart. Users can easily find the perfect recipe for their needs with additional filters for ingredients to include, diet, cuisine, meal type, intolerances, and ready time. The application also provides users with the ability to save recipes as favorites for easy access and management.
 
 ## Demo Video
 
 [![Watch the video](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExd3FjY2Z4NG8xZW9pMjhoZDV2NTdqNDc5ZXRoNGNybmd4ZHI2Ym9payZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/i4cQbhnJc1bMCtIdcd/giphy.gif)](https://www.youtube.com/watch?v=z0iRKaDXXA4)
+
 
 ## Features
 
@@ -24,6 +25,11 @@ A web application generates recipe ideas based on a user's specified ingredients
 - **Feedback:** Action feedback helps users understand the result of their actions
 - **Caching:** Recipes are cached in the front-end to minimize server requests and improve user experience
 - **Loading:** When recipes or Walmart items are loading, the UI displays a similar UI with MUI skeletons
+
+### Wireframe
+
+[Link to Wireframe](https://wireframe.cc/usWCFG)
+
 
 ## How to Run
 
@@ -133,6 +139,7 @@ This project includes a suite of unit tests to ensure the functionality of diffe
    ```bash
    python tests.py
    ```
+
    
 ## Technologies Used
 
@@ -243,6 +250,8 @@ This section outlines the underlying database structure of the project. It provi
 4. Improve searching
 
 
-## Notes
+## Acknowledgements:
 
-The wireframe of the project: [Link to Wireframe](https://wireframe.cc/usWCFG).
+This project represents the highlight of my journey at Hackbright Academy, thanks in large part to Walmart's generous support. A big thank you to Hackbright Academy for providing me with the tools and guidance to bring this project to life.
+
+A special shoutout to the mentors and fellow students at Hackbright Academy for their help throughout this exciting journey.
