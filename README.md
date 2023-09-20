@@ -116,8 +116,21 @@ A web application generates recipe ideas based on a user's specified ingredients
     ```
 
     The server should be running at [http://localhost:5000/](http://localhost:5000/).
+    
 
-   \*Running on http://172.21.172.27:5000/
+## Testing
+
+This project includes a suite of unit tests to ensure the functionality of different components. These tests are implemented using the `unittest` framework and cover various aspects of the application.
+
+### Running Tests
+
+To run the tests, follow these steps:
+
+1. **Navigate to the Test Directory**:
+
+   ```bash
+   cd Dish-Dash
+
 
 ## Technologies Used
 
