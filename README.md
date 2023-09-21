@@ -137,7 +137,7 @@ This project includes a suite of unit tests to ensure the functionality of diffe
 2. **Run the tests**:
 
    ```bash
-   python tests.py
+   python3 tests.py
    ```
 
    
