@@ -54,7 +54,7 @@ A web application generates recipe ideas based on a user's specified ingredients
     While in the virtual environment, install all required dependencies.
 
     ```bash
-    pip3 install -r requirement.txt
+    pip3 install -r requirements.txt
     ```
 
 4. **Create a .env File**:
