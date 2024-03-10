@@ -1,16 +1,16 @@
 import json
 import os
+
 from dotenv import load_dotenv
 from random import choice
 
+os.system('dropdb --if-exists dish-dash')
+os.system('createdb dish-dash')
 
 import model
 import server
 import crud
 
-
-os.system("dropdb dish-dash")
-os.system('createdb dish-dash')
 
 # Load MODE environment variable
 load_dotenv()
