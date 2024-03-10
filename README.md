@@ -81,7 +81,7 @@ A web application generates recipe ideas based on a user's specified ingredients
 7. **Add Mode (Defaulted to Test Mode)**:
 
     ```bash
-    echo 'MODE=_TEST_MODE' >> .env
+    echo 'MODE=TEST_MODE' >> .env
     ```
 
 8. **Verify .env Keys**:
