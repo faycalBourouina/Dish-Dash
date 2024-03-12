@@ -560,7 +560,7 @@ def add_favorite_to_recipes(recipe):
     """Add favorite recipe to the recipes table"""
 
     recipe_id = recipe['id']
-    recipe_title = recipe['name']
+    recipe_title = recipe['title']
     recipe_image = recipe['image']
     recipe_instructions = recipe['instructions']
     recipe_ingredients_list = recipe['ingredients']
