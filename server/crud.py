@@ -109,32 +109,41 @@ def get_trending_recipes(limit):
 def get_similar_recipes(recipe_id, num = 1):
     """Return similar recipes"""
 
-    similar_recipes = []
-    
-    # Limit number of recipes to
-    params = { 
-        'apiKey': SPOONACULAR_API_KEY,
-        'number': num
+    # Use mock data in test mode
+    if MODE == 'TEST_MODE':
+        # Temporary fetching from 'landing_recipes' as it's the only sample containing comprehensive recipe details
+        mock_response = mock_data['landing_recipes']['response']
+        # Excluding viewed recipe from similar recipes displayed
+        response = [recipe for recipe in mock_response if 'summary' in recipe and not recipe['id'] == recipe_id]
+
+    else:
+        similar_recipes = []
+        
+        # Limit number of recipes to
+        params = { 
+            'apiKey': SPOONACULAR_API_KEY,
+            'number': num
+            }
+        
+        # Get similar recipes from the api
+        similar_recipes_data = requests.get(f'{uri_recipes}/{recipe_id}/similar', params=params).json()
+        
+        # Get id of similar recipes
+        recipe_ids = [recipe['id'] for recipe in similar_recipes_data]
+
+        # Get the recipe information for each recipe in bulk
+        params = {
+            'apiKey': SPOONACULAR_API_KEY,
+            'ids': ','.join([str(recipe_id) for recipe_id in recipe_ids])
         }
-    
-    # Get similar recipes from the api
-    similar_recipes_data = requests.get(f'{uri_recipes}/{recipe_id}/similar', params=params).json()
-    
-    # Get id of similar recipes
-    recipe_ids = [recipe['id'] for recipe in similar_recipes_data]
-
-    # Get the recipe information for each recipe in bulk
-    params = {
-        'apiKey': SPOONACULAR_API_KEY,
-        'ids': ','.join([str(recipe_id) for recipe_id in recipe_ids])
-    }
 
 
-    # Get the recipe information for each recipe id in bulk
-    recipe = requests.get(f'{uri_recipes}/informationBulk', params=params).json()
-    similar_recipes.extend(recipe)
+        # Get the recipe information for each recipe id in bulk
+        recipe = requests.get(f'{uri_recipes}/informationBulk', params=params).json()
+        similar_recipes.extend(recipe)
 
-    return similar_recipes
+        response = similar_recipes
+    return response
 
 def get_custom_recipes(user_id, limit):
     """Return custom recipes for user if logged in """
@@ -282,7 +291,6 @@ def search_recipes(search, user_id):
 
     # Use mock data in test mode
     if MODE == 'TEST_MODE':
-
         # Temporary fetching from 'landing_recipes'as it's the only sample containig comprehensive recipe details 
         mock_response = mock_data['landing_recipes']['response']
         response = [recipe for recipe in mock_response if 'summary' in recipe]
