@@ -259,16 +259,22 @@ def get_landing_recipes(user_id):
 def auto_complete_search(query):
     """Autocomplete search"""
 
-    params = {
-        'apiKey': SPOONACULAR_API_KEY,
-        'number': 5,
-        'query': query
-    }
+    # Ignore auto search in test mode
+    if MODE == 'TEST_MODE':
+        response = []
 
-    # Get autocomplete search from the api
-    autocomplete_search = requests.get(f'{uri_recipes}/autocomplete', params=params).json()
-    
-    return autocomplete_search
+    else:
+        params = {
+            'apiKey': SPOONACULAR_API_KEY,
+            'number': 5,
+            'query': query
+        }
+
+        # Get autocomplete search from the api
+        autocomplete_search = requests.get(f'{uri_recipes}/autocomplete', params=params).json()
+        response = autocomplete_search
+
+    return response 
 
  
 def search_recipes(search, user_id):
