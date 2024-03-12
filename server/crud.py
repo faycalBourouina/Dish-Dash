@@ -228,26 +228,33 @@ def get_random_recipes(user_id, limit):
 def get_landing_recipes(user_id):
     """Return trending and custom recipes"""
 
-    trending_limit = 8
-    custom_limit = 8
-    random_limit = 8
+    # Fetch response data from mock data in If in test mode, and filter recipes with summary
+    if MODE == 'TEST_MODE':
+        mock_response = mock_data['landing_recipes']['response']
+        response = [recipe for recipe in mock_response if 'summary' in recipe]
+    else:
+        trending_limit = 8
+        custom_limit = 8
+        random_limit = 8
+        
+        landing_recipes = []
+        trending_recipes = get_trending_recipes(trending_limit)
+        custom_recipes = get_custom_recipes(user_id, custom_limit)
+        random_recipes = get_random_recipes(user_id, random_limit)
+
+        landing_recipes.extend(trending_recipes)
+        landing_recipes.extend(custom_recipes)
+        landing_recipes.extend(random_recipes)
+
+        # Remove duplicates based on recipe ID
+        landing_recipes = remove_duplicate_recipes(landing_recipes)
+
+        # Add isFavorite attribute to recipes
+        landing_recipes = add_favorite_attribute(landing_recipes, user_id)
+
+        response = landing_recipes
     
-    landing_recipes = []
-    trending_recipes = get_trending_recipes(trending_limit)
-    custom_recipes = get_custom_recipes(user_id, custom_limit)
-    random_recipes = get_random_recipes(user_id, random_limit)
-
-    landing_recipes.extend(trending_recipes)
-    landing_recipes.extend(custom_recipes)
-    landing_recipes.extend(random_recipes)
-
-    # Remove duplicates based on recipe ID
-    landing_recipes = remove_duplicate_recipes(landing_recipes)
-
-    # Add isFavorite attribute to recipes
-    landing_recipes = add_favorite_attribute(landing_recipes, user_id)
-
-    return landing_recipes
+    return response
 
 def auto_complete_search(query):
     """Autocomplete search"""
@@ -429,7 +436,7 @@ def get_walmart_items(recipe_id, ingredients):
     """Get Walmart items from recipe groceries"""
 
     # Get mapped ingredient to groceries items from spoonacular api
-    #groceries = map_ingredients_groceries(recipe_id)
+    # groceries = map_ingredients_groceries(recipe_id)
 
     # Or use the ingredients names passed from the front end
     groceries = json.loads(ingredients)
