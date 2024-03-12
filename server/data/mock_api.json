@@ -1689,6 +1689,86 @@
     "recipe_by_id": {
         "query": "http://localhost:5000/recipes/<recipe_id>",
         "response": [
+          {
+            "id": 664427,
+            "image": "https://spoonacular.com/recipeImages/664427-556x370.jpg",
+            "ingredients": [
+                  {
+                    "id": 20003,
+                    "name": "arrowroot powder",
+                    "original_name": "2 tablespoons arrowroot powder"
+                  },
+                  {
+                    "id": 18369,
+                    "name": "baking powder",
+                    "original_name": "2 1/2 teaspoons baking powder"
+                  },
+                  {
+                    "id": 20081,
+                    "name": "flour",
+                    "original_name": "2 cups flour"
+                  },
+                  {
+                    "id": 4582,
+                    "name": "oil",
+                    "original_name": "4 teaspoons oil"
+                  },
+                  {
+                    "id": 93761,
+                    "name": "rice milk",
+                    "original_name": "3/4 cup rice milk"
+                  },
+                  {
+                    "id": 19335,
+                    "name": "sugar",
+                    "original_name": "1/2 cup sugar"
+                  },
+                  {
+                    "id": 2050,
+                    "name": "vanilla extract",
+                    "original_name": "1 tablespoon vanilla extract"
+                  },
+                  {
+                    "id": 14412,
+                    "name": "water",
+                    "original_name": "4 cups water"
+                  }
+            ],
+            "instructions": "<ol><li>Preheat oven to 325 degrees.</li><li>Mix flour, sugar, and baking powder.</li><li>Mix arrowroot powder and water, then add rice milk, oil, and vanilla, mixing until well blended.</li><li>Pour batter into a greased donut pan.</li><li>Put in oven and bake for 8-10 minutes or until done.</li><li>Dip into a mixed sugar glaze of powdered sugar and water or roll in a bag filled with cinnamon sugar.</li></ol>",
+            "name": "Vegan Donuts"
+          },  
+          { "id": 643117,
+            "image": "https://spoonacular.com/recipeImages/643117-556x370.jpg",
+            "ingredients": [
+                  {
+                    "id": 16098,
+                    "name": "peanut butter",
+                    "original_name": "1 cup peanut butter"
+                  },
+                  {
+                    "id": 19296,
+                    "name": "honey",
+                    "original_name": "1/2 cup honey"
+                  },
+                  {
+                    "id": 1123,
+                    "name": "egg",
+                    "original_name": "1 large egg"
+                  },
+                  {
+                    "id": 18372,
+                    "name": "baking soda",
+                    "original_name": "1 teaspoon baking soda"
+                  },
+                  {
+                    "id": 2050,
+                    "name": "vanilla extract",
+                    "original_name": "1/2 teaspoon vanilla extract"
+                  }
+            ],
+            "instructions": "Preheat oven to 350F.\nMix all ingredients in a large mixing bowl, stir well.\nDrop by spoonfuls on to lightly greased cookie sheet, about 2\" apart.\nBake for about 12 minutes, the cookies will be soft to the touch.\nPlace on rack to cool.\nYield: 24 cookies",
+            "name": "Flour-Less Peanut Butter Cookies"
+          },
           { "id": 646974,
             "image": "https://spoonacular.com/recipeImages/646974-556x370.jpg",
             "ingredients": [
