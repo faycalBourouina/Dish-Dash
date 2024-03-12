@@ -250,6 +250,7 @@ def update_favorite(user_id, recipe_id):
 
             # Get recipe from the API
             recipe = crud.get_recipe(recipe_id)
+            print("------------------------- favorite recipe id: ", recipe_id)
             
             # Get the favorite recipe, recipe ingredients, and recipes_ingredients 
             results = crud.add_favorite_to_recipes(recipe)

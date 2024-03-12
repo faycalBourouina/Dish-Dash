@@ -293,7 +293,8 @@
                   }
                ]
             },
-            {
+            {  "id":643117,
+               "title":"Flour-Less Peanut Butter Cookies",
                "vegetarian":true,
                "vegan":false,
                "glutenFree":true,
@@ -450,8 +451,6 @@
                      }
                   }
                ],
-               "id":643117,
-               "title":"Flour-Less Peanut Butter Cookies",
                "readyInMinutes":45,
                "servings":24,
                "sourceUrl":"https://www.foodista.com/recipe/24SJWYZQ/flour-less-peanut-butter-cookies",
@@ -571,7 +570,8 @@
                "originalId":"None",
                "spoonacularSourceUrl":"https://spoonacular.com/flour-less-peanut-butter-cookies-643117"
             },
-            {
+            {  "id":664427,
+               "title":"Vegan Donuts",
                "vegetarian":true,
                "vegan":true,
                "glutenFree":false,
@@ -809,8 +809,6 @@
                      }
                   }
                ],
-               "id":664427,
-               "title":"Vegan Donuts",
                "readyInMinutes":45,
                "servings":1,
                "sourceUrl":"http://www.foodista.com/recipe/Q4CLB25R/vegan-donuts",
@@ -991,7 +989,8 @@
                "originalId":"None",
                "spoonacularSourceUrl":"https://spoonacular.com/vegan-donuts-664427"
             },
-            {
+            {  "id":646974,
+               "title":"Homemade Creamy Ramen Soup",
                "vegetarian":false,
                "vegan":false,
                "glutenFree":false,
@@ -1393,8 +1392,6 @@
                      }
                   }
                ],
-               "id":646974,
-               "title":"Homemade Creamy Ramen Soup",
                "readyInMinutes":45,
                "servings":4,
                "sourceUrl":"http://www.foodista.com/recipe/8ZNQGLHN/homemade-creamy-ramen-soup",
@@ -1692,6 +1689,78 @@
     "recipe_by_id": {
         "query": "http://localhost:5000/recipes/<recipe_id>",
         "response": [
+          { "id": 646974,
+            "image": "https://spoonacular.com/recipeImages/646974-556x370.jpg",
+            "ingredients": [
+                {
+                    "id": 11124,
+                    "name": "carrots",
+                    "original_name": "4 - 6 carrots"
+                },
+                {
+                    "id": 2007,
+                    "name": "celery seed",
+                    "original_name": "dash of celery seed"
+                },
+                {
+                    "id": 11282,
+                    "name": "onions",
+                    "original_name": "1/2 cup onions"
+                },
+                {
+                    "id": 1029003,
+                    "name": "all-purpose flour",
+                    "original_name": "1/4 cup all-purpose flour"
+                },
+                {
+                    "id": 11320420,
+                    "name": "poultry seasoning",
+                    "original_name": "1/4 teaspoon poultry seasoning"
+                },
+                {
+                    "id": 2044,
+                    "name": "turmeric",
+                    "original_name": "dash of turmeric"
+                },
+                {
+                    "id": 2047,
+                    "name": "sea salt",
+                    "original_name": "dash of sea salt"
+                },
+                {
+                    "id": 21118,
+                    "name": "water",
+                    "original_name": "1 quart water"
+                },
+                {
+                    "id": 11215,
+                    "name": "vegetable broth",
+                    "original_name": "1 quart vegetable broth"
+                },
+                {
+                    "id": 10514534,
+                    "name": "kombu",
+                    "original_name": "1 piece kombu, 2 inches long (optional)"
+                },
+                {
+                    "id": 10011693,
+                    "name": "unsweetened non-dairy milk",
+                    "original_name": "1 cup unsweetened non-dairy milk"
+                },
+                {
+                    "id": 1012047,
+                    "name": "salt and pepper",
+                    "original_name": "Salt and pepper to taste"
+                },
+                {
+                    "id": 11477,
+                    "name": "ramen noodles",
+                    "original_name": "4 oz ramen noodles"
+                }
+            ],
+            "instructions": "In a food processor combine onions, carrots, and garlic and mince well. The pieces should be very small. Heat oil in a soup pot. Add minced vegetables and saute, mixing occasionally, until just soft [7 - 10 minutes]. Add flour, poultry seasoning, turmeric, sea salt, and celery seed and stir constantly for about 30 seconds, coating the vegetables well.\nPour in the broth and water. Add kombu if you are using it. Bring to boil and then simmer, covered, for 30 minutes.\nAfter 30 minutes, pour in non-dairy milk and noodles. Let simmer an additional 10 minutes or until noodles are soft.\nRemove from heat and serve immediately.",
+            "name": "Homemade Creamy Ramen Soup"
+          }, 
           { "id": 644885,
             "image": "https://spoonacular.com/recipeImages/644885-556x370.jpg",
             "ingredients": [
