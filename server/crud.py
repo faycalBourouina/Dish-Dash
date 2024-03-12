@@ -282,7 +282,11 @@ def search_recipes(search, user_id):
 
     # Use mock data in test mode
     if MODE == 'TEST_MODE':
-        response = mock_data['search']['response']
+
+        # Temporary fetching from 'landing_recipes'as it's the only sample containig comprehensive recipe details 
+        mock_response = mock_data['landing_recipes']['response']
+        response = [recipe for recipe in mock_response if 'summary' in recipe]
+
     else:
         query = search.get('query', '')
         diet = search.get('diet', '')
