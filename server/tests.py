@@ -157,6 +157,9 @@ class DBTests(unittest.TestCase):
     def setUp(self):
         """Set up test client before each test"""
 
+        # Drop all tables before setting up
+        model.db.drop_all()
+
         # Get the Flask test client
         self.client = app.test_client()
         app.config['TESTING'] = True
@@ -169,9 +172,11 @@ class DBTests(unittest.TestCase):
 
     def tearDown(self):
 
-        # Drop all tables and remove session at the end of each test        
+        # Drop all tables and remove session at the end of each test
+        print("tearDown is being called")        
         model.db.drop_all()
         model.db.session.remove()
+        
 
     # Test sign up
     def test_signup_status_code_new_user(self):
