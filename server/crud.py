@@ -459,7 +459,6 @@ def get_walmart_items(recipe_id, ingredients):
     if MODE == 'TEST_MODE':
         # Use mock data in test mode
         response = mock_data['walmart_items']['response']
-        print("-------------Response :", response)
 
         # Loop through the response and extract needed information
         for item_name, item_data in response.items():

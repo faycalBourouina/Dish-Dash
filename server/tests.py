@@ -20,27 +20,28 @@ class ServerTests(unittest.TestCase):
     def test_landing_page_status_code(self):
         """Test landing page status code"""
 
-        result = self.client.get("/")
+        result = self.client.get("/landing")
         self.assertEqual(result.status_code, 200)
 
     def test_landing_page_response_format(self):
         """Test landing page response format"""
 
-        result = self.client.get("/")
+        result = self.client.get("/landing")
         self.assertEqual(result.headers['Content-Type'], 'application/json')
 
     def test_landing_page_recipes_attribute(self):
         """Test presence and format of 'recipes' attribute"""
 
-        result = self.client.get("/")
+        result = self.client.get("/landing")
         response_data = json.loads(result.data)
         self.assertIn('recipes', response_data)
 
     def test_landing_page_non_empty_recipes_list(self):
         """Test 'recipes' attribute is a non-empty list"""
 
-        result = self.client.get("/")
+        result = self.client.get("/landing")
         response_data = json.loads(result.data)
+
         recipes_value = response_data['recipes']['recipes']
         self.assertIsInstance(recipes_value, list, "'recipes' attribute is not a list")
         self.assertTrue(len(recipes_value) > 0, "'recipes' attribute is an empty list")
