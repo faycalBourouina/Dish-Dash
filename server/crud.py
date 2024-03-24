@@ -452,35 +452,37 @@ def map_ingredients_groceries(recipe_id):
 
 def get_walmart_items(recipe_id, ingredients):
     """Get Walmart items from recipe groceries"""
-
-    # Get mapped ingredient to groceries items from spoonacular api
-    # groceries = map_ingredients_groceries(recipe_id)
-
-    # Or use the ingredients names passed from the front end
-    groceries = json.loads(ingredients)
-
+    
     products = []
 
-    if groceries:
-
+    # Use mock data in test mode
+    if MODE == 'TEST_MODE':
         # Use mock data in test mode
-        if MODE == 'TEST_MODE':
-            # Use mock data in test mode
-            response = mock_data['walmart_items']['response']
+        response = mock_data['walmart_items']['response']
+        print("-------------Response :", response)
 
-            # Loop through the response and extract needed information
-            for item_name, item_data in response.items():
-                product_info = {}
+        # Loop through the response and extract needed information
+        for item_name, item_data in response.items():
+            product_info = {}
 
-                product_info["name"] = item_name
-                product_info["price"] = item_data["offers"]["primary"]["price"]
-                product_info["shipping"] = item_data["fulfillment"].get("shipping", False)
-                product_info.update(item_data["product"])
+            product_info["name"] = item_name
+            product_info["price"] = item_data["offers"]["primary"]["price"]
+            product_info["shipping"] = item_data["fulfillment"].get("shipping", False)
+            product_info.update(item_data["product"])
 
-                products.append(product_info)
+            products.append(product_info)
         
-        # Use real data in production mode
-        else:
+        response = products
+        
+    # Use real data in production mode
+    else:
+        # Get mapped ingredient to groceries items from spoonacular api
+        # groceries = map_ingredients_groceries(recipe_id)
+        
+        # Or use the ingredients names passed from the front end
+        groceries = json.loads(ingredients)
+
+        if groceries:
             # Set up the request parameters
             params = {
                 'api_key': BLUECART_API_KEY,
@@ -515,10 +517,12 @@ def get_walmart_items(recipe_id, ingredients):
 
                 products.append(product_info)
         
-        return products
-    
-    else:
-        return None
+            response = products
+
+        else:
+            response = None
+
+    return response 
 
 def add_recipe_ingredients(recipe):
     """Add recipe ingredients to the ingredients table and the recipes_ingredients association table"""
