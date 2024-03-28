@@ -73,8 +73,8 @@ class ServerTests(unittest.TestCase):
 
         result = self.client.get("/search")
         response_data = json.loads(result.data)
-
-        recipes_value = response_data['recipes']['results']
+        
+        recipes_value = response_data['recipes']
         self.assertIsInstance(recipes_value, list, "'results' attribute is not a list")
         self.assertTrue(len(recipes_value) > 0, "'results' attribute is an empty list")
 

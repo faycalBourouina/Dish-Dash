@@ -291,10 +291,9 @@ def search_recipes(search, user_id):
 
     # Use mock data in test mode
     if MODE == 'TEST_MODE':
-        # Temporary fetching from 'landing_recipes'as it's the only sample containig comprehensive recipe details 
-        mock_response = mock_data['landing_recipes']['response']
-        response = [recipe for recipe in mock_response if 'summary' in recipe]
-
+        # Fetching data from mock_data in test mode
+        response = mock_data['search']['response']['results']
+        
     else:
         query = search.get('query', '')
         diet = search.get('diet', '')
@@ -313,17 +312,16 @@ def search_recipes(search, user_id):
         # Add isFavorite attribute to recipes if user is logged in
         if user_id:
             response = add_favorite_attribute(response['results'], user_id)
-            print("response in search_recipes", response)
         
-        recipes = []
+    recipes = []
 
-        # Get full recipe information for each recipe
-        for recipe in response:
-            print("recipe in search_recipes", recipe)
-            recipe = get_recipe(recipe['id'])
-            recipes.append(recipe)
+    # Get full recipe information for each recipe
+    for recipe in response:
+        recipe = get_recipe(recipe['id'])
+        recipes.append(recipe)
 
-        response = recipes
+    response = recipes
+    print("-----------------------Recipes: ", response)
 
     return response
 
