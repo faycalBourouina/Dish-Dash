@@ -87,7 +87,7 @@ def add_favorite_attribute(recipes, user_id):
 
     for recipe in recipes:
         recipe['isFavorite'] = recipe['id'] in favorite_ids
-        print("is Favorite add to recipe: ", recipe['isFavorite'])
+        #print("is Favorite add to recipe: ", recipe['isFavorite'])
     return recipes
 
 
@@ -321,7 +321,6 @@ def search_recipes(search, user_id):
         recipes.append(recipe)
 
     response = recipes
-    print("-----------------------Recipes: ", response)
 
     return response
 
@@ -332,7 +331,7 @@ def get_recipe(recipe_id):
     if MODE == 'TEST_MODE':
         recipe = next((recipe for recipe in mock_data['recipe_by_id']['response'] if recipe['id'] == recipe_id), None)
         if recipe:
-            return {
+            response = {
                 'id': recipe['id'],
                 'title': recipe['name'],
                 'image': recipe['image'],
@@ -346,6 +345,8 @@ def get_recipe(recipe_id):
                 'vegan': recipe.get('vegan', False),
                 'vegetarian': recipe.get('vegetarian', False)
             }
+            print("--------------------------- Recipe by ID: ", response)
+            return response
         else:
             return None
 

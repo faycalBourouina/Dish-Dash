@@ -1689,479 +1689,519 @@
     "recipe_by_id": {
         "query": "http://localhost:5000/recipes/<recipe_id>",
         "response": [
-          {
-            "id": 664427,
+          { "id": 664427,
             "image": "https://spoonacular.com/recipeImages/664427-556x370.jpg",
             "ingredients": [
-                  {
-                    "id": 20003,
-                    "name": "arrowroot powder",
-                    "original_name": "2 tablespoons arrowroot powder"
-                  },
-                  {
-                    "id": 18369,
-                    "name": "baking powder",
-                    "original_name": "2 1/2 teaspoons baking powder"
-                  },
-                  {
-                    "id": 20081,
-                    "name": "flour",
-                    "original_name": "2 cups flour"
-                  },
-                  {
-                    "id": 4582,
-                    "name": "oil",
-                    "original_name": "4 teaspoons oil"
-                  },
-                  {
-                    "id": 93761,
-                    "name": "rice milk",
-                    "original_name": "3/4 cup rice milk"
-                  },
-                  {
-                    "id": 19335,
-                    "name": "sugar",
-                    "original_name": "1/2 cup sugar"
-                  },
-                  {
-                    "id": 2050,
-                    "name": "vanilla extract",
-                    "original_name": "1 tablespoon vanilla extract"
-                  },
-                  {
-                    "id": 14412,
-                    "name": "water",
-                    "original_name": "4 cups water"
-                  }
+                        {
+                          "id": 20003,
+                          "name": "arrowroot powder",
+                          "original_name": "2 tablespoons arrowroot powder"
+                        },
+                        {
+                          "id": 18369,
+                          "name": "baking powder",
+                          "original_name": "2 1/2 teaspoons baking powder"
+                        },
+                        {
+                          "id": 20081,
+                          "name": "flour",
+                          "original_name": "2 cups flour"
+                        },
+                        {
+                          "id": 4582,
+                          "name": "oil",
+                          "original_name": "4 teaspoons oil"
+                        },
+                        {
+                          "id": 93761,
+                          "name": "rice milk",
+                          "original_name": "3/4 cup rice milk"
+                        },
+                        {
+                          "id": 19335,
+                          "name": "sugar",
+                          "original_name": "1/2 cup sugar"
+                        },
+                        {
+                          "id": 2050,
+                          "name": "vanilla extract",
+                          "original_name": "1 tablespoon vanilla extract"
+                        },
+                        {
+                          "id": 14412,
+                          "name": "water",
+                          "original_name": "4 cups water"
+                        }
             ],
             "instructions": "<ol><li>Preheat oven to 325 degrees.</li><li>Mix flour, sugar, and baking powder.</li><li>Mix arrowroot powder and water, then add rice milk, oil, and vanilla, mixing until well blended.</li><li>Pour batter into a greased donut pan.</li><li>Put in oven and bake for 8-10 minutes or until done.</li><li>Dip into a mixed sugar glaze of powdered sugar and water or roll in a bag filled with cinnamon sugar.</li></ol>",
-            "name": "Vegan Donuts"
-          },  
+            "name": "Vegan Donuts",
+            "summary": "Delicious vegan donuts perfect for breakfast or dessert!",
+            "servings": 12,
+            "readyInMinutes": 30,
+            "vegetarian": true
+          },
           { "id": 643117,
             "image": "https://spoonacular.com/recipeImages/643117-556x370.jpg",
             "ingredients": [
-                  {
-                    "id": 16098,
-                    "name": "peanut butter",
-                    "original_name": "1 cup peanut butter"
-                  },
-                  {
-                    "id": 19296,
-                    "name": "honey",
-                    "original_name": "1/2 cup honey"
-                  },
-                  {
-                    "id": 1123,
-                    "name": "egg",
-                    "original_name": "1 large egg"
-                  },
-                  {
-                    "id": 18372,
-                    "name": "baking soda",
-                    "original_name": "1 teaspoon baking soda"
-                  },
-                  {
-                    "id": 2050,
-                    "name": "vanilla extract",
-                    "original_name": "1/2 teaspoon vanilla extract"
-                  }
+              {
+                "id": 16098,
+                "name": "peanut butter",
+                "original_name": "1 cup peanut butter"
+              },
+              {
+                "id": 19296,
+                "name": "honey",
+                "original_name": "1/2 cup honey"
+              },
+              {
+                "id": 1123,
+                "name": "egg",
+                "original_name": "1 large egg"
+              },
+              {
+                "id": 18372,
+                "name": "baking soda",
+                "original_name": "1 teaspoon baking soda"
+              },
+              {
+                "id": 2050,
+                "name": "vanilla extract",
+                "original_name": "1/2 teaspoon vanilla extract"
+              }
             ],
             "instructions": "Preheat oven to 350F.\nMix all ingredients in a large mixing bowl, stir well.\nDrop by spoonfuls on to lightly greased cookie sheet, about 2\" apart.\nBake for about 12 minutes, the cookies will be soft to the touch.\nPlace on rack to cool.\nYield: 24 cookies",
-            "name": "Flour-Less Peanut Butter Cookies"
+            "name": "Flour-Less Peanut Butter Cookies",
+            "summary": "Delicious flour-less peanut butter cookies made with honey, eggs, and baking soda.",
+            "servings": 24,
+            "readyInMinutes": 15,
+            "dairyFree": true,
+            "glutenFree": true,
+            "vegetarian": true
           },
           { "id": 646974,
             "image": "https://spoonacular.com/recipeImages/646974-556x370.jpg",
             "ingredients": [
-                {
-                    "id": 11124,
-                    "name": "carrots",
-                    "original_name": "4 - 6 carrots"
-                },
-                {
-                    "id": 2007,
-                    "name": "celery seed",
-                    "original_name": "dash of celery seed"
-                },
-                {
-                    "id": 11282,
-                    "name": "onions",
-                    "original_name": "1/2 cup onions"
-                },
-                {
-                    "id": 1029003,
-                    "name": "all-purpose flour",
-                    "original_name": "1/4 cup all-purpose flour"
-                },
-                {
-                    "id": 11320420,
-                    "name": "poultry seasoning",
-                    "original_name": "1/4 teaspoon poultry seasoning"
-                },
-                {
-                    "id": 2044,
-                    "name": "turmeric",
-                    "original_name": "dash of turmeric"
-                },
-                {
-                    "id": 2047,
-                    "name": "sea salt",
-                    "original_name": "dash of sea salt"
-                },
-                {
-                    "id": 21118,
-                    "name": "water",
-                    "original_name": "1 quart water"
-                },
-                {
-                    "id": 11215,
-                    "name": "vegetable broth",
-                    "original_name": "1 quart vegetable broth"
-                },
-                {
-                    "id": 10514534,
-                    "name": "kombu",
-                    "original_name": "1 piece kombu, 2 inches long (optional)"
-                },
-                {
-                    "id": 10011693,
-                    "name": "unsweetened non-dairy milk",
-                    "original_name": "1 cup unsweetened non-dairy milk"
-                },
-                {
-                    "id": 1012047,
-                    "name": "salt and pepper",
-                    "original_name": "Salt and pepper to taste"
-                },
-                {
-                    "id": 11477,
-                    "name": "ramen noodles",
-                    "original_name": "4 oz ramen noodles"
-                }
+              {
+                "id": 11124,
+                "name": "carrots",
+                "original_name": "4 - 6 carrots"
+              },
+              {
+                "id": 2007,
+                "name": "celery seed",
+                "original_name": "dash of celery seed"
+              },
+              {
+                "id": 11282,
+                "name": "onions",
+                "original_name": "1/2 cup onions"
+              },
+              {
+                "id": 1029003,
+                "name": "all-purpose flour",
+                "original_name": "1/4 cup all-purpose flour"
+              },
+              {
+                "id": 11320420,
+                "name": "poultry seasoning",
+                "original_name": "1/4 teaspoon poultry seasoning"
+              },
+              {
+                "id": 2044,
+                "name": "turmeric",
+                "original_name": "dash of turmeric"
+              },
+              {
+                "id": 2047,
+                "name": "sea salt",
+                "original_name": "dash of sea salt"
+              },
+              {
+                "id": 21118,
+                "name": "water",
+                "original_name": "1 quart water"
+              },
+              {
+                "id": 11215,
+                "name": "vegetable broth",
+                "original_name": "1 quart vegetable broth"
+              },
+              {
+                "id": 10514534,
+                "name": "kombu",
+                "original_name": "1 piece kombu, 2 inches long (optional)"
+              },
+              {
+                "id": 10011693,
+                "name": "unsweetened non-dairy milk",
+                "original_name": "1 cup unsweetened non-dairy milk"
+              },
+              {
+                "id": 1012047,
+                "name": "salt and pepper",
+                "original_name": "Salt and pepper to taste"
+              },
+              {
+                "id": 11477,
+                "name": "ramen noodles",
+                "original_name": "4 oz ramen noodles"
+              }
             ],
             "instructions": "In a food processor combine onions, carrots, and garlic and mince well. The pieces should be very small. Heat oil in a soup pot. Add minced vegetables and saute, mixing occasionally, until just soft [7 - 10 minutes]. Add flour, poultry seasoning, turmeric, sea salt, and celery seed and stir constantly for about 30 seconds, coating the vegetables well.\nPour in the broth and water. Add kombu if you are using it. Bring to boil and then simmer, covered, for 30 minutes.\nAfter 30 minutes, pour in non-dairy milk and noodles. Let simmer an additional 10 minutes or until noodles are soft.\nRemove from heat and serve immediately.",
-            "name": "Homemade Creamy Ramen Soup"
-          }, 
+            "name": "Homemade Creamy Ramen Soup",
+            "summary": "Delicious homemade creamy ramen soup made with fresh vegetables and non-dairy milk.",
+            "servings": 4,
+            "readyInMinutes": 45,
+            "vegetarian": true,
+            "vegan": true
+          },
           { "id": 644885,
             "image": "https://spoonacular.com/recipeImages/644885-556x370.jpg",
             "ingredients": [
-                {
-                    "id": 10211362,
-                    "name": "yukon gold potatoes",
-                    "original_name": "1 pound large Yukon Gold potatoes, scrubbed well"
-                },
-                {
-                    "id": 93658,
-                    "name": "ener-g egg replacer",
-                    "original_name": "2 tablespoons Ener-G egg replacer, prepared according to package directions"
-                },
-                {
-                    "id": 16157,
-                    "name": "chickpea flour",
-                    "original_name": "2 tablespoons chickpea flour"
-                },
-                {
-                    "id": 11413,
-                    "name": "potato starch",
-                    "original_name": "3 tablespoons potato starch"
-                },
-                {
-                    "id": 1102047,
-                    "name": "salt and pepper",
-                    "original_name": "Salt and black pepper to taste"
-                }
+              {
+                "id": 10211362,
+                "name": "yukon gold potatoes",
+                "original_name": "1 pound large Yukon Gold potatoes, scrubbed well"
+              },
+              {
+                "id": 93658,
+                "name": "ener-g egg replacer",
+                "original_name": "2 tablespoons Ener-G egg replacer, prepared according to package directions"
+              },
+              {
+                "id": 16157,
+                "name": "chickpea flour",
+                "original_name": "2 tablespoons chickpea flour"
+              },
+              {
+                "id": 11413,
+                "name": "potato starch",
+                "original_name": "3 tablespoons potato starch"
+              },
+              {
+                "id": 1102047,
+                "name": "salt and pepper",
+                "original_name": "Salt and black pepper to taste"
+              }
             ],
             "instructions": "Preheat oven to 425F. Pierce potatoes 2-3 times with a fork, place on a microwave-safe plate and microwave for 3 minutes.\nPlace potatoes on racks set over a cookie sheet and bake 1 hour.\nAllow to cool until you are able to handle them, then peel them into a potato ricer or food mill basin and run through.\nAdd egg replacer and beat in.\nCombine the chickpea flour and potato starch, then add to the potato mixture and blend to a fairly stiff dough.\nDivide into four even pieces and chill 1 hour.\nRoll out 1 porton of the dough into a rope about 20\" long.\nCut rope into approximately 1\" pieces and place onto a lined or greased cookie sheet.\nWith the back of a fork, slightly flatten each of the gnocchi. Chill 1 hour before cooking or freeze on the sheet and transfer to a freezer bag for later cooking.\nRepeat process with remaining dough.\nTo cook, heat 1/2 tbsp of oil or a small amount of non-stick spray in a large skillet (or for a non-vegan version, cook some bacon until crisp and use the bacon fat). Add chilled gnocchi and cook, stirring once or twice, until well browned on all sides. Add desired sauce (don't add too much or they will fall apart) and toss well.",
-            "name": "Gluten Free Vegan Gnocchi"
+            "name": "Gluten Free Vegan Gnocchi",
+            "summary": "Delicious gluten-free and vegan gnocchi made with Yukon Gold potatoes, chickpea flour, and potato starch.",
+            "servings": 4,
+            "readyInMinutes": 90,
+            "vegetarian": true,
+            "vegan": true,
+            "glutenFree": true
           },
           { "id": 644205,
             "image": "https://spoonacular.com/recipeImages/644205-556x370.jpg",
             "ingredients": [
-                {
-                    "id": 11090,
-                    "name": "broccoli",
-                    "original_name": "1 cup chopped broccoli"
-                },
-                {
-                    "id": 11124,
-                    "name": "carrots",
-                    "original_name": "1/2 cup sliced carrots"
-                },
-                {
-                    "id": 11167,
-                    "name": "ears of corn",
-                    "original_name": "2 ears of corn, kernels cut off cobs"
-                },
-                {
-                    "id": 1123,
-                    "name": "eggs",
-                    "original_name": "3 Eggs, beaten"
-                },
-                {
-                    "id": 20081,
-                    "name": "flour",
-                    "original_name": "1 1/2 cups all-purpose flour"
-                },
-                {
-                    "id": 10211297,
-                    "name": "flat-leaf parsley",
-                    "original_name": "small handful of fresh flat-leaf parsley, chopped"
-                },
-                {
-                    "id": 11215,
-                    "name": "garlic",
-                    "original_name": "1 cl Garlic, minced"
-                },
-                {
-                    "id": 1159,
-                    "name": "laura chenel's chabis goat cheese",
-                    "original_name": "1 package of Laura Chenel's Chabis goat cheese"
-                },
-                {
-                    "id": 1034053,
-                    "name": "olive oil",
-                    "original_name": "Extra-virgin olive oil"
-                },
-                {
-                    "id": 1002030,
-                    "name": "sea salt",
-                    "original_name": "Sea salt, fresh ground pepper"
-                },
-                {
-                    "id": 11291,
-                    "name": "spring onion",
-                    "original_name": "1 spring onion, dark green parts removed, chopped"
-                },
-                {
-                    "id": 11641,
-                    "name": "summer squash",
-                    "original_name": "4 summer squash, chopped"
-                },
-                {
-                    "id": 11529,
-                    "name": "tomatoes",
-                    "original_name": "1 1/2 pounds organic tomatoes, peeled and crushed"
-                }
+              {
+                "id": 11090,
+                "name": "broccoli",
+                "original_name": "1 cup chopped broccoli"
+              },
+              {
+                "id": 11124,
+                "name": "carrots",
+                "original_name": "1/2 cup sliced carrots"
+              },
+              {
+                "id": 11167,
+                "name": "ears of corn",
+                "original_name": "2 ears of corn, kernels cut off cobs"
+              },
+              {
+                "id": 1123,
+                "name": "eggs",
+                "original_name": "3 Eggs, beaten"
+              },
+              {
+                "id": 20081,
+                "name": "flour",
+                "original_name": "1 1/2 cups all-purpose flour"
+              },
+              {
+                "id": 10211297,
+                "name": "flat-leaf parsley",
+                "original_name": "small handful of fresh flat-leaf parsley, chopped"
+              },
+              {
+                "id": 11215,
+                "name": "garlic",
+                "original_name": "1 cl Garlic, minced"
+              },
+              {
+                "id": 1159,
+                "name": "laura chenel's chabis goat cheese",
+                "original_name": "1 package of Laura Chenel's Chabis goat cheese"
+              },
+              {
+                "id": 1034053,
+                "name": "olive oil",
+                "original_name": "Extra-virgin olive oil"
+              },
+              {
+                "id": 1002030,
+                "name": "sea salt",
+                "original_name": "Sea salt, fresh ground pepper"
+              },
+              {
+                "id": 11291,
+                "name": "spring onion",
+                "original_name": "1 spring onion, dark green parts removed, chopped"
+              },
+              {
+                "id": 11641,
+                "name": "summer squash",
+                "original_name": "4 summer squash, chopped"
+              },
+              {
+                "id": 11529,
+                "name": "tomatoes",
+                "original_name": "1 1/2 pounds organic tomatoes, peeled and crushed"
+              }
             ],
             "instructions": "<ol><li>Ravioli Stuffing: Heat up large saute pan and add two swirls of olive oil. Add spring onion and cook for two minutes. Add corn, carrots, squash, broccoli, sea salt and black pepper. Cook on medium-low for 15 minutes, until vegetables are soft. Stir every few minutes so they dont brown. Add chopped parsley, stir and turn off heat. Let cool for 5 minutes. Empty veggies into a large glass bowl and gently mix in goat cheese until combined. Taste for salt and set aside.</li><li>Tomato Brodo: Set a medium pot on low heat. Add tomatoes, crushed garlic cloves, 1/2 cup of water, salt and pepper. Cook on low for about 30 minutes. Just before serving, strain broth into a bowl, leaving garlic and tomato seeds behind.</li><li>Ravioli: Add flour to a large mixing bowl. Make a well in the middle of flour. Crack eggs into the well. Using your fingers, gently break up the egg yolks as you incorporate the flour, little by little, into the egg mixture. When the dough has not yet come together, add 1 tablespoon olive oil. Continue mixing until the dough forms a mass. Test the consistency by poking your finger into the dough. If your finger emerges caked in dough, add a touch more flour.</li><li>Transfer the dough to a floured surface and knead for 8 minutes. It should feel super smooth when its ready.</li><li>Divide the dough into four equal parts. One by one, guide the dough through the pasta machine, starting at the widest setting, going down to the second-to-last notch.</li><li>You should now have four long sheets of past dough. Take about 1 1/2 tablespoons of veggie filling, and place it 2 inches from the edge of the dough. Repeat this all along the edge of the sheet, keeping the filling mounds about 2 inches away from each other. </li><li>Fold the sheet on top of itself, so the filling is now covered. Using a pizza-cutter (or ravioli-cutter if you have one), cut between the filling, creating individual ravioli. Trim the edges to create a straight edge. Repeat with the remaining three sheets of dough. If dough is not sticking together, gently brush edges with an egg wash.</li><li>Cook the ravioli in boiling water for about two minutes. Strain tomato broth and ladle into a bowl, and  top with ravioli. Garnish with fresh basil.</li></ol>",
-            "name": "Garden Vegetable Ravioli With Tomato Brodo"
+            "name": "Garden Vegetable Ravioli With Tomato Brodo",
+            "summary": "Delicious garden vegetable ravioli served with a flavorful tomato broth.",
+            "servings": 4,
+            "readyInMinutes": 90,
+            "vegetarian": true
           },
           { "id": 656544,
             "image": "https://spoonacular.com/recipeImages/656544-556x370.jpg",
             "ingredients": [
-                {
-                    "id": 20011,
-                    "name": "buckwheat flour",
-                    "original_name": "1/3 cup buckwheat flour"
-                },
-                {
-                    "id": 1001,
-                    "name": "butter",
-                    "original_name": "2 tbsp butter"
-                },
-                {
-                    "id": 1008166,
-                    "name": "polenta",
-                    "original_name": "1/2 lb cooked polenta"
-                },
-                {
-                    "id": 1123,
-                    "name": "egg",
-                    "original_name": "1 egg"
-                },
-                {
-                    "id": 1020,
-                    "name": "fontina",
-                    "original_name": "1/2 cup fontina"
-                },
-                {
-                    "id": 11215,
-                    "name": "garlic",
-                    "original_name": "1 clove garlic"
-                },
-                {
-                    "id": 99226,
-                    "name": "sage",
-                    "original_name": "sage"
-                },
-                {
-                    "id": 2047,
-                    "name": "salt",
-                    "original_name": "salt"
-                },
-                {
-                    "id": 11114,
-                    "name": "savoy cabbage",
-                    "original_name": "1/2 savoy cabbage"
-                }
+              {
+                "id": 20011,
+                "name": "buckwheat flour",
+                "original_name": "1/3 cup buckwheat flour"
+              },
+              {
+                "id": 1001,
+                "name": "butter",
+                "original_name": "2 tbsp butter"
+              },
+              {
+                "id": 1008166,
+                "name": "polenta",
+                "original_name": "1/2 lb cooked polenta"
+              },
+              {
+                "id": 1123,
+                "name": "egg",
+                "original_name": "1 egg"
+              },
+              {
+                "id": 1020,
+                "name": "fontina",
+                "original_name": "1/2 cup fontina"
+              },
+              {
+                "id": 11215,
+                "name": "garlic",
+                "original_name": "1 clove garlic"
+              },
+              {
+                "id": 99226,
+                "name": "sage",
+                "original_name": "sage"
+              },
+              {
+                "id": 2047,
+                "name": "salt",
+                "original_name": "salt"
+              },
+              {
+                "id": 11114,
+                "name": "savoy cabbage",
+                "original_name": "1/2 savoy cabbage"
+              }
             ],
             "instructions": "<ol><li>Put the cold precooked polenta in a mixer and blend it with the egg until creamy.</li><li>Add the buckwheat flour. You will need more or less 1/3 of a cup, but a lot depends on how sticky your polenta. Add enough flour to get a soft dough that doesn't stick to your hand.</li><li>Form the gnocchi on a floured surface by rolling out the dough in long logs, more or less as thick as a thumb and then cut them in gnocchi. If you want the gnocchi to look super nice, roll them on a fork to give them the characteristic stripes (I never do). Place the gnocchi in the fridge while you prepare the sauce.</li><li>Cut the savoy cabbage in stripes, wash it and stew it with a bit of water until wilted. Drain it and sautee it with 1 spoon butter and salt until cooked.</li><li>Prepare the cheese by dicing it and the rest of the butter by melting it with the sage and the garlic.</li><li>Cook the gnocchi in salted boiling water in batches. Throw 10-20 gnocchi in the pot of boiling water and fish them out once they start floating. Drain them and add them to a bowl. Dress with cheese, cabbage and butter and keep layering the ingredients in the bowl until you run out.</li><li>Do not mix the gnocchi in the bowl, as they are rather soft and would break. If the cheese didn't melt much, you can microwave the bowl for a couple of minutes.</li><li>Serve piping hot.</li></ol>",
-            "name": "Polenta gnocchi with savoy cabbage and cheese"
-          },
+            "name": "Polenta Gnocchi With Savoy Cabbage and Cheese",
+            "summary": "Delicious polenta gnocchi served with savoy cabbage and fontina cheese sauce.",
+            "servings": 4,
+            "readyInMinutes": 30,
+            "vegetarian": true
+          },  
           { "id": 1096168,
             "image": "https://spoonacular.com/recipeImages/1096168-556x370.jpg",
             "ingredients": [
-                {
-                    "id": 11507,
-                    "name": "sweet potato",
-                    "original_name": "8 oz sweet potato"
-                },
-                {
-                    "id": 1123,
-                    "name": "egg",
-                    "original_name": "1 egg"
-                },
-                {
-                    "id": 20081,
-                    "name": "all purpose flour",
-                    "original_name": "2 to 2 1/4 cups all purpose flour"
-                },
-                {
-                    "id": 4053,
-                    "name": "olive oil",
-                    "original_name": "1 tablespoon olive oil"
-                },
-                {
-                    "id": 10211215,
-                    "name": "garlic cloves",
-                    "original_name": "2 garlic cloves , minced"
-                },
-                {
-                    "id": 14106,
-                    "name": "wine",
-                    "original_name": "2 tablespoons dry white wine"
-                },
-                {
-                    "id": 99226,
-                    "name": "sage leaves",
-                    "original_name": "8-10 sage leaves"
-                },
-                {
-                    "id": 1102047,
-                    "name": "salt and pepper",
-                    "original_name": "Salt and pepper to taste"
-                }
+              {
+                "id": 11507,
+                "name": "sweet potato",
+                "original_name": "8 oz sweet potato"
+              },
+              {
+                "id": 1123,
+                "name": "egg",
+                "original_name": "1 egg"
+              },
+              {
+                "id": 20081,
+                "name": "all purpose flour",
+                "original_name": "2 to 2 1/4 cups all purpose flour"
+              },
+              {
+                "id": 4053,
+                "name": "olive oil",
+                "original_name": "1 tablespoon olive oil"
+              },
+              {
+                "id": 10211215,
+                "name": "garlic cloves",
+                "original_name": "2 garlic cloves , minced"
+              },
+              {
+                "id": 14106,
+                "name": "wine",
+                "original_name": "2 tablespoons dry white wine"
+              },
+              {
+                "id": 99226,
+                "name": "sage leaves",
+                "original_name": "8-10 sage leaves"
+              },
+              {
+                "id": 1102047,
+                "name": "salt and pepper",
+                "original_name": "Salt and pepper to taste"
+              }
             ],
             "instructions": "<ol><li>Use a small food processor or blender to blend together the cooked, mashed sweet potato (1 cup), egg, and 1/4 tsp salt until no lumps remain. </li><li>Place in a large bowl and add 2 cups of flour. </li><li>Mix dough together until a sticky consistency, then knead the dough until smooth, adding additional flour as necessary so that the dough is no longer sticky. </li><li>The amount of flour will depend on the humidity of the day and the size of your egg. </li><li>Bring a large pot of salted water to a boil while you work on step 3.</li><li>Cut the dough into 8 even pieces. </li><li>Cover the dough with a damp towel and work with one piece at a time. </li><li>Roll out the dough into a long rope until it is about 1/2 inch thick. </li><li>Cut the dough into 3/4 - 1 inch pieces and use a fork to press the gnocchi down and form the beautiful gnocchi indents. </li><li>Repeat with the other pieces of dough.</li><li>Add the gnocchi to the large pot of boiling water and cook for 2-3 minutes until the gnocchi are floating. </li><li>Drain and rinse with cool water. </li><li>At this point the gnocchi are ready to eat - toss with your favorite sauce now, or continue with step 14 to serve the gnocchi pan fried in a delicious garlic sage oil.</li><li>In a large skillet, heat 1 tablespoon olive oil on medium heat. </li><li>Add the garlic and the gnocchi and saute for 5-8 minutes, or until the gnocchi starts to turn golden brown. </li><li>Add the 2 tablespoons of dry white wine to deglaze the pan and continue stirring. </li><li>Add the chopped sage leaves and stir fry for another minute. </li><li>Season with salt and pepper, if desired. </li><li>Serve warm.</li></ol>",
-            "name": "Sweet Potato Gnocchi tossed in Garlic Sage Olive Oil"
+            "name": "Sweet Potato Gnocchi tossed in Garlic Sage Olive Oil",
+            "summary": "Delicious sweet potato gnocchi tossed in a flavorful garlic sage olive oil sauce.",
+            "servings": 4,
+            "readyInMinutes": 45,
+            "vegetarian": true
           },
           { "id": 640064,
             "image": "https://spoonacular.com/recipeImages/640064-556x370.jpg",
             "ingredients": [
-                {
-                    "id": 20081,
-                    "name": "ap flour",
-                    "original_name": "1 cup AP flour"
-                },
-                {
-                    "id": 1002030,
-                    "name": "pepper",
-                    "original_name": "freshly ground black pepper"
-                },
-                {
-                    "id": 1123,
-                    "name": "egg",
-                    "original_name": "1 egg"
-                },
-                {
-                    "id": 11165,
-                    "name": "coriander",
-                    "original_name": "4 tablespoons fresh coriander, finely chopped"
-                },
-                {
-                    "id": 11215,
-                    "name": "garlic on its skin",
-                    "original_name": "4 cloves garlic on its skin"
-                },
-                {
-                    "id": 1077,
-                    "name": "milk",
-                    "original_name": "1/2 cup milk"
-                },
-                {
-                    "id": 1012,
-                    "name": "cottage cheese/paneer",
-                    "original_name": "1/2 cup cottage cheese/paneer"
-                },
-                {
-                    "id": 11422,
-                    "name": "pumpkin cubes",
-                    "original_name": "2 cups pumpkin cubes, cooked"
-                },
-                {
-                    "id": 2047,
-                    "name": "salt",
-                    "original_name": "1 teaspoon salt"
-                },
-                {
-                    "id": 11955,
-                    "name": "sundried tomatoes",
-                    "original_name": "4 pieces sundried tomatoes, chopped"
-                }
+              {
+                "id": 20081,
+                "name": "ap flour",
+                "original_name": "1 cup AP flour"
+              },
+              {
+                "id": 1002030,
+                "name": "pepper",
+                "original_name": "freshly ground black pepper"
+              },
+              {
+                "id": 1123,
+                "name": "egg",
+                "original_name": "1 egg"
+              },
+              {
+                "id": 11165,
+                "name": "coriander",
+                "original_name": "4 tablespoons fresh coriander, finely chopped"
+              },
+              {
+                "id": 11215,
+                "name": "garlic on its skin",
+                "original_name": "4 cloves garlic on its skin"
+              },
+              {
+                "id": 1077,
+                "name": "milk",
+                "original_name": "1/2 cup milk"
+              },
+              {
+                "id": 1012,
+                "name": "cottage cheese/paneer",
+                "original_name": "1/2 cup cottage cheese/paneer"
+              },
+              {
+                "id": 11422,
+                "name": "pumpkin cubes",
+                "original_name": "2 cups pumpkin cubes, cooked"
+              },
+              {
+                "id": 2047,
+                "name": "salt",
+                "original_name": "1 teaspoon salt"
+              },
+              {
+                "id": 11955,
+                "name": "sundried tomatoes",
+                "original_name": "4 pieces sundried tomatoes, chopped"
+              }
             ],
             "instructions": "<ol><li>Place the flour, salt, egg, milk and finely chopped coriander on a lightly floured board and knead into a smooth dough. Cover and refrigerate for 20 to 30 minutes.</li><li>Preheat the oven to 200 C. Place the garlic on the baking sheet and bake for 10 minutes until soft.</li><li>Separately mash the pumpkin, and cottage cheese.</li><li>In a large bowl place the mashed pumpkin, cottage cheese, drained and chopped sundried tomatoes, mashed garlic, and mix well. Season with some salt and lots of freshly ground pepper.</li><li>Divide the dough into 4 portions and roll out as thinly as humanly possible (if you have a pasta machine you need to roll out to 3mm thickness), and leave the pasta on a dish towel until it dries out a bit.</li><li>Using a 3 inch crinkle edged round cutter stamp out 30 rounds of pasta, I used all the bits and bobs and rolled out again and cut up almost the entire dough.</li><li>Top 15 rounds with spoonfuls of the filling and brush the edges with water and place another round of pasta on top. Press firmly around the edges to seal.</li><li>Bring a large pan of water to boil, add salt, add the ravioli and cook for 3 to 4 minutes, the pasta when cooked will rise up to the surface of the water.</li><li>Drain well and toss with the drained oil from the sundried tomatoes. Sprinkle with pepper and a few sprigs of fresh coriander. Nice!</li></ol>",
-            "name": "Coriander Ravioli With Pumpkin & Cottage Cheese Filling"
+            "name": "Coriander Ravioli With Pumpkin & Cottage Cheese Filling",
+            "summary": "Delicious ravioli filled with a savory mixture of pumpkin, cottage cheese, sundried tomatoes, and fresh coriander.",
+            "servings": 4,
+            "readyInMinutes": 45,
+            "vegetarian": true
           },
           { "id": 656972,
             "image": "https://spoonacular.com/recipeImages/656972-556x370.jpg",
             "ingredients": [
-                {
-                    "id": 11353,
-                    "name": "baking potatoes",
-                    "original_name": "1 1/2 pounds baking potatoes"
-                },
-                {
-                    "id": 20081,
-                    "name": "flour",
-                    "original_name": "1 cup all-purpose flour"
-                },
-                {
-                    "id": 1125,
-                    "name": "egg yolk",
-                    "original_name": "1 egg yolk"
-                },
-                {
-                    "id": 1082047,
-                    "name": "kosher salt",
-                    "original_name": "1 teaspoon kosher salt"
-                },
-                {
-                    "id": 1002025,
-                    "name": "nutmeg",
-                    "original_name": "1/4 teaspoon fresh nutmeg"
-                },
-                {
-                    "id": 4053,
-                    "name": "olive oil",
-                    "original_name": "2 teaspoons olive oil"
-                },
-                {
-                    "id": 11260,
-                    "name": "crimmini mushrooms",
-                    "original_name": "8 ounces brown or crimmini mushrooms, sliced"
-                },
-                {
-                    "id": 11233,
-                    "name": "kale",
-                    "original_name": "2 cups fresh kale, chopped"
-                },
-                {
-                    "id": 1159,
-                    "name": "semi-soft goat cheese",
-                    "original_name": "4 ounces semi-soft goat cheese"
-                },
-                {
-                    "id": 1085,
-                    "name": "skim milk",
-                    "original_name": "1/2 cup skim milk"
-                },
-                {
-                    "id": 1102047,
-                    "name": "salt and pepper",
-                    "original_name": "salt and pepper to taste"
-                }
+              {
+                "id": 11353,
+                "name": "baking potatoes",
+                "original_name": "1 1/2 pounds baking potatoes"
+              },
+              {
+                "id": 20081,
+                "name": "flour",
+                "original_name": "1 cup all-purpose flour"
+              },
+              {
+                "id": 1125,
+                "name": "egg yolk",
+                "original_name": "1 egg yolk"
+              },
+              {
+                "id": 1082047,
+                "name": "kosher salt",
+                "original_name": "1 teaspoon kosher salt"
+              },
+              {
+                "id": 1002025,
+                "name": "nutmeg",
+                "original_name": "1/4 teaspoon fresh nutmeg"
+              },
+              {
+                "id": 4053,
+                "name": "olive oil",
+                "original_name": "2 teaspoons olive oil"
+              },
+              {
+                "id": 11260,
+                "name": "crimmini mushrooms",
+                "original_name": "8 ounces brown or crimmini mushrooms, sliced"
+              },
+              {
+                "id": 11233,
+                "name": "kale",
+                "original_name": "2 cups fresh kale, chopped"
+              },
+              {
+                "id": 1159,
+                "name": "semi-soft goat cheese",
+                "original_name": "4 ounces semi-soft goat cheese"
+              },
+              {
+                "id": 1085,
+                "name": "skim milk",
+                "original_name": "1/2 cup skim milk"
+              },
+              {
+                "id": 1102047,
+                "name": "salt and pepper",
+                "original_name": "salt and pepper to taste"
+              }
             ],
             "instructions": "Preheat oven to 400F. Pierce potatoes several times each with a fork and bake until soft, about 1 hour. Remove from the oven and let cool.\nCut the potatoes in half and scoop the flesh into a medium-sized bowl and mash until smooth. You can also use a potato ricer or food mill and rice. Let cool to room temperature.\nLine a large backing sheet with parchment paper. Add flour to the potatoes and mix.  Form a well in the middle of the mixture and add yolk, nutmeg and salt. Using a fork, stir until the potato mixture is evenly coated, it will not be completely smooth. Form the dough into a ball and divide into 4 equally-sized pieces.\nRoll each piece of dough between your hands and a lightly floured work surface into a 3/4 inch diameter rope. Cut the rope int 3/4-inch pieces and indent each piece with a fork. (The indent is optional, but will help the gnocchi hold the sauce.) Place the pieces on the parchment and repeat with the remaining dough.\nBring a large pot of salted water to a rolling boil and add the gnocchi in batches. You don't want the water to stop boiling. It will sink to the bottom of the pot. Stirring occasionally, let the gnocchi cook until it floats and is cooked through, about 4 minutes. With a slotted spoon, transfer the cooked gnocchi to a bowl and set aside.\nIn a large skillet, heat the oil over medium-high heat. Add the mushrooms and sautee until browned and most of the moisture has cooked off. Add the kale and continue to cook until it just begins to wilt, about 1 minute. Add milk and goat cheese and stir continuously until well blended. Add gnocchi and stir until coated and warmed through. Add salt and pepper to taste.",
-            "name": "Potato Gnocchi With Kale and Mushrooms In A Goat Cheese Sauce"
+            "name": "Potato Gnocchi With Kale and Mushrooms In A Goat Cheese Sauce",
+            "summary": "Delicious potato gnocchi served with sautéed kale and mushrooms in a creamy goat cheese sauce.",
+            "servings": 4,
+            "readyInMinutes": 90,
+            "vegetarian": true
           }
         ]
     },
