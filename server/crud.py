@@ -87,7 +87,7 @@ def add_favorite_attribute(recipes, user_id):
 
     for recipe in recipes:
         recipe['isFavorite'] = recipe['id'] in favorite_ids
-        #print("is Favorite add to recipe: ", recipe['isFavorite'])
+
     return recipes
 
 
@@ -345,7 +345,6 @@ def get_recipe(recipe_id):
                 'vegan': recipe.get('vegan', False),
                 'vegetarian': recipe.get('vegetarian', False)
             }
-            print("--------------------------- Recipe by ID: ", response)
             return response
         else:
             return None

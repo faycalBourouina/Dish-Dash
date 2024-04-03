@@ -18,6 +18,9 @@ CORS(app)
 # Load the API key from the .env file
 load_dotenv()
 
+# developement environment
+ENV = os.getenv("ENVIRONMENT")
+
 # session secret key
 app.secret_key = os.getenv("SESSION_SECRET_KEY")
 
@@ -312,4 +315,7 @@ def update_favorite(user_id, recipe_id):
 
 if __name__ == "__main__":
 
-    app.run(host="0.0.0.0", debug=True)
+    if ENV == "DEVELOPEMENT":
+        app.run(host="0.0.0.0", debug=True)
+    else:
+        app.run()
