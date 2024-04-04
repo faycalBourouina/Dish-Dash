@@ -1,4 +1,4 @@
-# Dish-Dash
+# Dish-Dash [http://dishdash-app.com]
 
 A web application generates recipe ideas based on a user's specified ingredients and dietary preferences, while also providing links to purchase the necessary ingredients from Walmart. Users can easily find the perfect recipe for their needs with additional filters for ingredients to include, diet, cuisine, meal type, intolerances, and ready time. The application also provides users with the ability to save recipes as favorites for easy access and management.
 
@@ -84,7 +84,13 @@ A web application generates recipe ideas based on a user's specified ingredients
     echo 'MODE=TEST_MODE' >> .env
     ```
 
-8. **Verify .env Keys**:
+8. **Add Enivronment**:
+
+    ```bash
+    echo 'ENVIRONMENT=DEVELOPEMENT' >> .env
+    ```
+
+9. **Verify .env Keys**:
 
     Verify that all the .env keys were added successfully:
 
@@ -94,7 +100,7 @@ A web application generates recipe ideas based on a user's specified ingredients
 
     You should see the `SPOONACULAR_API_KEY`, `BLUECART_API_KEY`, `SESSION_SECRET_KEY`, and `MODE` entries in the output.
 
-9. **Create and Seed the Database**:
+10. **Create and Seed the Database**:
 
     Ensure PostgreSQL is installed. Then, run:
 
@@ -113,7 +119,7 @@ A web application generates recipe ideas based on a user's specified ingredients
 
     This will list the relations in the database.
 
-10. **Start the Server**:
+11. **Start the Server**:
 
     Run the server:
 
