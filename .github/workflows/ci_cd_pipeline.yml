@@ -1,0 +1,20 @@
+name: Deployment Workflow # Name of the workflow
+on: push # Trigger the workflow on every push to the repository
+
+jobs: # Group of tasks to be executed
+  deploy: # Name of the job to deploy the code
+    runs-on: ubuntu-latest # Specifies the type of runner that the job will run on
+
+    steps: # Series of tasks that will be executed
+      - name: Checkout code # Task to checkout the code from the repository
+        uses: actions/checkout@v2 # Uses a pre-built action to checkout the code
+
+      - name: SSH and Deploy # Task to SSH into the server and deploy the code
+        uses: appleboy/ssh-action@master # Uses a pre-built action to SSH into the server
+        with: # Inputs for the SSH action
+          host: ${{ secrets.HOST }} # The server's IP address or domain name
+          username: ${{ secrets.USERNAME }} # The username for SSH login
+          key: ${{ secrets.SSH_KEY }} # The SSH private key for authentication
+          script: | # The script that will be run on the server
+            chmod +x ~/deploy.sh # Makes the deploy script executable
+            ~/deploy.sh # Executes the deploy script
