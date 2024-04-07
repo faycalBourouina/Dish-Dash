@@ -4,7 +4,7 @@
 [Dish-Dash][1]
 is a web application generates recipe ideas based on a user's specified ingredients and dietary preferences, while also providing links to purchase the necessary ingredients from Walmart. Users can easily find the perfect recipe for their needs with additional filters for ingredients to include, diet, cuisine, meal type, intolerances, and ready time. The application also provides users with the ability to save recipes as favorites for easy access and management.
 
-You can visit the demo version here: [Dish-Dash][1]. Please note that the APIs are paused on the demo version for cost reasons.
+Please note that the [Dish-Dash][1] available here is currently a demo version. The APIs are paused for cost reasons, and the demo version uses mock API data, which might not be accurate.
 
 ## Demo Video
 
