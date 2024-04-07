@@ -180,6 +180,9 @@ function Layout({ isLogged , newUser, setNewUser, handleLogin, handleSignup, han
                 setSelectedRecipe={setSelectedRecipe} 
               />
             </Box>
+            <Box pt={4}>
+              <DemoMessage />
+            </Box>
           </Grid>
           <Box p={8}>
             <Grid item xs={12}>
