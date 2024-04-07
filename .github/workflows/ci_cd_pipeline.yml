@@ -2,7 +2,7 @@ name: Deployment Workflow # Name of the workflow
 on: 
   push: # Trigger the workflow on every push to the repository
     branches:
-      - pipeline-test
+      - main
 
 jobs: # Group of tasks to be executed
   deploy: # Name of the job to deploy the code
