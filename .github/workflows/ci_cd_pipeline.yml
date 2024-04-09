@@ -2,22 +2,43 @@ name: Deployment Workflow # Name of the workflow
 on: 
   push: # Trigger the workflow on every push to the repository
     branches:
-      - main
+      - main # Specifies the branch to trigger the workflow
 
-jobs: # Group of tasks to be executed
-  deploy: # Name of the job to deploy the code
-    runs-on: ubuntu-latest # Specifies the type of runner that the job will run on
+jobs:
+  test: # Job for running tests
+    runs-on: ubuntu-latest # The type of runner that the job will run on
+    steps: # Steps to be executed as part of this job
+      - name: Checkout code # Step to checkout the code from the repository
+        uses: actions/checkout@v2 # Action used to checkout the code
 
-    steps: # Series of tasks that will be executed
-      - name: Checkout code # Task to checkout the code from the repository
-        uses: actions/checkout@v2 # Uses a pre-built action to checkout the code
+      - name: Set up Python # Step to set up the Python environment
+        uses: actions/setup-python@v2 # Action used to set up Python
+        with:
+          python-version: '3.x' # Specify the Python version
 
-      - name: SSH and Deploy # Task to SSH into the server and deploy the code
-        uses: appleboy/ssh-action@master # Uses a pre-built action to SSH into the server
+      - name: Install dependencies # Step to install required dependencies
+        run: |
+          python -m pip install --upgrade pip # Upgrade pip
+          pip install -r requirements.txt # Install dependencies from requirements file
+
+      - name: Run tests # Step to run the tests
+        run: |
+          cd server # Change directory to the server where tests.py is located
+          python -m unittest discover # Discover and run all tests
+
+  deploy: # Job for deployment
+    needs: test # This job needs to succeed before deployment can run
+    runs-on: ubuntu-latest # The type of runner that the job will run on
+    steps: # Steps to be executed as part of this job
+      - name: Checkout code # Step to checkout the code from the repository
+        uses: actions/checkout@v2 # Action used to checkout the code
+
+      - name: SSH and Deploy # Step to SSH into the server and deploy the code
+        uses: appleboy/ssh-action@master # Action used to SSH into the server
         with: # Inputs for the SSH action
           host: ${{ secrets.HOST }} # The server's IP address or domain name
           username: ${{ secrets.USERNAME }} # The username for SSH login
           key: ${{ secrets.SSH_KEY }} # The SSH private key for authentication
           script: | # The script that will be run on the server
-            chmod +x ~/deploy.sh # Makes the deploy script executable
-            ~/deploy.sh # Executes the deploy script
+            chmod +x ~/deploy.sh # Make the deploy script executable
+            ~/deploy.sh # Execute the deploy script
