@@ -239,7 +239,7 @@ def get_landing_recipes(user_id):
 
     # Fetch response data from mock data in If in test mode, and filter recipes with summary
     if MODE == 'TEST_MODE':
-        mock_response = mock_data['landing_recipes']['response']
+        mock_response = mock_data['recipe_by_id']['response']
         response = [recipe for recipe in mock_response if 'summary' in recipe]
     else:
         trending_limit = 8
