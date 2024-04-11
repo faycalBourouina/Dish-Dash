@@ -337,7 +337,7 @@ class DBTests(unittest.TestCase):
 
         if 'favorites' in response_data:
             recipe_644885_exists = any(
-                favorite.get('recipe_id') == 644885 for favorite in response_data['favorites']
+                favorite.get('id') == 644885 for favorite in response_data['favorites']
             )
 
             if not recipe_644885_exists:
@@ -368,7 +368,7 @@ class DBTests(unittest.TestCase):
         # Check if 'favorites' key exists in response_data
         if 'favorites' in response_data:
             recipe_644885_exists = any(
-                favorite.get('recipe_id') == 644885 for favorite in response_data['favorites']
+                favorite.get('id') == 644885 for favorite in response_data['favorites']
             )
 
             if recipe_644885_exists:
@@ -403,7 +403,7 @@ class DBTests(unittest.TestCase):
         # Check if recipe 644885 is already in the use favorites
         result = self.client.get("/users/1/favorites")
         response_data = json.loads(result.data)
-        recipe_644885_exists = any(favorite.get('recipe_id') == 644885 for favorite in response_data['favorites'])
+        recipe_644885_exists = any(favorite.get('id') == 644885 for favorite in response_data['favorites'])
 
         if recipe_644885_exists:
             # Recipe already exists in favorites, so try adding it again
@@ -414,7 +414,7 @@ class DBTests(unittest.TestCase):
 
             # Check the response data
             response_data = json.loads(result.data)
-            self.assertEqual(response_data, 'Favorite already exists')
+            self.assertEqual(response_data['message'], 'Favorite already exists')
         else:
             self.skipTest("Recipe 644885 is not an existing favorite")
 
@@ -428,21 +428,18 @@ class DBTests(unittest.TestCase):
         # Check if recipe 644885 is already in favorites
         result = self.client.get("/users/1/favorites")
         response_data = json.loads(result.data)
-        print("Favorites before adding new:", response_data)  # Print current favorites
-        recipe_644885_exists = any(favorite.get('recipe_id') == 644885 for favorite in response_data['favorites'])
+        recipe_644885_exists = any(favorite.get('id') == 644885 for favorite in response_data['favorites'])
 
         if not recipe_644885_exists:
             # Recipe doesn't exist in favorites, add it as a favorite
             patch_result = self.client.patch("/users/1/favorites/644885")
-            print("Patch request result:", patch_result.data)  # Print result of patch request
 
             # Fetch the favorites list
             result = self.client.get("/users/1/favorites")
             response_data = json.loads(result.data)
-            print("Favorites after adding new:", response_data)  # Print updated favorites
 
             # Assert recipe 644885 is in the favorites list
-            self.assertTrue(any(favorite.get('recipe_id') == 644885 for favorite in response_data['favorites']), "Recipe id 644885 should be in the user favorites list")
+            self.assertTrue(any(favorite.get('id') == 644885 for favorite in response_data['favorites']), "Recipe id 644885 should be in the user favorites list")
         else:
             self.skipTest("Recipe 644885 is already an existing favorite in user favorite list")
 
@@ -486,10 +483,9 @@ class DBTests(unittest.TestCase):
 
             # Convert the JSON response to a dictionary
             response_data = json.loads(result.data)
-            print("Patch request result:", result.data)  # Print result of patch request
 
-            # Assert recipe_id attribute is not in the favorites list
-            self.assertFalse(any(favorite.get('recipe_id') == 644885 for favorite in response_data['favorites']), "Recipe id 644885 should not be in the favorites list")
+            # Assert id attribute is not in the favorites list
+            self.assertFalse(any(favorite.get('id') == 644885 for favorite in response_data['favorites']), "Recipe id 644885 should not be in the favorites list")
 
 if __name__ == "__main__":
-    unittest.main()
+    unittest.main(verbosity=1)
