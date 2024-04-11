@@ -10,6 +10,38 @@ from seed import seed_test_db
 class ServerTests(unittest.TestCase):
     """Tests for server.py"""
 
+    @classmethod
+    def setUpClass(cls):
+        """Set up test client and database before any tests run"""
+        super(ServerTests, cls).setUpClass()
+        
+        # Drop all tables before setting up
+        model.db.drop_all()
+        
+        # Create all tables
+        model.db.create_all()
+
+        # Call seed_test_db to create the test database and populate it with mock data
+        seed_test_db()
+
+        # Get the Flask test client
+        cls.client = app.test_client()
+        app.config['TESTING'] = True
+
+        # Disable DB logs to reduce logs during testing (uncomment to see logs)
+        logging.disable(logging.CRITICAL)
+
+    @classmethod
+    def tearDownClass(cls):
+        """Tear down test client and database after all tests run"""
+        super(ServerTests, cls).tearDownClass()
+        
+        # Drop all tables after tests are done
+        model.db.drop_all()
+
+        # Enable logging again (comment out to keep logs disabled)
+        logging.disable(logging.NOTSET)
+
     def setUp(self):
         """Set up test client before each test"""
         
