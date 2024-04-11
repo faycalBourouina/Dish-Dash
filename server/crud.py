@@ -240,7 +240,7 @@ def get_landing_recipes(user_id):
     # Fetch response data from mock data in If in test mode, and filter recipes with summary
     if MODE == 'TEST_MODE':
         mock_response = mock_data['recipe_by_id']['response']
-        response = [recipe for recipe in mock_response if 'summary' in recipe]
+        landing_recipes = [recipe for recipe in mock_response if 'summary' in recipe]
     else:
         trending_limit = 8
         custom_limit = 8
@@ -258,10 +258,10 @@ def get_landing_recipes(user_id):
         # Remove duplicates based on recipe ID
         landing_recipes = remove_duplicate_recipes(landing_recipes)
 
-        # Add isFavorite attribute to recipes
-        landing_recipes = add_favorite_attribute(landing_recipes, user_id)
+    # Add isFavorite attribute to recipes
+    landing_recipes = add_favorite_attribute(landing_recipes, user_id)
 
-        response = landing_recipes
+    response = landing_recipes
     
     return response
 

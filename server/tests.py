@@ -12,10 +12,11 @@ class ServerTests(unittest.TestCase):
 
     def setUp(self):
         """Set up test client before each test"""
-
+        
+        # Get the Flask test client
         self.client = app.test_client()
         app.config['TESTING'] = True
-
+        
     # Test landing page
     def test_landing_page_status_code(self):
         """Test landing page status code"""
@@ -41,7 +42,7 @@ class ServerTests(unittest.TestCase):
 
         result = self.client.get("/landing")
         response_data = json.loads(result.data)
-
+        
         recipes_value = response_data['recipes']
         self.assertIsInstance(recipes_value, list, "'recipes' attribute is not a list")
         self.assertTrue(len(recipes_value) > 0, "'recipes' attribute is an empty list")
@@ -310,6 +311,7 @@ class DBTests(unittest.TestCase):
             if not recipe_644885_exists:
                 # Add recipe 644885 to the user's favorites
                 result = self.client.patch("/users/1/favorites/644885")
+                
 
                 # Check the response status code
                 self.assertEqual(result.status_code, 201)
@@ -320,37 +322,37 @@ class DBTests(unittest.TestCase):
             self.fail("No 'favorites' key in the response data")
 
 
-def test_add_favorite_status_code_success_existing_favorite(self):
-    """Test add favorite status code if authentication is successful and recipe already exists in favorites"""
+    def test_add_favorite_status_code_success_existing_favorite(self):
+        """Test add favorite status code if authentication is successful and recipe already exists in favorites"""
 
-    # Set session to simulate authentication for user 1
-    with self.client.session_transaction() as session:
-        session['user'] = {'id': 1, 'email': 'user1@example.com'}
+        # Set session to simulate authentication for user 1
+        with self.client.session_transaction() as session:
+            session['user'] = {'id': 1, 'email': 'user1@example.com'}
 
-    # Check if recipe 644885 is already in the user's favorites
-    result = self.client.get("/users/1/favorites")
-    response_data = json.loads(result.data)
-    
-    # Check if 'favorites' key exists in response_data
-    if 'favorites' in response_data:
-        recipe_644885_exists = any(
-            favorite.get('recipe_id') == 644885 for favorite in response_data['favorites']
-        )
+        # Check if recipe 644885 is already in the user's favorites
+        result = self.client.get("/users/1/favorites")
+        response_data = json.loads(result.data)
+        
+        # Check if 'favorites' key exists in response_data
+        if 'favorites' in response_data:
+            recipe_644885_exists = any(
+                favorite.get('recipe_id') == 644885 for favorite in response_data['favorites']
+            )
 
-        if recipe_644885_exists:
-            # Add recipe 644885 to the user's favorites
-            result = self.client.patch("/users/1/favorites/644885")
+            if recipe_644885_exists:
+                # Add recipe 644885 to the user's favorites
+                result = self.client.patch("/users/1/favorites/644885")
 
-            # Check the response status code
-            self.assertEqual(result.status_code, 409)
+                # Check the response status code
+                self.assertEqual(result.status_code, 409)
 
-            # Check the response data
-            self.assertEqual(result.data, b'Favorite already exists')
+                # Check the response data
+                self.assertEqual(result.data, b'Favorite already exists')
 
+            else:
+                self.skipTest("Recipe does not exist in favorites")
         else:
-            self.skipTest("Recipe does not exist in favorites")
-    else:
-        self.fail("No 'favorites' key in the response data")
+            self.fail("No 'favorites' key in the response data")
 
 
     def test_add_favorites_status_code_fail(self):
@@ -369,7 +371,7 @@ def test_add_favorite_status_code_success_existing_favorite(self):
         # Check if recipe 644885 is already in the use favorites
         result = self.client.get("/users/1/favorites")
         response_data = json.loads(result.data)
-        recipe_644885_exists = any(favorite['recipe_id'] == 644885 for favorite in response_data['favorites'])
+        recipe_644885_exists = any(favorite.get('recipe_id') == 644885 for favorite in response_data['favorites'])
 
         if recipe_644885_exists:
             # Recipe already exists in favorites, so try adding it again
@@ -394,64 +396,68 @@ def test_add_favorite_status_code_success_existing_favorite(self):
         # Check if recipe 644885 is already in favorites
         result = self.client.get("/users/1/favorites")
         response_data = json.loads(result.data)
-        recipe_644885_exists = any(favorite['recipe_id'] == 644885 for favorite in response_data['favorites'])
+        print("Favorites before adding new:", response_data)  # Print current favorites
+        recipe_644885_exists = any(favorite.get('recipe_id') == 644885 for favorite in response_data['favorites'])
 
         if not recipe_644885_exists:
             # Recipe doesn't exist in favorites, add it as a favorite
-            self.client.patch("/users/1/favorites/644885")
+            patch_result = self.client.patch("/users/1/favorites/644885")
+            print("Patch request result:", patch_result.data)  # Print result of patch request
 
             # Fetch the favorites list
             result = self.client.get("/users/1/favorites")
             response_data = json.loads(result.data)
+            print("Favorites after adding new:", response_data)  # Print updated favorites
 
             # Assert recipe 644885 is in the favorites list
-            self.assertTrue(any(favorite['recipe_id'] == 644885 for favorite in response_data['favorites']), "Recipe id 644885 should be in the user favorites list")
+            self.assertTrue(any(favorite.get('recipe_id') == 644885 for favorite in response_data['favorites']), "Recipe id 644885 should be in the user favorites list")
         else:
             self.skipTest("Recipe 644885 is already an existing favorite in user favorite list")
 
-    # Test remove favorites recipes
-    def test_remove_favorite_status_code_success(self):
-        """Test remove favorite status code if successful"""
+        # Test remove favorites recipes
+        def test_remove_favorite_status_code_success(self):
+            """Test remove favorite status code if successful"""
 
-        # Set session to simulate authentication for user 1
-        with self.client.session_transaction() as session:
-            session['user'] = {'id': 1, 'email': 'user1@example.com'}
-        
-        # Add recipe to favorites if not already in favorites
-        self.client.patch("/users/1/favorites/644885")
+            # Set session to simulate authentication for user 1
+            with self.client.session_transaction() as session:
+                session['user'] = {'id': 1, 'email': 'user1@example.com'}
+            
+            # Add recipe to favorites if not already in favorites
+            self.client.patch("/users/1/favorites/644885")
 
-        # Remove a recipe from favorites
-        result = self.client.delete("/users/1/favorites/644885")
-        self.assertEqual(result.status_code, 204)
+            # Remove a recipe from favorites
+            result = self.client.delete("/users/1/favorites/644885")
+            self.assertEqual(result.status_code, 204)
 
-    def test_remove_favorite_status_code_fail(self):
-        """Test remove favorite status code if unsuccessful if user is not logged in"""
+        def test_remove_favorite_status_code_fail(self):
+            """Test remove favorite status code if unsuccessful if user is not logged in"""
 
-        result = self.client.delete("/users/1/favorites/644885")
-        self.assertEqual(result.status_code, 401)
+            result = self.client.delete("/users/1/favorites/644885")
+            self.assertEqual(result.status_code, 401)
 
-    def test_remove_favorite_from_favorites_attribute_value(self):
-        """Test removed favorite recipe value in favorites list"""
+        def test_remove_favorite_from_favorites_attribute_value(self):
+            """Test removed favorite recipe value in favorites list"""
 
-        # Set session to simulate authentication for user 1
-        with self.client.session_transaction() as session:
-            session['user'] = {'id': 1, 'email': 'user1@example.com'}
+            # Set session to simulate authentication for user 1
+            with self.client.session_transaction() as session:
+                session['user'] = {'id': 1, 'email': 'user1@example.com'}
 
 
-        # Add recipe to favorites if not already in favorites
-        self.client.patch("/users/1/favorites/644885")
+            # Add recipe to favorites if not already in favorites
+            self.client.patch("/users/1/favorites/644885")
 
-        # Remove a recipe from favorites
-        self.client.delete("/users/1/favorites/644885")
+            # Remove a recipe from favorites
+            self.client.delete("/users/1/favorites/644885")
 
-        # testing if the recipe was removed from the favorites
-        result = self.client.get("/users/1/favorites")
+            # testing if the recipe was removed from the favorites
+            result = self.client.get("/users/1/favorites")
 
-        # Convert the JSON response to a dictionary
-        response_data = json.loads(result.data)
+            # Convert the JSON response to a dictionary
+            response_data = json.loads(result.data)
+            print("Patch request result:", result.data)  # Print result of patch request
 
-        # Assert recipe_id attribute is not in the favorites list
-        self.assertFalse(any(favorite['recipe_id'] == 644885 for favorite in response_data['favorites']), "Recipe id 644885 should not be in the favorites list")
+            # Assert recipe_id attribute is not in the favorites list
+            self.assertFalse(any(favorite.get('recipe_id') == 644885 for favorite in response_data['favorites']), "Recipe id 644885 should not be in the favorites list")
 
 if __name__ == "__main__":
     unittest.main()
