@@ -1,11 +1,15 @@
 const { List, ListItem, IconButton, Link } = MaterialUI;
-function RecipeDetails({ isLogged, recipe, activeTab, handleUpdateFavorites, recipesLength, handleSelectedRecipe, cachedItems, setCachedItems, onRecipeClick}) {
+function RecipeDetails({ isLogged, recipe, activeTab, handleUpdateFavorites, recipesLength, handleSelectedRecipe, cachedItems, setCachedItems, onRecipeClick, recipes}) {
 
-  const { id, title, image, instructions, ingredients, summary, isFavorite: initIsFavorite } = recipe;
+  const { id, title, image, instructions, ingredients, summary, isFavorite} = recipe;
+
+  const handleFavoriteClick = (id, isFavorite) => {
+    handleUpdateFavorites(id, isFavorite);
+  };
+
+  // Log isFavorite and the name of the recipe when rendering
+  console.log(`Rendering RecipeDetails for "${recipe.title || recipe.name}": isFavorite - ${isFavorite}`);
   
-  const [isFavorite, setIsFavorite] = useState(initIsFavorite);
-
-
   return (
     <Grid 
       container 
@@ -28,7 +32,10 @@ function RecipeDetails({ isLogged, recipe, activeTab, handleUpdateFavorites, rec
             <img src={image} alt={title} />
             {isLogged && (
               <IconButton
-                onClick={() => {handleUpdateFavorites(id, isFavorite)}}
+                onClick={() => {
+                  //console.log('isFavorite before click:', isFavorite);
+                  handleFavoriteClick(id, isFavorite)}
+                }
                 aria-label="add to favorites"
                 sx={{ opacity: isFavorite ? 1 : 0.5 }}
                 style={{ position: 'absolute', top: 0, right: 0 }}

@@ -2,14 +2,13 @@ const { Card, CardContent, CardMedia, Grid, Typography, CardActions, Link, IconB
 
 function RecipeItem({ isLogged, handleUpdateFavorites, recipe, onRecipeClick }) {
 
-  const {id, image, summary, vegan, vegetarian, glutenFree, isFavorite: initIsFavorite } = recipe;
-
-  const [isFavorite, setIsFavorite] = useState(initIsFavorite);
+  const {id, image, summary, vegan, vegetarian, glutenFree, isFavorite} = recipe;
 
   const handleFavoriteClick = (id, isFavorite) => {
     handleUpdateFavorites(id, isFavorite);
-    setIsFavorite(!isFavorite);
   };
+   // Log isFavorite and the name of the recipe when rendering
+   console.log(`Rendering RecipeItem for "${recipe.title || recipe.name}": isFavorite - ${isFavorite}`);
 
   const MAX_SUMMARY_LENGTH = 100; // Maximum number of characters for summary
     

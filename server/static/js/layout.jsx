@@ -46,11 +46,17 @@ function Layout({ isLogged , newUser, setNewUser, handleLogin, handleSignup, han
           console.log("favorite added is ", favorite);
           // Update the cachedFavorites state by adding the new favorite recipe
           setCachedFavorites([...cachedFavorites, favorite]);
+          
+          // Update the recipes state by replacing the old recipe with the fetched one
+          setRecipes(recipes.map(recipe => recipe.id === favorite.id ? favorite : recipe));
+          selectedRecipe && setSelectedRecipe(favorite) 
+          
           // Update the recipes state if the active tab is favorites
           activeTab === "favorites" && setRecipes([...recipes, favorite]);
-
+          
           // Set the favorite success message
           setFavoriteMessage(`${favorite.name} added to favorites successfully`);
+       
         } else {
           // Error handling for other response statuses
           console.error("Failed to add recipe to favorites");
@@ -200,6 +206,7 @@ function Layout({ isLogged , newUser, setNewUser, handleLogin, handleSignup, han
                   cachedItems={cachedItems}
                   setCachedItems={setCachedItems}
                   onRecipeClick={handleRecipeClick}
+                  recipes={cachedFavorites}
                 />
               ) : (
                   <RecipeList
