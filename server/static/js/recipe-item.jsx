@@ -8,7 +8,7 @@ function RecipeItem({ isLogged, handleUpdateFavorites, recipe, onRecipeClick }) 
     handleUpdateFavorites(id, isFavorite);
   };
    // Log isFavorite and the name of the recipe when rendering
-   console.log(`Rendering RecipeItem for "${recipe.title || recipe.name}": isFavorite - ${isFavorite}`);
+   //console.log(`Rendering RecipeItem for "${recipe.title || recipe.name}": isFavorite - ${isFavorite}`);
 
   const MAX_SUMMARY_LENGTH = 100; // Maximum number of characters for summary
     

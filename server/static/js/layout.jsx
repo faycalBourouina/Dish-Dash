@@ -44,15 +44,28 @@ function Layout({ isLogged , newUser, setNewUser, handleLogin, handleSignup, han
           console.log("Recipe added to favorites");
           const { favorite } = data;
           console.log("favorite added is ", favorite);
+          
           // Update the cachedFavorites state by adding the new favorite recipe
           setCachedFavorites([...cachedFavorites, favorite]);
           
           // Update the recipes state by replacing the old recipe with the fetched one
-          setRecipes(recipes.map(recipe => recipe.id === favorite.id ? favorite : recipe));
+          setCachedLanding(cachedLanding.map(recipe => {
+            if (recipe.id === favorite.id) {
+              recipe.isFavorite = favorite.isFavorite;
+              console.log("Updating isFavorite in recipe", recipe);
+            }
+            return recipe;
+          }));
+          
+          console.log("Updating landing recipes with the fetched recipe", cachedLanding);
+
+          
+          // Update the recipes state to favorites if the active tab is favorites else update it to landing
+          activeTab === "favorites" ? setRecipes(cachedFavorites) : setRecipes(cachedLanding)
+
+          // If a recipe is selected, updating the recipe state to favorite to reflect the change made
           selectedRecipe && setSelectedRecipe(favorite) 
           
-          // Update the recipes state if the active tab is favorites
-          activeTab === "favorites" && setRecipes([...recipes, favorite]);
           
           // Set the favorite success message
           setFavoriteMessage(`${favorite.name} added to favorites successfully`);

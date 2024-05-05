@@ -8,7 +8,7 @@ function RecipeDetails({ isLogged, recipe, activeTab, handleUpdateFavorites, rec
   };
 
   // Log isFavorite and the name of the recipe when rendering
-  console.log(`Rendering RecipeDetails for "${recipe.title || recipe.name}": isFavorite - ${isFavorite}`);
+  //console.log(`Rendering RecipeDetails for "${recipe.title || recipe.name}": isFavorite - ${isFavorite}`);
   
   return (
     <Grid 
