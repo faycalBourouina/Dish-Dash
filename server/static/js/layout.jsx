@@ -17,7 +17,7 @@ function Layout({ isLogged , newUser, setNewUser, handleLogin, handleSignup, han
         const params = new URLSearchParams(searchQuery);
         const response = await fetch(`/search?${params.toString()}`);
         const data = await response.json();
-        console.log('data in handleSearch', data);
+        //console.log('data in handleSearch', data);
         const recipesResponse = data.recipes?.results || data.recipes || [];
         //setCachedSearch(recipes); // cache the search results
         setRecipes(recipesResponse); // update the recipes state to searched recipes
@@ -41,27 +41,22 @@ function Layout({ isLogged , newUser, setNewUser, handleLogin, handleSignup, han
     
         if (response.ok) {
           // Recipe added to favorites successfully
-          console.log("Recipe added to favorites");
+          //console.log("Recipe added to favorites");
           const { favorite } = data;
-          console.log("favorite added is ", favorite);
+          //console.log("favorite added is ", favorite);
           
           // Update the cachedFavorites state by adding the new favorite recipe
           setCachedFavorites([...cachedFavorites, favorite]);
           
-          // Update the recipes state by replacing the old recipe with the fetched one
+          // Update the landing recipes state by updating isFavorite with the fetched one
           setCachedLanding(cachedLanding.map(recipe => {
             if (recipe.id === favorite.id) {
               recipe.isFavorite = favorite.isFavorite;
-              console.log("Updating isFavorite in recipe", recipe);
+              //console.log("Updating isFavorite in recipe", recipe);
             }
             return recipe;
           }));
           
-          console.log("Updating landing recipes with the fetched recipe", cachedLanding);
-
-          
-          // Update the recipes state to favorites if the active tab is favorites else update it to landing
-          activeTab === "favorites" ? setRecipes(cachedFavorites) : setRecipes(cachedLanding)
 
           // If a recipe is selected, updating the recipe state to favorite to reflect the change made
           selectedRecipe && setSelectedRecipe(favorite) 
@@ -80,22 +75,33 @@ function Layout({ isLogged , newUser, setNewUser, handleLogin, handleSignup, han
         const deleteResponse = await fetch(`/users/${userId}/favorites/${recipeId}`, {
           method: "DELETE",
         });
-    
+
         if (deleteResponse.ok) {
           // Favorite removed successfully
-          console.log("Favorite removed");
+          //console.log("Favorite removed");
           setFavoriteMessage("Recipe removed from favorites successfully");
+          
+
+          console.log("Cached Favorites before removing a recipe ", cachedFavorites)
+
           // Update the recipes state by filtering out the deleted recipe
-          const updatedRecipes = cachedFavorites.filter((r) => r.id !== recipeId);
-          setCachedFavorites(updatedRecipes);
-          // Update the recipes state if the active tab is favorites
-          activeTab === "favorites" && setRecipes(updatedRecipes);
-    
-          // Update the selectedRecipe state if the deleted recipe is the selected recipe
-          if (selectedRecipe && selectedRecipe.id === recipeId) {
-            setSelectedRecipe(null);
-            setActiveTab("favorites");
-          }
+          const updatedFavorites = cachedFavorites.filter((r) => r.id !== recipeId)
+          console.log("Updated recipes after removing the recipe ", updatedFavorites)
+          setCachedFavorites(updatedFavorites);
+          console.log("Updated cached favorites state after removing the recipe ", cachedFavorites);
+
+          // Update the landing recipes state by updating isFavorite with the fetched one
+          const updatedLanding = cachedLanding.map(recipe => {
+            if (recipe.id === recipeId) {
+              recipe.isFavorite = !recipe.isFavorite
+              selectedRecipe && setSelectedRecipe(recipe) 
+            }
+            return recipe;
+          });
+
+          setCachedLanding(updatedLanding)
+          
+          
         } else {
           // Error handling
           console.error("Failed to remove favorite");
@@ -106,35 +112,26 @@ function Layout({ isLogged , newUser, setNewUser, handleLogin, handleSignup, han
       setAlertOpen(true);
     }
     async function fetchLandingRecipes() {
-        if (cachedLanding.length) {
-          setRecipes(cachedLanding);
-        } else {
+        if (!cachedLanding.length) {
+          console.log("Fetching")
           setIsLoading(true);     
           const response = await fetch("/landing");
           const data = await response.json();
           const { recipes } = await data;
-          
+          console.log("recipes after fetching:", recipes);
           setCachedLanding(recipes);
-          setRecipes(recipes);
           setIsLoading(false);
-
         }
-
     }
-
     async function fetchFavoritesRecipes() {
-        if (cachedFavorites.length) {
-          console.log("cachedFavorites in fetch", cachedFavorites);
-          setRecipes(cachedFavorites);
-        } else {
+        if (!cachedFavorites.length) {
           setIsLoading(true);
           const userId = isLogged;
           const response = await fetch(`users/${userId}/favorites`);
           const data = await response.json();
           const { favorites } = data;
-          console.log("favorites from server: ", favorites);
+          //console.log("favorites from server: ", favorites);
           setCachedFavorites(favorites);
-          setRecipes(favorites);
           setIsLoading(false);
         }
     }
@@ -158,13 +155,9 @@ function Layout({ isLogged , newUser, setNewUser, handleLogin, handleSignup, han
       }
     }, [isLogged]);
 
-
     useEffect(() => {
-      if (activeTab === "favorites") {
-        fetchFavoritesRecipes();
-      } else if (activeTab === "home") {
-        fetchLandingRecipes();
-      }
+      fetchLandingRecipes();
+      fetchFavoritesRecipes();
     }, [activeTab]);
 
     return (
@@ -219,13 +212,13 @@ function Layout({ isLogged , newUser, setNewUser, handleLogin, handleSignup, han
                   cachedItems={cachedItems}
                   setCachedItems={setCachedItems}
                   onRecipeClick={handleRecipeClick}
-                  recipes={cachedFavorites}
+                  recipes={recipes}
                 />
               ) : (
                   <RecipeList
                     isLogged={isLogged}
                     isLoading={isLoading}
-                    recipes={recipes}
+                    recipes={activeTab === "favorites" ? cachedFavorites : cachedLanding}
                     activeTab={activeTab}
                     handleUpdateFavorites={handleUpdateFavorites}
                     onRecipeClick={handleRecipeClick}
