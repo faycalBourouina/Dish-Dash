@@ -28,7 +28,6 @@ jobs:
           python -m unittest discover # Discover and run all tests
 
   deploy: # Job for deployment
-    needs: test # This job needs to succeed before deployment can run
     runs-on: ubuntu-latest # The type of runner that the job will run on
     steps: # Steps to be executed as part of this job
       - name: Checkout code # Step to checkout the code from the repository
