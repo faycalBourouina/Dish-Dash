@@ -54,3 +54,12 @@ def remove_duplicate_recipes(recipes):
             filtered_recipes.append(recipe)
     return filtered_recipes
 
+
+def mimic_api_autocomplete(query, recipes_obj):
+    """Mimic api autocomplete for testing mode"""
+
+    results = []
+    for obj in recipes_obj:
+        if obj['name'].startswith(query):
+            results.append(obj['name'])
+    return results
