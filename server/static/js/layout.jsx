@@ -56,11 +56,9 @@ function Layout({ isLogged , newUser, setNewUser, handleLogin, handleSignup, han
             }
             return recipe;
           }));
-          
 
           // If a recipe is selected, updating the recipe state to favorite to reflect the change made
           selectedRecipe && setSelectedRecipe(favorite) 
-          
           
           // Set the favorite success message
           setFavoriteMessage(`${favorite.name} added to favorites successfully`);
@@ -81,14 +79,11 @@ function Layout({ isLogged , newUser, setNewUser, handleLogin, handleSignup, han
           //console.log("Favorite removed");
           setFavoriteMessage("Recipe removed from favorites successfully");
           
-
-          console.log("Cached Favorites before removing a recipe ", cachedFavorites)
-
           // Update the recipes state by filtering out the deleted recipe
           const updatedFavorites = cachedFavorites.filter((r) => r.id !== recipeId)
-          console.log("Updated recipes after removing the recipe ", updatedFavorites)
+
+          // update the cachedFavorites
           setCachedFavorites(updatedFavorites);
-          console.log("Updated cached favorites state after removing the recipe ", cachedFavorites);
 
           // Update the landing recipes state by updating isFavorite with the fetched one
           const updatedLanding = cachedLanding.map(recipe => {
@@ -118,7 +113,6 @@ function Layout({ isLogged , newUser, setNewUser, handleLogin, handleSignup, han
           const response = await fetch("/landing");
           const data = await response.json();
           const { recipes } = await data;
-          console.log("recipes after fetching:", recipes);
           setCachedLanding(recipes);
           setIsLoading(false);
         }

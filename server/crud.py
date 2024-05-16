@@ -1,5 +1,5 @@
 from model import db, User, Recipe, Favorite, Ingredient, RecipeIngredient, connect_to_db
-from utils import (sqlalchemy_obj_to_dict, get_tag_combinations_of_2, remove_duplicate_recipes)
+from utils import (sqlalchemy_obj_to_dict, get_tag_combinations_of_2, remove_duplicate_recipes, mimic_api_autocomplete)
 
 
 
@@ -270,8 +270,8 @@ def auto_complete_search(query):
 
     # Ignore auto search in test mode
     if MODE == 'TEST_MODE':
-        response = []
-
+        recipes_obj = mock_data['landing_recipes']['response']
+        response = mimic_api_autocomplete(query, recipes_obj)
     else:
         params = {
             'apiKey': SPOONACULAR_API_KEY,

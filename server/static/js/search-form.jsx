@@ -36,6 +36,7 @@ function SearchForm({ onSearch }) {
   const performAutoComplete = async (query) => {
     const autoCompleteResponse = await fetch(`/autocomplete?query=${query}`);
     const autoCompleteData = await autoCompleteResponse.json();
+    console.log("autoCompleteData: ", autoCompleteData);  // This will log the data to the console
     setAutoComplete(autoCompleteData);
   };
 

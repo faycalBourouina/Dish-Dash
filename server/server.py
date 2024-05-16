@@ -136,6 +136,7 @@ def logout():
 def auto_complete_search():
     query = request.args.get("query", "")
     results = crud.auto_complete_search(query)
+    print("autocomplete results", jsonify(results))
     return jsonify(results)
 
 @app.route("/search")

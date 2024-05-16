@@ -24,7 +24,7 @@
         "query": "http://localhost:5000/",
         "response": [
             {  "id":662243,
-               "title":"Summer Rolls",
+               "name":"Summer Rolls",
                "image":"https://spoonacular.com/recipeImages/662243-556x370.jpg",
                "ingredients":[
                   {
@@ -102,7 +102,7 @@
                "kisses":1
             },
             { "id":661757,
-               "title":"Strawberry Basil Italian Ice",
+               "name":"Strawberry Basil Italian Ice",
                "image":"https://spoonacular.com/recipeImages/661757-556x370.jpg",
                "ingredients":[
                   {
@@ -130,7 +130,7 @@
                "kisses":1
             },
             { "id":650844,
-               "title":"Mango-Berry Swirled Smoothies",
+               "name":"Mango-Berry Swirled Smoothies",
                "image":"https://spoonacular.com/recipeImages/650844-556x370.jpg",
                "ingredients":[
                   {
@@ -294,7 +294,7 @@
                ]
             },
             {  "id":643117,
-               "title":"Flour-Less Peanut Butter Cookies",
+               "name":"Flour-Less Peanut Butter Cookies",
                "vegetarian":true,
                "vegan":false,
                "glutenFree":true,
@@ -571,7 +571,7 @@
                "spoonacularSourceUrl":"https://spoonacular.com/flour-less-peanut-butter-cookies-643117"
             },
             {  "id":664427,
-               "title":"Vegan Donuts",
+               "name":"Vegan Donuts",
                "vegetarian":true,
                "vegan":true,
                "glutenFree":false,
@@ -990,7 +990,7 @@
                "spoonacularSourceUrl":"https://spoonacular.com/vegan-donuts-664427"
             },
             {  "id":646974,
-               "title":"Homemade Creamy Ramen Soup",
+               "name":"Homemade Creamy Ramen Soup",
                "vegetarian":false,
                "vegan":false,
                "glutenFree":false,
