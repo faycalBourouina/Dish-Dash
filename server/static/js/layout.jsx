@@ -57,8 +57,8 @@ function Layout({ isLogged , newUser, setNewUser, handleLogin, handleSignup, han
             return recipe;
           }));
 
-          // If a recipe is selected, updating the recipe state to favorite to reflect the change made
-          selectedRecipe && setSelectedRecipe(favorite) 
+          // If the selected recipe is favorite, update the selected recipe state to favorite to reflect the change made
+          (selectedRecipe && selectedRecipe.id === favorite.id) && setSelectedRecipe(favorite);
           
           // Set the favorite success message
           setFavoriteMessage(`${favorite.name} added to favorites successfully`);
@@ -89,7 +89,8 @@ function Layout({ isLogged , newUser, setNewUser, handleLogin, handleSignup, han
           const updatedLanding = cachedLanding.map(recipe => {
             if (recipe.id === recipeId) {
               recipe.isFavorite = !recipe.isFavorite
-              selectedRecipe && setSelectedRecipe(recipe) 
+             // If the selected recipe is unfavorite, update the selected recipe state to favorite to reflect the change made
+             (selectedRecipe && selectedRecipe.id === recipe.id) && setSelectedRecipe(recipe);
             }
             return recipe;
           });

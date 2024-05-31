@@ -61,5 +61,5 @@ def mimic_api_autocomplete(query, recipes_obj):
     results = []
     for obj in recipes_obj:
         if obj['name'].startswith(query):
-            results.append(obj['name'])
+            results.append({'title': obj['name']})
     return results
