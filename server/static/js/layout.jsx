@@ -56,6 +56,20 @@ function Layout({ isLogged , newUser, setNewUser, handleLogin, handleSignup, han
         });
       }
 
+      // Function to update the cachedLanding state
+      function updateCachedLanding(favorite, isAdding) {
+        setCachedLanding((prevLanding) => {
+          return prevLanding.map((recipe) => {
+            if (recipe.id === favorite.id) {
+              return { ...recipe, isFavorite: isAdding }; // Update isFavorite property
+            }
+            return recipe;
+          });
+        });
+      } 
+
+
+
       if (!isFavorite) {
         const response = await fetch(`/users/${userId}/favorites/${recipeId}`, {
           method: "PATCH",
