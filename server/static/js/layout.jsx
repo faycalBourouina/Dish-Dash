@@ -198,8 +198,11 @@ function Layout({ isLogged , newUser, setNewUser, handleLogin, handleSignup, han
         setSelectedRecipe(recipe);
     }
 
+
+    // Triggered by favorite button event handler to update the favorites on recipes
+    
     async function handleUpdateFavorites(recipeId, isFavorite) {
-      const result = await handleUpdateFavorites(recipeId, isFavorite);
+      const result = await updateFavoriteRecipe(recipeId, isFavorite);
       const actionSuccess = result && 'favorite' in result;
     
       if (actionSuccess && result.favorite) {
