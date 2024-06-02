@@ -47,6 +47,15 @@ function Layout({ isLogged , newUser, setNewUser, handleLogin, handleSignup, han
       }
 
 
+      // Function to update the cachedFavorites state
+      function updateCachedFavorites(favorite, isAdding) {
+        setCachedFavorites((prevFavorites) => {
+          return isAdding
+          ? [...prevFavorites, favorite] // Add the new favorite recipe
+          : prevFavorites.filter((recipe) => recipe.id !== favorite.id); // Remove the recipe by ID
+        });
+      }
+
       if (!isFavorite) {
         const response = await fetch(`/users/${userId}/favorites/${recipeId}`, {
           method: "PATCH",
