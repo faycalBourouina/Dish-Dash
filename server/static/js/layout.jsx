@@ -68,7 +68,15 @@ function Layout({ isLogged , newUser, setNewUser, handleLogin, handleSignup, han
         });
       } 
 
-
+      // Function to update the selectedRecipe state
+      function updateSelectedRecipe(favorite, isAdding) {
+        setSelectedRecipe((prevSelected) => {
+          if (prevSelected && prevSelected.id === favorite.id) {
+            return { ...prevSelected, isFavorite: isAdding }; // Update isFavorite property
+          }
+          return prevSelected;
+        });
+      }
 
       if (!isFavorite) {
         const response = await fetch(`/users/${userId}/favorites/${recipeId}`, {
