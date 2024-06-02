@@ -31,7 +31,11 @@ function Layout({ isLogged , newUser, setNewUser, handleLogin, handleSignup, han
     } 
 
     async function handleUpdateFavorites(recipeId, isFavorite) {
-      const userId = isLogged;
+      const userId = isLogged; // Assume isLogged contains the current user's ID
+      const method = isFavorite ? "DELETE" : "PATCH"; // Determine the HTTP method based on the action
+      const response = await fetch(`/users/${userId}/favorites/${recipeId}`, { method });
+
+
 
       if (!isFavorite) {
         const response = await fetch(`/users/${userId}/favorites/${recipeId}`, {
