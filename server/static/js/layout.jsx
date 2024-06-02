@@ -78,6 +78,19 @@ function Layout({ isLogged , newUser, setNewUser, handleLogin, handleSignup, han
         });
       }
 
+
+      // Function to set the favoriteMessage state based on the action and its success
+      function setFavoriteMessageAction(isAdding, isSuccess, recipeName = '') {
+        const message = isSuccess
+          ? isAdding
+            ? `${recipeName} added to favorites successfully` // Message for adding to favorites
+            : `${recipeName} removed from favorites successfully` // Message for removing from favorites
+          : isAdding
+            ? 'Failed to add recipe to favorites' // Error message for adding
+            : 'Failed to remove recipe from favorites'; // Error message for removing
+        setFavoriteMessage(message);
+      }
+
       if (!isFavorite) {
         const response = await fetch(`/users/${userId}/favorites/${recipeId}`, {
           method: "PATCH",
