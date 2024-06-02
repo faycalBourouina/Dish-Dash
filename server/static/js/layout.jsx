@@ -44,20 +44,20 @@ function Layout({ isLogged , newUser, setNewUser, handleLogin, handleSignup, han
         // Return the favorite recipe object or null if removing
         const favorite = isFavorite ? null : await response.json();
         return { favorite, isFavorite };
-      }
+    }
 
 
-      // Function to update the cachedFavorites state
-      function updateCachedFavorites(favorite, isAdding) {
+    // Function to update the cachedFavorites state
+    function updateCachedFavorites(favorite, isAdding) {
         setCachedFavorites((prevFavorites) => {
           return isAdding
           ? [...prevFavorites, favorite] // Add the new favorite recipe
           : prevFavorites.filter((recipe) => recipe.id !== favorite.id); // Remove the recipe by ID
         });
-      }
+    }
 
-      // Function to update the cachedLanding state
-      function updateCachedLanding(favorite, isAdding) {
+    // Function to update the cachedLanding state
+    function updateCachedLanding(favorite, isAdding) {
         setCachedLanding((prevLanding) => {
           return prevLanding.map((recipe) => {
             if (recipe.id === favorite.id) {
@@ -66,21 +66,20 @@ function Layout({ isLogged , newUser, setNewUser, handleLogin, handleSignup, han
             return recipe;
           });
         });
-      } 
+    } 
 
-      // Function to update the selectedRecipe state
-      function updateSelectedRecipe(favorite, isAdding) {
+    // Function to update the selectedRecipe state
+    function updateSelectedRecipe(favorite, isAdding) {
         setSelectedRecipe((prevSelected) => {
           if (prevSelected && prevSelected.id === favorite.id) {
             return { ...prevSelected, isFavorite: isAdding }; // Update isFavorite property
           }
           return prevSelected;
         });
-      }
+    }
 
-
-      // Function to set the favoriteMessage state based on the action and its success
-      function setFavoriteMessageAction(isAdding, isSuccess, recipeName = '') {
+    // Function to set the favoriteMessage state based on the action and its success
+    function setFavoriteMessageAction(isAdding, isSuccess, recipeName = '') {
         const message = isSuccess
           ? isAdding
             ? `${recipeName} added to favorites successfully` // Message for adding to favorites
@@ -89,82 +88,8 @@ function Layout({ isLogged , newUser, setNewUser, handleLogin, handleSignup, han
             ? 'Failed to add recipe to favorites' // Error message for adding
             : 'Failed to remove recipe from favorites'; // Error message for removing
         setFavoriteMessage(message);
-      }
-
-      if (!isFavorite) {
-        const response = await fetch(`/users/${userId}/favorites/${recipeId}`, {
-          method: "PATCH",
-        });
-        const data = await response.json();
-    
-        if (response.ok) {
-          // Recipe added to favorites successfully
-          //console.log("Recipe added to favorites");
-          const { favorite } = data;
-          //console.log("favorite added is ", favorite);
-          
-          // Update the cachedFavorites state by adding the new favorite recipe
-          setCachedFavorites([...cachedFavorites, favorite]);
-          
-          // Update the landing recipes state by updating isFavorite with the fetched one
-          setCachedLanding(cachedLanding.map(recipe => {
-            if (recipe.id === favorite.id) {
-              recipe.isFavorite = favorite.isFavorite;
-              //console.log("Updating isFavorite in recipe", recipe);
-            }
-            return recipe;
-          }));
-
-          // If the selected recipe is favorite, update the selected recipe state to favorite to reflect the change made
-          (selectedRecipe && selectedRecipe.id === favorite.id) && setSelectedRecipe(favorite);
-          
-          // Set the favorite success message
-          setFavoriteMessage(`${favorite.name} added to favorites successfully`);
-       
-        } else {
-          // Error handling for other response statuses
-          console.error("Failed to add recipe to favorites");
-          // Failed to add recipe to favorites
-          setFavoriteMessage("Failed to add recipe to favorites");
-        }
-      } else {
-        const deleteResponse = await fetch(`/users/${userId}/favorites/${recipeId}`, {
-          method: "DELETE",
-        });
-
-        if (deleteResponse.ok) {
-          // Favorite removed successfully
-          //console.log("Favorite removed");
-          setFavoriteMessage("Recipe removed from favorites successfully");
-          
-          // Update the recipes state by filtering out the deleted recipe
-          const updatedFavorites = cachedFavorites.filter((r) => r.id !== recipeId)
-
-          // update the cachedFavorites
-          setCachedFavorites(updatedFavorites);
-
-          // Update the landing recipes state by updating isFavorite with the fetched one
-          const updatedLanding = cachedLanding.map(recipe => {
-            if (recipe.id === recipeId) {
-              recipe.isFavorite = !recipe.isFavorite
-             // If the selected recipe is unfavorite, update the selected recipe state to favorite to reflect the change made
-             (selectedRecipe && selectedRecipe.id === recipe.id) && setSelectedRecipe(recipe);
-            }
-            return recipe;
-          });
-
-          setCachedLanding(updatedLanding)
-          
-          
-        } else {
-          // Error handling
-          console.error("Failed to remove favorite");
-          // Failed to add recipe to favorites
-          setFavoriteMessage("Failed to remove recipe from favorites");
-        }
-      }
-      setAlertOpen(true);
     }
+
     async function fetchLandingRecipes() {
         if (!cachedLanding.length) {
           console.log("Fetching")
