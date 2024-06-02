@@ -35,6 +35,16 @@ function Layout({ isLogged , newUser, setNewUser, handleLogin, handleSignup, han
       const method = isFavorite ? "DELETE" : "PATCH"; // Determine the HTTP method based on the action
       const response = await fetch(`/users/${userId}/favorites/${recipeId}`, { method });
 
+      // Check if the server response is not OK and set an error message
+      if (!response.ok) {
+        console.error(`Failed to ${isFavorite ? "remove" : "add"} recipe to favorites`);
+        setFavoriteMessage(`Failed to ${isFavorite ? "remove" : "add"} recipe to favorites`);
+        return;
+      }
+        // Return the favorite recipe object or null if removing
+        const favorite = isFavorite ? null : await response.json();
+        return { favorite, isFavorite };
+      }
 
 
       if (!isFavorite) {
