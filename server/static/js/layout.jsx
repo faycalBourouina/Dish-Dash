@@ -30,7 +30,7 @@ function Layout({ isLogged , newUser, setNewUser, handleLogin, handleSignup, han
       (selectedRecipe && activeTab === "search") && setSelectedRecipe(null);
     } 
 
-    async function handleUpdateFavorites(recipeId, isFavorite) {
+    async function updateRecipeFavorite(recipeId, isFavorite) {
       const userId = isLogged; // Assume isLogged contains the current user's ID
       const method = isFavorite ? "DELETE" : "PATCH"; // Determine the HTTP method based on the action
       const response = await fetch(`/users/${userId}/favorites/${recipeId}`, { method });
@@ -196,6 +196,31 @@ function Layout({ isLogged , newUser, setNewUser, handleLogin, handleSignup, han
         recipe.ingredients = ingredients;
 
         setSelectedRecipe(recipe);
+    }
+
+    async function handleUpdateFavorites(recipeId, isFavorite) {
+      const result = await handleUpdateFavorites(recipeId, isFavorite);
+      const actionSuccess = result && 'favorite' in result;
+    
+      if (actionSuccess && result.favorite) {
+        // If a recipe was added, update states and set success message
+        const { favorite } = result;
+        updateCachedFavorites(favorite, !isFavorite);
+        updateCachedLanding(favorite, !isFavorite);
+        updateSelectedRecipe(favorite, !isFavorite);
+        setFavoriteMessageAction(!isFavorite, true, favorite.name);
+      } else if (actionSuccess) {
+        // If a recipe was removed, find it, update states, and set success message
+        const removedRecipeId = result.removedRecipeId;
+        const removedRecipe = cachedFavorites.find(r => r.id === removedRecipeId);
+        updateCachedFavorites(removedRecipe, false);
+        updateCachedLanding(removedRecipe, false);
+        updateSelectedRecipe(removedRecipe, false);
+        setFavoriteMessageAction(false, true, removedRecipe.name);
+      } else {
+        // If there was an error, set the error message
+        setFavoriteMessageAction(!isFavorite, false);
+      }
     }
 
 
