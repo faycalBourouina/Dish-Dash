@@ -30,23 +30,59 @@ function Layout({ isLogged , newUser, setNewUser, handleLogin, handleSignup, han
       (selectedRecipe && activeTab === "search") && setSelectedRecipe(null);
     } 
 
+    async function fetchLandingRecipes() {
+      if (!cachedLanding.length) {
+        console.log("Fetching")
+        setIsLoading(true);     
+        const response = await fetch("/landing");
+        const data = await response.json();
+        const { recipes } = await data;
+        setCachedLanding(recipes);
+        setIsLoading(false);
+      }
+    }
+
+    async function fetchFavoritesRecipes() {
+        if (!cachedFavorites.length) {
+          setIsLoading(true);
+          const userId = isLogged;
+          const response = await fetch(`users/${userId}/favorites`);
+          const data = await response.json();
+          const { favorites } = data;
+          //console.log("favorites from server: ", favorites);
+          setCachedFavorites(favorites);
+          setIsLoading(false);
+        }
+    }
+    
+    async function handleRecipeClick(recipe) {
+      const response = await fetch(`/recipes/${recipe.id}`);
+      const data = await response.json();
+      const { ingredients } = await data.recipe;
+      recipe.ingredients = ingredients;
+
+      setSelectedRecipe(recipe);
+    }
+
+
     async function updateRecipeFavorite(recipeId, isFavorite) {
       const userId = isLogged; // Assume isLogged contains the current user's ID
       const method = isFavorite ? "DELETE" : "PATCH"; // Determine the HTTP method based on the action
       const response = await fetch(`/users/${userId}/favorites/${recipeId}`, { method });
-
+    
       // Check if the server response is not OK and set an error message
       if (!response.ok) {
         console.error(`Failed to ${isFavorite ? "remove" : "add"} recipe to favorites`);
         setFavoriteMessage(`Failed to ${isFavorite ? "remove" : "add"} recipe to favorites`);
         return;
       }
-        // Return the favorite recipe object or null if removing
-        const favorite = isFavorite ? null : await response.json();
-        return { favorite, isFavorite };
+    
+      // Return the favorite recipe object or the ID of the removed recipe
+      const favorite = isFavorite ? { removedRecipeId: recipeId } : await response.json();
+      return favorite;
     }
-
-
+    
+    
     // Function to update the cachedFavorites state
     function updateCachedFavorites(favorite, isAdding) {
         setCachedFavorites((prevFavorites) => {
@@ -90,56 +126,21 @@ function Layout({ isLogged , newUser, setNewUser, handleLogin, handleSignup, han
         setFavoriteMessage(message);
     }
 
-    async function fetchLandingRecipes() {
-        if (!cachedLanding.length) {
-          console.log("Fetching")
-          setIsLoading(true);     
-          const response = await fetch("/landing");
-          const data = await response.json();
-          const { recipes } = await data;
-          setCachedLanding(recipes);
-          setIsLoading(false);
-        }
-    }
-    async function fetchFavoritesRecipes() {
-        if (!cachedFavorites.length) {
-          setIsLoading(true);
-          const userId = isLogged;
-          const response = await fetch(`users/${userId}/favorites`);
-          const data = await response.json();
-          const { favorites } = data;
-          //console.log("favorites from server: ", favorites);
-          setCachedFavorites(favorites);
-          setIsLoading(false);
-        }
-    }
-    
-    async function handleRecipeClick(recipe) {
-        const response = await fetch(`/recipes/${recipe.id}`);
-        const data = await response.json();
-        const { ingredients } = await data.recipe;
-        recipe.ingredients = ingredients;
-
-        setSelectedRecipe(recipe);
-    }
-
-
     // Triggered by favorite button event handler to update the favorites on recipes
-    
     async function handleUpdateFavorites(recipeId, isFavorite) {
-      const result = await updateFavoriteRecipe(recipeId, isFavorite);
-      const actionSuccess = result && 'favorite' in result;
-    
+      const result = await updateRecipeFavorite(recipeId, isFavorite);
+      const actionSuccess = result && ('favorite' in result || 'removedRecipeId' in result);
+
       if (actionSuccess && result.favorite) {
         // If a recipe was added, update states and set success message
         const { favorite } = result;
-        updateCachedFavorites(favorite, !isFavorite);
-        updateCachedLanding(favorite, !isFavorite);
-        updateSelectedRecipe(favorite, !isFavorite);
-        setFavoriteMessageAction(!isFavorite, true, favorite.name);
-      } else if (actionSuccess) {
+        updateCachedFavorites(favorite, true);
+        updateCachedLanding(favorite, true);
+        updateSelectedRecipe(favorite, true);
+        setFavoriteMessageAction(true, true, favorite.name);
+      } else if (actionSuccess && result.removedRecipeId) {
         // If a recipe was removed, find it, update states, and set success message
-        const removedRecipeId = result.removedRecipeId;
+        const { removedRecipeId } = result;
         const removedRecipe = cachedFavorites.find(r => r.id === removedRecipeId);
         updateCachedFavorites(removedRecipe, false);
         updateCachedLanding(removedRecipe, false);
@@ -147,10 +148,9 @@ function Layout({ isLogged , newUser, setNewUser, handleLogin, handleSignup, han
         setFavoriteMessageAction(false, true, removedRecipe.name);
       } else {
         // If there was an error, set the error message
-        setFavoriteMessageAction(!isFavorite, false);
+        setFavoriteMessageAction(isFavorite, false);
       }
     }
-
 
     useEffect(() => {
       if (!isLogged) {
