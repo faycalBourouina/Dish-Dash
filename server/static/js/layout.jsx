@@ -123,7 +123,9 @@ function Layout({ isLogged , newUser, setNewUser, handleLogin, handleSignup, han
           : isAdding
             ? 'Failed to add recipe to favorites' // Error message for adding
             : 'Failed to remove recipe from favorites'; // Error message for removing
-        setFavoriteMessage(message);
+        setFavoriteMessage(message) // update the favoriteMessage state
+        setAlertOpen(true); // Open the alert Snackbar
+
     }
 
     // Triggered by favorite button event handler to update the favorites on recipes
@@ -212,6 +214,7 @@ function Layout({ isLogged , newUser, setNewUser, handleLogin, handleSignup, han
                   isLogged={isLogged}
                   recipe={selectedRecipe}
                   activeTab={activeTab}
+                  cachedFavorites={cachedFavorites}
                   handleUpdateFavorites={handleUpdateFavorites}
                   recipesLength = {recipes.length}
                   handleSelectedRecipe = {handleSelectedRecipe}
