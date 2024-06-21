@@ -1,14 +1,15 @@
-const { useState, useEffect } = React;
+const { useState, useEffect, useContext } = React;
 const { Grid, Box, Alert, Snackbar } = MaterialUI;
 
-function Layout({ isLogged , newUser, setNewUser, handleLogin, handleSignup, handleLogout, message, setMessage, cachedItems, setCachedItems, cachedLanding, setCachedLanding, cachedFavorites, setCachedFavorites, cachedSearch, setCachedSearch}) {
+function Layout({ isLogged , newUser, setNewUser, handleLogin, handleSignup, handleLogout, message, setMessage, cachedItems, setCachedItems, cachedFavorites, setCachedFavorites, cachedSearch, setCachedSearch}) {
     const [activeTab, setActiveTab] = React.useState("home"); // State variable to track which tab is active
     const [isLoading, setIsLoading] = React.useState(false); // State variable to track whether data is being fetched
     const [recipes, setRecipes] = React.useState([]); // State variable to store the recipes
     const [selectedRecipe, setSelectedRecipe] = React.useState(null); // State variable to store the selected recipe
     const [favoriteMessage, setFavoriteMessage] = useState(""); // State variable to store the favorite success message
     const [alertOpen, setAlertOpen] = useState(false); // State variable to control the Snackbar visibility
-    
+
+    const {cachedLanding, setCachedLanding } = useContext(CachedLandingContext);
     
     async function handleSearch(searchQuery) {
 
@@ -227,7 +228,7 @@ function Layout({ isLogged , newUser, setNewUser, handleLogin, handleSignup, han
                   <RecipeList
                     isLogged={isLogged}
                     isLoading={isLoading}
-                    recipes={activeTab === "favorites" ? cachedFavorites : cachedLanding}
+                    cachedFavorites={cachedFavorites}
                     activeTab={activeTab}
                     handleUpdateFavorites={handleUpdateFavorites}
                     onRecipeClick={handleRecipeClick}

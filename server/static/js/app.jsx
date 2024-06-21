@@ -5,7 +5,6 @@ function App({ userId }) {
 
   const [isLogged, setIsLogged] = useState(userId);
   const [newUser, setNewUser] = useState(false);
-  const [cachedLanding, setCachedLanding] = useState([]);
   const [cachedFavorites, setCachedFavorites] = useState([]);
   const [cachedSearch, setCachedSearch] = useState([]);
   const [cachedItems, setCachedItems] = useState({});
@@ -88,24 +87,24 @@ function App({ userId }) {
 
   return (
       <>
+      <CachedLandingProvider>
         <Layout 
-          isLogged={isLogged}
-          newUser={newUser}
-          setNewUser={setNewUser}
-          handleLogin={handleLogin} 
-          handleSignup={handleSignup} 
-          handleLogout={handleLogout}
-          message={authMessage}
-          setMessage = {setAuthMessage}
-          cachedLanding={cachedLanding}
-          setCachedLanding={setCachedLanding}
-          cachedFavorites={cachedFavorites}
-          setCachedFavorites={setCachedFavorites}
-          cachedItems={cachedItems}
-          setCachedItems={setCachedItems}
-          cachedSearch={cachedSearch}
-          setCachedSearch={setCachedSearch}
-        />
+            isLogged={isLogged}
+            newUser={newUser}
+            setNewUser={setNewUser}
+            handleLogin={handleLogin} 
+            handleSignup={handleSignup} 
+            handleLogout={handleLogout}
+            message={authMessage}
+            setMessage = {setAuthMessage}
+            cachedFavorites={cachedFavorites}
+            setCachedFavorites={setCachedFavorites}
+            cachedItems={cachedItems}
+            setCachedItems={setCachedItems}
+            cachedSearch={cachedSearch}
+            setCachedSearch={setCachedSearch}
+          />
+      </CachedLandingProvider>
     </>
   );
 }
