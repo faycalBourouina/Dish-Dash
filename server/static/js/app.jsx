@@ -88,22 +88,22 @@ function App({ userId }) {
   return (
       <>
       <CachedLandingProvider>
-        <Layout 
-            isLogged={isLogged}
-            newUser={newUser}
-            setNewUser={setNewUser}
-            handleLogin={handleLogin} 
-            handleSignup={handleSignup} 
-            handleLogout={handleLogout}
-            message={authMessage}
-            setMessage = {setAuthMessage}
-            cachedFavorites={cachedFavorites}
-            setCachedFavorites={setCachedFavorites}
-            cachedItems={cachedItems}
-            setCachedItems={setCachedItems}
-            cachedSearch={cachedSearch}
-            setCachedSearch={setCachedSearch}
-          />
+        <CachedFavoritesProvider>
+          <Layout 
+              isLogged={isLogged}
+              newUser={newUser}
+              setNewUser={setNewUser}
+              handleLogin={handleLogin} 
+              handleSignup={handleSignup} 
+              handleLogout={handleLogout}
+              message={authMessage}
+              setMessage = {setAuthMessage}
+              cachedItems={cachedItems}
+              setCachedItems={setCachedItems}
+              cachedSearch={cachedSearch}
+              setCachedSearch={setCachedSearch}
+            />
+        </CachedFavoritesProvider>
       </CachedLandingProvider>
     </>
   );

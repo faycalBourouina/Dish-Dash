@@ -1,6 +1,7 @@
-function SimilarRecipes({ isLogged, handleUpdateFavorites, recipeId, onRecipeClick, cachedFavorites }) {
+function SimilarRecipes({ isLogged, handleUpdateFavorites, recipeId, onRecipeClick }) {
   const [isLoadingSimilar, setIsLoadingSimilar] = useState(false);
   const [recipes, setRecipes] = useState([]);
+  const { cachedFavorites} = useContext(CachedFavoritesContext)
 
   useEffect(() => {
     async function fetchSimilarRecipes() {

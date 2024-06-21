@@ -1,8 +1,9 @@
-function RecipeList({ isLogged, isLoading, activeTab, cachedFavorites, handleUpdateFavorites, onRecipeClick }) {
+function RecipeList({ isLogged, isLoading, activeTab, handleUpdateFavorites, onRecipeClick }) {
 
   //console.log('recipes in RecipeList', recipes);
-  
+
   const { cachedLanding } = useContext(CachedLandingContext);
+  const { cachedFavorites} = useContext(CachedFavoritesContext)
 
   // Determine which recipes to display based on the activeTab
   const recipes = activeTab === "favorites" ? cachedFavorites : cachedLanding;
