@@ -92,8 +92,8 @@ function App({ userId }) {
               handleLogin={handleLogin} 
               handleSignup={handleSignup} 
               handleLogout={handleLogout}
-              message={authMessage}
-              setMessage = {setAuthMessage}
+              authMessage={authMessage}
+              setAuthMessage = {setAuthMessage}
             />
           </SearchProvider>
         </CachedFavoritesProvider>

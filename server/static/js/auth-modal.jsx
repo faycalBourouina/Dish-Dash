@@ -1,9 +1,8 @@
 const { Dialog } = MaterialUI;
 const { useContext } = React;
 
-function AuthModal({ open, handleClose, handleLogin, handleSignup, message }) {
+function AuthModal({ open, handleClose, handleLogin, handleSignup, authMessage }) {
 const { newUser } = useContext(AuthContext)
-console.log ("new user status babyyyy!!!!!!!!!!:", newUser)
   return (
     <Dialog open={open} onClose={handleClose}>
         {!newUser ? (
@@ -11,13 +10,12 @@ console.log ("new user status babyyyy!!!!!!!!!!:", newUser)
                 open={open}
                 handleLogin={handleLogin}
                 handleSignup={handleSignup}
-                message={message}
+                authMessage={authMessage}
                 handleClose={handleClose}
             />
         ) : (
             <TagsModal
                 open={open}
-                message={message}
                 handleClose={handleClose}   
             />
         )}

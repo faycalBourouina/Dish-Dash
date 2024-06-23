@@ -1,7 +1,7 @@
 const { useState, useContext } = React;
 const { AppBar, Toolbar, CssBaseline, ButtonBase } = MaterialUI;
 
-function Navbar({ activeTab, setActiveTab, handleLogin, handleSignup, message, setMessage, handleLogout, setSelectedRecipe }) {
+function Navbar({ activeTab, setActiveTab, handleLogin, handleSignup, authMessage, setAuthMessage, handleLogout, setSelectedRecipe }) {
   const { setNewUser } = useContext(AuthContext)
   
   const { isLogged } = useContext(AuthContext)
@@ -19,16 +19,16 @@ function Navbar({ activeTab, setActiveTab, handleLogin, handleSignup, message, s
 
   const handleLoginWithModal = (email, password) => {
     handleLogin(email, password);
-    if (message && message.isError) {
+    if (authMessage && authMessage.isError) {
       return // don't close the modal if there was an error
     }
-    else if (!message.isError) {
+    else if (!authMessage.isError) {
       // If successful, close the modal after a short delay
       setTimeout(() => { 
         setIsModalOpen(false);
         setActiveTab("home");
         setNewUser(false);
-        setMessage({}); // clear the message
+        setAuthMessage({}); // clear the message
       }, 2000);
     }
   };
@@ -37,7 +37,7 @@ function Navbar({ activeTab, setActiveTab, handleLogin, handleSignup, message, s
       setActiveTab("home"); // reset the active tab
       setIsModalOpen(false) // close the modal
       setNewUser(false) // reset newUser
-      setMessage({}); // clear the message
+      setAuthMessage({}); // clear the message
   }
 
     return (
@@ -158,7 +158,7 @@ function Navbar({ activeTab, setActiveTab, handleLogin, handleSignup, message, s
                   handleClose={handleClose}
                   handleLogin={handleLoginWithModal}
                   handleSignup={handleSignupWithModal}
-                  message={message}
+                  authMessage={authMessage}
           />
         </Box>
       )}

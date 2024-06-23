@@ -1,6 +1,6 @@
 const { Dialog, DialogTitle, DialogContent, DialogActions, TextField, Button, Grid, Alert } = MaterialUI;
 
-function AuthForm({ handleLogin, handleSignup, handleClose, message }) {
+function AuthForm({ handleLogin, handleSignup, handleClose, authMessage }) {
   const { isLogged } = useContext(AuthContext)
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -50,14 +50,14 @@ function AuthForm({ handleLogin, handleSignup, handleClose, message }) {
       </Box>
     </DialogTitle>
       <DialogContent>
-        {message.message && message.isError && (
+        {authMessage.message && authMessage.isError && (
           <Alert severity="error" sx={{ mb: 2 }}>
-            {message.message}
+            {authMessage.message}
           </Alert>
         )}
-        {message.message && !message.isError && (
+        {authMessage.message && !authMessage.isError && (
           <Alert severity="success" sx={{ mb: 2 }}>
-            {message.message}
+            {authMessage.message}
           </Alert>
         )}
         <Grid container spacing={2}>
