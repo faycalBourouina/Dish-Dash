@@ -4,8 +4,7 @@ const { Grid } = MaterialUI;
 function App({ userId }) {
 
   const { setIsLogged } = useContext(AuthContext)
-  const { setNewUser } = useContext(AuthContext)
-  const [authMessage, setAuthMessage] = useState({});
+  const { setNewUser, setAuthMessage } = useContext(AuthContext)
 
   const handleLogin = async (email, password) => {
     try {
@@ -92,8 +91,6 @@ function App({ userId }) {
               handleLogin={handleLogin} 
               handleSignup={handleSignup} 
               handleLogout={handleLogout}
-              authMessage={authMessage}
-              setAuthMessage = {setAuthMessage}
             />
           </SearchProvider>
         </CachedFavoritesProvider>

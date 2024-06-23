@@ -1,7 +1,7 @@
 const { Dialog } = MaterialUI;
 const { useContext } = React;
 
-function AuthModal({ open, handleClose, handleLogin, handleSignup, authMessage }) {
+function AuthModal({ open, handleClose, handleLogin, handleSignup}) {
 const { newUser } = useContext(AuthContext)
   return (
     <Dialog open={open} onClose={handleClose}>
@@ -10,13 +10,12 @@ const { newUser } = useContext(AuthContext)
                 open={open}
                 handleLogin={handleLogin}
                 handleSignup={handleSignup}
-                authMessage={authMessage}
                 handleClose={handleClose}
             />
         ) : (
             <TagsModal
                 open={open}
-                handleClose={handleClose}   
+                handleClose={handleClose}
             />
         )}
     </Dialog>

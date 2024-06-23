@@ -6,7 +6,7 @@ const cuisines = ['african', 'asian', 'american', 'british', 'cajun', 'caribbean
 const intolerance = ['egg', 'gluten', 'grain', 'peanut', 'seafood', 'sesame', 'shellfish', 'soy', 'sulfite', 'tree nut', 'wheat', 'dairy', 'fat', 'fodmap', 'pork', 'red meat', 'sugar'];
 
 const TagsModal = ({ handleClose }) => {
-  const { isLogged } = useContext(AuthContext)
+  //const { isLogged } = useContext(AuthContext)
   const [selectedTags, setSelectedTags] = useState([]);
 
   // Select or deselect a tag and update the selectedTags state
@@ -21,7 +21,7 @@ const TagsModal = ({ handleClose }) => {
   // Send the selected tags to the server and close the modal
   const handleDoneClick = async () => {
     const user_id = isLogged;
-    console.log("user_id: ", user_id);
+    //console.log("user_id: ", user_id);
     console.log("selectedTags: ", selectedTags);
 
     const data = {

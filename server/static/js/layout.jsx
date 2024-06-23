@@ -1,7 +1,7 @@
 const { useState, useEffect, useContext } = React;
 const { Grid, Box, Alert, Snackbar } = MaterialUI;
 
-function Layout({ handleLogin, handleSignup, handleLogout, authMessage, setAuthMessage}) {
+function Layout({ handleLogin, handleSignup, handleLogout }) {
     const [activeTab, setActiveTab] = React.useState("home"); // State variable to track which tab is active
     const [isLoading, setIsLoading] = React.useState(false); // State variable to track whether data is being fetched
     const [recipes, setRecipes] = React.useState([]); // State variable to store the recipes
@@ -196,8 +196,6 @@ function Layout({ handleLogin, handleSignup, handleLogout, authMessage, setAuthM
                 handleLogin={handleLogin}
                 handleSignup={handleSignup}
                 handleLogout={handleLogout}
-                authMessage={authMessage}
-                setAuthMessage={setAuthMessage}
                 setSelectedRecipe={setSelectedRecipe} 
               />
             </Box>
