@@ -1,7 +1,7 @@
 const { useState, useEffect, useContext } = React;
 const { Grid, Box, Alert, Snackbar } = MaterialUI;
 
-function Layout({ isLogged , newUser, setNewUser, handleLogin, handleSignup, handleLogout, message, setMessage, cachedItems, setCachedItems, cachedSearch, setCachedSearch}) {
+function Layout({ handleLogin, handleSignup, handleLogout, message, setMessage, cachedItems, setCachedItems, cachedSearch, setCachedSearch}) {
     const [activeTab, setActiveTab] = React.useState("home"); // State variable to track which tab is active
     const [isLoading, setIsLoading] = React.useState(false); // State variable to track whether data is being fetched
     const [recipes, setRecipes] = React.useState([]); // State variable to store the recipes
@@ -9,8 +9,9 @@ function Layout({ isLogged , newUser, setNewUser, handleLogin, handleSignup, han
     const [favoriteMessage, setFavoriteMessage] = useState(""); // State variable to store the favorite success message
     const [alertOpen, setAlertOpen] = useState(false); // State variable to control the Snackbar visibility
 
-    const {cachedLanding, setCachedLanding } = useContext(CachedLandingContext);
-    const {cachedFavorites, setCachedFavorites} = useContext(CachedFavoritesContext)
+    const { isLogged } = useContext(AuthContext)
+    const { cachedLanding, setCachedLanding } = useContext(CachedLandingContext);
+    const { cachedFavorites, setCachedFavorites } = useContext(CachedFavoritesContext);
     
     async function handleSearch(searchQuery) {
 
@@ -191,9 +192,6 @@ function Layout({ isLogged , newUser, setNewUser, handleLogin, handleSignup, han
                 <Navbar 
                 activeTab={activeTab}
                 setActiveTab={setActiveTab}
-                isLogged={isLogged}
-                newUser={newUser}
-                setNewUser={setNewUser}
                 handleLogin={handleLogin}
                 handleSignup={handleSignup}
                 handleLogout={handleLogout}
@@ -213,7 +211,6 @@ function Layout({ isLogged , newUser, setNewUser, handleLogin, handleSignup, han
             <Grid item xs={12} p={12}>
               {selectedRecipe ? (
                 <RecipeDetails
-                  isLogged={isLogged}
                   recipe={selectedRecipe}
                   activeTab={activeTab}
                   handleUpdateFavorites={handleUpdateFavorites}
@@ -226,7 +223,6 @@ function Layout({ isLogged , newUser, setNewUser, handleLogin, handleSignup, han
                 />
               ) : (
                   <RecipeList
-                    isLogged={isLogged}
                     isLoading={isLoading}
                     activeTab={activeTab}
                     handleUpdateFavorites={handleUpdateFavorites}

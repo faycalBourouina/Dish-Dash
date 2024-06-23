@@ -5,7 +5,8 @@ const mealTypes = ['main course', 'side dish', 'dessert', 'appetizer', 'salad', 
 const cuisines = ['african', 'asian', 'american', 'british', 'cajun', 'caribbean', 'chinese', 'eastern european', 'european', 'french', 'german', 'greek', 'indian', 'irish', 'italian', 'japanese', 'jewish', 'korean', 'latin american', 'mediterranean', 'mexican', 'middle eastern', 'nordic', 'southern', 'spanish', 'thai', 'vietnamese'];
 const intolerance = ['egg', 'gluten', 'grain', 'peanut', 'seafood', 'sesame', 'shellfish', 'soy', 'sulfite', 'tree nut', 'wheat', 'dairy', 'fat', 'fodmap', 'pork', 'red meat', 'sugar'];
 
-const TagsModal = ({ isLogged, handleClose }) => {
+const TagsModal = ({ handleClose }) => {
+  const { isLogged } = useContext(AuthContext)
   const [selectedTags, setSelectedTags] = useState([]);
 
   // Select or deselect a tag and update the selectedTags state

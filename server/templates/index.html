@@ -23,7 +23,6 @@
       // Access the userSession value from Flask and assign it to a JavaScript variable
       {% if session['user'] %}
         var userId = {{session['user']['id']}};
-        console.log("userId: ", userId);
       {% else %}
         var userId = null;
       {% endif %}
@@ -48,10 +47,16 @@
     <script type="text/babel" src="/static/js/layout.jsx"></script>
     <script type="text/babel" src="/static/js/context/CachedFavoritesContext.js"></script>
     <script type="text/babel" src="/static/js/context/CachedLandingContext.js"></script>
+    <script type="text/babel" src="/static/js/context/AuthContext.js"></script>
     <script type="text/babel" src="/static/js/app.jsx"></script>
 
     <script type="text/babel">
-      ReactDOM.render(<App userId={userId} />, document.getElementById('root'));
+      ReactDOM.render(
+        <AuthProvider initialIsLogged={userId}>
+          <App />
+        </AuthProvider>,
+        document.getElementById('root')
+      );
     </script>
   </body>
 </html>

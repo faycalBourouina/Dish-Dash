@@ -1,11 +1,10 @@
-const { useState } = React;
+const { useState, useContext } = React;
 const { Grid } = MaterialUI;
 
 function App({ userId }) {
 
-  const [isLogged, setIsLogged] = useState(userId);
-  const [newUser, setNewUser] = useState(false);
-  const [cachedFavorites, setCachedFavorites] = useState([]);
+  const { setIsLogged } = useContext(AuthContext)
+  const { setNewUser } = useContext(AuthContext)
   const [cachedSearch, setCachedSearch] = useState([]);
   const [cachedItems, setCachedItems] = useState({});
   const [authMessage, setAuthMessage] = useState({});
@@ -61,6 +60,7 @@ function App({ userId }) {
         setAuthMessage({ message: 'Signup successful', isError: false });
         // delay setting newUser to true to allow for the message to be displayed
         setTimeout(() => setNewUser(true), 2000);
+
       } else if (response.status === 409) {
         const data = await response.json();
         const { message } = data;
@@ -90,9 +90,6 @@ function App({ userId }) {
       <CachedLandingProvider>
         <CachedFavoritesProvider>
           <Layout 
-              isLogged={isLogged}
-              newUser={newUser}
-              setNewUser={setNewUser}
               handleLogin={handleLogin} 
               handleSignup={handleSignup} 
               handleLogout={handleLogout}

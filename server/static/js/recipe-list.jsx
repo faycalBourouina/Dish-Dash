@@ -1,4 +1,4 @@
-function RecipeList({ isLogged, isLoading, activeTab, handleUpdateFavorites, onRecipeClick }) {
+function RecipeList({ isLoading, activeTab, handleUpdateFavorites, onRecipeClick }) {
 
   //console.log('recipes in RecipeList', recipes);
 
@@ -42,7 +42,6 @@ function RecipeList({ isLogged, isLoading, activeTab, handleUpdateFavorites, onR
             <Grid container spacing={8}>
               {recipes.map((recipe) => (
                 <RecipeItem
-                  isLogged={isLogged}
                   handleUpdateFavorites={handleUpdateFavorites}
                   key={recipe.id}
                   recipe={recipe}

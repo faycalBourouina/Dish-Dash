@@ -1,6 +1,7 @@
 const { Dialog, DialogTitle, DialogContent, DialogActions, TextField, Button, Grid, Alert } = MaterialUI;
 
-function AuthForm({ isLogged, handleLogin, handleSignup, handleClose, message }) {
+function AuthForm({ handleLogin, handleSignup, handleClose, message }) {
+  const { isLogged } = useContext(AuthContext)
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [emailError, setEmailError] = useState(false);

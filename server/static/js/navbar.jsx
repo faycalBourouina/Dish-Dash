@@ -1,8 +1,10 @@
-const { useState } = React;
+const { useState, useContext } = React;
 const { AppBar, Toolbar, CssBaseline, ButtonBase } = MaterialUI;
 
-function Navbar({ activeTab, setActiveTab, isLogged, setNewUser, newUser, handleLogin, handleSignup, message, setMessage, handleLogout, setSelectedRecipe }) {
+function Navbar({ activeTab, setActiveTab, handleLogin, handleSignup, message, setMessage, handleLogout, setSelectedRecipe }) {
+  const { setNewUser } = useContext(AuthContext)
   
+  const { isLogged } = useContext(AuthContext)
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleTabClick = (tab) => {
@@ -157,7 +159,6 @@ function Navbar({ activeTab, setActiveTab, isLogged, setNewUser, newUser, handle
                   handleLogin={handleLoginWithModal}
                   handleSignup={handleSignupWithModal}
                   message={message}
-                  newUser={newUser}
           />
         </Box>
       )}

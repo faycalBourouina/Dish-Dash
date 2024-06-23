@@ -1,4 +1,4 @@
-function SimilarRecipes({ isLogged, handleUpdateFavorites, recipeId, onRecipeClick }) {
+function SimilarRecipes({ handleUpdateFavorites, recipeId, onRecipeClick }) {
   const [isLoadingSimilar, setIsLoadingSimilar] = useState(false);
   const [recipes, setRecipes] = useState([]);
   const { cachedFavorites} = useContext(CachedFavoritesContext)
@@ -48,7 +48,6 @@ function SimilarRecipes({ isLogged, handleUpdateFavorites, recipeId, onRecipeCli
             {recipes.map((recipe) => (
                 <RecipeItem
                     key={recipe.id}
-                    isLogged={isLogged}
                     handleUpdateFavorites={handleUpdateFavorites}
                     recipe={recipe}
                     onRecipeClick={onRecipeClick}
