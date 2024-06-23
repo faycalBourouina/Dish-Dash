@@ -1,4 +1,4 @@
-const { useRef } = React;
+const { useRef, useContext } = React;
 
 const testItems =
 [
@@ -134,7 +134,8 @@ const testItems =
         "title": "MckinnonS Dry Craft Cocktails | Dehydrated Fruit And Herbs | Diy Mixology | Infusion Kit | Mason Jar Serves 8  16 Drinks | Handmade In The Usa (Hot Toddy, 1-Jar)"
     }
 ]
-const ItemList = ({ recipe, cachedItems, setCachedItems }) => {
+const ItemList = ({ recipe }) => {
+  const { cachedItems, setCachedItems } = useContext(ItemsContext)
   
   const [isLoadingItems, setIsLoadingItems] = useState(false);
   const [items, setItems] = useState([]);

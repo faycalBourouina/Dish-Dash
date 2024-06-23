@@ -5,7 +5,6 @@ function App({ userId }) {
 
   const { setIsLogged } = useContext(AuthContext)
   const { setNewUser } = useContext(AuthContext)
-  const [cachedItems, setCachedItems] = useState({});
   const [authMessage, setAuthMessage] = useState({});
 
   const handleLogin = async (email, password) => {
@@ -95,8 +94,6 @@ function App({ userId }) {
               handleLogout={handleLogout}
               message={authMessage}
               setMessage = {setAuthMessage}
-              cachedItems={cachedItems}
-              setCachedItems={setCachedItems}
             />
           </SearchProvider>
         </CachedFavoritesProvider>

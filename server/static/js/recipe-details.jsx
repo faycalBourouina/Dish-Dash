@@ -1,5 +1,5 @@
 const { List, ListItem, IconButton, Link } = MaterialUI;
-function RecipeDetails({ recipe, activeTab, handleUpdateFavorites, recipesLength, handleSelectedRecipe, cachedItems, setCachedItems, onRecipeClick}) {
+function RecipeDetails({ recipe, activeTab, handleUpdateFavorites, recipesLength, handleSelectedRecipe, onRecipeClick}) {
   
   const { isLogged } = useContext(AuthContext)
   const { id, title, image, instructions, ingredients, summary, isFavorite} = recipe;
@@ -91,11 +91,9 @@ function RecipeDetails({ recipe, activeTab, handleUpdateFavorites, recipesLength
               style={{ height: '48px'}}
             />
           </Typography>
-          <ItemList
-            recipe={recipe}
-            cachedItems={cachedItems}
-            setCachedItems={setCachedItems}
-          />
+          <ItemsProvider>
+            <ItemList recipe={recipe} />
+          </ItemsProvider>
         </Box>
       </Grid>
         <SimilarRecipes
