@@ -5,7 +5,6 @@ function App({ userId }) {
 
   const { setIsLogged } = useContext(AuthContext)
   const { setNewUser } = useContext(AuthContext)
-  const [cachedSearch, setCachedSearch] = useState([]);
   const [cachedItems, setCachedItems] = useState({});
   const [authMessage, setAuthMessage] = useState({});
 
@@ -89,7 +88,8 @@ function App({ userId }) {
       <>
       <CachedLandingProvider>
         <CachedFavoritesProvider>
-          <Layout 
+          <SearchProvider>
+           <Layout 
               handleLogin={handleLogin} 
               handleSignup={handleSignup} 
               handleLogout={handleLogout}
@@ -97,9 +97,8 @@ function App({ userId }) {
               setMessage = {setAuthMessage}
               cachedItems={cachedItems}
               setCachedItems={setCachedItems}
-              cachedSearch={cachedSearch}
-              setCachedSearch={setCachedSearch}
             />
+          </SearchProvider>
         </CachedFavoritesProvider>
       </CachedLandingProvider>
     </>

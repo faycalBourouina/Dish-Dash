@@ -1,7 +1,7 @@
 const { useState, useEffect, useContext } = React;
 const { Grid, Box, Alert, Snackbar } = MaterialUI;
 
-function Layout({ handleLogin, handleSignup, handleLogout, message, setMessage, cachedItems, setCachedItems, cachedSearch, setCachedSearch}) {
+function Layout({ handleLogin, handleSignup, handleLogout, message, setMessage, cachedItems, setCachedItems}) {
     const [activeTab, setActiveTab] = React.useState("home"); // State variable to track which tab is active
     const [isLoading, setIsLoading] = React.useState(false); // State variable to track whether data is being fetched
     const [recipes, setRecipes] = React.useState([]); // State variable to store the recipes
@@ -12,7 +12,8 @@ function Layout({ handleLogin, handleSignup, handleLogout, message, setMessage, 
     const { isLogged } = useContext(AuthContext)
     const { cachedLanding, setCachedLanding } = useContext(CachedLandingContext);
     const { cachedFavorites, setCachedFavorites } = useContext(CachedFavoritesContext);
-    
+    const { cachedSearch, setCachedSearch } = useContext(SearchContext)
+
     async function handleSearch(searchQuery) {
 
         setIsLoading(true); // set isLoading to true before starting the fetch
