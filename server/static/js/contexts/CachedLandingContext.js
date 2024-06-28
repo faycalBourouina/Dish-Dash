@@ -8,11 +8,11 @@ const initialState = {
 }
 
 function CachedLandingProvider ({ children }) {
-  const [cachedLanding, setCachedLanding] = useState([]);
-  //const [state, dispatch] = useReducer(landingReducer, initialState)
+  //const [cachedLanding, setCachedLanding] = useState([]);
+  const [state, dispatch] = useReducer(landingReducer, initialState)
 
   return (
-    <CachedLandingContext.Provider value={{ cachedLanding, setCachedLanding }}>
+    <CachedLandingContext.Provider value={{ state, dispatch }}>
       {children}
     </CachedLandingContext.Provider>
   );

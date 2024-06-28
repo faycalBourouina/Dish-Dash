@@ -1,7 +1,7 @@
 const favoritesReducer = (state, action) => {
     switch (action.type) {
       case 'ADD_RECIPE':
-        return { ...state, cachedFavorites: [...state.cachedFavorites, action.payload] };
+        return { ...state, cachedFavorites: [...state.cachedFavorites, action.payload.favorite] };
   
       case 'REMOVE_RECIPE':
         console.log("Removed Recipe id: ", action.payload.removedRecipeId)

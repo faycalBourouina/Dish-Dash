@@ -10,12 +10,12 @@ function Layout({ handleLogin, handleSignup, handleLogout }) {
     const [alertOpen, setAlertOpen] = useState(false); // State variable to control the Snackbar visibility
 
     const { isLogged } = useContext(AuthContext);
-    const { cachedLanding, setCachedLanding } = useContext(CachedLandingContext);
-
-    //const { cachedLanding, dispatch } = useContext(CachedLandingContext);
+    
+    //const { cachedLanding, setCachedLanding } = useContext(CachedLandingContext);
+    const { state: { cachedLanding }, dispatch: landingDispatch } = useContext(CachedLandingContext);
   
     //const { cachedFavorites, setCachedFavorites } = useContext(CachedFavoritesContext);
-    const { state: { cachedFavorites }, dispatch } = useContext(CachedFavoritesContext)
+    const { state: { cachedFavorites }, dispatch: favoritesDispatch } = useContext(CachedFavoritesContext)
 
     const { cachedSearch, setCachedSearch } = useContext(SearchContext);
 
@@ -46,7 +46,10 @@ function Layout({ handleLogin, handleSignup, handleLogout }) {
         const response = await fetch("/landing");
         const data = await response.json();
         const { recipes } = await data;
-        setCachedLanding(recipes);
+       
+        //setCachedLanding(recipes);
+        landingDispatch({ type: 'FETCH_LANDING', payload: { landing: recipes } })
+
         setIsLoading(false);
       }
     }
@@ -61,9 +64,9 @@ function Layout({ handleLogin, handleSignup, handleLogout }) {
           const { favorites } = data;
           //console.log("favorites from server: ", favorites);
           
-          // commented out state setter as we transition to reducer
           //setCachedFavorites(favorites);
-          dispatch({ type: 'FETCH_FAVORITES', payload: { favorites: favorites } })
+          favoritesDispatch({ type: 'FETCH_FAVORITES', payload: { favorites: favorites } })
+
           setIsLoading(false);
         }
     }
@@ -107,7 +110,7 @@ function Layout({ handleLogin, handleSignup, handleLogout }) {
     }
   */
     // Function to update the cachedLanding state
-    function updateCachedLanding(favorite, isAdding) {
+    /*function updateCachedLanding(favorite, isAdding) {
         setCachedLanding((prevLanding) => {
           return prevLanding.map((recipe) => {
             if (recipe.id === favorite.id) {
@@ -117,7 +120,7 @@ function Layout({ handleLogin, handleSignup, handleLogout }) {
           });
         });
     } 
-
+  */
     // Function to update the selectedRecipe state
     function updateSelectedRecipe(favorite, isAdding) {
         setSelectedRecipe((prevSelected) => {
@@ -151,18 +154,24 @@ function Layout({ handleLogin, handleSignup, handleLogout }) {
         // If a recipe was added, update states and set success message
         const { favorite } = result;
         //updateCachedFavorites(favorite, true);
-        dispatch({ type: 'ADD_RECIPE', payload: favorite})
+        favoritesDispatch({ type: 'ADD_RECIPE', payload: { favorite: favorite} })
 
-        updateCachedLanding(favorite, true);
+        //updateCachedLanding(favorite, true);
+        landingDispatch({ type: 'ADD_RECIPE', payload: { favorite: favorite} })
+
         updateSelectedRecipe(favorite, true);
         setFavoriteMessageAction(true, true, favorite.name);
       } else if (actionSuccess && result.removedRecipeId) {
         // If a recipe was removed, find it, update states, and set success message
         const { removedRecipeId } = result;
         const removedRecipe = cachedFavorites.find(r => r.id === removedRecipeId);
+        
         //updateCachedFavorites(removedRecipe, false);
-        dispatch({ type: 'REMOVE_RECIPE', payload:{ removedRecipeId: removedRecipeId }})
-        updateCachedLanding(removedRecipe, false);
+        favoritesDispatch({ type: 'REMOVE_RECIPE', payload:{ removedRecipeId: removedRecipeId } })
+        
+        //updateCachedLanding(removedRecipe, false);
+        landingDispatch({ type: 'REMOVE_RECIPE', payload:{ removedRecipeId: removedRecipeId } })
+
         updateSelectedRecipe(removedRecipe, false);
         setFavoriteMessageAction(false, true, removedRecipe.name);
       } else {
@@ -173,22 +182,21 @@ function Layout({ handleLogin, handleSignup, handleLogout }) {
 
     useEffect(() => {
       if (!isLogged) {
-        //Reset the cached items when isLogged value changes
-        setCachedLanding([]);
+        //Reset the cached when isLogged value changes
+       
+        //setCachedLanding([]);
+        landingDispatch({ type: 'ADD_RECIPE', payload: { landing: [] } })
         
-        // comment state setter as we transition to reducer
         //setCachedFavorites([]);
-        dispatch({ type: 'FETCH_FAVORITES', payload: { favorites: [] } })
+        favoritesDispatch({ type: 'FETCH_FAVORITES', payload: { favorites: [] } })
+       
         setCachedSearch([]);
-      
-        // Log the updated cachedFavorites state
-        setCachedSearch([]);
+  
       }
     }, [isLogged]);
 
     useEffect(() => {
       fetchLandingRecipes();
-      // commented out to test reducer work flow
       isLogged && fetchFavoritesRecipes();
     }, [activeTab]);
 

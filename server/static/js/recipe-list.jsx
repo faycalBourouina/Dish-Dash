@@ -1,8 +1,8 @@
 function RecipeList({ isLoading, activeTab, handleUpdateFavorites, onRecipeClick }) {
 
-  //console.log('recipes in RecipeList', recipes);
-
-  const { cachedLanding } = useContext(CachedLandingContext);
+  //const { cachedLanding } = useContext(CachedLandingContext);
+  const { state: { cachedLanding }, dispatch: landingDispatch } = useContext(CachedLandingContext);
+  
   //const { cachedFavorites} = useContext(CachedFavoritesContext)
   const { state: {cachedFavorites} } = useContext(CachedFavoritesContext)
 
