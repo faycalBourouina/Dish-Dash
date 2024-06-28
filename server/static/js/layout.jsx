@@ -9,10 +9,15 @@ function Layout({ handleLogin, handleSignup, handleLogout }) {
     const [favoriteMessage, setFavoriteMessage] = useState(""); // State variable to store the favorite success message
     const [alertOpen, setAlertOpen] = useState(false); // State variable to control the Snackbar visibility
 
-    const { isLogged } = useContext(AuthContext)
+    const { isLogged } = useContext(AuthContext);
     const { cachedLanding, setCachedLanding } = useContext(CachedLandingContext);
-    const { cachedFavorites, setCachedFavorites } = useContext(CachedFavoritesContext);
-    const { cachedSearch, setCachedSearch } = useContext(SearchContext)
+
+    //const { cachedLanding, dispatch } = useContext(CachedLandingContext);
+  
+    //const { cachedFavorites, setCachedFavorites } = useContext(CachedFavoritesContext);
+    const { state: { cachedFavorites }, dispatch } = useContext(CachedFavoritesContext)
+
+    const { cachedSearch, setCachedSearch } = useContext(SearchContext);
 
     async function handleSearch(searchQuery) {
 
@@ -47,14 +52,18 @@ function Layout({ handleLogin, handleSignup, handleLogout }) {
     }
 
     async function fetchFavoritesRecipes() {
-        if (!cachedFavorites.length) {
+      console.log("cachedFavorite before .length: ", cachedFavorites)
+        if (!cachedFavorites || !cachedFavorites.length) {
           setIsLoading(true);
           const userId = isLogged;
           const response = await fetch(`users/${userId}/favorites`);
           const data = await response.json();
           const { favorites } = data;
           //console.log("favorites from server: ", favorites);
-          setCachedFavorites(favorites);
+          
+          // commented out state setter as we transition to reducer
+          //setCachedFavorites(favorites);
+          dispatch({ type: 'FETCH_FAVORITES', payload: { favorites: favorites } })
           setIsLoading(false);
         }
     }
@@ -88,6 +97,7 @@ function Layout({ handleLogin, handleSignup, handleLogout }) {
     
     
     // Function to update the cachedFavorites state
+    /*
     function updateCachedFavorites(favorite, isAdding) {
         setCachedFavorites((prevFavorites) => {
           return isAdding
@@ -95,7 +105,7 @@ function Layout({ handleLogin, handleSignup, handleLogout }) {
           : prevFavorites.filter((recipe) => recipe.id !== favorite.id); // Remove the recipe by ID
         });
     }
-
+  */
     // Function to update the cachedLanding state
     function updateCachedLanding(favorite, isAdding) {
         setCachedLanding((prevLanding) => {
@@ -140,7 +150,9 @@ function Layout({ handleLogin, handleSignup, handleLogout }) {
       if (actionSuccess && result.favorite) {
         // If a recipe was added, update states and set success message
         const { favorite } = result;
-        updateCachedFavorites(favorite, true);
+        //updateCachedFavorites(favorite, true);
+        dispatch({ type: 'ADD_RECIPE', payload: favorite})
+
         updateCachedLanding(favorite, true);
         updateSelectedRecipe(favorite, true);
         setFavoriteMessageAction(true, true, favorite.name);
@@ -148,7 +160,8 @@ function Layout({ handleLogin, handleSignup, handleLogout }) {
         // If a recipe was removed, find it, update states, and set success message
         const { removedRecipeId } = result;
         const removedRecipe = cachedFavorites.find(r => r.id === removedRecipeId);
-        updateCachedFavorites(removedRecipe, false);
+        //updateCachedFavorites(removedRecipe, false);
+        dispatch({ type: 'REMOVE_RECIPE', payload:{ removedRecipeId: removedRecipeId }})
         updateCachedLanding(removedRecipe, false);
         updateSelectedRecipe(removedRecipe, false);
         setFavoriteMessageAction(false, true, removedRecipe.name);
@@ -162,14 +175,21 @@ function Layout({ handleLogin, handleSignup, handleLogout }) {
       if (!isLogged) {
         //Reset the cached items when isLogged value changes
         setCachedLanding([]);
-        setCachedFavorites([]);
+        
+        // comment state setter as we transition to reducer
+        //setCachedFavorites([]);
+        dispatch({ type: 'FETCH_FAVORITES', payload: { favorites: [] } })
+        setCachedSearch([]);
+      
+        // Log the updated cachedFavorites state
         setCachedSearch([]);
       }
     }, [isLogged]);
 
     useEffect(() => {
       fetchLandingRecipes();
-      fetchFavoritesRecipes();
+      // commented out to test reducer work flow
+      isLogged && fetchFavoritesRecipes();
     }, [activeTab]);
 
     return (

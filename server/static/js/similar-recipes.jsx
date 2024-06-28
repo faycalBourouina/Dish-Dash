@@ -1,7 +1,9 @@
 function SimilarRecipes({ handleUpdateFavorites, recipeId, onRecipeClick }) {
   const [isLoadingSimilar, setIsLoadingSimilar] = useState(false);
   const [recipes, setRecipes] = useState([]);
-  const { cachedFavorites} = useContext(CachedFavoritesContext)
+  //const { cachedFavorites} = useContext(CachedFavoritesContext)
+  const { state: {cachedFavorites}} = useContext(CachedFavoritesContext)
+
 
   useEffect(() => {
     async function fetchSimilarRecipes() {
