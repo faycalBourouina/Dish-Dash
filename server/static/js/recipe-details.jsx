@@ -1,8 +1,9 @@
 const { List, ListItem, IconButton, Link } = MaterialUI;
-function RecipeDetails({ recipe, activeTab, handleUpdateFavorites, recipesLength, handleSelectedRecipe, onRecipeClick}) {
+function RecipeDetails({ activeTab, handleUpdateFavorites, recipesLength, handleSelectedRecipe, onRecipeClick}) {
   
   const { isLogged } = useContext(AuthContext)
-  const { id, title, image, instructions, ingredients, summary, isFavorite} = recipe;
+  const { selectedRecipe } = useContext(SelectedRecipeContext)
+  const { id, title, image, instructions, ingredients, summary, isFavorite} = selectedRecipe;
 
 
   const handleFavoriteClick = (id, isFavorite) => {
@@ -27,7 +28,7 @@ function RecipeDetails({ recipe, activeTab, handleUpdateFavorites, recipesLength
           </Box>
         )}
         <Box marginBottom={4}>
-          <Typography variant="h3">{title || recipe.name}</Typography>
+          <Typography variant="h3">{title || selectedRecipe.name}</Typography>
         </Box>
         <Box>
           <div style={{ position: 'relative', display: 'inline-block' }}>
@@ -57,7 +58,7 @@ function RecipeDetails({ recipe, activeTab, handleUpdateFavorites, recipesLength
           </div>
         </Box> 
         <Box marginBottom={4}>
-          <RecipeTags recipe={recipe} />
+          <RecipeTags recipe={selectedRecipe} />
         </Box>
         <Box marginBottom={2}>
           <Typography variant="h4">Summary:</Typography>
@@ -92,13 +93,13 @@ function RecipeDetails({ recipe, activeTab, handleUpdateFavorites, recipesLength
             />
           </Typography>
           <ItemsProvider>
-            <ItemList recipe={recipe} />
+            <ItemList recipe={selectedRecipe} />
           </ItemsProvider>
         </Box>
       </Grid>
         <SimilarRecipes
           handleUpdateFavorites={handleUpdateFavorites}
-          recipeId={recipe.id}
+          recipeId={selectedRecipe.id}
           onRecipeClick={onRecipeClick}
         />
     </Grid>

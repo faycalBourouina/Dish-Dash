@@ -1,10 +1,11 @@
 const { useState, useContext } = React;
 const { AppBar, Toolbar, CssBaseline, ButtonBase } = MaterialUI;
 
-function Navbar({ activeTab, setActiveTab, handleLogin, handleSignup, handleLogout, setSelectedRecipe }) {
+function Navbar({ activeTab, setActiveTab, handleLogin, handleSignup, handleLogout }) {
   const { setNewUser } = useContext(AuthContext)
-  
   const { isLogged, authMessage, setAuthMessage } = useContext(AuthContext)
+  const { setSelectedRecipe } = useContext(SelectedRecipeContext)
+
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleTabClick = (tab) => {

@@ -86,13 +86,15 @@ function App({ userId }) {
       <>
       <CachedLandingProvider>
         <CachedFavoritesProvider>
-          <SearchProvider>
-           <Layout 
-              handleLogin={handleLogin} 
-              handleSignup={handleSignup} 
-              handleLogout={handleLogout}
-            />
-          </SearchProvider>
+          <SelectedRecipeProvider>
+            <SearchProvider>
+            <Layout 
+                handleLogin={handleLogin} 
+                handleSignup={handleSignup} 
+                handleLogout={handleLogout}
+              />
+            </SearchProvider>
+          </SelectedRecipeProvider>
         </CachedFavoritesProvider>
       </CachedLandingProvider>
     </>

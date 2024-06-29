@@ -3,9 +3,13 @@ const { Grid, Box, Alert, Snackbar } = MaterialUI;
 
 function Layout({ handleLogin, handleSignup, handleLogout }) {
     const [activeTab, setActiveTab] = React.useState("home"); // State variable to track which tab is active
-    const [isLoading, setIsLoading] = React.useState(false); // State variable to track whether data is being fetched
+    const [isLoading, setIsLoading] = React.useState(false); // State variable to track whether data is being fetched 
     const [recipes, setRecipes] = React.useState([]); // State variable to store the recipes
-    const [selectedRecipe, setSelectedRecipe] = React.useState(null); // State variable to store the selected recipe
+   
+
+    //const [selectedRecipe, setSelectedRecipe] = React.useState(null); // State variable to store the selected recipe
+    const { selectedRecipe, setSelectedRecipe } = useContext(SelectedRecipeContext)
+
     const [favoriteMessage, setFavoriteMessage] = useState(""); // State variable to store the favorite success message
     const [alertOpen, setAlertOpen] = useState(false); // State variable to control the Snackbar visibility
 
@@ -55,7 +59,6 @@ function Layout({ handleLogin, handleSignup, handleLogout }) {
     }
 
     async function fetchFavoritesRecipes() {
-      console.log("cachedFavorite before .length: ", cachedFavorites)
         if (!cachedFavorites || !cachedFavorites.length) {
           setIsLoading(true);
           const userId = isLogged;
@@ -224,7 +227,6 @@ function Layout({ handleLogin, handleSignup, handleLogout }) {
                 handleLogin={handleLogin}
                 handleSignup={handleSignup}
                 handleLogout={handleLogout}
-                setSelectedRecipe={setSelectedRecipe} 
               />
             </Box>
             <Box pt={4}>
@@ -238,7 +240,6 @@ function Layout({ handleLogin, handleSignup, handleLogout }) {
             <Grid item xs={12} p={12}>
               {selectedRecipe ? (
                 <RecipeDetails
-                  recipe={selectedRecipe}
                   activeTab={activeTab}
                   handleUpdateFavorites={handleUpdateFavorites}
                   recipesLength = {recipes.length}
