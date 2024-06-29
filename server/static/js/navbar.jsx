@@ -4,13 +4,15 @@ const { AppBar, Toolbar, CssBaseline, ButtonBase } = MaterialUI;
 function Navbar({ activeTab, setActiveTab, handleLogin, handleSignup, handleLogout }) {
   const { setNewUser } = useContext(AuthContext)
   const { isLogged, authMessage, setAuthMessage } = useContext(AuthContext)
-  const { setSelectedRecipe } = useContext(SelectedRecipeContext)
+  
+  //const { setSelectedRecipe } = useContext(SelectedRecipeContext)
+  const { dispatch: selectedDispatch } = useContext(SelectedRecipeContext)
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
-    setSelectedRecipe(null); // Clear the selected recipe
+    selectedDispatch({ type: 'UPDATE_SELECTED', payload: { selected: null} }); //setSelectedRecipe(null); // Clear the selected recipe
   };
 
   const handleSignupWithModal = (email, password) => {

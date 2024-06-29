@@ -7,8 +7,6 @@ function Layout({ handleLogin, handleSignup, handleLogout }) {
     const [recipes, setRecipes] = React.useState([]); // State variable to store the recipes
    
 
-    //const [selectedRecipe, setSelectedRecipe] = React.useState(null); // State variable to store the selected recipe
-    const { selectedRecipe, setSelectedRecipe } = useContext(SelectedRecipeContext)
 
     const [favoriteMessage, setFavoriteMessage] = useState(""); // State variable to store the favorite success message
     const [alertOpen, setAlertOpen] = useState(false); // State variable to control the Snackbar visibility
@@ -20,6 +18,10 @@ function Layout({ handleLogin, handleSignup, handleLogout }) {
   
     //const { cachedFavorites, setCachedFavorites } = useContext(CachedFavoritesContext);
     const { state: { cachedFavorites }, dispatch: favoritesDispatch } = useContext(CachedFavoritesContext)
+
+    //const { selectedRecipe, setSelectedRecipe } = useContext(SelectedRecipeContext)
+    const { state: { selectedRecipe }, dispatch: selectedDispatch } = useContext(SelectedRecipeContext)
+
 
     const { cachedSearch, setCachedSearch } = useContext(SearchContext);
 
@@ -34,13 +36,18 @@ function Layout({ handleLogin, handleSignup, handleLogout }) {
         const recipesResponse = data.recipes?.results || data.recipes || [];
         //setCachedSearch(recipes); // cache the search results
         setRecipes(recipesResponse); // update the recipes state to searched recipes
-        setSelectedRecipe(null); // clear the selected recipe
+
+        //setSelectedRecipe(null); // clear the selected recipe
+        selectedDispatch({ type: 'UPDATE_SELECTED', payload: { selected: null} });
+
+        
+        
         setActiveTab("search"); // switch to the search tab
         setIsLoading(false); // set isLoading back to false once data has finished loading
     }
 
     function handleSelectedRecipe () {
-      (selectedRecipe && activeTab === "search") && setSelectedRecipe(null);
+      (selectedRecipe && activeTab === "search") && selectedDispatch({ type: 'UPDATE_SELECTED', payload: { selected: null } }); //setSelectedRecipe(null);
     } 
 
     async function fetchLandingRecipes() {
@@ -80,7 +87,10 @@ function Layout({ handleLogin, handleSignup, handleLogout }) {
       const { ingredients } = await data.recipe;
       recipe.ingredients = ingredients;
 
-      setSelectedRecipe(recipe);
+      //setSelectedRecipe(recipe);
+      selectedDispatch({ type: 'UPDATE_SELECTED', payload: { selected: recipe } });
+
+      
     }
 
 
@@ -125,7 +135,7 @@ function Layout({ handleLogin, handleSignup, handleLogout }) {
     } 
   */
     // Function to update the selectedRecipe state
-    function updateSelectedRecipe(favorite, isAdding) {
+    /* function updateSelectedRecipe(favorite, isAdding) {
         setSelectedRecipe((prevSelected) => {
           if (prevSelected && prevSelected.id === favorite.id) {
             return { ...prevSelected, isFavorite: isAdding }; // Update isFavorite property
@@ -133,6 +143,7 @@ function Layout({ handleLogin, handleSignup, handleLogout }) {
           return prevSelected;
         });
     }
+    */
 
     // Function to set the favoriteMessage state based on the action and its success
     function setFavoriteMessageAction(isAdding, isSuccess, recipeName = '') {
@@ -162,7 +173,9 @@ function Layout({ handleLogin, handleSignup, handleLogout }) {
         //updateCachedLanding(favorite, true);
         landingDispatch({ type: 'ADD_RECIPE', payload: { favorite: favorite} })
 
-        updateSelectedRecipe(favorite, true);
+        //updateSelectedRecipe(favorite, true);
+        selectedRecipe && selectedDispatch({ type: 'ADD_RECIPE' })
+        
         setFavoriteMessageAction(true, true, favorite.name);
       } else if (actionSuccess && result.removedRecipeId) {
         // If a recipe was removed, find it, update states, and set success message
@@ -175,7 +188,9 @@ function Layout({ handleLogin, handleSignup, handleLogout }) {
         //updateCachedLanding(removedRecipe, false);
         landingDispatch({ type: 'REMOVE_RECIPE', payload:{ removedRecipeId: removedRecipeId } })
 
-        updateSelectedRecipe(removedRecipe, false);
+        //updateSelectedRecipe(removedRecipe, false);
+        selectedRecipe && selectedDispatch({ type: 'REMOVE_RECIPE' })
+
         setFavoriteMessageAction(false, true, removedRecipe.name);
       } else {
         // If there was an error, set the error message

@@ -2,9 +2,10 @@ const { List, ListItem, IconButton, Link } = MaterialUI;
 function RecipeDetails({ activeTab, handleUpdateFavorites, recipesLength, handleSelectedRecipe, onRecipeClick}) {
   
   const { isLogged } = useContext(AuthContext)
-  const { selectedRecipe } = useContext(SelectedRecipeContext)
-  const { id, title, image, instructions, ingredients, summary, isFavorite} = selectedRecipe;
+  //const { selectedRecipe } = useContext(SelectedRecipeContext)
+  const { state: { selectedRecipe } } = useContext(SelectedRecipeContext)
 
+  const { id, title, image, instructions, ingredients, summary, isFavorite} = selectedRecipe;
 
   const handleFavoriteClick = (id, isFavorite) => {
     handleUpdateFavorites(id, isFavorite);
