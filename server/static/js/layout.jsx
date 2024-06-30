@@ -13,8 +13,6 @@ function Layout({ handleLogin, handleSignup, handleLogout }) {
     const { state: { cachedFavorites }, dispatch: favoritesDispatch } = useContext(CachedFavoritesContext)
     const { state: { selectedRecipe }, dispatch: selectedDispatch } = useContext(SelectedRecipeContext)
 
-    const [favoriteMessage, alertOpen, setAlertOpen] = useFavorites()
-
 
     async function handleSearch(searchQuery) {
 
@@ -89,19 +87,7 @@ function Layout({ handleLogin, handleSignup, handleLogout }) {
       <div>
         <Grid container direction="column">
           <Grid item xs={12}>
-          <Snackbar
-                open={alertOpen}
-                autoHideDuration={3000}
-                anchorOrigin={{ vertical: "top", horizontal: "right" }}
-                onClose={() => setAlertOpen(false)}
-            >
-                <Alert
-                onClose={() => setAlertOpen(false)}
-                severity={favoriteMessage.includes("Failed") ? "error" : "success"}
-                >
-                {favoriteMessage}
-                </Alert>
-            </Snackbar>
+                <FavoriteMessageBar />
             <Box pl={8} pr={8} pt={4} pb={0}>
                 <Navbar 
                 activeTab={activeTab}
