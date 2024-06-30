@@ -6,7 +6,7 @@ const cuisines = ['african', 'asian', 'american', 'british', 'cajun', 'caribbean
 const intolerance = ['egg', 'gluten', 'grain', 'peanut', 'seafood', 'sesame', 'shellfish', 'soy', 'sulfite', 'tree nut', 'wheat', 'dairy', 'fat', 'fodmap', 'pork', 'red meat', 'sugar'];
 
 const TagsModal = ({ handleClose }) => {
-  //const { isLogged } = useContext(AuthContext)
+
   const [selectedTags, setSelectedTags] = useState([]);
 
   // Select or deselect a tag and update the selectedTags state

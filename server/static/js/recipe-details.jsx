@@ -2,7 +2,6 @@ const { List, ListItem, IconButton, Link } = MaterialUI;
 function RecipeDetails({ activeTab, handleUpdateFavorites, recipesLength, handleSelectedRecipe, onRecipeClick}) {
   
   const { isLogged } = useContext(AuthContext)
-  //const { selectedRecipe } = useContext(SelectedRecipeContext)
   const { state: { selectedRecipe } } = useContext(SelectedRecipeContext)
 
   const { id, title, image, instructions, ingredients, summary, isFavorite} = selectedRecipe;
@@ -10,9 +9,6 @@ function RecipeDetails({ activeTab, handleUpdateFavorites, recipesLength, handle
   const handleFavoriteClick = (id, isFavorite) => {
     handleUpdateFavorites(id, isFavorite);
   };
-
-  // Log isFavorite and the name of the recipe when rendering
-  //console.log(`Rendering RecipeDetails for "${recipe.title || recipe.name}": isFavorite - ${isFavorite}`);
   
   return (
     <Grid 
