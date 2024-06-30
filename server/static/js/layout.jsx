@@ -1,13 +1,11 @@
 const { useState, useEffect, useContext } = React;
-const { Grid, Box, Alert, Snackbar } = MaterialUI;
+const { Grid, Box } = MaterialUI;
 
 function Layout({ handleLogin, handleSignup, handleLogout }) {
     const [activeTab, setActiveTab] = React.useState("home"); // State variable to track which tab is active
     const [isLoading, setIsLoading] = React.useState(false); // State variable to track whether data is being fetched 
     const [recipes, setRecipes] = React.useState([]); // State variable to store the recipes
    
-    const [alertOpen, setAlertOpen] = useState(false); // State variable to control the Snackbar visibility
-
     const { cachedSearch, setCachedSearch } = useContext(SearchContext);
     const { isLogged } = useContext(AuthContext);
     
@@ -15,7 +13,8 @@ function Layout({ handleLogin, handleSignup, handleLogout }) {
     const { state: { cachedFavorites }, dispatch: favoritesDispatch } = useContext(CachedFavoritesContext)
     const { state: { selectedRecipe }, dispatch: selectedDispatch } = useContext(SelectedRecipeContext)
 
-    const [favoriteMessage, setFavoriteMessage] = useState(""); // State variable to store the favorite success message
+    const [favoriteMessage, alertOpen, setAlertOpen] = useFavorites()
+
 
     async function handleSearch(searchQuery) {
 
@@ -29,8 +28,6 @@ function Layout({ handleLogin, handleSignup, handleLogout }) {
         setRecipes(recipesResponse); // update the recipes state to searched recipes
 
         selectedDispatch({ type: 'UPDATE_SELECTED', payload: { selected: null} });
-
-        
         
         setActiveTab("search"); // switch to the search tab
         setIsLoading(false); // set isLoading back to false once data has finished loading
@@ -74,65 +71,6 @@ function Layout({ handleLogin, handleSignup, handleLogout }) {
       selectedDispatch({ type: 'UPDATE_SELECTED', payload: { selected: recipe } });
     }
 
-    async function updateRecipeFavorite(recipeId, isFavorite) {
-      const userId = isLogged; // Assume isLogged contains the current user's ID
-      const method = isFavorite ? "DELETE" : "PATCH"; // Determine the HTTP method based on the action
-      const response = await fetch(`/users/${userId}/favorites/${recipeId}`, { method });
-    
-      // Check if the server response is not OK and set an error message
-      if (!response.ok) {
-        setFavoriteMessage(`Failed to ${isFavorite ? "remove" : "add"} recipe to favorites`);
-        return;
-      }
-      // Return the favorite recipe object or the ID of the removed recipe
-      const favorite = isFavorite ? { removedRecipeId: recipeId } : await response.json();
-      return favorite;
-    }
-    
-    // Function to set the favoriteMessage state based on the action and its success
-    function updateFavoriteMessage(isAdding, isSuccess, recipeName = '') {
-        const message = isSuccess
-          ? isAdding
-            ? `${recipeName} added to favorites successfully` // Message for adding to favorites
-            : `${recipeName} removed from favorites successfully` // Message for removing from favorites
-          : isAdding
-            ? 'Failed to add recipe to favorites' // Error message for adding
-            : 'Failed to remove recipe from favorites'; // Error message for removing
-        setFavoriteMessage(message) // update the favoriteMessage state
-        setAlertOpen(true); // Open the alert Snackbar
-    }
-
-    // Triggered by favorite button event handler to update the favorites on recipes
-    async function handleUpdateFavorites(recipeId, isFavorite) {
-      const result = await updateRecipeFavorite(recipeId, isFavorite);
-      const actionSuccess = result && ('favorite' in result || 'removedRecipeId' in result);
-
-      if (actionSuccess && result.favorite) {
-        // If a recipe was added, update states and set success message
-        const { favorite } = result;
-        
-        favoritesDispatch({ type: 'ADD_RECIPE', payload: { favorite: favorite} })
-        landingDispatch({ type: 'ADD_RECIPE', payload: { favorite: favorite} })
-        selectedRecipe && selectedRecipe.id === favorite.id && selectedDispatch({ type: 'ADD_RECIPE'})
-        
-        updateFavoriteMessage(true, true, favorite.name);
-
-      } else if (actionSuccess && result.removedRecipeId) {
-        // If a recipe was removed, find it, update states, and set success message
-        const { removedRecipeId } = result;
-        const removedRecipe = cachedFavorites.find(r => r.id === removedRecipeId);
-        
-        favoritesDispatch({ type: 'REMOVE_RECIPE', payload:{ removedRecipeId: removedRecipeId } })        
-        landingDispatch({ type: 'REMOVE_RECIPE', payload:{ removedRecipeId: removedRecipeId } })
-        selectedRecipe && selectedRecipe.id === removedRecipeId && selectedDispatch({ type: 'REMOVE_RECIPE' })
-
-        updateFavoriteMessage(false, true, removedRecipe.name);
-      } else {
-        // If there was an error, set the error message
-        updateFavoriteMessage(isFavorite, false);
-      }
-    }
-
     useEffect(() => {
       if (!isLogged) {
         //Reset the cached when isLogged value changes
@@ -151,15 +89,15 @@ function Layout({ handleLogin, handleSignup, handleLogout }) {
       <div>
         <Grid container direction="column">
           <Grid item xs={12}>
-            <Snackbar
+          <Snackbar
                 open={alertOpen}
                 autoHideDuration={3000}
                 anchorOrigin={{ vertical: "top", horizontal: "right" }}
                 onClose={() => setAlertOpen(false)}
-              >
+            >
                 <Alert
-                  onClose={() => setAlertOpen(false)}
-                  severity={favoriteMessage.includes("Failed") ? "error" : "success"}
+                onClose={() => setAlertOpen(false)}
+                severity={favoriteMessage.includes("Failed") ? "error" : "success"}
                 >
                 {favoriteMessage}
                 </Alert>
@@ -185,7 +123,6 @@ function Layout({ handleLogin, handleSignup, handleLogout }) {
               {selectedRecipe ? (
                 <RecipeDetails
                   activeTab={activeTab}
-                  handleUpdateFavorites={handleUpdateFavorites}
                   recipesLength = {recipes.length}
                   handleSelectedRecipe = {handleSelectedRecipe}
                   onRecipeClick={handleRecipeClick}
@@ -195,7 +132,6 @@ function Layout({ handleLogin, handleSignup, handleLogout }) {
                   <RecipeList
                     isLoading={isLoading}
                     activeTab={activeTab}
-                    handleUpdateFavorites={handleUpdateFavorites}
                     onRecipeClick={handleRecipeClick}
                   />
                 )

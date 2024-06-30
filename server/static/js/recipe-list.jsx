@@ -1,9 +1,8 @@
-function RecipeList({ isLoading, activeTab, handleUpdateFavorites, onRecipeClick }) {
+function RecipeList({ isLoading, activeTab, onRecipeClick }) {
 
   const { state: { cachedLanding } } = useContext(CachedLandingContext);
   const { state: {cachedFavorites} } = useContext(CachedFavoritesContext)
-
-
+  
   // Determine which recipes to display based on the activeTab
   const recipes = activeTab === "favorites" ? cachedFavorites : cachedLanding;
 
@@ -41,7 +40,6 @@ function RecipeList({ isLoading, activeTab, handleUpdateFavorites, onRecipeClick
             <Grid container spacing={8}>
               {recipes.map((recipe) => (
                 <RecipeItem
-                  handleUpdateFavorites={handleUpdateFavorites}
                   key={recipe.id}
                   recipe={recipe}
                   onRecipeClick={onRecipeClick}

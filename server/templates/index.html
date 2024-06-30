@@ -43,6 +43,7 @@
     <script type="text/babel" src="/static/js/item-details.jsx"></script>
     <script type="text/babel" src="/static/js/recipe-tags.jsx"></script>
     <script type="text/babel" src="/static/js/recipe-details.jsx"></script>
+    <script type="text/babel" src="/static/js/favorite-message-bar.jsx"></script>
     <script type="text/babel" src="/static/js/footer.jsx"></script>
     <script type="text/babel" src="/static/js/layout.jsx"></script>
     <script type="text/babel" src="/static/js/reducers/SelectedReducer.js"></script>
@@ -54,13 +55,14 @@
     <script type="text/babel" src="/static/js/contexts/CachedFavoritesContext.js"></script>
     <script type="text/babel" src="/static/js/contexts/CachedLandingContext.js"></script>
     <script type="text/babel" src="/static/js/contexts/AuthContext.js"></script>
+    <script type="text/babel" src="/static/js/hooks/useFavorites.js"></script>
     <script type="text/babel" src="/static/js/app.jsx"></script>
 
     <script type="text/babel">
       ReactDOM.render(
-        <AuthProvider initialIsLogged={userId}>
-          <App />
-        </AuthProvider>,
+          <AuthProvider initialIsLogged={userId}>
+            <App />
+          </AuthProvider>,
         document.getElementById('root')
       );
     </script>

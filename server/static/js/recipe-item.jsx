@@ -1,8 +1,10 @@
 const { Card, CardContent, CardMedia, Grid, Typography, CardActions, Link, IconButton} = MaterialUI;
 
-function RecipeItem({ handleUpdateFavorites, recipe, onRecipeClick }) {
+function RecipeItem({ recipe, onRecipeClick }) {
   const { isLogged } = useContext(AuthContext)
   const {id, image, summary, vegan, vegetarian, glutenFree, isFavorite} = recipe;
+  
+  const { handleUpdateFavorites } =  useFavorites();
 
   const handleFavoriteClick = (id, isFavorite) => {
     handleUpdateFavorites(id, isFavorite);
