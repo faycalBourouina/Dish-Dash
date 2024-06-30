@@ -3,9 +3,7 @@ const { useState, useContext } = React;
 
 const useFavorites = () => {
 
-    //const { setFavoriteMessage, setAlertOpen } = useContext(FavoriteMessageContext)
-    const [favoriteMessage, setFavoriteMessage] = useState('');
-    const [alertOpen, setAlertOpen] = useState(false);
+    const { setFavoriteMessage, setAlertOpen } = useContext(FavoriteMessageContext)
 
     const { dispatch: landingDispatch } = useContext(CachedLandingContext);
     const { state: { cachedFavorites }, dispatch: favoritesDispatch } = useContext(CachedFavoritesContext)
@@ -71,5 +69,5 @@ const useFavorites = () => {
           updateFavoriteMessage(isFavorite, false);
         }
       }
-      return { handleUpdateFavorites, favoriteMessage, alertOpen, setAlertOpen };
+      return { handleUpdateFavorites };
 }

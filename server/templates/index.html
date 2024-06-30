@@ -52,6 +52,7 @@
     <script type="text/babel" src="/static/js/contexts/SelectedRecipeContext.js"></script>
     <script type="text/babel" src="/static/js/contexts/ItemsContext.js"></script>
     <script type="text/babel" src="/static/js/contexts/SearchContext.js"></script>
+    <script type="text/babel" src="/static/js/contexts/FavoriteMessageContext.js"></script>
     <script type="text/babel" src="/static/js/contexts/CachedFavoritesContext.js"></script>
     <script type="text/babel" src="/static/js/contexts/CachedLandingContext.js"></script>
     <script type="text/babel" src="/static/js/contexts/AuthContext.js"></script>
@@ -60,9 +61,11 @@
 
     <script type="text/babel">
       ReactDOM.render(
+        <FavoriteMessageProvider>
           <AuthProvider initialIsLogged={userId}>
             <App />
-          </AuthProvider>,
+          </AuthProvider>
+        </FavoriteMessageProvider> ,
         document.getElementById('root')
       );
     </script>

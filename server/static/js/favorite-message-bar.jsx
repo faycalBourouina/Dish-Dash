@@ -1,8 +1,7 @@
 function FavoriteMessageBar () {
     const { Alert, Snackbar } = MaterialUI
 
-    //const { favoriteMessage, setAlertOpen, alertOpen } = useContext(FavoriteMessageContext)
-    const { favoriteMessage, setAlertOpen, alertOpen } = useFavorite
+    const { favoriteMessage, setAlertOpen, alertOpen } = useContext(FavoriteMessageContext)
     
     return (
             <Snackbar
