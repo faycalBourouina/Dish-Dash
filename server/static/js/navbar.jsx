@@ -1,9 +1,11 @@
 const { useState, useContext } = React;
 const { AppBar, Toolbar, CssBaseline, ButtonBase } = MaterialUI;
 
-function Navbar({ activeTab, setActiveTab, handleLogin, handleSignup, handleLogout }) {
-  const { setNewUser } = useContext(AuthContext)
-  const { isLogged, authMessage, setAuthMessage } = useContext(AuthContext)
+function Navbar({ activeTab, setActiveTab }) {
+
+  const { isLogged, authMessage, setAuthMessage, setNewUser  } = useContext(AuthContext)
+  const { handleLogout, handleLogin, handleSignup } = useAuth()
+
   
   const { dispatch: selectedDispatch } = useContext(SelectedRecipeContext)
 

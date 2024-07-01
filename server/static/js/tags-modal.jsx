@@ -7,6 +7,7 @@ const intolerance = ['egg', 'gluten', 'grain', 'peanut', 'seafood', 'sesame', 's
 
 const TagsModal = ({ handleClose }) => {
 
+  const { isLogged } = useContext(AuthContext)
   const [selectedTags, setSelectedTags] = useState([]);
 
   // Select or deselect a tag and update the selectedTags state
@@ -21,9 +22,7 @@ const TagsModal = ({ handleClose }) => {
   // Send the selected tags to the server and close the modal
   const handleDoneClick = async () => {
     const user_id = isLogged;
-    //console.log("user_id: ", user_id);
     console.log("selectedTags: ", selectedTags);
-
     const data = {
       tags: selectedTags,
     };
@@ -40,7 +39,7 @@ const TagsModal = ({ handleClose }) => {
       if (response.ok) {
         const data = await response.json();
         const {tags} = data;
-        console.log("Tags updated: ", tags);
+        console.log("User Tags sent from the server: ", tags);
       } else {
         console.error('Request failed:', response.status);
       }

@@ -1,12 +1,12 @@
 const { useState, useEffect, useContext } = React;
 const { Grid, Box } = MaterialUI;
 
-function Layout({ handleLogin, handleSignup, handleLogout }) {
+function Layout() {
     const [activeTab, setActiveTab] = React.useState("home"); // State variable to track which tab is active
     const [isLoading, setIsLoading] = React.useState(false); // State variable to track whether data is being fetched 
     const [recipes, setRecipes] = React.useState([]); // State variable to store the recipes
    
-    const { cachedSearch, setCachedSearch } = useContext(SearchContext);
+    const { setCachedSearch } = useContext(SearchContext);
     const { isLogged } = useContext(AuthContext);
     
     const { state: { cachedLanding }, dispatch: landingDispatch } = useContext(CachedLandingContext);
@@ -22,11 +22,9 @@ function Layout({ handleLogin, handleSignup, handleLogout }) {
         const response = await fetch(`/search?${params.toString()}`);
         const data = await response.json();
         const recipesResponse = data.recipes?.results || data.recipes || [];
-        //setCachedSearch(recipes); // cache the search results
         setRecipes(recipesResponse); // update the recipes state to searched recipes
 
-        selectedDispatch({ type: 'UPDATE_SELECTED', payload: { selected: null} });
-        
+        selectedDispatch({ type: 'UPDATE_SELECTED', payload: { selected: null} });        
         setActiveTab("search"); // switch to the search tab
         setIsLoading(false); // set isLoading back to false once data has finished loading
     }
@@ -92,9 +90,6 @@ function Layout({ handleLogin, handleSignup, handleLogout }) {
                 <Navbar 
                 activeTab={activeTab}
                 setActiveTab={setActiveTab}
-                handleLogin={handleLogin}
-                handleSignup={handleSignup}
-                handleLogout={handleLogout}
               />
             </Box>
             <Box pt={4}>

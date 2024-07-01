@@ -1,10 +1,10 @@
 const { useState, useContext } = React;
 const { Grid } = MaterialUI;
 
-function App({ userId }) {
+function App() {
 
-  const { setIsLogged } = useContext(AuthContext)
-  const { setNewUser, setAuthMessage } = useContext(AuthContext)
+  /*
+  const { setIsLogged, setNewUser, setAuthMessage  } = useContext(AuthContext)
 
   const handleLogin = async (email, password) => {
     try {
@@ -82,17 +82,15 @@ function App({ userId }) {
     }
   };
 
+  */
+
   return (
       <>
       <CachedLandingProvider>
         <CachedFavoritesProvider>
           <SelectedRecipeProvider>
             <SearchProvider>
-            <Layout 
-                handleLogin={handleLogin} 
-                handleSignup={handleSignup} 
-                handleLogout={handleLogout}
-              />
+            <Layout />
             </SearchProvider>
           </SelectedRecipeProvider>
         </CachedFavoritesProvider>
