@@ -160,8 +160,8 @@ function Navbar({ activeTab, setActiveTab }) {
                   open={isModalOpen}
                   isLogged={isLogged}
                   handleClose={handleClose}
-                  handleLogin={handleLoginWithModal}
-                  handleSignup={handleSignupWithModal}
+                  handleLoginWithModal={handleLoginWithModal}
+                  handleSignupWithModal={handleSignupWithModal}
           />
         </Box>
       )}

@@ -1,4 +1,4 @@
-const { useState, useContext } = React;
+const { useState, useContext, useMemo } = React;
 
 
 const useFavorites = () => {
@@ -10,7 +10,7 @@ const useFavorites = () => {
     const { state: { selectedRecipe }, dispatch: selectedDispatch } = useContext(SelectedRecipeContext)
     const { isLogged } = useContext(AuthContext);
 
-
+    console.log("useFvorite")
     async function updateRecipeFavorite(recipeId, isFavorite) {
         const userId = isLogged; // Assume isLogged contains the current user's ID
         const method = isFavorite ? "DELETE" : "PATCH"; // Determine the HTTP method based on the action
@@ -69,5 +69,7 @@ const useFavorites = () => {
           updateFavoriteMessage(isFavorite, false);
         }
       }
-      return { handleUpdateFavorites };
+      return useMemo(() => ({
+        handleUpdateFavorites,
+      }), []); // Empty dependency array means it's created once
 }

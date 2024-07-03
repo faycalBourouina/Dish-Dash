@@ -70,16 +70,18 @@ function Layout() {
     useEffect(() => {
       if (!isLogged) {
         //Reset the cached when isLogged value changes
-        landingDispatch({ type: 'ADD_RECIPE', payload: { landing: [] } })        
+        console.log("!isLogged useEffect getting called")
+        //landingDispatch({ type: 'ADD_RECIPE', payload: { landing: [] } })        
         favoritesDispatch({ type: 'FETCH_FAVORITES', payload: { favorites: [] } })
         setCachedSearch([]);
       }
     }, [isLogged]);
 
     useEffect(() => {
+      console.log("fetch recipes useEffect getting called")
       fetchLandingRecipes();
       isLogged && fetchFavoritesRecipes();
-    }, [activeTab]);
+    }, []);
 
     return (
       <div>

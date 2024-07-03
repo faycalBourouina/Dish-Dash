@@ -1,6 +1,6 @@
 const { Dialog, DialogTitle, DialogContent, DialogActions, TextField, Button, Grid, Alert } = MaterialUI;
 
-function AuthForm({ handleLogin, handleSignup, handleClose }) {
+function AuthForm({ handleLoginWithModal, handleSignupWithModal, handleClose }) {
   const { isLogged, authMessage } = useContext(AuthContext)
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -23,7 +23,7 @@ function AuthForm({ handleLogin, handleSignup, handleClose }) {
       setPasswordError(true);
       return;
     }
-    handleLogin(email, password);
+    handleLoginWithModal(email, password);
     setEmail('');
     setPassword('');
   };
@@ -37,7 +37,7 @@ function AuthForm({ handleLogin, handleSignup, handleClose }) {
       setPasswordError(true);
       return;
     }
-    handleSignup(email, password);
+    handleSignupWithModal(email, password);
     setEmail('');
     setPassword('');
   };
