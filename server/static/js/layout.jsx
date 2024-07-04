@@ -34,8 +34,6 @@ function Layout() {
     }
 
     async function fetchLandingRecipes() {
-      if (!cachedLanding.length) {
-        console.log("Fetching")
         setIsLoading(true);     
         const response = await fetch("/landing");
         const data = await response.json();
@@ -43,7 +41,6 @@ function Layout() {
        
         landingDispatch({ type: 'FETCH_LANDING', payload: { landing: recipes } })
         setIsLoading(false);
-      }
     }
 
     async function fetchFavoritesRecipes() {
@@ -56,6 +53,8 @@ function Layout() {
           
           favoritesDispatch({ type: 'FETCH_FAVORITES', payload: { favorites: favorites } })
           setIsLoading(false);
+          console.log("fetching favorites", favoritesRecipes)
+
         }
     }
     
@@ -67,21 +66,20 @@ function Layout() {
       selectedDispatch({ type: 'UPDATE_SELECTED', payload: { selected: recipe } });
     }
 
+  
     useEffect(() => {
+      // Reset the cached search when the user is not logged in
       if (!isLogged) {
-        //Reset the cached when isLogged value changes
-        console.log("!isLogged useEffect getting called")
-        //landingDispatch({ type: 'ADD_RECIPE', payload: { landing: [] } })        
-        favoritesDispatch({ type: 'FETCH_FAVORITES', payload: { favorites: [] } })
         setCachedSearch([]);
+        favoritesDispatch({ type: 'FETCH_FAVORITES', payload: { favorites: [] } });
+      } else if (isLogged) {
+        // Fetch favorites only when the user is logged in
+        fetchFavoritesRecipes();
       }
-    }, [isLogged]);
-
-    useEffect(() => {
-      console.log("fetch recipes useEffect getting called")
+      // fetch landing recipes everytime isLogged updates
       fetchLandingRecipes();
-      isLogged && fetchFavoritesRecipes();
-    }, []);
+    }, [isLogged]);
+    
 
     return (
       <div>

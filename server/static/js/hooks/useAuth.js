@@ -4,7 +4,6 @@ const useAuth = () => {
 
 const { setIsLogged, setNewUser, setAuthMessage  } = useContext(AuthContext)
 
-  console.log("useAuth")
   const handleLogin = async (email, password) => {
     try {
       const response = await fetch('/authenticate', {
@@ -81,7 +80,10 @@ const { setIsLogged, setNewUser, setAuthMessage  } = useContext(AuthContext)
     }
   };
 
-  return { handleSignup, handleLogin, handleLogout }
+  return useMemo(() => {
+    return { handleSignup, handleLogin, handleLogout }
+  }, [])
+  
 }
 
 
