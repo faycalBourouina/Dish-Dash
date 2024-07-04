@@ -259,10 +259,10 @@ def get_landing_recipes(user_id):
         landing_recipes = remove_duplicate_recipes(landing_recipes)
 
     # Add isFavorite attribute to recipes
-    landing_recipes = add_favorite_attribute(landing_recipes, user_id)
-
-    response = landing_recipes
+    if user_id:
+        landing_recipes = add_favorite_attribute(landing_recipes, user_id)
     
+    response = landing_recipes
     return response
 
 def auto_complete_search(query):
