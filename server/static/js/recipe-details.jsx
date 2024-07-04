@@ -3,7 +3,7 @@ function RecipeDetails({ activeTab, recipesLength, handleSelectedRecipe, onRecip
   
   const { isLogged } = useContext(AuthContext)
   const { state: { selectedRecipe } } = useContext(SelectedRecipeContext)
-  const { handleUpdateFavorites } =  useFavorites();
+  const { handleUpdateFavorites } =  useFavorite();
 
   const { id, title, image, instructions, ingredients, summary, isFavorite} = selectedRecipe;
 

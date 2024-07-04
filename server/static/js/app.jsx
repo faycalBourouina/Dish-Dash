@@ -5,15 +5,15 @@ function App() {
 
   return (
       <>
-      <CachedLandingProvider>
-        <CachedFavoritesProvider>
+      <LandingRecipesProvider>
+        <FavoriteRecipesProvider>
           <SelectedRecipeProvider>
             <SearchProvider>
             <Layout />
             </SearchProvider>
           </SelectedRecipeProvider>
-        </CachedFavoritesProvider>
-      </CachedLandingProvider>
+        </FavoriteRecipesProvider>
+      </LandingRecipesProvider>
     </>
   );
 }

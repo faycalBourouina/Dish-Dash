@@ -1,10 +1,10 @@
 function RecipeList({ isLoading, activeTab, onRecipeClick }) {
 
-  const { state: { cachedLanding } } = useContext(CachedLandingContext);
-  const { state: {cachedFavorites} } = useContext(CachedFavoritesContext)
+  const { state: { cachedLanding } } = useContext(LandingRecipesContext);
+  const { state: { favoriteRecipes } } = useContext(FavoriteRcipesContext);
   
   // Determine which recipes to display based on the activeTab
-  const recipes = activeTab === "favorites" ? cachedFavorites : cachedLanding;
+  const recipes = activeTab === "favorites" ? favoriteRecipes : cachedLanding;
 
   if (isLoading) {
     return <RecipeListSkeleton />;

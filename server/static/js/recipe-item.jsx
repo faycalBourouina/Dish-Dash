@@ -4,7 +4,7 @@ function RecipeItem({ recipe, onRecipeClick }) {
   const { isLogged } = useContext(AuthContext)
   const {id, image, summary, vegan, vegetarian, glutenFree, isFavorite} = recipe;
   
-  const { handleUpdateFavorites } =  useFavorites();
+  const { handleUpdateFavorites } =  useFavorite();
 
   const handleFavoriteClick = (id, isFavorite) => {
     handleUpdateFavorites(id, isFavorite);

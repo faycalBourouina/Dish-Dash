@@ -1,7 +1,7 @@
 function SimilarRecipes({ recipeId, onRecipeClick }) {
   const [isLoadingSimilar, setIsLoadingSimilar] = useState(false);
   const [recipes, setRecipes] = useState([]);
-  const { state: {cachedFavorites}} = useContext(CachedFavoritesContext)
+  const { state: { favoriteRecipes }} = useContext(FavoriteRcipesContext)
 
 
   useEffect(() => {
@@ -21,17 +21,17 @@ function SimilarRecipes({ recipeId, onRecipeClick }) {
     // Function to update the recipes with favorites information
     function updateRecipesWithFavorites() {
       const updatedRecipes = recipes.map((recipe) => {
-        // Find if the current recipe is in cachedFavorites
-        const favoriteRecipe = cachedFavorites.find(fav => fav.id === recipe.id);
+        // Find if the current recipe is in favoriteRecipes 
+        const favoriteRecipe = favoriteRecipes.find(fav => fav.id === recipe.id);
         // If it is, return the favorite recipe, otherwise return the original recipe
         return favoriteRecipe ||  { ...recipe, isFavorite: false }
       });
       setRecipes(updatedRecipes); // Update the state with the new recipes array
     }
 
-    // Call the function to update recipes whenever cachedFavorites changes
+    // Call the function to update recipes whenever favoriteRecipes changes
     updateRecipesWithFavorites();
-  }, [cachedFavorites]); // Added cachedFavorites as a dependency
+  }, [favoriteRecipes]); // Added favoriteRecipes as a dependency
 
 
   return (
