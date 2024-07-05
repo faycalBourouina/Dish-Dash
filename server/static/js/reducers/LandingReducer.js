@@ -1,6 +1,6 @@
 const landingReducer = (state, action) => {
     switch (action.type) {
-        case 'ADD_RECIPE':
+        case ADD_RECIPE:
 
             const recipesUpdatedAdd = state.cachedLanding.map((recipe) => {
                 if (recipe.id === action.payload.favorite.id) {
@@ -10,7 +10,7 @@ const landingReducer = (state, action) => {
             });
             return { ...state, cachedLanding: recipesUpdatedAdd };
 
-        case 'REMOVE_RECIPE':
+        case REMOVE_RECIPE:
 
             const recipesUpdatedRemove = state.cachedLanding.map((recipe) => {
                 if (recipe.id === action.payload.removedRecipeId) {
@@ -20,7 +20,7 @@ const landingReducer = (state, action) => {
                 });
                 return {...state, cachedLanding: recipesUpdatedRemove };
 
-        case 'FETCH_LANDING':
+        case FETCH_LANDING:
             return { ...state, cachedLanding: action.payload.landing };
 
         default:

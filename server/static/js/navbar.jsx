@@ -13,7 +13,7 @@ function Navbar({ activeTab, setActiveTab }) {
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
-    selectedDispatch({ type: 'UPDATE_SELECTED', payload: { selected: null} }); // Clear the selected recipe
+    selectedDispatch({ type: UPDATE_SELECTED, payload: { selected: null} }); // Clear the selected recipe
   };
 
   const handleSignupWithModal = (email, password) => {

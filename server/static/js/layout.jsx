@@ -24,13 +24,13 @@ function Layout() {
         const recipesResponse = data.recipes?.results || data.recipes || [];
         setRecipes(recipesResponse); // update the recipes state to searched recipes
 
-        selectedDispatch({ type: 'UPDATE_SELECTED', payload: { selected: null} });        
+        selectedDispatch({ type: UPDATE_SELECTED, payload: { selected: null} });        
         setActiveTab("search"); // switch to the search tab
         setIsLoading(false); // set isLoading back to false once data has finished loading
     }
 
     function handleSelectedRecipe () {
-      (selectedRecipe && activeTab === "search") && selectedDispatch({ type: 'UPDATE_SELECTED', payload: { selected: null } }); 
+      (selectedRecipe && activeTab === "search") && selectedDispatch({ type: UPDATE_SELECTED, payload: { selected: null } }); 
     }
 
     async function fetchLandingRecipes() {
@@ -39,7 +39,7 @@ function Layout() {
         const data = await response.json();
         const { recipes } = await data;
        
-        landingDispatch({ type: 'FETCH_LANDING', payload: { landing: recipes } })
+        landingDispatch({ type: FETCH_LANDING, payload: { landing: recipes } })
         setIsLoading(false);
     }
 
@@ -51,7 +51,7 @@ function Layout() {
           const data = await response.json();
           const { favorites } = data;
           
-          favoritesDispatch({ type: 'FETCH_FAVORITES', payload: { favorites: favorites } })
+          favoritesDispatch({ type: FETCH_FAVORITES, payload: { favorites: favorites } })
           setIsLoading(false);
           console.log("fetching favorites", favoritesRecipes)
 
@@ -63,7 +63,7 @@ function Layout() {
       const data = await response.json();
       const { ingredients } = await data.recipe;
       recipe.ingredients = ingredients;
-      selectedDispatch({ type: 'UPDATE_SELECTED', payload: { selected: recipe } });
+      selectedDispatch({ type: UPDATE_SELECTED, payload: { selected: recipe } });
     }
 
   
@@ -71,7 +71,7 @@ function Layout() {
       // Reset the cached search when the user is not logged in
       if (!isLogged) {
         setCachedSearch([]);
-        favoritesDispatch({ type: 'FETCH_FAVORITES', payload: { favorites: [] } });
+        favoritesDispatch({ type: FETCH_FAVORITES, payload: { favorites: [] } });
       } else if (isLogged) {
         // Fetch favorites only when the user is logged in
         fetchFavoritesRecipes();

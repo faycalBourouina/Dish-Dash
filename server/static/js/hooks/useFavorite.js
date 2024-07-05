@@ -46,9 +46,9 @@ const useFavorite = () => {
       if (actionSuccess && result.favorite) {
           // If a recipe was added, update states and set success message
           const { favorite } = result;
-          favoritesDispatch({ type: 'ADD_RECIPE', payload: { favorite: favorite } });
-          landingDispatch({ type: 'ADD_RECIPE', payload: { favorite: favorite } });
-          selectedRecipe && selectedRecipe.id === favorite.id && selectedDispatch({ type: 'ADD_RECIPE' });
+          favoritesDispatch({ type: ADD_RECIPE, payload: { favorite: favorite } });
+          landingDispatch({ type: ADD_RECIPE, payload: { favorite: favorite } });
+          selectedRecipe && selectedRecipe.id === favorite.id && selectedDispatch({ type: ADD_RECIPE });
           updateFavoriteMessage(true, true, favorite.name);
       } else if (actionSuccess && result.removedRecipeId) {
           // If a recipe was removed, find it, update states, and set success message
@@ -56,7 +56,7 @@ const useFavorite = () => {
           const removedRecipe = favoriteRecipes.find(r => r.id === removedRecipeId);
           favoritesDispatch({ type: 'REMOVE_RECIPE', payload: { removedRecipeId: removedRecipeId } });
           landingDispatch({ type: 'REMOVE_RECIPE', payload: { removedRecipeId: removedRecipeId } });
-          selectedRecipe && selectedRecipe.id === removedRecipeId && selectedDispatch({ type: 'REMOVE_RECIPE' });
+          selectedRecipe && selectedRecipe.id === removedRecipeId && selectedDispatch({ type: REMOVE_RECIPE });
           updateFavoriteMessage(false, true, removedRecipe.name);
       } else {
           // If there was an error, set the error message
