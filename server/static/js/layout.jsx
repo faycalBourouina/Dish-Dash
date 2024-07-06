@@ -9,7 +9,7 @@ function Layout() {
     const { setCachedSearch } = useContext(SearchContext);
     const { isLogged } = useContext(AuthContext);
     
-    const { state: { cachedLanding }, dispatch: landingDispatch } = useContext(LandingRecipesContext);
+    const { dispatch: landingDispatch } = useContext(LandingRecipesContext);
     const { state: { favoritesRecipes }, dispatch: favoritesDispatch } = useContext(FavoriteRcipesContext)
     const { state: { selectedRecipe }, dispatch: selectedDispatch } = useContext(SelectedRecipeContext)
 

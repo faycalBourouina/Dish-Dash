@@ -1,14 +1,19 @@
 const selectedReducer = (state, action) => {
     switch (action.type) {
         case ADD_RECIPE:
-            return { ...state, selectedRecipe: { ...state.selectedRecipe, isFavorite: true }};
+            // Mark the selected recipe as a favorite
+            return { ...state, selectedRecipe: { ...state.selectedRecipe, isFavorite: true } };
 
         case REMOVE_RECIPE:
-            return { ...state, selectedRecipe: { ...state.selectedRecipe, isFavorite: false }};
+            // Remove the selected recipe from favorites
+            return { ...state, selectedRecipe: { ...state.selectedRecipe, isFavorite: false } };
 
         case UPDATE_SELECTED:
-            return { ...state, selectedRecipe: action.payload.selected }
+            // Update the entire selected recipe with new data
+            return { ...state, selectedRecipe: action.payload.selected };
+
         default:
+            // If action type doesn't match any defined cases, return current state
             return state;
     }
-}
+};
