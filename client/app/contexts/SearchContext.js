@@ -2,7 +2,7 @@ import  { createContext, useState } from 'react';
 
 const SearchContext = createContext()
 
-function SearchProvider({ children }) {
+const SearchProvider = ({ children }) => {
   const [cachedSearch, setCachedSearch] = useState([]);
 
   return (
@@ -11,3 +11,5 @@ function SearchProvider({ children }) {
     </SearchContext.Provider>
   );
 };
+
+export default SearchProvider;

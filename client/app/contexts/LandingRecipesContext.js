@@ -8,7 +8,7 @@ const initialState = {
   landingRecipes: [],
 };
 
-function LandingRecipesProvider({ children }) {
+const LandingRecipesProvider = ({ children }) => {
   // Use useReducer to manage state with landingReducer and initialState
   const [state, dispatch] = useReducer(landingReducer, initialState);
 
@@ -19,3 +19,5 @@ function LandingRecipesProvider({ children }) {
     </LandingRecipesContext.Provider>
   );
 }
+
+export default LandingRecipesProvider;

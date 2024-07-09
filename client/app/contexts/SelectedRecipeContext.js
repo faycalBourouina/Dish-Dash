@@ -20,3 +20,5 @@ const SelectedRecipeProvider = ({ children }) => {
         </SelectedRecipeContext.Provider>
     );
 }
+
+export default SelectedRecipeProvider;

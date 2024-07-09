@@ -2,7 +2,7 @@ import { createContext, useState } from 'react';
 
 const ItemsContext = createContext()
 
-function ItemsProvider({ children }) {
+const ItemsProvider = ({ children }) => {
     const [cachedItems, setCachedItems] = useState({});
 
     return(
@@ -11,3 +11,5 @@ function ItemsProvider({ children }) {
         </ItemsContext.Provider>
     );
 };
+
+export default ItemsProvider;

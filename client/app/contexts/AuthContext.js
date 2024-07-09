@@ -2,7 +2,7 @@ import { createContext, useState } from 'react';
 
 const AuthContext = createContext();
 
-function AuthProvider ({ children, initialIsLogged }) {
+const AuthProvider = ({ children, initialIsLogged }) =>{
     const [isLogged, setIsLogged] = useState(initialIsLogged)
     const [newUser, setNewUser] = useState(false);
     const [authMessage, setAuthMessage] = useState({});
@@ -13,3 +13,5 @@ function AuthProvider ({ children, initialIsLogged }) {
      </AuthContext.Provider>
     )
 };
+
+export default AuthProvider;

@@ -2,7 +2,7 @@ import { createContext, useState } from React
 
 const FavoriteMessageContext = createContext();
 
-function FavoriteMessageProvider({ children }) {
+const FavoriteMessageProvider = ({ children }) => {
   const [favoriteMessage, setFavoriteMessage] = useState('');
   const [alertOpen, setAlertOpen] = useState(false);
 
@@ -12,3 +12,5 @@ function FavoriteMessageProvider({ children }) {
     </FavoriteMessageContext.Provider>
   );
 }
+
+export default FavoriteMessageProvider;

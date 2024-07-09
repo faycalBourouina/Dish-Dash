@@ -1,5 +1,6 @@
 import { Grid, Box } from '@mui/material'
 
+
 export const metadata = {
     title: 'Dish-Dash',
     description: 'Get recipes'

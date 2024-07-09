@@ -2,7 +2,7 @@ import { createContext, useState } from 'react';
 
 const ActiveTabContext = createContext();
 
-function ActiveTabProvider ({ children }) {
+const ActiveTabProvider =  ({ children }) => {
 
     const [activeTab, setActiveTab] = useState('home');
 
@@ -12,3 +12,5 @@ function ActiveTabProvider ({ children }) {
      </ActiveTabContext.Provider>
     )
 };
+
+export default ActiveTabContext

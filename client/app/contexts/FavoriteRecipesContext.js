@@ -9,7 +9,7 @@ const initialState = {
 }
 
 // Define a provider component for the favorite recipes context
-function FavoriteRecipesProvider ({ children }) {
+const FavoriteRecipesProvider = ({ children }) => {
   const [state, dispatch] = useReducer(favoritesReducer, initialState)
   
   // Provide state and dispatch values to child components via context
@@ -19,3 +19,5 @@ function FavoriteRecipesProvider ({ children }) {
       </FavoriteRcipesContext.Provider>
     );
 };
+
+export default FavoriteRecipesProvider;
