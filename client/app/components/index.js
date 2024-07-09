@@ -1,5 +1,3 @@
-// components/index.js
-
 export { default as AuthForm } from './auth-form'; // Adjust filenames as needed
 export { default as AuthModal } from './auth-modal';
 export { default as DemoMessage } from './demo-message';
