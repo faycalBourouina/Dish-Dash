@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useContext } from 'react';
-import { AuthContext, ActiveTabContext, SearchContext, LandingRecipesContext, FavoriteRcipesContext, SelectedRecipeContext }  from '../contexts';
+import { AuthContext, ActiveTabContext, SearchContext, LandingRecipesContext, FavoriteRcipesContext, SelectedRecipeContext }  from './contexts';
 
 import { RecipeDetails, RecipeList } from './components';
 

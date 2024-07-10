@@ -1,4 +1,4 @@
-import { Grid, Skeleton } from MaterialUI;
+import { Grid, Skeleton } from '@mui/material'
 
 
 const RecipeListSkeleton = ({ num=20 }) => {

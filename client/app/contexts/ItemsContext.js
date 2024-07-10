@@ -1,3 +1,5 @@
+'use client';
+
 import { createContext, useState } from 'react';
 
 const ItemsContext = createContext()
@@ -12,4 +14,4 @@ const ItemsProvider = ({ children }) => {
     );
 };
 
-export default ItemsProvider;
+export { ItemsContext, ItemsProvider }

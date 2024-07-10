@@ -1,14 +1,14 @@
-'use client ';
+'use client';
 
 import { useState, useContext } from 'react'; 
-import { Grid, Box, ButtonBase, AppBar, Toolbar, CssBaseline, ButtonBase } from '@mui/material'
+import { Grid, Box, ButtonBase, AppBar, Toolbar, CssBaseline } from '@mui/material'
 
 import { ActiveTabContext, AuthContext, SelectedRecipeContext } from '../contexts';
 import { AuthModal  } from './';
 import useAuth from '../hooks/useAuth';
 
 
-function Navbar({ activeTab, setActiveTab }) {
+const Navbar = () => {
 
   const { activeTab, setActiveTab }  = useContext(ActiveTabContext)
   const { isLogged, authMessage, setAuthMessage, setNewUser  } = useContext(AuthContext)
@@ -176,3 +176,5 @@ function Navbar({ activeTab, setActiveTab }) {
       </Box>
   );
 }
+
+export default Navbar;

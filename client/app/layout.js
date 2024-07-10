@@ -1,5 +1,5 @@
 import { Grid, Box } from '@mui/material'
-import { ActiveTabProvider, LandingRecipesProvider, FavoriteRecipesProvider, SelectedRecipeProvider,  } from './contexts'
+import { AuthProvider, ActiveTabProvider, LandingRecipesProvider, FavoriteRecipesProvider, SelectedRecipeProvider, SearchProvider, FavoriteMessageProvider  } from './contexts'
 import { FavoriteMessageBar, Navbar, DemoMessage, SearchForm, Footer } from './components'
 
 
@@ -9,16 +9,25 @@ export const metadata = {
 }
 
 const RootLayout = ({ children }) => {
+
     return (
        <html>
             <body>
                 <Grid container direction="column">
+
                     <Grid item xs={12}>
-                            <FavoriteMessageBar />
+                            <FavoriteMessageProvider>
+                                <FavoriteMessageBar />
+                            </FavoriteMessageProvider>
+
                         <Box pl={8} pr={8} pt={4} pb={0}>
-                            <ActiveTabProvider>
-                                <Navbar />
-                            </ActiveTabProvider>
+                            <AuthProvider initialIsLogged ={false}>
+                                <ActiveTabProvider>
+                                    <SelectedRecipeProvider>
+                                        <Navbar />
+                                    </SelectedRecipeProvider>
+                                </ActiveTabProvider>
+                            </ AuthProvider>
                         </Box>
                         
                         <Box pt={4}>
@@ -28,21 +37,23 @@ const RootLayout = ({ children }) => {
                     
                     <Box p={8}>
                         <Grid item xs={12}>
-                            <SearchForm onSearch={handleSearch} />
+                            <SearchForm />
                         </Grid>
 
                         <Grid item xs={12} p={12}>
-                            <ActiveTabProvider>
-                                <LandingRecipesProvider>
-                                    <FavoriteRecipesProvider>
-                                        <SelectedRecipeProvider>
-                                            <SearchProvider>
-                                                { children }
-                                            </SearchProvider>
-                                        </SelectedRecipeProvider>
-                                    </FavoriteRecipesProvider>
-                                </LandingRecipesProvider>
-                            </ActiveTabProvider>
+                            <AuthProvider initialIsLogged ={false}>
+                                <ActiveTabProvider>
+                                    <LandingRecipesProvider>
+                                        <FavoriteRecipesProvider>
+                                            <SelectedRecipeProvider>
+                                                <SearchProvider>
+                                                    { children }
+                                                </SearchProvider>
+                                            </SelectedRecipeProvider>
+                                        </FavoriteRecipesProvider>
+                                    </LandingRecipesProvider>
+                                </ActiveTabProvider>
+                            </AuthProvider>
                         </Grid>
 
                     </Box>

@@ -1,3 +1,5 @@
+'use client';
+
 import { Snackbar, Alert } from '@mui/material'
 import { useContext } from 'react'
 import { FavoriteMessageContext } from '../contexts';

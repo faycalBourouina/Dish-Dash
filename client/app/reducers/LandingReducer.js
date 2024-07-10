@@ -1,4 +1,5 @@
-import { ADD_RECIPE, REMOVE_RECIPE, FETCH_LANDING } from './action-types';
+import actionTypes from "./action-types";
+const { ADD_RECIPE, REMOVE_RECIPE, FETCH_LANDING } = actionTypes
 
 
 const landingReducer = (state, action) => {

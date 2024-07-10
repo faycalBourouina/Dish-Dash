@@ -1,3 +1,5 @@
+'use client';
+
 import { createContext, useState } from 'react';
 
 const ActiveTabContext = createContext();
@@ -13,4 +15,4 @@ const ActiveTabProvider =  ({ children }) => {
     )
 };
 
-export default ActiveTabContext
+export { ActiveTabContext, ActiveTabProvider }

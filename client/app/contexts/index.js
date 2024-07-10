@@ -1,13 +1,9 @@
-export { default as ActiveTabProvider } from './ActiveTabContext'
-export { default as AuthProvider } from './AuthContext';
-export { default as FavoriteMessageProvider } from './FavoriteMessageContext';
-export { default as FavoriteRecipesProvide } from './FavoriteRecipesContext';
-export { default as LandingRecipesProvider } from './LandingRecipesContext';
-export { default as selectedRecipeProvider } from './SelectedRecipeContext';
-export { default as ItemsProvider } from './ItemsContext';
-export { default as SerachProvider } from './SearchContext';
-
-
-
-
+export { ActiveTabProvider, ActiveTabContext } from './ActiveTabContext'
+export { AuthProvider, AuthContext } from './AuthContext';
+export { FavoriteMessageProvider, FavoriteMessageContext } from './FavoriteMessageContext';
+export { FavoriteRecipesProvider, FavoriteRcipesContext } from './FavoriteRecipesContext';
+export { LandingRecipesProvider, LandingRecipesContext } from './LandingRecipesContext';
+export { SelectedRecipeProvider, SelectedRecipeContext } from './SelectedRecipeContext';
+export { ItemsProvider, ItemsContext } from './ItemsContext';
+export { SearchProvider, SearchContext } from './SearchContext'; 
 

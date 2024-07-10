@@ -1,3 +1,5 @@
+'use client';
+
 import { createContext, useState, useReducer } from 'react';
 
 // Create a new context called LandingRecipesContext
@@ -20,4 +22,4 @@ const LandingRecipesProvider = ({ children }) => {
   );
 }
 
-export default LandingRecipesProvider;
+export { LandingRecipesContext, LandingRecipesProvider }; 

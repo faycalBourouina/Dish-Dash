@@ -1,4 +1,6 @@
-import { createContext, useState } from React
+'use client';
+
+import { createContext, useState } from 'react'
 
 const FavoriteMessageContext = createContext();
 
@@ -13,4 +15,4 @@ const FavoriteMessageProvider = ({ children }) => {
   );
 }
 
-export default FavoriteMessageProvider;
+export { FavoriteMessageContext, FavoriteMessageProvider }

@@ -1,3 +1,5 @@
+'use client';
+
 import { createContext, useState, useReducer } from 'react';
 
 // Define initial state with an empty array for favoriteRecipes
@@ -21,4 +23,4 @@ const SelectedRecipeProvider = ({ children }) => {
     );
 }
 
-export default SelectedRecipeProvider;
+export { SelectedRecipeContext, SelectedRecipeProvider };

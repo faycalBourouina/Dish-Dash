@@ -1,3 +1,5 @@
+'use client';
+
 import { createContext, useReducer } from 'react';
 
 // Create a context for managing favorite recipes
@@ -20,4 +22,4 @@ const FavoriteRecipesProvider = ({ children }) => {
     );
 };
 
-export default FavoriteRecipesProvider;
+export { FavoriteRcipesContext ,FavoriteRecipesProvider } 

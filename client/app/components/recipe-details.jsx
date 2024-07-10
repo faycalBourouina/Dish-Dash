@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { Grid, Box, Typography, List, ListItem, IconButton, Link } from '@mui/material';
 
 import { AuthContext, SelectedRecipeContext } from '../contexts';
-import { ItemsProvider } from '../reducers';
+import { ItemsProvider } from '../contexts';
 import useFavorite from '../hooks/useFavorite';
 
 import { ItemList, SimilarRecipes } from './';

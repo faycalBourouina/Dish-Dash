@@ -24,3 +24,5 @@ const { newUser } = useContext(AuthContext)
   );
 }
 
+export default AuthForm;
+

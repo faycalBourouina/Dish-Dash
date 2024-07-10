@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-const { Grid, TextField, FormControl, InputLabel, Select, MenuItem, FormGroup, FormControlLabel, Checkbox, Button, Stack, styled, Autocomplete } = MaterialUI;
+const { Grid, TextField, FormControl, InputLabel, Select, MenuItem, FormGroup, FormControlLabel, Checkbox, Button, Stack, styled, Autocomplete } = '@mui/material'
 
 const SearchForm = ({ onSearch }) => {
 

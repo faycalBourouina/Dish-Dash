@@ -1,4 +1,5 @@
-import { ADD_RECIPE, REMOVE_RECIPE, FETCH_FAVORITES } from './action-types';
+import actionTypes from "./action-types";
+const { ADD_RECIPE, REMOVE_RECIPE, FETCH_FAVORITES } = actionTypes;
 
 const favoritesReducer = (state, action) => {
   switch (action.type) {

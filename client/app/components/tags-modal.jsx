@@ -1,5 +1,5 @@
 'use client'
-import { DialogTitle, DialogContent, DialogActions ,Chip } from '@mui/Material'
+import { DialogTitle, DialogContent, DialogActions ,Chip } from '@mui/material'
 import { useContext, useState } from 'react'; 
 
 import { AuthContext } from '../contexts';
@@ -154,3 +154,5 @@ const TagsModal = ({ handleClose }) => {
     </>
   );
 }
+
+export default TagsModal;

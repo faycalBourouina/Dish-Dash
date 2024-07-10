@@ -1,4 +1,5 @@
-import { ADD_RECIPE, REMOVE_RECIPE, UPDATE_SELECTED } from './action-types';
+import actionTypes from "./action-types";
+const { ADD_RECIPE, REMOVE_RECIPE, UPDATE_SELECTED } = actionTypes;
 
 const selectedReducer = (state, action) => {
     switch (action.type) {

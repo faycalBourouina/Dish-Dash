@@ -1,4 +1,6 @@
-import { Skeleton, styled, CardContent, CardActions } from '@mui/material'
+'use client'
+
+import { Skeleton, styled, Card, CardMedia, CardContent, CardActions } from '@mui/material'
 
 const StyledCard = styled(Card)({
     maxWidth: 220,
