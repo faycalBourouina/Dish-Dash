@@ -1,4 +1,6 @@
 import { Grid, Box } from '@mui/material'
+import { ActiveTabProvider, LandingRecipesProvider, FavoriteRecipesProvider, SelectedRecipeProvider,  } from './contexts'
+import { FavoriteMessageBar, Navbar, DemoMessage, SearchForm, Footer } from './components'
 
 
 export const metadata = {

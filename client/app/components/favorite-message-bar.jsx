@@ -1,5 +1,8 @@
-function FavoriteMessageBar () {
-    const { Alert, Snackbar } = MaterialUI
+import { Snackbar, Alert } from '@mui/material'
+import { useContext } from 'react'
+import { FavoriteMessageContext } from '../contexts';
+
+const FavoriteMessageBar = () => {
 
     const { favoriteMessage, setAlertOpen, alertOpen } = useContext(FavoriteMessageContext)
     
@@ -19,3 +22,5 @@ function FavoriteMessageBar () {
             </Snackbar>
     )
 }
+
+export default FavoriteMessageBar;

@@ -1,6 +1,6 @@
-const  {Alert, Typography } =  MaterialUI;
+import {Alert, Typography } from '@mui/material'
 
-function DemoMessage() {
+const DemoMessage = () => {
     return (
       <Alert severity="info">
         <Typography variant="body2" align="center">
@@ -9,3 +9,5 @@ function DemoMessage() {
       </Alert>
     );
 };
+
+export default DemoMessage;

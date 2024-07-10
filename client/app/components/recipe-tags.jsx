@@ -10,7 +10,7 @@ function FontAwesomeIcon({ iconClass }) {
   );
 }
 
-function RecipeTags({ recipe }) {
+const RecipeTags = ({ recipe }) => {
     const { readyInMinutes, servings, vegan, vegetarian, glutenFree, dairyFree, healthScore } = recipe;
   
     return (
@@ -70,3 +70,5 @@ function RecipeTags({ recipe }) {
       </Box>
     );
   }
+
+  export default RecipeTags;

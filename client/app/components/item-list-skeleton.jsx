@@ -1,4 +1,4 @@
-const { Skeleton } = MaterialUI;
+import { Skeleton, styled, CardContent, CardActions } from '@mui/material'
 
 const StyledCard = styled(Card)({
     maxWidth: 220,
@@ -10,7 +10,7 @@ const StyledCardMedia = styled(CardMedia)({
     height: 220,
 });   
 
-function ItemListSkeleton() {
+const ItemListSkeleton = () => {
     return (
       <>
         {Array.from(new Array(10)).map((_, index) => (
@@ -29,3 +29,5 @@ function ItemListSkeleton() {
       </>
     );
 }
+
+export default ItemListSkeleton;

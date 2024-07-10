@@ -34,3 +34,5 @@ const landingReducer = (state, action) => {
             return state;
     }
 };
+
+export default landingReducer;

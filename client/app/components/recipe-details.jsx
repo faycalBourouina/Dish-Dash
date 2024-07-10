@@ -1,5 +1,13 @@
-const { List, ListItem, IconButton, Link } = MaterialUI;
-function RecipeDetails({ activeTab, recipesLength, handleSelectedRecipe, onRecipeClick}) {
+import { useContext } from 'react';
+import { Grid, Box, Typography, List, ListItem, IconButton, Link } from '@mui/material';
+
+import { AuthContext, SelectedRecipeContext } from '../contexts';
+import { ItemsProvider } from '../reducers';
+import useFavorite from '../hooks/useFavorite';
+
+import { ItemList, SimilarRecipes } from './';
+
+const RecipeDetails = ({ activeTab, recipesLength, handleSelectedRecipe, onRecipeClick}) => {
   
   const { isLogged } = useContext(AuthContext)
   const { state: { selectedRecipe } } = useContext(SelectedRecipeContext)
@@ -102,3 +110,5 @@ function RecipeDetails({ activeTab, recipesLength, handleSelectedRecipe, onRecip
     </Grid>
   );
 }
+
+export default RecipeDetails;

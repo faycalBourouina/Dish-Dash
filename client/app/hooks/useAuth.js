@@ -1,4 +1,5 @@
-import  { useContext } from 'react';
+import { useContext } from 'react';
+import { AuthContext } from '../contexts'
 
 const useAuth = () => {
 
@@ -86,4 +87,4 @@ const { setIsLogged, setNewUser, setAuthMessage  } = useContext(AuthContext)
   
 }
 
-
+export default useAuth;

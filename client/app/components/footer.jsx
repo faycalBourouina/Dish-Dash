@@ -1,5 +1,6 @@
+import { Box, Typography } from '@mui/material'
 
-function Footer() {
+const Footer = () => {
     return (
       <Box
         bgcolor="#1976d2"
@@ -12,3 +13,5 @@ function Footer() {
       </Box>
     );
   }
+
+  export default Footer;

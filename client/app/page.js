@@ -1,13 +1,16 @@
 'use client';
 
-import { useState, useEffect, useContext } from 'react'
+import { useState, useEffect, useContext } from 'react';
+import { AuthContext, ActiveTabContext, SearchContext, LandingRecipesContext, FavoriteRcipesContext, SelectedRecipeContext }  from '../contexts';
+
+import { RecipeDetails, RecipeList } from './components';
 
 function Home() {
 
     const { activeTab, setActiveTab }  = useContext(ActiveTabContext) // State variable to track which tab is active
 
-    const [isLoading, setIsLoading] = React.useState(false); // State variable to track whether data is being fetched 
-    const [recipes, setRecipes] = React.useState([]); // State variable to store the recipes
+    const [isLoading, setIsLoading] = useState(false); // State variable to track whether data is being fetched 
+    const [recipes, setRecipes] = useState([]); // State variable to store the recipes
    
     const { setCachedSearch } = useContext(SearchContext);
     const { isLogged } = useContext(AuthContext);

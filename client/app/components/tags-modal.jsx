@@ -1,4 +1,8 @@
-const { Dialog, DialogTitle, DialogContent, DialogActions ,Chip } = MaterialUI;
+'use client'
+import { DialogTitle, DialogContent, DialogActions ,Chip } from '@mui/Material'
+import { useContext, useState } from 'react'; 
+
+import { AuthContext } from '../contexts';
 
 const diets = ['gluten free', 'ketogenic', 'vegetarian', 'lacto-vegetarian', 'ovo-vegetarian', 'vegan', 'pescetarian', 'paleo', 'primal', 'low-fodmap', 'whole30'];
 const mealTypes = ['main course', 'side dish', 'dessert', 'appetizer', 'salad', 'bread', 'breakfast', 'soup', 'beverage', 'sauce', 'marinade', 'fingerfood', 'snack', 'drink'];

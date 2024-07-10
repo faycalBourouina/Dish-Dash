@@ -1,4 +1,4 @@
-const { styled, Rating } = MaterialUI;
+import { styled, Rating, Box, Typography, CardContent, CardActions } from '@mui/material';
 
 const StyledCard = styled(Card)({
   maxWidth: 220,
@@ -21,7 +21,7 @@ const Tag = styled('div')(({ theme }) => ({
 }));
 
 const ItemDetails = ({ item }) => {
-  const { title, description, price, main_image, link, best_seller, shipping, ratings_total, rating } = item;
+  const { title, price, main_image, link, best_seller, shipping, ratings_total, rating } = item;
 
   return (
     <StyledCard>
@@ -102,3 +102,5 @@ const ItemDetails = ({ item }) => {
     </StyledCard>
   );
 };
+
+export default ItemDetails;

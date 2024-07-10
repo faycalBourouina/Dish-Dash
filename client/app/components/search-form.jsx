@@ -1,7 +1,10 @@
-const { useState } = React;
+'use client';
+
+import { useState } from "react";
+
 const { Grid, TextField, FormControl, InputLabel, Select, MenuItem, FormGroup, FormControlLabel, Checkbox, Button, Stack, styled, Autocomplete } = MaterialUI;
 
-function SearchForm({ onSearch }) {
+const SearchForm = ({ onSearch }) => {
 
   const [autoComplete, setAutoComplete] = useState([]);
   const [query, setQuery] = useState('');
@@ -218,3 +221,5 @@ function SearchForm({ onSearch }) {
     </form> 
   );
 }
+
+export default SearchForm;

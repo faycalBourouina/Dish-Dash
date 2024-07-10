@@ -1,7 +1,7 @@
-const { Skeleton } = MaterialUI;
+import { Grid, Skeleton } from MaterialUI;
 
 
-function RecipeListSkeleton({ num=20 }) {
+const RecipeListSkeleton = ({ num=20 }) => {
     return (
       <Grid container spacing={8}>
         {Array.from(new Array(num)).map((_, index) => (
@@ -21,3 +21,5 @@ function RecipeListSkeleton({ num=20 }) {
       </Grid>
     );
   }
+
+export default RecipeListSkeleton;

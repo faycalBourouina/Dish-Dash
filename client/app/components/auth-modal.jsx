@@ -1,7 +1,9 @@
-const { Dialog } = MaterialUI;
-const { useContext } = React;
+import { Dialog } from '@mui/material' 
+import { useContext } from 'react';
 
-function AuthModal({ open, handleClose, handleLoginWithModal, handleSignupWithModal}) {
+import { AuthForm, TagsModal } from './'
+
+const AuthModal = ({ open, handleClose, handleLoginWithModal, handleSignupWithModal}) => {
 const { newUser } = useContext(AuthContext)
   return (
     <Dialog open={open} onClose={handleClose}>

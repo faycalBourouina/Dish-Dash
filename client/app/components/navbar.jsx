@@ -1,5 +1,12 @@
+'use client ';
+
 import { useState, useContext } from 'react'; 
-import { AppBar, Toolbar, CssBaseline, ButtonBase } from '@mui/material'
+import { Grid, Box, ButtonBase, AppBar, Toolbar, CssBaseline, ButtonBase } from '@mui/material'
+
+import { ActiveTabContext, AuthContext, SelectedRecipeContext } from '../contexts';
+import { AuthModal  } from './';
+import useAuth from '../hooks/useAuth';
+
 
 function Navbar({ activeTab, setActiveTab }) {
 

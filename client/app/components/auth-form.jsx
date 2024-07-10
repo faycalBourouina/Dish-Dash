@@ -1,6 +1,7 @@
-const { Dialog, DialogTitle, DialogContent, DialogActions, TextField, Button, Grid, Alert } = MaterialUI;
+import { Dialog, DialogTitle, DialogContent, TextField, Button, Grid, Alert } from '@mui/material'
+import { useContext, useState } from 'react';
 
-function AuthForm({ handleLoginWithModal, handleSignupWithModal, handleClose }) {
+const AuthForm = ({ handleLoginWithModal, handleSignupWithModal, handleClose }) => {
   const { isLogged, authMessage } = useContext(AuthContext)
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -118,3 +119,5 @@ function AuthForm({ handleLoginWithModal, handleSignupWithModal, handleClose }) 
     </Dialog>
   );
 }
+
+export default AuthForm;

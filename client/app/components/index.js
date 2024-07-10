@@ -6,7 +6,7 @@ export { default as Footer } from './footer';
 export { default as ItemDetails } from './item-details';
 export { default as ItemListSkeleton } from './item-list-skeleton';
 export { default as ItemList } from './item-list';
-export { default as NavBar } from './navbar';
+export { default as Navbar } from './navbar';
 export { default as RecipeDetails } from './recipe-details';
 export { default as RecipeItem } from './recipe-item';
 export { default as RecipeListSkeleton } from './recipe-list-skeleton';

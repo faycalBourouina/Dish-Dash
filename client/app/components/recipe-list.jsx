@@ -1,4 +1,10 @@
-function RecipeList({ isLoading, activeTab, onRecipeClick }) {
+'use client';
+
+import { useContext } from "react";
+import { LandingRecipesContext, FavoriteRcipesContext } from '../contexts'
+import { RecipeListSkeleton, RecipeItem } from "./";
+
+const RecipeList = ({ isLoading, activeTab, onRecipeClick }) => {
 
   const { state: { landingRecipes } } = useContext(LandingRecipesContext);
   const { state: { favoriteRecipes } } = useContext(FavoriteRcipesContext);
@@ -53,3 +59,5 @@ function RecipeList({ isLoading, activeTab, onRecipeClick }) {
     );
    }
 }
+
+export default RecipeList;

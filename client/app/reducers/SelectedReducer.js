@@ -19,3 +19,5 @@ const selectedReducer = (state, action) => {
             return state;
     }
 };
+
+export default selectedReducer;

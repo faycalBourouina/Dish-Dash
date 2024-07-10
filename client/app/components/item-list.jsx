@@ -1,4 +1,10 @@
-const { useRef, useContext } = React;
+'use client'
+
+import { useRef, useState, useContext, useEffect } from 'react';
+import { ItemsContext } from '../contexts'
+
+import { ItemListSkeleton } from './';
+import { ItemDetails } from './';
 
 const testItems =
 [
@@ -134,6 +140,7 @@ const testItems =
         "title": "MckinnonS Dry Craft Cocktails | Dehydrated Fruit And Herbs | Diy Mixology | Infusion Kit | Mason Jar Serves 8  16 Drinks | Handmade In The Usa (Hot Toddy, 1-Jar)"
     }
 ]
+
 const ItemList = ({ recipe }) => {
   const { cachedItems, setCachedItems } = useContext(ItemsContext)
   
@@ -222,3 +229,5 @@ const ItemList = ({ recipe }) => {
     </>
   );
 };
+
+export default ItemList;

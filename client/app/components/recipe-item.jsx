@@ -1,6 +1,11 @@
-const { Card, CardContent, CardMedia, Grid, Typography, CardActions, Link, IconButton} = MaterialUI;
+'use client'
+import { Card, CardContent, CardMedia, Grid, Typography, CardActions, IconButton} from '@mui/material';
+import { useContext } from 'react';
 
-function RecipeItem({ recipe, onRecipeClick }) {
+import { AuthContext } from '../contexts';
+import useFavorite  from '../hooks/useFavorite'; 
+
+const  RecipeItem = ({ recipe, onRecipeClick }) => {
   const { isLogged } = useContext(AuthContext)
   const {id, image, summary, vegan, vegetarian, glutenFree, isFavorite} = recipe;
   
@@ -9,8 +14,6 @@ function RecipeItem({ recipe, onRecipeClick }) {
   const handleFavoriteClick = (id, isFavorite) => {
     handleUpdateFavorites(id, isFavorite);
   };
-   // Log isFavorite and the name of the recipe when rendering
-   //console.log(`Rendering RecipeItem for "${recipe.title || recipe.name}": isFavorite - ${isFavorite}`);
 
   const MAX_SUMMARY_LENGTH = 100; // Maximum number of characters for summary
     
@@ -100,3 +103,5 @@ function RecipeItem({ recipe, onRecipeClick }) {
     </Grid>
   );
 }
+
+export default RecipeItem;
