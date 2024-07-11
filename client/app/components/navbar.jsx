@@ -62,7 +62,7 @@ const Navbar = () => {
                 <Grid container justifyContent="flex-start" spacing={2}>
                   <Grid item>
                     <Box pt={1}>
-                      <img src="static/img/logo_fill.png" alt="Logo" style={{ height: '48px' }} />
+                      <img src="/static/img/logo_fill.png" alt="Logo" style={{ height: '48px' }} />
                     </Box>
                   </Grid>
                   <Grid item>

@@ -1,14 +1,14 @@
 'use client';
 
 import { useState, useContext, useEffect } from 'react';
-import { FavoriteRcipesContext } from '../contexts';
+import { FavoriteRecipesContext } from '../contexts';
 
 import { RecipeListSkeleton, RecipeItem } from './';
 
 const SimilarRecipes = ({ recipeId, onRecipeClick }) => {
   const [isLoadingSimilar, setIsLoadingSimilar] = useState(false);
   const [recipes, setRecipes] = useState([]);
-  const { state: { favoriteRecipes }} = useContext(FavoriteRcipesContext)
+  const { state: { favoriteRecipes }} = useContext(FavoriteRecipesContext)
 
 
   useEffect(() => {

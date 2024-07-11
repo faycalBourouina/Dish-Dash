@@ -1,6 +1,7 @@
 'use client';
 
-import { createContext, useState, useReducer } from 'react';
+import { createContext, useReducer } from 'react';
+import { landingReducer } from '../reducers';
 
 // Create a new context called LandingRecipesContext
 const LandingRecipesContext = createContext();

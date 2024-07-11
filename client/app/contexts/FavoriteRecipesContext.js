@@ -1,9 +1,10 @@
 'use client';
 
 import { createContext, useReducer } from 'react';
+import { favoritesReducer } from '../reducers';
 
 // Create a context for managing favorite recipes
-const FavoriteRcipesContext = createContext();
+const FavoriteRecipesContext = createContext();
 
 // Initialize the state with an empty array of favorite recipes
 const initialState = {
@@ -16,10 +17,10 @@ const FavoriteRecipesProvider = ({ children }) => {
   
   // Provide state and dispatch values to child components via context
   return (
-      <FavoriteRcipesContext.Provider value={{ state, dispatch }}>
+      <FavoriteRecipesContext.Provider value={{ state, dispatch }}>
         {children}
-      </FavoriteRcipesContext.Provider>
+      </FavoriteRecipesContext.Provider>
     );
 };
 
-export { FavoriteRcipesContext ,FavoriteRecipesProvider } 
+export { FavoriteRecipesContext ,FavoriteRecipesProvider } 

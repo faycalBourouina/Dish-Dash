@@ -1,13 +1,13 @@
 import { useContext, useMemo } from 'react';
 
-import { AuthContext, FavoriteMessageContext, LandingRecipesContext, FavoriteRcipesContext, SelectedRecipeContext } from '../contexts';
+import { AuthContext, FavoriteMessageContext, LandingRecipesContext, FavoriteRecipesContext, SelectedRecipeContext } from '../contexts';
 
 
 const useFavorite = () => {
   // Extract necessary context values
   const { setFavoriteMessage, setAlertOpen } = useContext(FavoriteMessageContext);
   const { dispatch: landingDispatch } = useContext(LandingRecipesContext);
-  const { state: { favoriteRecipes }, dispatch: favoritesDispatch } = useContext(FavoriteRcipesContext);
+  const { state: { favoriteRecipes }, dispatch: favoritesDispatch } = useContext(FavoriteRecipesContext);
   const { state: { selectedRecipe }, dispatch: selectedDispatch } = useContext(SelectedRecipeContext);
   const { isLogged } = useContext(AuthContext);
 

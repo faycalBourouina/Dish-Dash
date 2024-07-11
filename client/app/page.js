@@ -1,8 +1,8 @@
 'use client';
 
 import { useState, useEffect, useContext } from 'react';
-import { AuthContext, ActiveTabContext, SearchContext, LandingRecipesContext, FavoriteRcipesContext, SelectedRecipeContext }  from './contexts';
-
+import { AuthContext, ActiveTabContext, SearchContext, LandingRecipesContext, FavoriteRecipesContext, SelectedRecipeContext }  from './contexts';
+import actionTypes from './reducers/action-types'
 import { RecipeDetails, RecipeList } from './components';
 
 function Home() {
@@ -12,11 +12,13 @@ function Home() {
     const [isLoading, setIsLoading] = useState(false); // State variable to track whether data is being fetched 
     const [recipes, setRecipes] = useState([]); // State variable to store the recipes
    
+    const { FETCH_FAVORITES, FETCH_LANDING, UPDATE_SELECTED } = actionTypes;
+
     const { setCachedSearch } = useContext(SearchContext);
     const { isLogged } = useContext(AuthContext);
     
     const { dispatch: landingDispatch } = useContext(LandingRecipesContext);
-    const { state: { favoritesRecipes }, dispatch: favoritesDispatch } = useContext(FavoriteRcipesContext)
+    const { state: { favoritesRecipes }, dispatch: favoritesDispatch } = useContext(FavoriteRecipesContext)
     const { state: { selectedRecipe }, dispatch: selectedDispatch } = useContext(SelectedRecipeContext)
 
 
@@ -108,3 +110,5 @@ function Home() {
         </>
     );
 }
+
+export default Home;

@@ -1,13 +1,14 @@
 'use client';
 
 import { useContext } from "react";
-import { LandingRecipesContext, FavoriteRcipesContext } from '../contexts'
+import { Grid, Box, Typography } from '@mui/material';
+import { LandingRecipesContext, FavoriteRecipesContext } from '../contexts';
 import { RecipeListSkeleton, RecipeItem } from "./";
 
 const RecipeList = ({ isLoading, activeTab, onRecipeClick }) => {
 
   const { state: { landingRecipes } } = useContext(LandingRecipesContext);
-  const { state: { favoriteRecipes } } = useContext(FavoriteRcipesContext);
+  const { state: { favoriteRecipes } } = useContext(FavoriteRecipesContext);
   
   // Determine which recipes to display based on the activeTab
   const recipes = activeTab === "favorites" ? favoriteRecipes : landingRecipes;

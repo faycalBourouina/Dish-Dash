@@ -1,6 +1,7 @@
 'use client';
 
-import { createContext, useState, useReducer } from 'react';
+import { createContext, useReducer } from 'react';
+import { selectedReducer } from '../reducers';
 
 // Define initial state with an empty array for favoriteRecipes
 const initialState = {
