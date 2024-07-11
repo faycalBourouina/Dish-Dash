@@ -1,5 +1,5 @@
 'use client'
-import { Card, CardContent, CardMedia, Grid, Typography, CardActions, IconButton} from '@mui/material';
+import { Grid, Typography, Button, Card, CardContent, CardMedia, Stack, CardActions, IconButton} from '@mui/material';
 import { useContext } from 'react';
 
 import { AuthContext } from '../contexts';

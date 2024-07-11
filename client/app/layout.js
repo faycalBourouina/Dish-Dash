@@ -47,7 +47,9 @@ const RootLayout = ({ children }) => {
                                         <FavoriteRecipesProvider>
                                             <SelectedRecipeProvider>
                                                 <SearchProvider>
-                                                    { children }
+                                                    <FavoriteMessageProvider>
+                                                        { children }
+                                                    </FavoriteMessageProvider>
                                                 </SearchProvider>
                                             </SelectedRecipeProvider>
                                         </FavoriteRecipesProvider>

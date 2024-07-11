@@ -5,6 +5,7 @@ import { AuthContext, ActiveTabContext, SearchContext, LandingRecipesContext, Fa
 import actionTypes from './reducers/action-types'
 import { RecipeDetails, RecipeList } from './components';
 
+
 function Home() {
 
     const { activeTab, setActiveTab }  = useContext(ActiveTabContext) // State variable to track which tab is active
@@ -27,7 +28,7 @@ function Home() {
         setIsLoading(true); // set isLoading to true before starting the fetch
         setCachedSearch([]); // clear the cached search results
         const params = new URLSearchParams(searchQuery);
-        const response = await fetch(`/search?${params.toString()}`);
+        const response = await fetch(`api/search?${params.toString()}`);
         const data = await response.json();
         const recipesResponse = data.recipes?.results || data.recipes || [];
         setRecipes(recipesResponse); // update the recipes state to searched recipes
@@ -43,9 +44,10 @@ function Home() {
 
     async function fetchLandingRecipes() {
         setIsLoading(true);     
-        const response = await fetch("/landing");
+        const response = await fetch("/api/landing");
         const data = await response.json();
         const { recipes } = await data;
+        console.log("landing: ", recipes )
        
         landingDispatch({ type: FETCH_LANDING, payload: { landing: recipes } })
         setIsLoading(false);
@@ -55,7 +57,7 @@ function Home() {
         if (!favoritesRecipes || !favoritesRecipes.length) {
           setIsLoading(true);
           const userId = isLogged;
-          const response = await fetch(`users/${userId}/favorites`);
+          const response = await fetch(`api/users/${userId}/favorites`);
           const data = await response.json();
           const { favorites } = data;
           
@@ -67,7 +69,7 @@ function Home() {
     }
     
     async function handleRecipeClick(recipe) {
-      const response = await fetch(`/recipes/${recipe.id}`);
+      const response = await fetch(`api/recipes/${recipe.id}`);
       const data = await response.json();
       const { ingredients } = await data.recipe;
       recipe.ingredients = ingredients;
