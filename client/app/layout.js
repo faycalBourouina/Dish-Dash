@@ -14,54 +14,44 @@ const RootLayout = ({ children }) => {
        <html>
             <body>
                 <Grid container direction="column">
-
-                    <Grid item xs={12}>
-                            <FavoriteMessageProvider>
-                                <FavoriteMessageBar />
-                            </FavoriteMessageProvider>
-
-                        <Box pl={8} pr={8} pt={4} pb={0}>
-                            <AuthProvider initialIsLogged ={false}>
-                                <ActiveTabProvider>
-                                    <SelectedRecipeProvider>
-                                        <Navbar />
-                                    </SelectedRecipeProvider>
-                                </ActiveTabProvider>
-                            </ AuthProvider>
-                        </Box>
-                        
-                        <Box pt={4}>
-                            <DemoMessage />
-                        </Box>
-                    </Grid>
-                    
-                    <Box p={8}>
-                        <Grid item xs={12}>
-                            <SearchForm />
-                        </Grid>
-
-                        <Grid item xs={12} p={12}>
-                            <AuthProvider initialIsLogged ={false}>
-                                <ActiveTabProvider>
+                    <AuthProvider initialIsLogged ={false}>
+                        <ActiveTabProvider>
                                     <LandingRecipesProvider>
                                         <FavoriteRecipesProvider>
                                             <SelectedRecipeProvider>
                                                 <SearchProvider>
                                                     <FavoriteMessageProvider>
-                                                        { children }
+                                                        <Grid item xs={12}>
+                                                            <Box pl={8} pr={8} pb={0}>
+                                                                <FavoriteMessageBar />
+                                                            </Box>
+
+                                                            <Box pl={8} pr={8} pt={4} pb={0}>
+                                                                <Navbar />
+                                                            </Box>
+                                                            
+                                                            <Box pt={4}>
+                                                                <DemoMessage />
+                                                            </Box>
+
+                                                        </Grid>
+                                                        
+                                                        <Box p={8}>
+                                                            <Grid item xs={12}>
+                                                                <SearchForm />
+                                                            </Grid>
+                                                            <Grid item xs={12} p={12}>
+                                                                { children }
+                                                            </Grid>
+                                                        </Box>
+                                                        <Footer />
                                                     </FavoriteMessageProvider>
                                                 </SearchProvider>
                                             </SelectedRecipeProvider>
                                         </FavoriteRecipesProvider>
                                     </LandingRecipesProvider>
-                                </ActiveTabProvider>
-                            </AuthProvider>
-                        </Grid>
-
-                    </Box>
-
-                        <Footer />
-                    
+                        </ActiveTabProvider>
+                    </AuthProvider>                    
                 </Grid>
             </body>
        </html>

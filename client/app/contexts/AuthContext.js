@@ -6,6 +6,7 @@ const AuthContext = createContext();
 
 const AuthProvider = ({ children, initialIsLogged }) => {
     const [isLogged, setIsLogged] = useState(initialIsLogged)
+
     const [newUser, setNewUser] = useState(false);
     const [authMessage, setAuthMessage] = useState({});
 
@@ -15,5 +16,4 @@ const AuthProvider = ({ children, initialIsLogged }) => {
      </AuthContext.Provider>
     )
 };
-
 export { AuthContext, AuthProvider }

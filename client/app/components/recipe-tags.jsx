@@ -1,3 +1,5 @@
+import { Box, Chip } from '@mui/material';
+
 function FontAwesomeIcon({ iconClass }) {
   return (
     <i

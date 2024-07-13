@@ -5,9 +5,20 @@ const useAuth = () => {
 
 const { setIsLogged, setNewUser, setAuthMessage  } = useContext(AuthContext)
 
+  const handleSession = async () => {
+      try {
+        const response = await fetch('/api/'); 
+        const data = await response.json();
+        const userId = data?.user_id || false
+        setIsLogged(userId);
+      } catch (error) {
+        console.error('Error fetching session:', error);
+      }
+  };
+
   const handleLogin = async (email, password) => {
     try {
-      const response = await fetch('/authenticate', {
+      const response = await fetch('/api/authenticate', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded'
@@ -37,7 +48,7 @@ const { setIsLogged, setNewUser, setAuthMessage  } = useContext(AuthContext)
 
   const handleSignup = async (email, password) => {
     try {
-      const response = await fetch('/signup', {
+      const response = await fetch('/api/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded'
@@ -72,7 +83,7 @@ const { setIsLogged, setNewUser, setAuthMessage  } = useContext(AuthContext)
 
   const handleLogout = async () => {
     try {
-      const response = await fetch('/logout');
+      const response = await fetch('/api/logout');
       const data = await response.json();
       console.log(data.message);
       setIsLogged(null);
@@ -82,7 +93,7 @@ const { setIsLogged, setNewUser, setAuthMessage  } = useContext(AuthContext)
   };
 
   return useMemo(() => {
-    return { handleSignup, handleLogin, handleLogout }
+    return { handleSignup, handleLogin, handleLogout, handleSession }
   }, [])
   
 }

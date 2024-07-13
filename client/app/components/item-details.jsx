@@ -1,6 +1,6 @@
 'use client'
 
-import { styled, Rating, Box, Typography, Card, CardMedia, CardContent, CardActions } from '@mui/material';
+import { styled, Rating, Box, Typography, Button, Card, CardMedia, CardContent, CardActions } from '@mui/material';
 
 const StyledCard = styled(Card)({
   maxWidth: 220,

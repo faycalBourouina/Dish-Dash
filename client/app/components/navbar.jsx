@@ -6,22 +6,24 @@ import { Grid, Box, ButtonBase, AppBar, Toolbar, CssBaseline } from '@mui/materi
 import { ActiveTabContext, AuthContext, SelectedRecipeContext } from '../contexts';
 import { AuthModal  } from './';
 import useAuth from '../hooks/useAuth';
+import { actionTypes } from '../reducers';
 
 
 const Navbar = () => {
 
-  const { activeTab, setActiveTab }  = useContext(ActiveTabContext)
-  const { isLogged, authMessage, setAuthMessage, setNewUser  } = useContext(AuthContext)
+  const { UPDATE_SELECTED } = actionTypes;
   const { handleLogout, handleLogin, handleSignup } = useAuth()
 
-  
-  const { dispatch: selectedDispatch } = useContext(SelectedRecipeContext)
+  const { activeTab, setActiveTab }  = useContext(ActiveTabContext)
+  const { isLogged, authMessage, setAuthMessage, setNewUser  } = useContext(AuthContext)
+  const { state: { selectedRecipe}, dispatch: selectedDispatch } = useContext(SelectedRecipeContext)
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
     selectedDispatch({ type: UPDATE_SELECTED, payload: { selected: null} }); // Clear the selected recipe
+    console.log(selectedRecipe)
   };
 
   const handleSignupWithModal = (email, password) => {

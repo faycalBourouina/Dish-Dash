@@ -1,6 +1,6 @@
 'use client'
 import { Grid, Typography, Button, Card, CardContent, CardMedia, Stack, CardActions, IconButton} from '@mui/material';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 
 import { AuthContext } from '../contexts';
 import useFavorite  from '../hooks/useFavorite'; 

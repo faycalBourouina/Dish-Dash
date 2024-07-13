@@ -184,7 +184,7 @@ const ItemList = ({ recipe }) => {
     const queryParams = new URLSearchParams({ ingredients: JSON.stringify(ingredients) }).toString();
 
     // Fetch items from server
-    const response = await fetch(`/recipes/${recipeId}/items?${queryParams}`);
+    const response = await fetch(`/api/recipes/${recipeId}/items?${queryParams}`);
     const data = await response.json();
     const { items } = data;
     

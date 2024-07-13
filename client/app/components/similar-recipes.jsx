@@ -1,6 +1,7 @@
 'use client';
-
 import { useState, useContext, useEffect } from 'react';
+import { Grid, Box, Typography} from '@mui/material';
+
 import { FavoriteRecipesContext } from '../contexts';
 
 import { RecipeListSkeleton, RecipeItem } from './';
@@ -14,7 +15,7 @@ const SimilarRecipes = ({ recipeId, onRecipeClick }) => {
   useEffect(() => {
     async function fetchSimilarRecipes() {
       setIsLoadingSimilar(true);
-      const response = await fetch(`/recipes/${recipeId}/similar`);
+      const response = await fetch(`/api/recipes/${recipeId}/similar`);
       const data = await response.json();
       setRecipes(data.recipes);
       setIsLoadingSimilar(false);

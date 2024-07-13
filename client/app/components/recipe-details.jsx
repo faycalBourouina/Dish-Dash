@@ -1,17 +1,20 @@
 import { useContext } from 'react';
 import { Grid, Box, Typography, List, ListItem, IconButton, Link } from '@mui/material';
+import { RecipeTags } from './';
 
-import { AuthContext, SelectedRecipeContext } from '../contexts';
+import { ActiveTabContext, AuthContext, SelectedRecipeContext } from '../contexts';
 import { ItemsProvider } from '../contexts';
 
 import useFavorite from '../hooks/useFavorite';
 
 import { ItemList, SimilarRecipes } from './';
 
-const RecipeDetails = ({ activeTab, recipesLength, handleSelectedRecipe, onRecipeClick}) => {
+const RecipeDetails = ({ recipesLength, handleSelectedRecipe, onRecipeClick}) => {
   
   const { isLogged } = useContext(AuthContext)
   const { state: { selectedRecipe } } = useContext(SelectedRecipeContext)
+  const { activeTab } = useContext(ActiveTabContext)
+
   const { handleUpdateFavorites } =  useFavorite();
 
   const { id, title, image, instructions, ingredients, summary, isFavorite} = selectedRecipe;

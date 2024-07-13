@@ -1,7 +1,7 @@
 import actionTypes from "./action-types";
 const { ADD_RECIPE, REMOVE_RECIPE, UPDATE_SELECTED } = actionTypes;
 
-const selectedReducer = (state, action) => {
+function selectedReducer (state, action) {
     switch (action.type) {
         case ADD_RECIPE:
             // Mark the selected recipe as a favorite

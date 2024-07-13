@@ -31,11 +31,11 @@ model.db.create_all()
 
 
 
-@app.route("/")
-def get_client():
-    """Return client"""
+#@app.route("/")
+#def get_client():
+#    """Return client"""
     
-    return render_template("index.html")
+#    return render_template("index.html")
 
 @app.route("/joke")
 def get_food_jokes():
@@ -45,6 +45,15 @@ def get_food_jokes():
     response = jsonify({'joke': joke})
 
     return response, 200     
+
+
+@app.route("/")
+def get_session():
+    """Return user session"""
+    user_id = session.get('user', {}).get('id', None)
+    response = jsonify(user_id)
+    print('sending user session: ', response)
+    return response, 200
 
 @app.route("/landing")
 def get_landing_page_recipes():

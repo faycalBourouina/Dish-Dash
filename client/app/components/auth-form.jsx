@@ -1,7 +1,8 @@
 'use client';
 
-import { Dialog, DialogTitle, DialogContent, TextField, Button, Grid, Alert } from '@mui/material'
 import { useContext, useState } from 'react';
+import { Grid, Box, Dialog, DialogTitle, DialogContent, TextField, Button, Alert } from '@mui/material'
+import { AuthContext } from '../contexts';
 
 const AuthForm = ({ handleLoginWithModal, handleSignupWithModal, handleClose }) => {
   const { isLogged, authMessage } = useContext(AuthContext)

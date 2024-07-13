@@ -2,18 +2,20 @@
 
 import { useState, useEffect, useContext } from 'react';
 import { AuthContext, ActiveTabContext, SearchContext, LandingRecipesContext, FavoriteRecipesContext, SelectedRecipeContext }  from './contexts';
+
 import actionTypes from './reducers/action-types'
 import { RecipeDetails, RecipeList } from './components';
 
 
 function Home() {
 
-    const { activeTab, setActiveTab }  = useContext(ActiveTabContext) // State variable to track which tab is active
 
     const [isLoading, setIsLoading] = useState(false); // State variable to track whether data is being fetched 
     const [recipes, setRecipes] = useState([]); // State variable to store the recipes
    
     const { FETCH_FAVORITES, FETCH_LANDING, UPDATE_SELECTED } = actionTypes;
+    
+    const { activeTab, setActiveTab }  = useContext(ActiveTabContext) // State variable to track which tab is active
 
     const { setCachedSearch } = useContext(SearchContext);
     const { isLogged } = useContext(AuthContext);
@@ -28,7 +30,7 @@ function Home() {
         setIsLoading(true); // set isLoading to true before starting the fetch
         setCachedSearch([]); // clear the cached search results
         const params = new URLSearchParams(searchQuery);
-        const response = await fetch(`api/search?${params.toString()}`);
+        const response = await fetch(`/api/search?${params.toString()}`);
         const data = await response.json();
         const recipesResponse = data.recipes?.results || data.recipes || [];
         setRecipes(recipesResponse); // update the recipes state to searched recipes
@@ -47,7 +49,6 @@ function Home() {
         const response = await fetch("/api/landing");
         const data = await response.json();
         const { recipes } = await data;
-        console.log("landing: ", recipes )
        
         landingDispatch({ type: FETCH_LANDING, payload: { landing: recipes } })
         setIsLoading(false);
@@ -57,19 +58,17 @@ function Home() {
         if (!favoritesRecipes || !favoritesRecipes.length) {
           setIsLoading(true);
           const userId = isLogged;
-          const response = await fetch(`api/users/${userId}/favorites`);
+          const response = await fetch(`/api/users/${userId}/favorites`);
           const data = await response.json();
           const { favorites } = data;
           
           favoritesDispatch({ type: FETCH_FAVORITES, payload: { favorites: favorites } })
           setIsLoading(false);
-          console.log("fetching favorites", favoritesRecipes)
-
         }
     }
     
     async function handleRecipeClick(recipe) {
-      const response = await fetch(`api/recipes/${recipe.id}`);
+      const response = await fetch(`/api/recipes/${recipe.id}`);
       const data = await response.json();
       const { ingredients } = await data.recipe;
       recipe.ingredients = ingredients;
@@ -95,16 +94,15 @@ function Home() {
         <>
             {selectedRecipe ? (
                 <RecipeDetails
-                activeTab={activeTab}
                 recipesLength = {recipes.length}
                 handleSelectedRecipe = {handleSelectedRecipe}
                 onRecipeClick={handleRecipeClick}
                 recipes={recipes}
+                
                 />
             ) : (
                 <RecipeList
                     isLoading={isLoading}
-                    activeTab={activeTab}
                     onRecipeClick={handleRecipeClick}
                 />
                 )
