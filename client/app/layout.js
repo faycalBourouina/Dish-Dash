@@ -5,7 +5,17 @@ import { FavoriteMessageBar, Navbar, DemoMessage, SearchForm, Footer } from './c
 
 export const metadata = {
     title: 'Dish-Dash',
-    description: 'Get recipes'
+    description: 'Get recipes',
+    stylesheets: [
+        {
+            rel: 'stylesheet',
+            href: 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap',
+          },
+        {
+          rel: 'stylesheet',
+          href: 'https://fonts.googleapis.com/icon?family=Material+Icons',
+        }
+    ]
 }
 
 const RootLayout = ({ children }) => {
@@ -25,17 +35,13 @@ const RootLayout = ({ children }) => {
                                                             <Box pl={8} pr={8} pb={0}>
                                                                 <FavoriteMessageBar />
                                                             </Box>
-
                                                             <Box pl={8} pr={8} pt={4} pb={0}>
                                                                 <Navbar />
                                                             </Box>
-                                                            
                                                             <Box pt={4}>
                                                                 <DemoMessage />
                                                             </Box>
-
                                                         </Grid>
-                                                        
                                                         <Box p={8}>
                                                             <Grid item xs={12}>
                                                                 <SearchForm />

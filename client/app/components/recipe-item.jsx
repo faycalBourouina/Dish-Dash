@@ -1,6 +1,9 @@
 'use client'
+import { useContext } from 'react';
 import { Grid, Typography, Button, Card, CardContent, CardMedia, Stack, CardActions, IconButton} from '@mui/material';
-import { useContext, useEffect } from 'react';
+
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
 import { AuthContext } from '../contexts';
 import useFavorite  from '../hooks/useFavorite'; 
@@ -43,23 +46,38 @@ const  RecipeItem = ({ recipe, onRecipeClick }) => {
                 sx={{ backgroundColor: '#e0e0e0' }}
             />
             {isLogged && (
-            <IconButton
-              onClick={() => handleFavoriteClick(id, isFavorite)}
-              aria-label="add to favorites"
-              sx={{ opacity: isFavorite ? 1 : 0.5 }}
-              style={{ position: 'absolute', top: 0, right: 0 }}
-            >
-              <i
-                className="material-icons"
-                style={{
-                  fontSize: '40px',
-                  color: isFavorite ? '#FFCB05' : 'rgba(255, 255, 255, 1)',
-                  WebkitTextStroke: '3px black',
-                }}
-              >
-                favorite
-              </i>
-            </IconButton>
+              <>
+                <IconButton
+                  onClick={() => handleFavoriteClick(id, isFavorite)}
+                  aria-label="add to favorites"
+                  sx={{ opacity: isFavorite ? 1 : 0.5 }}
+                  style={{ position: 'absolute', top: 0, right: 0 }}
+                >
+                  <FavoriteIcon
+                                    sx={{
+                                      fontSize: '40px',
+                                      color: isFavorite ? '#FFCB05' : 'rgba(255, 255, 255, 1)',
+                                      WebkitTextStroke: '3px black',
+                                    }}
+                  
+                  />
+                </IconButton>
+
+                <IconButton
+                  onClick={() => handleFavoriteClick(id, isFavorite)}
+                  aria-label="add to favorites"
+                  sx={{ position: 'absolute', top: 0, right: 0 }}
+                >
+                  <FavoriteBorderIcon
+                                    sx={{
+                                      fontSize: '40px',
+                                      color: 'Black',
+                                      WebkitTextStroke: '3px black',
+                                    }}
+                  
+                  />
+                </IconButton>
+              </> 
             )}
         </div>
 

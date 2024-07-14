@@ -1,10 +1,11 @@
 import { useContext, useMemo } from 'react';
 import { AuthContext, FavoriteMessageContext, LandingRecipesContext, FavoriteRecipesContext, SelectedRecipeContext } from '../contexts';
+import { actionTypes } from '../reducers';
 
 const useFavorite = () => {
   // Extract necessary context values
+  const {ADD_RECIPE, REMOVE_RECIPE } = actionTypes;
   const { setFavoriteMessage, setAlertOpen } = useContext(FavoriteMessageContext);
-
   const { dispatch: landingDispatch } = useContext(LandingRecipesContext);
   const { state: { favoriteRecipes }, dispatch: favoritesDispatch } = useContext(FavoriteRecipesContext);
   const { state: { selectedRecipe }, dispatch: selectedDispatch } = useContext(SelectedRecipeContext);
@@ -14,7 +15,7 @@ const useFavorite = () => {
   async function updateRecipeFavorite(recipeId, isFavorite) {
       const userId = isLogged; // Assume isLogged contains the current user's ID
       const method = isFavorite ? "DELETE" : "PATCH"; // Determine the HTTP method based on the action
-      const response = await fetch(`/users/${userId}/favorites/${recipeId}`, { method });
+      const response = await fetch(`/api/users/${userId}/favorites/${recipeId}`, { method });
     
       // Check if the server response is not OK and set an error message
       if (!response.ok) {
