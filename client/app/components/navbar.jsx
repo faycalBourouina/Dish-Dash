@@ -1,7 +1,13 @@
 'use client';
 
 import { useState, useContext } from 'react'; 
-import { Grid, Box, ButtonBase, AppBar, Toolbar, CssBaseline } from '@mui/material'
+import { Grid, Box, ButtonBase, AppBar, Toolbar, CssBaseline, IconButton } from '@mui/material'
+
+import HomeIcon from '@mui/icons-material/Home';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+
 
 import { ActiveTabContext, AuthContext, SelectedRecipeContext } from '../contexts';
 import { AuthModal  } from './';
@@ -23,7 +29,6 @@ const Navbar = () => {
   const handleTabClick = (tab) => {
     setActiveTab(tab);
     selectedDispatch({ type: UPDATE_SELECTED, payload: { selected: null} }); // Clear the selected recipe
-    console.log(selectedRecipe)
   };
 
   const handleSignupWithModal = (email, password) => {
@@ -75,15 +80,12 @@ const Navbar = () => {
                         underline="none"
                         sx={{ fontSize: '1.2rem', minHeight: '48px' }}
                       >
-                        <i
-                          className="material-icons"
-                          style={{
+                        <HomeIcon
+                          sx={{
                             marginRight: '8px',
                             color: activeTab === "home" ? '#FFCB05' : 'white',
                           }}
-                        >
-                          home
-                        </i>
+                        />
                         Home
                       </ButtonBase>
                     </Box>
@@ -102,15 +104,12 @@ const Navbar = () => {
                           underline="none"
                           sx={{ fontSize: '1.2rem', minHeight: '48px'}}
                         >
-                          <i 
-                            className="material-icons" 
-                            style={{ 
+                          <FavoriteIcon
+                            sx={{ 
                               marginRight: '8px',                       
                               color: activeTab === "favorites" ? '#FFCB05' : 'white',
                           }}
-                          >
-                              favorite
-                          </i>
+                          />
                           My Recipes
                         </ButtonBase>
                       </Grid>
@@ -121,15 +120,13 @@ const Navbar = () => {
                           underline="none"
                           sx={{ fontSize: '1.2rem', minHeight: '48px'}}
                         >
-                          <i 
+                          <ExitToAppIcon
                             className="material-icons" 
                               style={{ 
                               marginRight: '8px',                       
                               color: activeTab === "account" ? '#FFCB05' : 'white',
                             }}
-                          >
-                            logout
-                          </i>
+                          />
                           Logout
                         </ButtonBase>
                       </Grid>
@@ -145,16 +142,13 @@ const Navbar = () => {
                       underline="none"
                       sx={{ fontSize: '1.2rem', minHeight: '48px' }}
                     >
-                        <i 
-                            className="material-icons" 
-                            style={{ 
-                              marginRight: '8px',                       
-                              color: activeTab === "account" ? '#FFCB05' : 'white',
-                          }}
-                        >
-                          account_circle
-                        </i>
-                      Account
+                      <AccountCircleIcon
+                        sx={{ 
+                          marginRight: '8px',                       
+                          color: activeTab === "account" ? '#FFCB05' : 'white',
+                        }}
+                      />                     
+                       Account
                     </ButtonBase>
                   </Grid>
                 </Grid>
