@@ -5,10 +5,13 @@ import { Grid, Typography, Button, Card, CardContent, CardMedia, Stack, CardActi
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 
+import Link from 'next/link';
+
+
 import { AuthContext } from '../contexts';
 import useFavorite  from '../hooks/useFavorite'; 
 
-const  RecipeItem = ({ recipe, onRecipeClick }) => {
+const  RecipeItem = ({ recipe }) => {
   const { isLogged } = useContext(AuthContext)
   const {id, image, summary, vegan, vegetarian, glutenFree, isFavorite} = recipe;
   
@@ -109,10 +112,11 @@ const  RecipeItem = ({ recipe, onRecipeClick }) => {
                         </Typography>
                     )}
                 </Stack>
-            <Button 
+            <Button
+                component={Link}
+                href={`/favorite/${id}`}
                 size="small" 
                 color="primary"
-                onClick={() => onRecipeClick(recipe)}
             >
                 Learn More
             </Button>

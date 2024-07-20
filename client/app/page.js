@@ -24,7 +24,6 @@ function Home() {
     const { state: { favoritesRecipes }, dispatch: favoritesDispatch } = useContext(FavoriteRecipesContext)
     const { state: { selectedRecipe }, dispatch: selectedDispatch } = useContext(SelectedRecipeContext)
 
-
     async function handleSearch(searchQuery) {
 
         setIsLoading(true); // set isLoading to true before starting the fetch

@@ -26,8 +26,8 @@ const RootLayout = ({ children }) => {
                 <Grid container direction="column">
                     <AuthProvider initialIsLogged ={false}>
                         <ActiveTabProvider>
-                                    <LandingRecipesProvider>
-                                        <FavoriteRecipesProvider>
+                            <LandingRecipesProvider>
+                                <FavoriteRecipesProvider>
                                             <SelectedRecipeProvider>
                                                 <SearchProvider>
                                                     <FavoriteMessageProvider>
@@ -54,8 +54,8 @@ const RootLayout = ({ children }) => {
                                                     </FavoriteMessageProvider>
                                                 </SearchProvider>
                                             </SelectedRecipeProvider>
-                                        </FavoriteRecipesProvider>
-                                    </LandingRecipesProvider>
+                                    </FavoriteRecipesProvider>
+                            </LandingRecipesProvider>
                         </ActiveTabProvider>
                     </AuthProvider>                    
                 </Grid>

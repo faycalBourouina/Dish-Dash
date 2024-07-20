@@ -13,23 +13,23 @@ function FontAwesomeIcon({ iconClass }) {
 }
 
 const RecipeTags = ({ recipe }) => {
-    const { readyInMinutes, servings, vegan, vegetarian, glutenFree, dairyFree, healthScore } = recipe;
+    //const { readyInMinutes, servings, vegan, vegetarian, glutenFree, dairyFree, healthScore } = recipe;
   
     return (
       <Box display="flex" flexWrap="wrap">
         <Box marginRight={1} marginBottom={1}>
           <Chip
             icon={<FontAwesomeIcon iconClass="fa-clock" />}
-            label={`${readyInMinutes} minutes`}
+            label={`${recipe?.readyInMinutes} minutes`}
           />
         </Box>
         <Box marginRight={1} marginBottom={1}>
           <Chip
             icon={<FontAwesomeIcon iconClass="fa-utensils" />}
-            label={`Servings: ${servings}`}
+            label={`Servings: ${recipe?.servings}`}
           />
         </Box>
-        {vegan && (
+        {recipe?.vegan && (
           <Box marginRight={1} marginBottom={1}>
             <Chip
               icon={<FontAwesomeIcon iconClass="fa-seedling" />}
@@ -37,7 +37,7 @@ const RecipeTags = ({ recipe }) => {
             />
           </Box>
         )}
-        {vegetarian && (
+        {recipe?.vegetarian && (
           <Box marginRight={1} marginBottom={1}>
             <Chip
               icon={<FontAwesomeIcon iconClass="fa-carrot" />}
@@ -45,7 +45,7 @@ const RecipeTags = ({ recipe }) => {
             />
           </Box>
         )}
-        {glutenFree && (
+        {recipe?.glutenFree && (
           <Box marginRight={1} marginBottom={1}>
             <Chip
               icon={<FontAwesomeIcon iconClass="fa-bread-slice" />}
@@ -53,7 +53,7 @@ const RecipeTags = ({ recipe }) => {
             />
           </Box>
         )}
-        {dairyFree && (
+        {recipe?.dairyFree && (
           <Box marginRight={1} marginBottom={1}>
             <Chip
               icon={<FontAwesomeIcon iconClass="fa-cheese" />}
@@ -61,7 +61,7 @@ const RecipeTags = ({ recipe }) => {
             />
           </Box>
         )}
-        {healthScore && (
+        {recipe?.healthScore && (
           <Box marginRight={1} marginBottom={1}>
             <Chip
               icon={<FontAwesomeIcon iconClass="fa-heartbeat" />}

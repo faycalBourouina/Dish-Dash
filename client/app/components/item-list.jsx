@@ -159,7 +159,7 @@ const ItemList = ({ recipe }) => {
     }
   }, []);
 
-  const recipeId = recipe.id;
+  const recipeId = recipe?.id;
 
   async function fetchItems(recipeId) {
 
@@ -170,7 +170,7 @@ const ItemList = ({ recipe }) => {
     }
 
     // Get recipe ingredients
-    const ingredients = recipe.ingredients;
+    const ingredients = recipe?.ingredients;
 
     // Check if ingredients are empty
     if (ingredients.length === 0) {

@@ -2,6 +2,7 @@
 
 import { useState, useContext } from 'react'; 
 import { Grid, Box, ButtonBase, AppBar, Toolbar, CssBaseline, IconButton } from '@mui/material'
+import Link from 'next/link';
 
 import HomeIcon from '@mui/icons-material/Home';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
@@ -22,7 +23,7 @@ const Navbar = () => {
 
   const { activeTab, setActiveTab }  = useContext(ActiveTabContext)
   const { isLogged, authMessage, setAuthMessage, setNewUser  } = useContext(AuthContext)
-  const { state: { selectedRecipe}, dispatch: selectedDispatch } = useContext(SelectedRecipeContext)
+  const { dispatch: selectedDispatch } = useContext(SelectedRecipeContext)
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -53,7 +54,7 @@ const Navbar = () => {
   };
 
   const handleClose = () => {
-      setActiveTab("home"); // reset the active tab
+      //setActiveTab("home"); // reset the active tab
       setIsModalOpen(false) // close the modal
       setNewUser(false) // reset newUser
       setAuthMessage({}); // clear the message
@@ -99,6 +100,8 @@ const Navbar = () => {
                     <Grid container spacing={4}>
                       <Grid item>
                         <ButtonBase
+                          component={Link}
+                          href='/favorite'
                           onClick={() => handleTabClick("favorites")}
                           color="inherit" 
                           underline="none"
@@ -162,7 +165,6 @@ const Navbar = () => {
         <Box sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', pr: 5 }}>
           <AuthModal
                   open={isModalOpen}
-                  isLogged={isLogged}
                   handleClose={handleClose}
                   handleLoginWithModal={handleLoginWithModal}
                   handleSignupWithModal={handleSignupWithModal}

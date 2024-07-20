@@ -16,6 +16,7 @@ const { setIsLogged, setNewUser, setAuthMessage  } = useContext(AuthContext)
       }
   };
 
+
   const handleLogin = async (email, password) => {
     try {
       const response = await fetch('/api/authenticate', {

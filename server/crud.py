@@ -74,21 +74,25 @@ def get_user_by_id(user_id):
     else:
         return None
 
-
 def add_favorite_attribute(recipes, user_id):
-    """Add the isFavorite attribute to each recipe """
+    """Add the isFavorite attribute to each recipe.""" 
 
     # Query to fetch user favorites
     user_favorites = Favorite.query.filter(Favorite.user_id == user_id).all()
 
-    # Get the recipe IDs from the user favorites
-    favorite_ids = [favorite.recipe_id for favorite in user_favorites]
-    
+    # Create a set of recipe IDs from user favorites
+    favorite_ids = {favorite.recipe_id for favorite in user_favorites}
 
-    for recipe in recipes:
-        recipe['isFavorite'] = recipe['id'] in favorite_ids
+    if len([recipes]) == 1:
+        recipe_id = recipes.get('id')
+        recipes['isFavorite'] = recipe_id in favorite_ids
+
+    else:
+        for recipe in recipes:
+            recipe['isFavorite'] = recipe['id'] in favorite_ids
 
     return recipes
+
 
 
 def get_trending_recipes(limit):
@@ -324,7 +328,7 @@ def search_recipes(search, user_id):
 
     return response
 
-def get_recipe(recipe_id):
+def get_recipe(recipe_id, user_id=None):
     """Return recipe"""
 
     # Use mock data in test mode
@@ -345,7 +349,6 @@ def get_recipe(recipe_id):
                 'vegan': recipe.get('vegan', False),
                 'vegetarian': recipe.get('vegetarian', False)
             }
-            return response
         else:
             return None
 
@@ -380,7 +383,7 @@ def get_recipe(recipe_id):
                         'original_name': ingredient_original_name
                 })
 
-            return {
+            response = {
                 'id': recipe_id,
                 'name': recipe_name,
                 'image': recipe_image,
@@ -396,6 +399,12 @@ def get_recipe(recipe_id):
             }
         else:
             return None
+
+    if user_id:
+        return add_favorite_attribute(response, user_id)
+
+    else:
+        return response
 
 def get_recipe_ingredients(recipe_id):
     """Return recipe ingredients"""

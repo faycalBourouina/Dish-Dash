@@ -1,5 +1,5 @@
 'use client'
-import { DialogTitle, DialogContent, DialogActions ,Chip } from '@mui/material'
+import { Box, Typography, Button, DialogTitle, DialogContent, DialogActions ,Chip } from '@mui/material'
 import { useContext, useState } from 'react'; 
 
 import { AuthContext } from '../contexts';

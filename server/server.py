@@ -13,7 +13,7 @@ from utils import  sqlalchemy_obj_to_dict
 
 app = Flask(__name__)
 
-CORS(app)
+CORS(app, origins=['http://localhost:3000'])
 
 # Load the API key from the .env file
 load_dotenv()
@@ -28,7 +28,6 @@ app.secret_key = os.getenv("SESSION_SECRET_KEY")
 # Connect to the database
 model.connect_to_db(app)
 model.db.create_all()
-
 
 
 #@app.route("/")
@@ -52,7 +51,6 @@ def get_session():
     """Return user session"""
     user_id = session.get('user', {}).get('id', None)
     response = jsonify(user_id)
-    print('sending user session: ', response)
     return response, 200
 
 @app.route("/landing")
@@ -145,7 +143,6 @@ def logout():
 def auto_complete_search():
     query = request.args.get("query", "")
     results = crud.auto_complete_search(query)
-    print("autocomplete results", jsonify(results))
     return jsonify(results)
 
 @app.route("/search")
@@ -167,11 +164,11 @@ def search_recipes():
     else:
         return {'Error': 'No recipes found'}, 404
 
-@app.route("/recipes/<int:recipe_id>")
-def get_recipe(recipe_id):
+@app.route("/recipes/<int:recipe_id>/<int:user_id>")
+def get_recipe(recipe_id, user_id=None):
     """Return recipe"""
 
-    recipe = crud.get_recipe(recipe_id)
+    recipe = crud.get_recipe(recipe_id, user_id)
 
     if recipe:
         response = jsonify({'recipe': recipe})
@@ -326,6 +323,6 @@ def update_favorite(user_id, recipe_id):
 if __name__ == "__main__":
 
     if ENV == "DEVELOPEMENT":
-        app.run(host="0.0.0.0", debug=True)
+        app.run(host="0.0.0.0", debug=True, port=8080)
     else:
         app.run()
