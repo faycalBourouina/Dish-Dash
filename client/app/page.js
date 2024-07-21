@@ -91,22 +91,8 @@ function Home() {
 
     return (
         <>
-            {selectedRecipe ? (
-                <RecipeDetails
-                recipesLength = {recipes.length}
-                handleSelectedRecipe = {handleSelectedRecipe}
-                onRecipeClick={handleRecipeClick}
-                recipes={recipes}
-                
-                />
-            ) : (
-                <RecipeList
-                    isLoading={isLoading}
-                    onRecipeClick={handleRecipeClick}
-                />
-                )
-            }
-        </>
+          <RecipeList isLoading={isLoading} />
+        </> 
     );
 }
 export default Home;

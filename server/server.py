@@ -164,10 +164,11 @@ def search_recipes():
     else:
         return {'Error': 'No recipes found'}, 404
 
+@app.route("/recipes/<int:recipe_id>")
 @app.route("/recipes/<int:recipe_id>/<int:user_id>")
 def get_recipe(recipe_id, user_id=None):
     """Return recipe"""
-
+    
     recipe = crud.get_recipe(recipe_id, user_id)
 
     if recipe:

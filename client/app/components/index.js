@@ -15,6 +15,7 @@ export { default as RecipeTags } from './recipe-tags';
 export { default as SearchForm } from './search-form';
 export { default as SimilarRecipes } from './similar-recipes';
 export { default as TagsModal } from './tags-modal';
+export { default as RecipeDetail } from './recipe-detail';
 
 
 

@@ -76,6 +76,8 @@ const Navbar = () => {
                   <Grid item>
                     <Box pt={1}>
                       <ButtonBase
+                        component={Link}
+                        href='/'
                         onClick={() => handleTabClick("home")}
                         color="inherit"
                         underline="none"

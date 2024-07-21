@@ -77,17 +77,19 @@ def get_user_by_id(user_id):
 def add_favorite_attribute(recipes, user_id):
     """Add the isFavorite attribute to each recipe.""" 
 
+def add_favorite_attribute(recipes, user_id):
+    """Add the isFavorite attribute to each recipe.""" 
+
     # Query to fetch user favorites
     user_favorites = Favorite.query.filter(Favorite.user_id == user_id).all()
 
     # Create a set of recipe IDs from user favorites
     favorite_ids = {favorite.recipe_id for favorite in user_favorites}
 
-    if len([recipes]) == 1:
+    if isinstance(recipes, dict):  # Check if it's a single recipe (dictionary)
         recipe_id = recipes.get('id')
         recipes['isFavorite'] = recipe_id in favorite_ids
-
-    else:
+    elif isinstance(recipes, list):  # Check if it's a list of recipes
         for recipe in recipes:
             recipe['isFavorite'] = recipe['id'] in favorite_ids
 

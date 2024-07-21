@@ -1,4 +1,4 @@
-import { RecipeDetail } from '../../components'
+import { RecipeDetail } from '../components'
 
 const page = ({ params }) => {
   return (

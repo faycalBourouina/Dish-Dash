@@ -8,11 +8,15 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import Link from 'next/link';
 
 
-import { AuthContext } from '../contexts';
+import { AuthContext, ActiveTabContext } from '../contexts';
 import useFavorite  from '../hooks/useFavorite'; 
 
 const  RecipeItem = ({ recipe }) => {
   const { isLogged } = useContext(AuthContext)
+  const { activeTab } = useContext(ActiveTabContext)
+
+  console.log("active tab", activeTab)
+
   const {id, image, summary, vegan, vegetarian, glutenFree, isFavorite} = recipe;
   
   const { handleUpdateFavorites } =  useFavorite();
@@ -114,7 +118,7 @@ const  RecipeItem = ({ recipe }) => {
                 </Stack>
             <Button
                 component={Link}
-                href={`/favorite/${id}`}
+                href={ activeTab == 'home' ? `/${id}` : `/favorite/${id}`}
                 size="small" 
                 color="primary"
             >
