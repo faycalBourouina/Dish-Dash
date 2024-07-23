@@ -69,7 +69,7 @@ const useFavorite = () => {
   // Memoize the handleUpdateFavorites function with favoriteRecipes as a dependency
   return useMemo(() => ({
       handleUpdateFavorites,
-  }), [favoriteRecipes]);
+  }), [favoriteRecipes, selectedRecipe]);
 }
 
 export default useFavorite;

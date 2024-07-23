@@ -1,9 +1,9 @@
-import { RecipeDetail } from '../components'
+import { RecipeDetails } from '../components'
 
 const page = ({ params }) => {
   return (
     <>
-        <RecipeDetail params ={params}/>
+        <RecipeDetails params ={params}/>
     </>  
 )
 }

@@ -1,27 +1,47 @@
-import { useContext } from 'react';
+'use client';
+
+import { useContext, useEffect } from 'react';
 import { Grid, Box, Typography, List, ListItem, IconButton, Link } from '@mui/material';
 
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 
-import { RecipeTags } from './';
+import actionTypes from '../reducers/action-types';
+import { RecipeTags } from '.'
+import { ItemList, SimilarRecipes } from '.'
 
-import { ActiveTabContext, AuthContext, SelectedRecipeContext } from '../contexts';
-import { ItemsProvider } from '../contexts';
+import { ActiveTabContext, AuthContext, SelectedRecipeContext } from '../contexts'
+import { ItemsProvider } from '../contexts'
 
 import useFavorite from '../hooks/useFavorite';
 
-import { ItemList, SimilarRecipes } from './';
 
-const RecipeDetails = ({ recipesLength, handleSelectedRecipe, onRecipeClick}) => {
+const RecipeDetails = ({ params }) => {
   
   const { isLogged } = useContext(AuthContext)
-  const { state: { selectedRecipe } } = useContext(SelectedRecipeContext)
-  const { activeTab } = useContext(ActiveTabContext)
-
+  const { activeTab } = useContext(ActiveTabContext);
+  const { state: { selectedRecipe}, dispatch: selectedDispatch } = useContext(SelectedRecipeContext);
+  const { UPDATE_SELECTED } = actionTypes;
+  
   const { handleUpdateFavorites } =  useFavorite();
 
-  const { id, title, image, instructions, ingredients, summary, isFavorite} = selectedRecipe;
+  async function fetchRecipe (recipeId) {
+    try {
+      // Adjust the route for non-logged-in users
+      const url = isLogged ? `${recipeId}/${isLogged}` : `${recipeId}`; 
+
+      const response = await fetch(`http://localhost:8080/recipes/${url}`);
+      const data = await response.json();
+      const { recipe } = data;
+      selectedDispatch({ type: UPDATE_SELECTED, payload: { selected: recipe } })  
+    } catch (error) {
+      console.error("Error fetching recipe data:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchRecipe(params.recipeId);
+  }, [])
 
   const handleFavoriteClick = (id, isFavorite) => {
     handleUpdateFavorites(id, isFavorite);
@@ -42,23 +62,22 @@ const RecipeDetails = ({ recipesLength, handleSelectedRecipe, onRecipeClick}) =>
           </Box>
         )}
         <Box marginBottom={4}>
-          <Typography variant="h3">{title || selectedRecipe.name}</Typography>
+          <Typography variant="h3">{selectedRecipe?.name}</Typography>
         </Box>
         <Box>
           <div style={{ position: 'relative', display: 'inline-block' }}>
-            <img src={image} alt={title} />
+            <img src={selectedRecipe?.image} alt={selectedRecipe?.title} />
             {isLogged && (
                 <>
                     <IconButton
-                      onClick={() => handleFavoriteClick(id, isFavorite)}
                       aria-label="add to favorites"
-                      sx={{ opacity: isFavorite ? 1 : 0.5 }}
+                      sx={{ opacity: selectedRecipe?.isFavorite ? 1 : 0.5 }}
                       style={{ position: 'absolute', top: 0, right: 0 }}
                     >
                       <FavoriteIcon
                                         sx={{
                                           fontSize: '40px',
-                                          color: isFavorite ? '#FFCB05' : 'rgba(255, 255, 255, 1)',
+                                          color: selectedRecipe?.isFavorite ? '#FFCB05' : 'rgba(255, 255, 255, 1)',
                                           WebkitTextStroke: '3px black',
                                         }}
                       
@@ -66,7 +85,7 @@ const RecipeDetails = ({ recipesLength, handleSelectedRecipe, onRecipeClick}) =>
                     </IconButton>
 
                     <IconButton
-                      onClick={() => handleFavoriteClick(id, isFavorite)}
+                      onClick={() => handleFavoriteClick(selectedRecipe?.id, selectedRecipe?.isFavorite)}
                       aria-label="add to favorites"
                       sx={{ position: 'absolute', top: 0, right: 0 }}
                     >
@@ -90,14 +109,14 @@ const RecipeDetails = ({ recipesLength, handleSelectedRecipe, onRecipeClick}) =>
           <Typography variant="h4">Summary:</Typography>
         </Box>
         <Box marginBottom={4}>
-          {summary}
+          {selectedRecipe?.summary}
         </Box>
         <Box marginBottom={2}>
           <Typography variant="h4">Ingredients:</Typography>
         </Box>
         <Box marginBottom={4}>
           <List>
-            {ingredients.map((ingredient) => (
+            {selectedRecipe?.ingredients.map((ingredient) => (
               <ListItem key={ingredient.id}>{ingredient.original_name}</ListItem>
             ))}
           </List>
@@ -106,7 +125,7 @@ const RecipeDetails = ({ recipesLength, handleSelectedRecipe, onRecipeClick}) =>
           <Typography variant="h4">Instructions:</Typography>
         </Box>
         <Box marginBottom={2}>
-        <div dangerouslySetInnerHTML={{ __html: instructions }}></div>
+        <div dangerouslySetInnerHTML={{ __html: selectedRecipe?.instructions }}></div>
         </Box>
       </Grid>
       <Grid item xs={12} md={6} container justifyContent="flex-end">
@@ -124,8 +143,7 @@ const RecipeDetails = ({ recipesLength, handleSelectedRecipe, onRecipeClick}) =>
         </Box>
       </Grid>
         <SimilarRecipes
-          recipeId={selectedRecipe.id}
-          onRecipeClick={onRecipeClick}
+          recipeId={params.recipeId}
         />
     </Grid>
   );

@@ -7,15 +7,14 @@ export { default as ItemDetails } from './item-details';
 export { default as ItemListSkeleton } from './item-list-skeleton';
 export { default as ItemList } from './item-list';
 export { default as Navbar } from './navbar';
-export { default as RecipeDetails } from './recipe-details';
 export { default as RecipeItem } from './recipe-item';
+export { default as RecipeDetails } from './recipe-details';
 export { default as RecipeListSkeleton } from './recipe-list-skeleton';
 export { default as RecipeList } from './recipe-list';
 export { default as RecipeTags } from './recipe-tags';
 export { default as SearchForm } from './search-form';
 export { default as SimilarRecipes } from './similar-recipes';
 export { default as TagsModal } from './tags-modal';
-export { default as RecipeDetail } from './recipe-detail';
 
 
 

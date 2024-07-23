@@ -1,28 +1,32 @@
 'use client';
 
 import { useState, useEffect, useContext } from 'react';
-import { AuthContext, ActiveTabContext, SearchContext, LandingRecipesContext, FavoriteRecipesContext, SelectedRecipeContext }  from './contexts';
+import { ActiveTabContext, SearchContext, LandingRecipesContext }  from './contexts';
 
 import actionTypes from './reducers/action-types'
-import { RecipeDetails, RecipeList } from './components';
+import { RecipeList } from './components';
 
 
 function Home() {
 
 
     const [isLoading, setIsLoading] = useState(false); // State variable to track whether data is being fetched 
-    const [recipes, setRecipes] = useState([]); // State variable to store the recipes
    
-    const { FETCH_FAVORITES, FETCH_LANDING, UPDATE_SELECTED } = actionTypes;
+    const { FETCH_LANDING } = actionTypes;
     
-    const { activeTab, setActiveTab }  = useContext(ActiveTabContext) // State variable to track which tab is active
+    const { setActiveTab }  = useContext(ActiveTabContext) // State variable to track which tab is active
 
-    const { setCachedSearch } = useContext(SearchContext);
-    const { isLogged } = useContext(AuthContext);
-    
+    const { setCachedSearch } = useContext(SearchContext);    
     const { dispatch: landingDispatch } = useContext(LandingRecipesContext);
-    const { state: { favoritesRecipes }, dispatch: favoritesDispatch } = useContext(FavoriteRecipesContext)
-    const { state: { selectedRecipe }, dispatch: selectedDispatch } = useContext(SelectedRecipeContext)
+   
+    //const { state: { selectedRecipe }, dispatch: selectedDispatch } = useContext(SelectedRecipeContext)
+
+
+       /*
+    function handleSelectedRecipe () {
+      (selectedRecipe && activeTab === "search") && selectedDispatch({ type: UPDATE_SELECTED, payload: { selected: null } }); 
+    }
+    */
 
     async function handleSearch(searchQuery) {
 
@@ -34,13 +38,9 @@ function Home() {
         const recipesResponse = data.recipes?.results || data.recipes || [];
         setRecipes(recipesResponse); // update the recipes state to searched recipes
 
-        selectedDispatch({ type: UPDATE_SELECTED, payload: { selected: null} });        
+        //selectedDispatch({ type: UPDATE_SELECTED, payload: { selected: null} });        
         setActiveTab("search"); // switch to the search tab
         setIsLoading(false); // set isLoading back to false once data has finished loading
-    }
-
-    function handleSelectedRecipe () {
-      (selectedRecipe && activeTab === "search") && selectedDispatch({ type: UPDATE_SELECTED, payload: { selected: null } }); 
     }
 
     async function fetchLandingRecipes() {
@@ -52,41 +52,11 @@ function Home() {
         landingDispatch({ type: FETCH_LANDING, payload: { landing: recipes } })
         setIsLoading(false);
     }
-
-    async function fetchFavoritesRecipes() {
-        if (!favoritesRecipes || !favoritesRecipes.length) {
-          setIsLoading(true);
-          const userId = isLogged;
-          const response = await fetch(`/api/users/${userId}/favorites`);
-          const data = await response.json();
-          const { favorites } = data;
-          
-          favoritesDispatch({ type: FETCH_FAVORITES, payload: { favorites: favorites } })
-          setIsLoading(false);
-        }
-    }
-    
-    async function handleRecipeClick(recipe) {
-      const response = await fetch(`/api/recipes/${recipe.id}`);
-      const data = await response.json();
-      const { ingredients } = await data.recipe;
-      recipe.ingredients = ingredients;
-      selectedDispatch({ type: UPDATE_SELECTED, payload: { selected: recipe } });
-    }
-
   
     useEffect(() => {
       // Reset the cached search when the user is not logged in
-      if (!isLogged) {
-        setCachedSearch([]);
-        favoritesDispatch({ type: FETCH_FAVORITES, payload: { favorites: [] } });
-      } else if (isLogged) {
-        // Fetch favorites only when the user is logged in
-        fetchFavoritesRecipes();
-      }
-      // fetch landing recipes everytime isLogged updates
       fetchLandingRecipes();
-    }, [isLogged]);
+    }, []);
     
 
     return (

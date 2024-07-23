@@ -18,7 +18,6 @@ import { actionTypes } from '../reducers';
 
 const Navbar = () => {
 
-  const { UPDATE_SELECTED } = actionTypes;
   const { handleLogout, handleLogin, handleSignup } = useAuth()
 
   const { activeTab, setActiveTab }  = useContext(ActiveTabContext)
@@ -29,7 +28,6 @@ const Navbar = () => {
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
-    selectedDispatch({ type: UPDATE_SELECTED, payload: { selected: null} }); // Clear the selected recipe
   };
 
   const handleSignupWithModal = (email, password) => {

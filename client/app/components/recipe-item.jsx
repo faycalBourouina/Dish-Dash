@@ -15,10 +15,8 @@ const  RecipeItem = ({ recipe }) => {
   const { isLogged } = useContext(AuthContext)
   const { activeTab } = useContext(ActiveTabContext)
 
-  console.log("active tab", activeTab)
 
-  const {id, image, summary, vegan, vegetarian, glutenFree, isFavorite} = recipe;
-  
+  const {id, image, summary, vegan, vegetarian, glutenFree, isFavorite} = recipe;  
   const { handleUpdateFavorites } =  useFavorite();
 
   const handleFavoriteClick = (id, isFavorite) => {
