@@ -8,7 +8,6 @@ import { RecipeList } from '../components';
 
 const Favorite = () => {
 
-    const [isLoading, setIsLoading] = useState(false); // State variable to track whether data is being fetched 
     const { FETCH_FAVORITES, UPDATE_SELECTED } = actionTypes;
     const { isLogged } = useContext(AuthContext);
     const { state: { favoriteRecipes }, dispatch: favoritesDispatch } = useContext(FavoriteRecipesContext)
@@ -22,14 +21,11 @@ const Favorite = () => {
     */
       async function fetchFavoritesRecipes() {
           if (!favoriteRecipes || !favoriteRecipes.length) {
-            setIsLoading(true);
             const userId = isLogged;
             const response = await fetch(`/api/users/${userId}/favorites`);
             const data = await response.json();
             const { favorites } = data;
-            
             favoritesDispatch({ type: FETCH_FAVORITES, payload: { favorites: favorites } })
-            setIsLoading(false);
           }
       }
     
@@ -47,7 +43,7 @@ const Favorite = () => {
 
     return (
         <>
-          <RecipeList isLoading={isLoading} />
+          <RecipeList />
         </>
     );
 }

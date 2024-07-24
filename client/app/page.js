@@ -8,9 +8,6 @@ import { RecipeList } from './components';
 
 
 function Home() {
-
-
-    const [isLoading, setIsLoading] = useState(false); // State variable to track whether data is being fetched 
    
     const { FETCH_LANDING } = actionTypes;
     
@@ -29,8 +26,6 @@ function Home() {
     */
 
     async function handleSearch(searchQuery) {
-
-        setIsLoading(true); // set isLoading to true before starting the fetch
         setCachedSearch([]); // clear the cached search results
         const params = new URLSearchParams(searchQuery);
         const response = await fetch(`/api/search?${params.toString()}`);
@@ -40,17 +35,14 @@ function Home() {
 
         //selectedDispatch({ type: UPDATE_SELECTED, payload: { selected: null} });        
         setActiveTab("search"); // switch to the search tab
-        setIsLoading(false); // set isLoading back to false once data has finished loading
     }
 
     async function fetchLandingRecipes() {
-        setIsLoading(true);     
         const response = await fetch("/api/landing");
         const data = await response.json();
         const { recipes } = await data;
        
         landingDispatch({ type: FETCH_LANDING, payload: { landing: recipes } })
-        setIsLoading(false);
     }
   
     useEffect(() => {
@@ -61,7 +53,7 @@ function Home() {
 
     return (
         <>
-          <RecipeList isLoading={isLoading} />
+          <RecipeList />
         </> 
     );
 }
