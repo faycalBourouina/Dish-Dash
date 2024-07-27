@@ -1,11 +1,11 @@
 """Server for Dish-Dash app"""
 from flask import (Flask, request, session, jsonify, render_template, redirect)
 from flask_cors import CORS
+from itsdangerous import URLSafeSerializer
 
 from urllib.parse import parse_qs
 import os
 from dotenv import load_dotenv
-import json
 
 import crud
 import model
@@ -36,22 +36,16 @@ model.db.create_all()
     
 #    return render_template("index.html")
 
-@app.route("/joke")
-def get_food_jokes():
-    """Get a random joke"""
+#@app.route("/joke")
+#def get_food_jokes():
+#    """Get a random joke"""
 
-    joke = crud.get_food_jokes()
-    response = jsonify({'joke': joke})
+#    joke = crud.get_food_jokes()
+#    response = jsonify({'joke': joke})
 
-    return response, 200     
+#    return response, 200     
 
 
-@app.route("/")
-def get_session():
-    """Return user session"""
-    user_id = session.get('user', {}).get('id', None)
-    response = jsonify(user_id)
-    return response, 200
 
 @app.route("/landing")
 def get_landing_page_recipes():
@@ -130,8 +124,7 @@ def authenticate_user():
         return response, 200
     else:
         return 'Authentication failed', 401
-
-
+    
 @app.route("/logout")
 def logout():
     session.clear()
@@ -183,7 +176,6 @@ def get_similar_recipes(recipe_id):
     """Return similar recipes"""
 
     recipes = crud.get_similar_recipes(recipe_id, 4)
-    
     # Check if user is logged in add isFavorite key to recipe
     user_id = session.get('user', {}).get('id', None)
     
@@ -195,6 +187,18 @@ def get_similar_recipes(recipe_id):
         return response, 200
     else:
         return {'Error': 'No similar recipes found'}, 404
+
+
+@app.route("/session")
+def get_session():
+    """Return session"""
+    
+    # Check if user is logged 
+    user_id = session.get('user', {}).get('id', None)
+    if user_id:
+        return {"user": user_id}, 200
+    else:
+        return {'Error': 'No session found'}, 404
 
 @app.route("/recipes/<int:recipe_id>/ingredients")
 def get_recipe_ingredients(recipe_id):
@@ -229,7 +233,6 @@ def get_user_favorites(user_id):
     """Return user favorites"""
 
     if 'user' in session and session['user']['id'] == user_id:
-        
         favorites_list = []
 
         # get user favorites in sqlalchemy objects
@@ -246,8 +249,8 @@ def get_user_favorites(user_id):
 
         return response, 200
     else:
-         return "Authentication required", 401
-
+         return "Authentication session required", 401
+    
 @app.route("/users/<int:user_id>/favorites/<int:recipe_id>", methods=["PATCH", "DELETE"])
 def update_favorite(user_id, recipe_id):
     """Update favorites"""

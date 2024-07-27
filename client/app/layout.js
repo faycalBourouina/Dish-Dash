@@ -2,7 +2,6 @@ import { Grid, Box } from '@mui/material'
 import { AuthProvider, ActiveTabProvider, LandingRecipesProvider, FavoriteRecipesProvider, SelectedRecipeProvider, SearchProvider, FavoriteMessageProvider  } from './contexts'
 import { FavoriteMessageBar, Navbar, DemoMessage, SearchForm, Footer } from './components'
 
-
 export const metadata = {
     title: 'Dish-Dash',
     description: 'Get recipes',
@@ -19,12 +18,11 @@ export const metadata = {
 }
 
 const RootLayout = ({ children }) => {
-
     return (
        <html>
             <body>
                 <Grid container direction="column">
-                    <AuthProvider initialIsLogged ={false}>
+                    <AuthProvider >
                         <ActiveTabProvider>
                             <LandingRecipesProvider>
                                 <FavoriteRecipesProvider>

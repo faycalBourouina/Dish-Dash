@@ -12,15 +12,15 @@ const SimilarRecipes = ({ recipeId, onRecipeClick }) => {
   const { state: { favoriteRecipes }} = useContext(FavoriteRecipesContext)
 
 
-  useEffect(() => {
-    async function fetchSimilarRecipes() {
-      setIsLoadingSimilar(true);
-      const response = await fetch(`/api/recipes/${recipeId}/similar`);
-      const data = await response.json();
-      setRecipes(data.recipes);
-      setIsLoadingSimilar(false);
-    }
+  async function fetchSimilarRecipes() {
+    setIsLoadingSimilar(true);
+    const response = await fetch(`/api/recipes/${recipeId}/similar`);
+    const data = await response.json();
+    setRecipes(data.recipes);
+    setIsLoadingSimilar(false);
+  }
 
+  useEffect(() => {
     fetchSimilarRecipes();
   }, []);
 

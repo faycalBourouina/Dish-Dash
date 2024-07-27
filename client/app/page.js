@@ -38,13 +38,21 @@ function Home() {
     }
 
     async function fetchLandingRecipes() {
+      try {
+        // The rest of your code (fetching and data handling) goes here
         const response = await fetch("/api/landing");
-        const data = await response.json();
-        const { recipes } = await data;
-       
-        landingDispatch({ type: FETCH_LANDING, payload: { landing: recipes } })
+        if (response.ok) {
+          // Simulate an intentional error (replace with your actual logic)
+          const data = await response.json();
+          const { recipes } = data;
+          landingDispatch({ type: FETCH_LANDING, payload: { landing: recipes } });
+        }
+      } catch (error) {
+        console.error("Error fetching landing recipes:", error);
+        // You can set an error state here if needed
+      }
     }
-  
+        
     useEffect(() => {
       // Reset the cached search when the user is not logged in
       fetchLandingRecipes();
