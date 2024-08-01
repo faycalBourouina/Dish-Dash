@@ -10,6 +10,10 @@ Please note that the [Dish-Dash][1] available here is currently a demo version. 
 
 [![Watch the video](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExd3FjY2Z4NG8xZW9pMjhoZDV2NTdqNDc5ZXRoNGNybmd4ZHI2Ym9payZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/i4cQbhnJc1bMCtIdcd/giphy.gif)](https://www.youtube.com/watch?v=z0iRKaDXXA4)
 
+## Migration to Next.js
+[2]: https://medium.com/@faycalbourouina/migrating-to-next-js-560f223d3f6c ""
+Read my article on Medium: [Migrating to Next.js][2]
+
 
 ## Features 
 
@@ -37,13 +41,16 @@ Please note that the [Dish-Dash][1] available here is currently a demo version. 
 
 ## How to Run
 
-1. **Clone the Repository**:
+### Git Setup
+
+1. **Clone the repository**:
 
     ```bash
     git clone https://github.com/faycalBourouina/Dish-Dash.git
     ```
+### Server Setup
 
-2. **Navigate and Initialize**:
+1. **Navigate and Initialize**:
 
     Navigate to the project's server directory and initialize a virtual environment.
 
@@ -53,7 +60,7 @@ Please note that the [Dish-Dash][1] available here is currently a demo version. 
     source env/bin/activate
     ```
 
-3. **Install Dependencies**:
+2. **Install Dependencies**:
 
     While in the virtual environment, install all required dependencies.
 
@@ -61,13 +68,13 @@ Please note that the [Dish-Dash][1] available here is currently a demo version. 
     pip3 install -r requirements.txt
     ```
 
-4. **Create a .env File**:
+3. **Create a .env File**:
 
     ```bash
     touch .env
     ```
 
-5. **Add API Secret Keys**:
+4. **Add API Secret Keys**:
 
     Add the following API secret keys to your `.env` file:
 
@@ -76,25 +83,25 @@ Please note that the [Dish-Dash][1] available here is currently a demo version. 
     echo 'BLUECART_API_KEY=[insert_a_random_key_here]' >> .env
     ```
 
-6. **Add a Session Secret Key**:
+5. **Add a Session Secret Key**:
 
     ```bash
     echo 'SESSION_SECRET_KEY=[insert_a_random_key_here]' >> .env
     ```
 
-7. **Add Mode (Defaulted to Test Mode)**:
+6. **Add Mode (Defaulted to Test Mode)**:
 
     ```bash
     echo 'MODE=TEST_MODE' >> .env
     ```
 
-8. **Add Enivronment**:
+7. **Add Enivronment**:
 
     ```bash
     echo 'ENVIRONMENT=DEVELOPEMENT' >> .env
     ```
 
-9. **Verify .env Keys**:
+8. **Verify .env Keys**:
 
     Verify that all the .env keys were added successfully:
 
@@ -104,7 +111,7 @@ Please note that the [Dish-Dash][1] available here is currently a demo version. 
 
     You should see the `SPOONACULAR_API_KEY`, `BLUECART_API_KEY`, `SESSION_SECRET_KEY`, and `MODE` entries in the output.
 
-10. **Create and Seed the Database**:
+9. **Create and Seed the Database**:
 
     Ensure PostgreSQL is installed. Then, run:
 
@@ -123,16 +130,42 @@ Please note that the [Dish-Dash][1] available here is currently a demo version. 
 
     This will list the relations in the database.
 
-11. **Start the Server**:
+10. **Start the Server**:
 
-    Run the server:
+    Run Flask server:
 
     ```bash
     python3 server.py
     ```
 
-    The server should be running at [http://localhost:5000/](http://localhost:5000/).
+    The server should be running at [http://localhost:8080/](http://localhost:8080/).
     
+### Client Setup
+
+
+1. **Navigate to the Client Directory**:
+
+    ```bash
+    cd ../client
+    ```
+
+2. **Install Dependencies**:
+
+    Install all required dependencies:
+
+    ```bash
+    npm install
+    ```
+
+3. **Start the Next.js Development Server**:
+    Run Next.js server:
+
+    ```bash
+    npm run dev
+    ```
+
+    The server should be running at [http://localhost:3000/](http://localhost:3000/).
+
 
 ## Testing
 
@@ -167,6 +200,7 @@ This project includes a suite of unit tests to ensure the functionality of diffe
 
 ### Frontend
 
+- Next.js
 - React
 - MUI
 
