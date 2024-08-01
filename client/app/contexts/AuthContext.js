@@ -22,7 +22,7 @@ const AuthProvider = ({ children }) => {
               setIsLogged(user)
             } 
             else {
-                console.log("Session not found")
+                console.log("User not logged in")
             }
         } catch (e) {
             console.error(e)

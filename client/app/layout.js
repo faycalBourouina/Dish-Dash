@@ -5,6 +5,9 @@ import { FavoriteMessageBar, Navbar, DemoMessage, SearchForm, Footer } from './c
 export const metadata = {
     title: 'Dish-Dash',
     description: 'Get recipes',
+    icons: {
+        icon: '../static/img/logo_fill.png'
+    },
     stylesheets: [
         {
             rel: 'stylesheet',

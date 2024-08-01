@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useContext } from 'react';
+import { useEffect, useContext } from 'react';
 import { ActiveTabContext, SearchContext, LandingRecipesContext }  from './contexts';
 
 import actionTypes from './reducers/action-types'
@@ -15,15 +15,6 @@ function Home() {
 
     const { setCachedSearch } = useContext(SearchContext);    
     const { dispatch: landingDispatch } = useContext(LandingRecipesContext);
-   
-    //const { state: { selectedRecipe }, dispatch: selectedDispatch } = useContext(SelectedRecipeContext)
-
-
-       /*
-    function handleSelectedRecipe () {
-      (selectedRecipe && activeTab === "search") && selectedDispatch({ type: UPDATE_SELECTED, payload: { selected: null } }); 
-    }
-    */
 
     async function handleSearch(searchQuery) {
         setCachedSearch([]); // clear the cached search results
